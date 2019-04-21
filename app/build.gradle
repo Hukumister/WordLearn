@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId applicationId
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode applicationVersionCode
+        versionName applicationVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    /**
+     * Android support
+     */
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    /**
+     * Groupie
+     */
+    implementation presentationDependencies.groupie
+    implementation presentationDependencies.groupieExt
+    /**
+     * DI
+     */
+    implementation presentationDependencies.koinCore
+    implementation presentationDependencies.koinCoreExt
+    implementation presentationDependencies.koinAndroid
+    /**
+     * Kotlin
+     */
+    implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutinesAndroid
+    implementation domainDependencies.coroutinesCore
+    /**
+     * Moxy
+     */
+    implementation presentationDependencies.moxyCore
+    kapt presentationDependencies.moxyCompiler
+    /**
+     * Gson
+     */
+    implementation domainDependencies.gson
+    /**
+     * Routing
+     */
+    implementation presentationDependencies.routing
+    /**
+     * Logger
+     */
+    implementation presentationDependencies.logger
+    /**
+     * Third party libs
+     */
+    implementation 'de.siegmar:fastcsv:1.0.3'
+    implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.2'
+    implementation 'com.github.DingMouRen:LayoutManagerGroup:1e6f4f96eb'
+    /**
+     * Test
+     */
+    testImplementation testDependencies.junit
+    androidTestImplementation androidTestDependencies.runner
+    androidTestImplementation androidTestDependencies.espresso
+}

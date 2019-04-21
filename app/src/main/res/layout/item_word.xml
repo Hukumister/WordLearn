@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wajahatkarim3.easyflipview.EasyFlipView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flipView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:flipFrom="front"
+    app:flipOnTouch="false"
+    app:flipType="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp">
+
+        <TextView
+            android:id="@+id/cardText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="28sp"
+            tools:text="Текст карточки" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp">
+
+        <TextView
+            android:id="@+id/cardTextTranslate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="28sp"
+            tools:text="Текст карточки" />
+    </androidx.cardview.widget.CardView>
+</com.wajahatkarim3.easyflipview.EasyFlipView>
