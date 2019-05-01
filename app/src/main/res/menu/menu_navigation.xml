@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/words"
+        android:icon="@drawable/ic_apps_black_24dp"
+        android:title="words" />
+
+    <item
+        android:id="@+id/learn"
+        android:icon="@drawable/ic_done_black_24dp"
+        android:title="learn" />
+
+    <item
+        android:id="@+id/phrases"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="phrases" />
 </menu>
