@@ -6,7 +6,7 @@ allprojects {
 
 ext {
     //di
-    koin_version = '2.0.0-rc-2'
+    dagger_version = '2.22.1'
 
     //Libraries
     groupie_version = '2.3.0'
@@ -30,21 +30,20 @@ ext {
     testingSupportLibVersion = '0.1'
 
     presentationDependencies = [
-            logger      : "com.jakewharton.timber:timber:$timber_version",
-            routing     : "ru.terrakok.cicerone:cicerone:$cicerone_version",
+            logger        : "com.jakewharton.timber:timber:$timber_version",
+            routing       : "ru.terrakok.cicerone:cicerone:$cicerone_version",
 
-            moxyCore    : "com.arello-mobile:moxy:$moxy_version",
-            moxyCompiler: "com.arello-mobile:moxy-compiler:$moxy_version",
+            moxyCore      : "com.arello-mobile:moxy:$moxy_version",
+            moxyCompiler  : "com.arello-mobile:moxy-compiler:$moxy_version",
 
-            koinCore    : "org.koin:koin-core:$koin_version",
-            koinCoreExt : "org.koin:koin-core-ext:$koin_version",
-            koinAndroid : "org.koin:koin-android:$koin_version",
+            dagger        : "com.google.dagger:dagger:$dagger_version",
+            daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version",
 
-            groupie     : "com.xwray:groupie:$groupie_version",
-            groupieExt  : "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
+            groupie       : "com.xwray:groupie:$groupie_version",
+            groupieExt    : "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
     ]
 
-    domainDependencies = [
+    commonDependencies = [
             gson             : "com.google.code.gson:gson:$gson_version",
             kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
             coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",

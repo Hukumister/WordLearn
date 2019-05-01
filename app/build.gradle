@@ -43,15 +43,14 @@ dependencies {
     /**
      * DI
      */
-    implementation presentationDependencies.koinCore
-    implementation presentationDependencies.koinCoreExt
-    implementation presentationDependencies.koinAndroid
+    implementation presentationDependencies.dagger
+    kapt presentationDependencies.daggerCompiler
     /**
      * Kotlin
      */
-    implementation domainDependencies.kotlin
-    implementation domainDependencies.coroutinesAndroid
-    implementation domainDependencies.coroutinesCore
+    implementation commonDependencies.kotlin
+    implementation commonDependencies.coroutinesAndroid
+    implementation commonDependencies.coroutinesCore
     /**
      * Moxy
      */
@@ -60,7 +59,7 @@ dependencies {
     /**
      * Gson
      */
-    implementation domainDependencies.gson
+    implementation commonDependencies.gson
     /**
      * Routing
      */
