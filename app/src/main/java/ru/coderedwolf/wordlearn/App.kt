@@ -1,25 +1,21 @@
 package ru.coderedwolf.wordlearn
 
 import android.app.Application
-import ru.coderedwolf.wordlearn.di.AppComponent
-import ru.coderedwolf.wordlearn.di.common.ComponentDependenciesProvider
-import ru.coderedwolf.wordlearn.di.common.HasChildDependencies
+import ru.coderedwolf.wordlearn.di.DI
+import ru.coderedwolf.wordlearn.di.module.AppModule
 import timber.log.Timber
-import javax.inject.Inject
+import toothpick.Toothpick
+import toothpick.configuration.Configuration
 
 
-class App : Application(), HasChildDependencies {
-
-    @Inject
-    override lateinit var dependencies: ComponentDependenciesProvider
-
-    lateinit var appComponent: AppComponent
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
         initLogger()
-        appComponent = buildComponent().apply { inject(this@App) }
+        initToothpick()
+        initAppScope()
     }
 
     private fun initLogger() {
@@ -28,9 +24,16 @@ class App : Application(), HasChildDependencies {
         }
     }
 
-    private fun buildComponent(): AppComponent {
-        return DaggerAppComponent.builder()
-            .context(this)
-            .build()
+    private fun initToothpick() {
+        if (BuildConfig.DEBUG) {
+            Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
+        } else {
+            Toothpick.setConfiguration(Configuration.forProduction().disableReflection())
+        }
+    }
+
+    private fun initAppScope() {
+        Toothpick.openScope(DI.APP_SCOPE)
+            .installModules(AppModule(this))
     }
 }

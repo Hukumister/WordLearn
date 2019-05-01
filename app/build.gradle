@@ -43,8 +43,8 @@ dependencies {
     /**
      * DI
      */
-    implementation presentationDependencies.dagger
-    kapt presentationDependencies.daggerCompiler
+    implementation presentationDependencies.toothpick
+    kapt presentationDependencies.toothpickCompiler
     /**
      * Kotlin
      */

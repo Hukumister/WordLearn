@@ -3,15 +3,17 @@ package ru.coderedwolf.wordlearn.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import ru.coderedwolf.wordlearn.App
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.di.AppComponent
+import ru.coderedwolf.wordlearn.Screens
+import ru.coderedwolf.wordlearn.di.DI
+import ru.coderedwolf.wordlearn.extension.setLaunchScreen
 import ru.coderedwolf.wordlearn.moxy.androidx.MvpAppCompatActivity
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
+import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
@@ -21,9 +23,6 @@ class AppActivity : MvpAppCompatActivity() {
 
     private val currentFragment: BaseFragment?
         get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? BaseFragment
-
-    private val appComponent: AppComponent?
-        get() = (application as? App)?.appComponent
 
     private val navigator: Navigator =
         object : SupportAppNavigator(this, supportFragmentManager, R.id.fragmentContainer) {
@@ -43,9 +42,12 @@ class AppActivity : MvpAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
-        appComponent?.inject(this)
+        Toothpick.inject(this, Toothpick.openScope(DI.APP_SCOPE))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_container)
+        if (savedInstanceState == null) {
+            navigator.setLaunchScreen(Screens.MainFlow)
+        }
     }
 
     override fun onResumeFragments() {

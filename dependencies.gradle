@@ -6,7 +6,7 @@ allprojects {
 
 ext {
     //di
-    dagger_version = '2.22.1'
+    toothpick_version = '1.0.6'
 
     //Libraries
     groupie_version = '2.3.0'
@@ -30,17 +30,17 @@ ext {
     testingSupportLibVersion = '0.1'
 
     presentationDependencies = [
-            logger        : "com.jakewharton.timber:timber:$timber_version",
-            routing       : "ru.terrakok.cicerone:cicerone:$cicerone_version",
+            logger           : "com.jakewharton.timber:timber:$timber_version",
+            routing          : "ru.terrakok.cicerone:cicerone:$cicerone_version",
 
-            moxyCore      : "com.arello-mobile:moxy:$moxy_version",
-            moxyCompiler  : "com.arello-mobile:moxy-compiler:$moxy_version",
+            moxyCore         : "com.arello-mobile:moxy:$moxy_version",
+            moxyCompiler     : "com.arello-mobile:moxy-compiler:$moxy_version",
 
-            dagger        : "com.google.dagger:dagger:$dagger_version",
-            daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version",
+            toothpick        : "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpick_version",
+            toothpickCompiler: "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpick_version",
 
-            groupie       : "com.xwray:groupie:$groupie_version",
-            groupieExt    : "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
+            groupie          : "com.xwray:groupie:$groupie_version",
+            groupieExt       : "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
     ]
 
     commonDependencies = [
