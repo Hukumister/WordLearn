@@ -46,11 +46,21 @@ dependencies {
     implementation presentationDependencies.toothpick
     kapt presentationDependencies.toothpickCompiler
     /**
+     * Image
+     */
+    implementation commonDependencies.glide
+    /**
      * Kotlin
      */
     implementation commonDependencies.kotlin
     implementation commonDependencies.coroutinesAndroid
     implementation commonDependencies.coroutinesCore
+    /**
+     * Room
+     */
+    implementation dataDependencies.roomRuntime
+    implementation dataDependencies.roomKtx
+    kapt dataDependencies.roomCompiler
     /**
      * Moxy
      */
@@ -78,6 +88,10 @@ dependencies {
      * Test
      */
     testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
+    testImplementation testDependencies.mockk
+
     androidTestImplementation androidTestDependencies.runner
     androidTestImplementation androidTestDependencies.espresso
 }
