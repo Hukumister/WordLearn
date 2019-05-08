@@ -10,6 +10,7 @@ import kotlin.coroutines.CoroutineContext
  * required methods.
  *
  * @param V the type of the View the presenter is based on
+ * @param foregroundContext - context for ui coroutine scope
  * @constructor Injects the required dependencies
  */
 abstract class BasePresenter<V : MvpView>(
@@ -24,11 +25,11 @@ abstract class BasePresenter<V : MvpView>(
     final override fun onDestroy() {
         super.onDestroy()
         onViewDestroyed()
-        mParentJob.cancelChildren()
+        coroutineContext.cancel()
     }
 
-    fun launchUI(block: suspend CoroutineScope.() -> Unit) {
-        launch { block.invoke(this) }
+    inline fun launchUI(crossinline block: suspend CoroutineScope.() -> Unit) {
+        launch { block(this) }
     }
 
     /**
@@ -37,7 +38,7 @@ abstract class BasePresenter<V : MvpView>(
     open fun onViewDestroyed() {}
 
     /**
-     * Optimal method should be call, onBackPressed on Activity or Fragment
+     * Optional method should be call, onBackPressed on Activity or Fragment
      */
     open fun onBackPressed() {}
 }
