@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.model.system
+package ru.coderedwolf.wordlearn.domain.system
 
 import kotlinx.coroutines.Dispatchers
 
