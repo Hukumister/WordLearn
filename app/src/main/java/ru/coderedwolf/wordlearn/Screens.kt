@@ -15,20 +15,20 @@ object Screens {
     }
 
     object LearnScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return StubFragment()
-        }
+        override fun getFragment(): Fragment = StubFragment()
     }
 
     object WordsScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return StubFragment()
-        }
+        override fun getFragment(): Fragment = StubFragment()
+
     }
 
     object PhrasesScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return StubFragment()
-        }
+        override fun getFragment(): Fragment = StubFragment()
+    }
+
+    class CategoryWordsFlow(val categoryId: Long) : SupportAppScreen() {
+
+        override fun getFragment() = StubFragment()
     }
 }
