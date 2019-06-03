@@ -1,6 +1,9 @@
 package ru.coderedwolf.wordlearn.extension
 
+import android.app.Activity
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -23,11 +26,11 @@ fun Navigator.setLaunchScreen(screen: SupportAppScreen) {
     )
 }
 
-fun View.visibility(visibility: Boolean) {
+fun View.visibile(visibility: Boolean) {
     this.visibility = if (visibility) {
         View.VISIBLE
     } else {
-        View.INVISIBLE
+        View.GONE
     }
 }
 
