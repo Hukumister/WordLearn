@@ -6,21 +6,14 @@ import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.Screens
 import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
-import ru.coderedwolf.wordlearn.ui.base.FlowFragment
-import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import toothpick.Toothpick
-import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 21.04.2019.
  */
-class MainFlowFragment : FlowFragment() {
+class MainFlowFragment : BaseFragment() {
 
     override val layoutRes = R.layout.fragment_main
-
-    @Inject
-    override lateinit var navigatorHolder: NavigatorHolder
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
@@ -28,11 +21,6 @@ class MainFlowFragment : FlowFragment() {
     override val parentScopeName = DI.APP_SCOPE
 
     private val mainFlowScreenFactory = MainFlowScreenFactory()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Toothpick.inject(this, scope)
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,11 +33,11 @@ class MainFlowFragment : FlowFragment() {
         }
 
         selectTab(
-            when (currentTabFragment?.tag) {
-                Screens.LearnScreen.screenKey -> Screens.LearnScreen
-                Screens.WordsScreen.screenKey -> Screens.WordsScreen
-                else -> Screens.PhrasesScreen
-            }
+                when (currentTabFragment?.tag) {
+                    Screens.LearnScreen.screenKey -> Screens.LearnScreen
+                    Screens.WordsCategoryScreen.screenKey -> Screens.WordsCategoryScreen
+                    else -> Screens.PhrasesScreen
+                }
         )
     }
 
@@ -64,11 +52,9 @@ class MainFlowFragment : FlowFragment() {
 
             currentFragment?.let {
                 hide(it)
-                it.userVisibleHint = false
             }
             newFragment?.let {
                 show(it)
-                it.userVisibleHint = true
             }
         }.commitNow()
     }

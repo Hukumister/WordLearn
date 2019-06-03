@@ -7,6 +7,7 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
+import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 21.04.2019.
@@ -18,7 +19,8 @@ abstract class FlowFragment : BaseFragment() {
     private val currentFragment
         get() = childFragmentManager.findFragmentById(R.id.container) as? BaseFragment
 
-    protected abstract val navigatorHolder: NavigatorHolder
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
 
     protected val navigator: Navigator by lazy {
         object : SupportAppNavigator(this.activity, childFragmentManager, R.id.container) {
@@ -27,10 +29,10 @@ abstract class FlowFragment : BaseFragment() {
             }
 
             override fun setupFragmentTransaction(
-                command: Command?,
-                currentFragment: Fragment?,
-                nextFragment: Fragment?,
-                fragmentTransaction: FragmentTransaction
+                    command: Command?,
+                    currentFragment: Fragment?,
+                    nextFragment: Fragment?,
+                    fragmentTransaction: FragmentTransaction
             ) {
                 //fix incorrect order lifecycle callback of MainFlowFragment
                 fragmentTransaction.setReorderingAllowed(true)

@@ -46,7 +46,7 @@ class AppActivity : MvpAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_container)
         if (savedInstanceState == null) {
-            navigator.setLaunchScreen(Screens.MainFlow)
+            navigator.setLaunchScreen(Screens.MainScreen)
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.di.ScopeManager
 import ru.coderedwolf.wordlearn.extension.scopeName
 import ru.coderedwolf.wordlearn.moxy.androidx.MvpAppCompatFragment
@@ -23,8 +24,7 @@ abstract class BaseFragment : MvpAppCompatFragment() {
     private val viewHandler = Handler()
 
     protected open val parentScopeName: String by lazy {
-        (parentFragment as? BaseFragment)?.fragmentScopeName
-            ?: throw RuntimeException("Must be parent fragment!")
+        (parentFragment as? BaseFragment)?.fragmentScopeName ?: DI.APP_SCOPE
     }
 
     protected open val scopeModuleInstaller: (Scope) -> Unit = {}
@@ -40,21 +40,21 @@ abstract class BaseFragment : MvpAppCompatFragment() {
         val scopeNameExist = ScopeManager.exist(fragmentScopeName)
         val scopeIsNotInit = scopeNameExist || scopeWasClosed
         scope = Toothpick.openScopes(parentScopeName, fragmentScopeName)
-            .apply {
-                if (scopeIsNotInit) {
-                    Timber.d("Init new UI scope: $fragmentScopeName")
-                    scopeModuleInstaller(this)
-                    ScopeManager.addName(fragmentScopeName)
-                } else {
-                    Timber.d("Get exist UI scope: $fragmentScopeName")
+                .apply {
+                    if (scopeIsNotInit) {
+                        Timber.d("Init new UI scope: $fragmentScopeName")
+                        scopeModuleInstaller(this)
+                        ScopeManager.addName(fragmentScopeName)
+                    } else {
+                        Timber.d("Get exist UI scope: $fragmentScopeName")
+                    }
                 }
-            }
 
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        inflater.inflate(layoutRes, container, false)!!
+            inflater.inflate(layoutRes, container, false)!!
 
     override fun onResume() {
         super.onResume()
@@ -90,15 +90,15 @@ abstract class BaseFragment : MvpAppCompatFragment() {
     }
 
     private fun isRealRemoving(): Boolean =
-        (isRemoving && !instanceStateSaved) //because isRemoving == true for fragment in backstack on screen rotation
-                || ((parentFragment as? BaseFragment)?.isRealRemoving() ?: false)
+            (isRemoving && !instanceStateSaved) //because isRemoving == true for fragment in backstack on screen rotation
+                    || ((parentFragment as? BaseFragment)?.isRealRemoving() ?: false)
 
     private fun needCloseScope(): Boolean =
-        when {
-            activity?.isChangingConfigurations == true -> false
-            activity?.isFinishing == true -> true
-            else -> isRealRemoving()
-        }
+            when {
+                activity?.isChangingConfigurations == true -> false
+                activity?.isFinishing == true -> true
+                else -> isRealRemoving()
+            }
 
     open fun onBackPressed() {}
 }
