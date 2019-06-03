@@ -12,7 +12,7 @@ class MainFlowScreenFactory {
     fun findScreen(itemId: Int): SupportAppScreen {
         return when (itemId) {
             R.id.words -> {
-                Screens.WordsScreen
+                Screens.WordsCategoryScreen
             }
             R.id.phrases -> {
                 Screens.PhrasesScreen
@@ -20,7 +20,7 @@ class MainFlowScreenFactory {
             R.id.learn -> {
                 Screens.LearnScreen
             }
-            else -> Screens.WordsScreen
+            else -> Screens.WordsCategoryScreen
         }
     }
 }
