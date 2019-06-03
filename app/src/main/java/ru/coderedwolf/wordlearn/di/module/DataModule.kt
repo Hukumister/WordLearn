@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.di.module
 
-import ru.coderedwolf.wordlearn.domain.data.reporitory.WordsCategoryRepository
-import ru.coderedwolf.wordlearn.domain.data.reporitory.WordsCategoryRepositoryImpl
+import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepository
+import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepositoryImpl
 import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractorImpl
 import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper

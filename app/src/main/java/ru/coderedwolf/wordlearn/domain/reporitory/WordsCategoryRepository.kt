@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.domain.data.reporitory
+package ru.coderedwolf.wordlearn.domain.reporitory
 
 import kotlinx.coroutines.withContext
 import ru.coderedwolf.wordlearn.domain.data.DataBase
@@ -20,22 +20,23 @@ interface WordsCategoryRepository {
 }
 
 class WordsCategoryRepositoryImpl @Inject constructor(
-        private val dataBase: DataBase,
+        dataBase: DataBase,
         private val provider: DispatchersProvider,
         private val mapper: CategoryMapper
 ) : WordsCategoryRepository {
 
+    private val categoryDao = dataBase.wordsCategoryDao()
+
     override suspend fun findAll(): List<Category> = withContext(provider.io()) {
-        dataBase.wordsCategoryDao().findAll().map { mapper.convert(it) }
+        categoryDao.findAll().map { mapper.convert(it) }
     }
 
     override suspend fun save(category: Category): Category = withContext(provider.io()) {
-        val entity = dataBase.wordsCategoryDao()
-                .saveAndReturn(mapper.convertToEntity(category))
+        val entity = categoryDao.saveAndReturn(mapper.convertToEntity(category))
         mapper.convert(entity)
     }
 
     override suspend fun delete(categoryId: Long) = withContext(provider.io()) {
-        dataBase.wordsCategoryDao().remove(categoryId)
+        categoryDao.remove(categoryId)
     }
 }
