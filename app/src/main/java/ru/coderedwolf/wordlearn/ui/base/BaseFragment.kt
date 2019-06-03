@@ -37,8 +37,8 @@ abstract class BaseFragment : MvpAppCompatFragment() {
         val scopeWasClosed = savedInstanceState?.getBoolean(STATE_SCOPE_WAS_CLOSED) ?: true
         fragmentScopeName = savedInstanceState?.getString(STATE_SCOPE_NAME) ?: scopeName()
 
-        val scopeNameExist = ScopeManager.exist(fragmentScopeName)
-        val scopeIsNotInit = scopeNameExist || scopeWasClosed
+        val scopeNameNotExist = ScopeManager.exist(fragmentScopeName).not()
+        val scopeIsNotInit = scopeNameNotExist || scopeWasClosed
         scope = Toothpick.openScopes(parentScopeName, fragmentScopeName)
                 .apply {
                     if (scopeIsNotInit) {
@@ -85,7 +85,7 @@ abstract class BaseFragment : MvpAppCompatFragment() {
             //destroy this fragment with scope
             Timber.d("Destroy UI scope: $fragmentScopeName")
             Toothpick.closeScope(scope.name)
-            ScopeManager.addName(fragmentScopeName)
+            ScopeManager.removeName(fragmentScopeName)
         }
     }
 
