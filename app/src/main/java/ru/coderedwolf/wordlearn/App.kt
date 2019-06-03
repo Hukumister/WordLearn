@@ -3,6 +3,7 @@ package ru.coderedwolf.wordlearn
 import android.app.Application
 import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.di.module.AppModule
+import ru.coderedwolf.wordlearn.di.module.DataModule
 import timber.log.Timber
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
@@ -33,6 +34,6 @@ class App : Application() {
     }
 
     private fun initAppScope() {
-        Toothpick.openScope(DI.APP_SCOPE).installModules(AppModule(this))
+        Toothpick.openScope(DI.APP_SCOPE).installModules(AppModule(this), DataModule())
     }
 }
