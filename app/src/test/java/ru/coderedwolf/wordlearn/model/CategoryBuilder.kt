@@ -9,7 +9,7 @@ object CategoryBuilder {
         return Category(
                 id = id,
                 name = "Test",
-                image = "test_image_path",
+                isStudy = false,
                 progress = 50
         )
     }

@@ -11,7 +11,6 @@ object CategoryEntityBuilder {
         return CategoryEntity(
                 id = id,
                 name = "test",
-                image = "test_image_path",
                 createDate = createDate
         )
     }
