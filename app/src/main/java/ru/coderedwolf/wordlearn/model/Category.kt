@@ -6,6 +6,6 @@ package ru.coderedwolf.wordlearn.model
 data class Category(
         val id: Long? = null,
         val name: String,
-        val image: String,
-        val progress: Int
+        val isStudy: Boolean,
+        val progress: Int = 0
 )

@@ -3,17 +3,18 @@ package ru.coderedwolf.wordlearn.domain.mappers
 import ru.coderedwolf.wordlearn.model.Category
 import ru.coderedwolf.wordlearn.model.entity.CategoryEntity
 import java.util.*
+import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 02.05.2019.
  */
-class CategoryMapper {
+class CategoryMapper @Inject constructor() {
 
     fun convert(categoryEntity: CategoryEntity): Category {
         return Category(
                 id = categoryEntity.id ?: -1,
                 name = categoryEntity.name,
-                image = categoryEntity.image,
+                isStudy = categoryEntity.isStudy,
                 progress = 0
         )
     }
@@ -22,7 +23,7 @@ class CategoryMapper {
         return CategoryEntity(
                 id = category.id,
                 name = category.name,
-                image = category.image,
+                isStudy = category.isStudy,
                 createDate = Date()
         )
     }

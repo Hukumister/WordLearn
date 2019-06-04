@@ -9,8 +9,8 @@ import java.util.*
  */
 @Entity
 data class CategoryEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long? = null,
-    val name: String,
-    val image: String,
-    val createDate: Date
+        @PrimaryKey(autoGenerate = true) val id: Long? = null,
+        val name: String,
+        val isStudy: Boolean,
+        val createDate: Date
 )

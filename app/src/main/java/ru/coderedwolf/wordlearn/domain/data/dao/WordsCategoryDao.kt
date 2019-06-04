@@ -9,9 +9,10 @@ import ru.coderedwolf.wordlearn.model.entity.CategoryEntity
 @Dao
 interface WordsCategoryDao {
 
-    @Query("select * from categoryentity")
+    @Query("select * from CategoryEntity")
     suspend fun findAll(): List<CategoryEntity>
 
+    @Query("select * from CategoryEntity where id=:categoryId")
     suspend fun findById(categoryId: Long): CategoryEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -23,6 +24,6 @@ interface WordsCategoryDao {
         return findById(insertedId)
     }
 
-    @Query("delete from categoryentity where id = :categoryId")
+    @Query("delete from CategoryEntity where id = :categoryId")
     suspend fun remove(categoryId: Long)
 }
