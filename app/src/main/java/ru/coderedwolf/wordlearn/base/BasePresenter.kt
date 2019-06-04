@@ -1,8 +1,8 @@
 package ru.coderedwolf.wordlearn.base
 
-import com.arellomobile.mvp.MvpPresenter
-import com.arellomobile.mvp.MvpView
 import kotlinx.coroutines.*
+import moxy.MvpPresenter
+import moxy.MvpView
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
  * @constructor Injects the required dependencies
  */
 abstract class BasePresenter<V : MvpView>(
-    private val foregroundContext: CoroutineContext = Dispatchers.Main
+        private val foregroundContext: CoroutineContext = Dispatchers.Main
 ) : MvpPresenter<V>(), CoroutineScope {
 
     private val parentJob = SupervisorJob()

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import moxy.MvpAppCompatFragment
 import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.di.ScopeManager
 import ru.coderedwolf.wordlearn.extension.scopeName
-import ru.coderedwolf.wordlearn.moxy.androidx.MvpAppCompatFragment
 import timber.log.Timber
 import toothpick.Scope
 import toothpick.Toothpick

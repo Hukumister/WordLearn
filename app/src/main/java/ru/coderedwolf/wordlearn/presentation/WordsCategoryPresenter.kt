@@ -1,6 +1,6 @@
 package ru.coderedwolf.wordlearn.presentation
 
-import com.arellomobile.mvp.InjectViewState
+import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.Screens
 import ru.coderedwolf.wordlearn.base.BasePresenter
 import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractor
