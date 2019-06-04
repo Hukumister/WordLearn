@@ -17,14 +17,14 @@ abstract class BasePresenter<V : MvpView>(
     private val foregroundContext: CoroutineContext = Dispatchers.Main
 ) : MvpPresenter<V>(), CoroutineScope {
 
-    private val mParentJob = SupervisorJob()
+    private val parentJob = SupervisorJob()
 
     override val coroutineContext: CoroutineContext
-        get() = foregroundContext + mParentJob
+        get() = foregroundContext + parentJob
 
     final override fun onDestroy() {
         super.onDestroy()
-        onViewDestroyed()
+        onPresenterDestroy()
         coroutineContext.cancel()
     }
 
@@ -35,7 +35,7 @@ abstract class BasePresenter<V : MvpView>(
     /**
      * This method may be called when the presenter view is destroyed
      */
-    open fun onViewDestroyed() {}
+    open fun onPresenterDestroy() {}
 
     /**
      * Optional method should be call, onBackPressed on Activity or Fragment
