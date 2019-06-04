@@ -8,25 +8,23 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/categoryImage"
-        android:layout_width="@dimen/material_list_icon_size"
-        android:layout_height="@dimen/material_list_icon_size"
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/material_horizontal_margin"
         android:layout_marginTop="@dimen/material_horizontal_margin"
-        android:layout_marginBottom="@dimen/material_horizontal_margin"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/backgrounds/scenic[5]" />
+        android:layout_marginBottom="@dimen/material_horizontal_margin" />
 
     <TextView
         android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/material_horizontal_margin"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="@dimen/material_horizontal_margin"
         android:layout_toStartOf="@id/categoryProgress"
-        android:layout_toEndOf="@id/categoryImage"
+        android:layout_toEndOf="@id/checkbox"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"

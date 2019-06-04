@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:indeterminate="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryList"
