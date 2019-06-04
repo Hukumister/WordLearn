@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">EnglishLearn</string>
+
+    <!--Category create dialog-->
+    <string name="create_category_title">Создание категории</string>
+
+    <!--Common-->
+    <string name="create">Создать</string>
+    <string name="cancel">Отмена</string>
 </resources>

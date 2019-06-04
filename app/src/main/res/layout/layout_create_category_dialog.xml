@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/categoryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/material_horizontal_margin"
+        android:layout_marginTop="@dimen/material_horizontal_margin"
+        android:layout_marginEnd="@dimen/material_horizontal_margin"
+        android:focusable="true"
+        android:inputType="textAutoComplete" />
+</FrameLayout>
