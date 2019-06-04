@@ -6,7 +6,6 @@ import ru.coderedwolf.wordlearn.base.BasePresenter
 import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.model.Category
 import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryItem
-import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryView
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

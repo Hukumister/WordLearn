@@ -13,6 +13,7 @@ import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visibile
 import ru.coderedwolf.wordlearn.model.Category
 import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryPresenter
+import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 
 /**

@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.ui.wordscategory
+package ru.coderedwolf.wordlearn.presentation.wordcategory
 
 import moxy.MvpView
 import moxy.viewstate.strategy.OneExecutionStateStrategy
