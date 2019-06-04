@@ -12,7 +12,7 @@ import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visibile
 import ru.coderedwolf.wordlearn.model.Category
-import ru.coderedwolf.wordlearn.presentation.WordsCategoryPresenter
+import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryPresenter
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 
 /**

@@ -23,6 +23,14 @@ class WordsCategoryItem(val category: Category) : Item() {
 
     override fun getLayout() = R.layout.item_category
 
+    override fun isSameAs(other: com.xwray.groupie.Item<*>?): Boolean {
+        return if (other is WordsCategoryItem) {
+            other.category.id == category.id
+        } else {
+            false
+        }
+    }
+
     override fun equals(other: Any?): Boolean {
         return if (other is WordsCategoryItem) {
             other.category == category

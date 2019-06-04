@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.presentation
+package ru.coderedwolf.wordlearn.presentation.wordcategory
 
 import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.Screens
@@ -41,7 +41,8 @@ class WordsCategoryPresenter @Inject constructor(
         viewState.addCategory(0, insertedCategory)
     }
 
-    fun onClickCategory(category: Category) = router.navigateTo(Screens.CategoryWordsFlow(category.id!!))
+    fun onClickCategory(category: Category) = router
+            .navigateTo(Screens.WordScreenFlow(category.id!!, category.name))
 
     fun onClickAddCategory() = viewState.showCreateCategoryDialog()
 
