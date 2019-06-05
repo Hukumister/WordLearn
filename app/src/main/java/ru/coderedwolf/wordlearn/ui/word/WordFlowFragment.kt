@@ -57,7 +57,7 @@ class WordFlowFragment : FlowFragment() {
         super.onCreate(savedInstanceState)
         Toothpick.inject(this, scope)
         if (childFragmentManager.fragments.isEmpty()) {
-            navigator.setLaunchScreen(Screens.WordsCategoryScreen)
+            navigator.setLaunchScreen(Screens.WordListScreen)
         }
     }
 
