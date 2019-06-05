@@ -32,6 +32,13 @@ abstract class BasePresenter<V : MvpView>(
         launch { block(this) }
     }
 
+    override fun attachView(view: V?) {
+        super.attachView(view)
+        onViewAttach(view)
+    }
+
+    open fun onViewAttach(view: V?) {}
+
     /**
      * This method may be called when the presenter view is destroyed
      */
