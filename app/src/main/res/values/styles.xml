@@ -16,4 +16,9 @@
     <style name="ItemQuantityText">
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="ToolbarStyle">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
 </resources>
