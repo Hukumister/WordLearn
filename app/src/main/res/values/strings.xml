@@ -5,6 +5,9 @@
     <string name="category_title">Категории</string>
     <string name="create_category_title">Создание категории</string>
 
+    <!--Word list-->
+    <string name="place_holder_no_words">В данной категории нет слов</string>
+
     <!--Common-->
     <string name="create">Создать</string>
     <string name="cancel">Отмена</string>
