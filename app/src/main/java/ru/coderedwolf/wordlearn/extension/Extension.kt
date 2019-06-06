@@ -30,15 +30,15 @@ fun View.visibile(visibility: Boolean) {
     this.visibility = if (visibility) {
         View.VISIBLE
     } else {
-        View.GONE
+        View.INVISIBLE
     }
 }
 
-fun View.gone(gone: Boolean) {
+fun View.visibleOrGone(gone: Boolean) {
     this.visibility = if (gone) {
-        View.GONE
-    } else {
         View.VISIBLE
+    } else {
+        View.GONE
     }
 }
 
