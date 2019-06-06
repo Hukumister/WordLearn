@@ -36,4 +36,8 @@ object Screens {
     object WordListScreen : SupportAppScreen() {
         override fun getFragment(): Fragment = WordListFragment.newInstance()
     }
+
+    object WordCreateScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = StubFragment()
+    }
 }
