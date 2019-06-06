@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.presentation.word
+package ru.coderedwolf.wordlearn.presentation.word.wordlist
 
 import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.Screens

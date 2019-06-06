@@ -3,8 +3,8 @@ package ru.coderedwolf.wordlearn
 import androidx.fragment.app.Fragment
 import ru.coderedwolf.wordlearn.ui.base.StubFragment
 import ru.coderedwolf.wordlearn.ui.main.MainFlowFragment
-import ru.coderedwolf.wordlearn.ui.word.WordFlowFragment
-import ru.coderedwolf.wordlearn.ui.word.WordListFragment
+import ru.coderedwolf.wordlearn.ui.word.wordlist.WordFlowFragment
+import ru.coderedwolf.wordlearn.ui.word.wordlist.WordListFragment
 import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 

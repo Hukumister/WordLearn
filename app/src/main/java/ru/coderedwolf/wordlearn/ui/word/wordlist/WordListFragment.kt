@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.ui.word
+package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,8 +12,8 @@ import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visibile
 import ru.coderedwolf.wordlearn.extension.visibleOrGone
 import ru.coderedwolf.wordlearn.model.WordPreview
-import ru.coderedwolf.wordlearn.presentation.word.WordListPresenter
-import ru.coderedwolf.wordlearn.presentation.word.WordListView
+import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListPresenter
+import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 
 /**

@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.ui.word
+package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
