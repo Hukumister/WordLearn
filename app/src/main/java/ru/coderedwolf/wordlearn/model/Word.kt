@@ -11,7 +11,7 @@ data class Word(
         val word: String,
         val phraseToMemorize: String,
         val transcription: String,
-        val translate: String,
+        val translation: String,
         val lastReviewDate: Date,
         val examplesList: List<String>,
         val isRotate: Boolean,

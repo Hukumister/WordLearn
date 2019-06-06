@@ -7,5 +7,5 @@ data class WordPreview(
         val wordId: Long,
         val word: String,
         val reviewCount: Int,
-        val translate: String
+        val translation: String
 )

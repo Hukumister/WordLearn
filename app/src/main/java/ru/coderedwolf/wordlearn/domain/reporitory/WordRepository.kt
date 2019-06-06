@@ -40,7 +40,7 @@ private fun WordEntity.toPreview(): WordPreview {
     return WordPreview(
             wordId = wordId!!,
             reviewCount = reviewCount,
-            translate = translate,
+            translation = translation,
             word = word
     )
 }

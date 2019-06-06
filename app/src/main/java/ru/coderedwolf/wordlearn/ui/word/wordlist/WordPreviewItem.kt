@@ -13,7 +13,7 @@ class WordPreviewItem(val wordPreview: WordPreview) : Item() {
 
     //todo заменить на нормальный текст
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        val wordText = "${wordPreview.word} - ${wordPreview.translate}"
+        val wordText = "${wordPreview.word} - ${wordPreview.translation}"
         viewHolder.wordText.text = wordText
         viewHolder.reviewCountText.text = wordPreview.reviewCount.toString()
     }

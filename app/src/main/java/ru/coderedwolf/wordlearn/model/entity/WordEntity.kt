@@ -26,7 +26,7 @@ data class WordEntity(
         val word: String,
         val phraseToMemorize: String,
         val transcription: String,
-        val translate: String,
+        val translation: String,
         val reviewCount: Int,
         val lastReviewDate: Date,
         val examplesList: List<String>
