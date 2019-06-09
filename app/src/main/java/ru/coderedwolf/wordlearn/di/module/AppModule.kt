@@ -6,6 +6,7 @@ import ru.coderedwolf.wordlearn.domain.data.DataBase
 import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper
 import ru.coderedwolf.wordlearn.domain.system.AppDispatchersProvider
 import ru.coderedwolf.wordlearn.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.presentation.global.ErrorHandler
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -18,6 +19,7 @@ class AppModule(context: Context) : Module() {
         bind(Context::class.java).toInstance(context)
         bind(DataBase::class.java).toProvider(DataBaseProvider::class.java).singletonInScope()
 
+        bind(ErrorHandler::class.java).singletonInScope()
         bind(DispatchersProvider::class.java).to(AppDispatchersProvider::class.java).singletonInScope()
         //Navigation
         val cicerone = Cicerone.create()
