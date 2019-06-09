@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.presentation.wordcategory
 
 import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.Screens
-import ru.coderedwolf.wordlearn.base.BasePresenter
+import ru.coderedwolf.wordlearn.presentation.base.BasePresenter
 import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.model.Category
 import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryItem

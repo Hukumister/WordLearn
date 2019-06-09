@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.presentation.word.wordlist
 
 import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.Screens
-import ru.coderedwolf.wordlearn.base.BasePresenter
+import ru.coderedwolf.wordlearn.presentation.base.BasePresenter
 import ru.coderedwolf.wordlearn.di.FlowRouter
 import ru.coderedwolf.wordlearn.di.PrimitiveWrapper
 import ru.coderedwolf.wordlearn.di.provider.qualifier.CategoryId

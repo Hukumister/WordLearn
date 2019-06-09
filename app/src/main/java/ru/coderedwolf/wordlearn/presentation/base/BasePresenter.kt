@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.base
+package ru.coderedwolf.wordlearn.presentation.base
 
 import kotlinx.coroutines.*
 import moxy.MvpPresenter
@@ -19,8 +19,10 @@ abstract class BasePresenter<V : MvpView>(
 
     private val parentJob = SupervisorJob()
 
+    private val errorHandler = CoroutineExceptionHandler { _, exception -> onException(exception) }
+
     override val coroutineContext: CoroutineContext
-        get() = foregroundContext + parentJob
+        get() = foregroundContext + errorHandler + parentJob
 
     final override fun onDestroy() {
         super.onDestroy()
@@ -37,6 +39,16 @@ abstract class BasePresenter<V : MvpView>(
         onViewAttach(view)
     }
 
+    /**
+     *  Method call on uncaught exception
+     */
+    open fun onException(exception: Throwable) {
+        throw exception
+    }
+
+    /**
+     * Alias function with callback style name
+     */
     open fun onViewAttach(view: V?) {}
 
     /**
