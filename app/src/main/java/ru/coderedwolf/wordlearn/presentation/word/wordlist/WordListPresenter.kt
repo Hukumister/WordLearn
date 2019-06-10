@@ -35,5 +35,5 @@ class WordListPresenter @Inject constructor(
 
     override fun onBackPressed() = flowRouter.finishFlow()
 
-    fun onClickAddWord() = flowRouter.startFlow(Screens.WordCreateScreen)
+    fun onClickAddWord() = flowRouter.navigateTo(Screens.WordCreateScreen)
 }

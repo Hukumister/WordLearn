@@ -39,6 +39,6 @@ object Screens {
     }
 
     object WordCreateScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment = StubFragment()
+        override fun getFragment(): Fragment = CreateWordFragment()
     }
 }
