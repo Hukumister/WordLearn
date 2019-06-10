@@ -11,4 +11,10 @@
     <!--Common-->
     <string name="create">Создать</string>
     <string name="cancel">Отмена</string>
+
+    <!--Valid field-->
+    <string name="error_empty">Должно быть заполнено</string>
+
+    <!--Error-->
+    <string name="unknown_error">Неизвестная ошибка</string>
 </resources>
