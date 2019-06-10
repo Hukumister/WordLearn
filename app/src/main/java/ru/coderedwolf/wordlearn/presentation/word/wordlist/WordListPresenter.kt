@@ -7,7 +7,7 @@ import ru.coderedwolf.wordlearn.di.FlowRouter
 import ru.coderedwolf.wordlearn.di.PrimitiveWrapper
 import ru.coderedwolf.wordlearn.di.provider.qualifier.CategoryId
 import ru.coderedwolf.wordlearn.di.provider.qualifier.CategoryName
-import ru.coderedwolf.wordlearn.domain.interactors.WordInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractor
 import javax.inject.Inject
 
 /**

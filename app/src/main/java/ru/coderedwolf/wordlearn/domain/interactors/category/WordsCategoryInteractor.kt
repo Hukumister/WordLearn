@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.domain.interactors
+package ru.coderedwolf.wordlearn.domain.interactors.category
 
 import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepository
 import ru.coderedwolf.wordlearn.model.Category
