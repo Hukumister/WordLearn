@@ -24,11 +24,6 @@ class WordListFragment : BaseFragment(), WordListView {
     override val layoutRes: Int
         get() = R.layout.fragment_word_list
 
-    companion object {
-
-        fun newInstance(): Fragment = WordListFragment()
-    }
-
     @InjectPresenter
     lateinit var presenter: WordListPresenter
 

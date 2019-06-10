@@ -3,7 +3,8 @@ package ru.coderedwolf.wordlearn
 import androidx.fragment.app.Fragment
 import ru.coderedwolf.wordlearn.ui.base.StubFragment
 import ru.coderedwolf.wordlearn.ui.main.MainFlowFragment
-import ru.coderedwolf.wordlearn.ui.word.wordlist.WordFlowFragment
+import ru.coderedwolf.wordlearn.ui.word.WordFlowFragment
+import ru.coderedwolf.wordlearn.ui.word.createword.CreateWordFragment
 import ru.coderedwolf.wordlearn.ui.word.wordlist.WordListFragment
 import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -34,7 +35,7 @@ object Screens {
     }
 
     object WordListScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment = WordListFragment.newInstance()
+        override fun getFragment(): Fragment = WordListFragment()
     }
 
     object WordCreateScreen : SupportAppScreen() {
