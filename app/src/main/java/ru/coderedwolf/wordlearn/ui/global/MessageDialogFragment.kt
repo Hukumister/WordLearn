@@ -1,24 +1,19 @@
 package ru.coderedwolf.wordlearn.ui.global
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.layout_input_text_dialog.*
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.args
 
-/**
- * @author CodeRedWolf. Date 12.06.2019.
- */
-class InputTextDialogFragment : DialogFragment() {
+
+class MessageDialogFragment : DialogFragment() {
 
     private var startTag: String by args()
     private var title: String by args()
+    private var message: String by args()
     private var positiveText: String by args()
     private var negativeText: String by args()
 
@@ -29,48 +24,42 @@ class InputTextDialogFragment : DialogFragment() {
             else -> object : OnClickListener {}
         }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        @SuppressLint("InflateParams")
-        val view = LayoutInflater.from(requireContext())
-                .inflate(R.layout.layout_input_text_dialog, null)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+            AlertDialog.Builder(context!!).apply {
+                setTitle(title)
+                setMessage(message)
+                setUpPositiveButton(positiveText)
+                setUpNegativeButton(negativeText)
+            }.create()
 
-        return AlertDialog.Builder(requireContext()).apply {
-            setTitle(getString(R.string.create_category_title))
-            setView(view)
-            setUpPositiveButton(positiveText)
-            setUpNegativeButton(negativeText)
-        }.create()
-    }
 
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
-        clickListener.inputDialogCanceled(startTag)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        clickListener.dialogCanceled(startTag)
     }
 
     companion object {
 
         fun create(
                 title: String = "",
+                message: String,
                 positive: String = "",
                 negative: String = "",
                 tag: String = "message_dialog"
         ) =
-                InputTextDialogFragment().apply {
+                MessageDialogFragment().apply {
                     this.title = title
                     this.startTag = tag
+                    this.message = message
                     this.positiveText = positive
                     this.negativeText = negative
                 }
     }
 
     interface OnClickListener {
-        fun inputDialogTextAccepted(tag: String, text: String) {}
-        fun inputDialogCanceled(tag: String) {}
+        fun dialogPositiveClicked(tag: String) {}
+        fun dialogNegativeClicked(tag: String) {}
+        fun dialogCanceled(tag: String) {}
     }
 
     private fun AlertDialog.Builder.setUpPositiveButton(positiveText: String) {
@@ -80,11 +69,8 @@ class InputTextDialogFragment : DialogFragment() {
             getString(R.string.ok)
         }
         setPositiveButton(textButton) { _, _ ->
-            val string = requireDialog().inputText.text.toString()
-            if (string.isNotEmpty()) {
-                clickListener.inputDialogTextAccepted(startTag, string)
-            }
             dismissAllowingStateLoss()
+            clickListener.dialogPositiveClicked(startTag)
         }
     }
 
@@ -92,7 +78,7 @@ class InputTextDialogFragment : DialogFragment() {
         if (negativeText.isNotEmpty()) {
             setNegativeButton(negativeText) { _, _ ->
                 dismissAllowingStateLoss()
-                clickListener.inputDialogCanceled(startTag)
+                clickListener.dialogNegativeClicked(startTag)
             }
         }
     }
