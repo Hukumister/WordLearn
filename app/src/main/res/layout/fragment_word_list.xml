@@ -49,7 +49,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progressBar"
         tools:itemCount="10"
-        tools:listitem="@layout/item_review_word" />
+        tools:listitem="@layout/item_preview_word" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addWordFab"
