@@ -3,7 +3,6 @@ package ru.coderedwolf.wordlearn.di.module
 import android.content.Context
 import ru.coderedwolf.wordlearn.di.provider.DataBaseProvider
 import ru.coderedwolf.wordlearn.domain.data.DataBase
-import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper
 import ru.coderedwolf.wordlearn.domain.system.AppDispatchersProvider
 import ru.coderedwolf.wordlearn.domain.system.DispatchersProvider
 import ru.coderedwolf.wordlearn.domain.system.ResourceProvider
@@ -23,6 +22,7 @@ class AppModule(context: Context) : Module() {
         bind(ErrorHandler::class.java).singletonInScope()
         bind(ResourceProvider::class.java).singletonInScope()
         bind(DispatchersProvider::class.java).to(AppDispatchersProvider::class.java).singletonInScope()
+
         //Navigation
         val cicerone = Cicerone.create()
         bind(Router::class.java).toInstance(cicerone.router)

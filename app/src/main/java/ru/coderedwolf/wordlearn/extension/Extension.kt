@@ -26,7 +26,7 @@ fun Navigator.setLaunchScreen(screen: SupportAppScreen) {
     )
 }
 
-fun View.visibile(visibility: Boolean) {
+fun View.visible(visibility: Boolean) {
     this.visibility = if (visibility) {
         View.VISIBLE
     } else {
