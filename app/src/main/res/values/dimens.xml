@@ -2,4 +2,18 @@
 <resources>
     <dimen name="material_horizontal_margin">16dp</dimen>
     <dimen name="material_list_icon_size">40dp</dimen>
+
+    <!-- All components align to an 8dp square baseline grid for mobile, tablet, and desktop. -->
+    <!-- Keylines are determined by each element’s distance from the edge of the screen, measured in increments of 8dp. -->
+    <dimen name="spacing_huge">40dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+
+    <!-- Touch target minimum of 48 x 48 dp -->
+    <dimen name="icon_size">48dp</dimen>
+    <dimen name="icon_size_small">24dp</dimen>
+
+    <dimen name="elevation_card">1dp</dimen>
+    <dimen name="elevation_toolbar">4dp</dimen>
 </resources>

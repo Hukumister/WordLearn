@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="toolbarStyle">@style/Component.Toolbar</item>
+
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
     <style name="ItemListText">
@@ -17,8 +22,9 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="ToolbarStyle">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="titleTextColor">@color/white</item>
+    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:buttonBarButtonStyle">
+            @style/Widget.MaterialComponents.Button.TextButton.Dialog
+        </item>
     </style>
 </resources>
