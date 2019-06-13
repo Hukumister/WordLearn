@@ -1,7 +1,10 @@
 package ru.coderedwolf.wordlearn.domain.data.dao
 
-import androidx.room.*
-import ru.coderedwolf.wordlearn.model.entity.CategoryEntity
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Transaction
+import ru.coderedwolf.wordlearn.model.entity.WordCategoryEntity
 
 /**
  * @author CodeRedWolf. Date 02.05.2019.
@@ -9,21 +12,21 @@ import ru.coderedwolf.wordlearn.model.entity.CategoryEntity
 @Dao
 interface WordsCategoryDao {
 
-    @Query("select * from CategoryEntity")
-    suspend fun findAll(): List<CategoryEntity>
+    @Query("select * from WordCategoryEntity")
+    suspend fun findAll(): List<WordCategoryEntity>
 
-    @Query("select * from CategoryEntity where id=:categoryId")
-    suspend fun findById(categoryId: Long): CategoryEntity
+    @Query("select * from WordCategoryEntity where id=:categoryId")
+    suspend fun findById(categoryId: Long): WordCategoryEntity
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(categoryEntity: CategoryEntity): Long
+    @Insert
+    suspend fun save(wordCategoryEntity: WordCategoryEntity): Long
 
     @Transaction
-    suspend fun saveAndReturn(categoryEntity: CategoryEntity): CategoryEntity {
-        val insertedId = save(categoryEntity)
+    suspend fun saveAndReturn(wordCategoryEntity: WordCategoryEntity): WordCategoryEntity {
+        val insertedId = save(wordCategoryEntity)
         return findById(insertedId)
     }
 
-    @Query("delete from CategoryEntity where id = :categoryId")
+    @Query("delete from WordCategoryEntity where id = :categoryId")
     suspend fun remove(categoryId: Long)
 }

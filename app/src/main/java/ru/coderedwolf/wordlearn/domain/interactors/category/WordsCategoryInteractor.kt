@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.domain.interactors.category
 
 import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepository
-import ru.coderedwolf.wordlearn.model.Category
+import ru.coderedwolf.wordlearn.model.WordCategory
 import javax.inject.Inject
 
 /**
@@ -9,9 +9,9 @@ import javax.inject.Inject
  */
 interface WordsCategoryInteractor {
 
-    suspend fun findAllCategory(): List<Category>
+    suspend fun findAllCategory(): List<WordCategory>
 
-    suspend fun addCategory(category: Category): Category
+    suspend fun addCategory(wordCategory: WordCategory): WordCategory
 
     suspend fun remoteCategory(categoryId: Long)
 }
@@ -20,9 +20,9 @@ class WordsCategoryInteractorImpl @Inject constructor(
         private val wordsCategoryRepository: WordsCategoryRepository
 ) : WordsCategoryInteractor {
 
-    override suspend fun findAllCategory(): List<Category> = wordsCategoryRepository.findAll()
+    override suspend fun findAllCategory(): List<WordCategory> = wordsCategoryRepository.findAll()
 
-    override suspend fun addCategory(category: Category): Category = wordsCategoryRepository.save(category)
+    override suspend fun addCategory(wordCategory: WordCategory): WordCategory = wordsCategoryRepository.save(wordCategory)
 
     override suspend fun remoteCategory(categoryId: Long) = wordsCategoryRepository.delete(categoryId)
 }

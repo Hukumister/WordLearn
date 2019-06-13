@@ -11,7 +11,7 @@ import java.util.*
 @Entity(
         foreignKeys = [
             ForeignKey(
-                    entity = CategoryEntity::class,
+                    entity = WordCategoryEntity::class,
                     childColumns = ["categoryId"],
                     parentColumns = ["id"]
             )

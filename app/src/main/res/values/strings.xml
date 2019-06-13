@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EnglishLearn</string>
 
-    <!--Category create dialog-->
+    <!--WordCategory create dialog-->
     <string name="category_title">Категории</string>
     <string name="create_category_title">Создание категории</string>
 

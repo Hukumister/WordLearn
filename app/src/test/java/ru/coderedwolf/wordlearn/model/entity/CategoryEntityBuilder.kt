@@ -7,15 +7,16 @@ import java.util.*
  */
 object CategoryEntityBuilder {
 
-    fun create(id: Long, createDate: Date = Date()): CategoryEntity {
-        return CategoryEntity(
+    fun create(id: Long, createDate: Date = Date()): WordCategoryEntity {
+        return WordCategoryEntity(
                 id = id,
                 name = "test",
-                createDate = createDate
+                createDate = createDate,
+                isStudy = false
         )
     }
 
-    fun createList(): List<CategoryEntity> {
+    fun createList(): List<WordCategoryEntity> {
         return listOf(
                 create(1),
                 create(2),

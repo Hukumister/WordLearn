@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.model
 /**
  * @author CodeRedWolf. Date 02.05.2019.
  */
-data class Category(
+data class WordCategory(
         val id: Long? = null,
         val name: String,
         val isStudy: Boolean,
