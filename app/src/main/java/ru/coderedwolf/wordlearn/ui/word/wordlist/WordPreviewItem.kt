@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.item_review_word.*
+import kotlinx.android.synthetic.main.item_preview_word.*
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.model.WordPreview
 
@@ -18,5 +18,25 @@ class WordPreviewItem(val wordPreview: WordPreview) : Item() {
         viewHolder.reviewCountText.text = wordPreview.reviewCount.toString()
     }
 
-    override fun getLayout(): Int = R.layout.fragment_word_list
+    override fun getLayout(): Int = R.layout.item_preview_word
+
+    override fun isSameAs(other: com.xwray.groupie.Item<*>?): Boolean {
+        return if (other is WordPreviewItem) {
+            other.wordPreview.wordId == wordPreview.wordId
+        } else {
+            false
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is WordPreviewItem) {
+            other.wordPreview == wordPreview
+        } else {
+            false
+        }
+    }
+
+    override fun hashCode(): Int {
+        return wordPreview.hashCode()
+    }
 }

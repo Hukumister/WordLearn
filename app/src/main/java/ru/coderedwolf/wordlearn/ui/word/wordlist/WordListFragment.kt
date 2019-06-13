@@ -1,7 +1,6 @@
 package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_word_list.*
@@ -9,8 +8,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.extension.visibile
-import ru.coderedwolf.wordlearn.extension.visibleOrGone
+import ru.coderedwolf.wordlearn.extension.visible
 import ru.coderedwolf.wordlearn.model.WordPreview
 import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListPresenter
 import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListView
@@ -29,7 +27,7 @@ class WordListFragment : BaseFragment(), WordListView {
 
     @ProvidePresenter
     fun providePresenter(): WordListPresenter =
-            scope.getInstance(WordListPresenter::class.java)
+        scope.getInstance(WordListPresenter::class.java)
 
     private val wordPreviewAdapter = GroupAdapter<ViewHolder>()
 
@@ -43,12 +41,18 @@ class WordListFragment : BaseFragment(), WordListView {
         addWordFab.onClick { presenter.onClickAddWord() }
     }
 
-    override fun showLoading(show: Boolean) = progressBar.visibleOrGone(show)
+    override fun showLoading(show: Boolean) {
+        if (show) {
+            progressBar.visible(true)
+        } else {
+            postViewAction(500) { progressBar.visible(false) }
+        }
+    }
 
-    override fun showWords(list: List<WordPreview>) = wordPreviewAdapter
-            .update(list.map { WordPreviewItem(it) })
-
-    override fun showEmptyPlaceHolder(show: Boolean) = placeHolder.visibile(show)
+    override fun showWords(list: List<WordPreview>) {
+        placeHolder.visible(list.isEmpty())
+        wordPreviewAdapter.update(list.map { WordPreviewItem(it) })
+    }
 
     override fun showTitle(title: String) {
         toolbar.title = title

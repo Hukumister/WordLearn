@@ -12,7 +12,6 @@ import ru.coderedwolf.wordlearn.model.WordPreview
 interface WordListView : MvpView {
 
     fun showLoading(show: Boolean)
-    fun showEmptyPlaceHolder(show: Boolean)
 
     fun showTitle(title: String)
     fun showWords(list: List<WordPreview>)
