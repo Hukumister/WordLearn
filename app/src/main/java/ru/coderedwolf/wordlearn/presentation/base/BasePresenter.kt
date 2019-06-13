@@ -34,7 +34,7 @@ abstract class BasePresenter<V : MvpView>(
         launch { block(this) }
     }
 
-    override fun attachView(view: V?) {
+    final override fun attachView(view: V?) {
         super.attachView(view)
         onViewAttach(view)
     }
