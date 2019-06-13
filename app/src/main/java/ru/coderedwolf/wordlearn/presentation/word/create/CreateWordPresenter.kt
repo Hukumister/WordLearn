@@ -23,19 +23,25 @@ class CreateWordPresenter @Inject constructor(
         private val errorHandler: ErrorHandler
 ) : BasePresenter<CreateWordView>() {
 
+    private val exampleList: MutableList<WordExample> = mutableListOf()
+
     private val categoryId: Long = categoryIdWrapper.value
     private val wordBuilder = WordBuilder()
 
-    fun onAddWordExample(position: Int, example: String, translation: String) {
-        wordBuilder.addExample(position, WordExample(example, translation))
+    fun onAddWordExample(example: String, translation: String) {
+        val wordExample = WordExample(example, translation)
+        val result = exampleList.add(wordExample)
+        if (result) {
+            viewState.updateExampleList(exampleList)
+        }
     }
 
-    fun onRemoveExample(position: Int) {
-        wordBuilder.removeExample(position)
-        viewState.removeExample(position)
+    fun onRemoveExample(example: WordExample) {
+        exampleList.remove(example)
+        viewState.updateExampleList(exampleList)
     }
 
-    fun onClickAddExample() = viewState.addExampleView()
+    fun onClickAddExample() = viewState.showDialogCreateExample()
 
     fun onClickSave(
             word: String,
@@ -48,17 +54,19 @@ class CreateWordPresenter @Inject constructor(
                 .word(word)
                 .translation(translation)
                 .association(association)
+                .exampleList(exampleList)
                 .transcription(transcription)
                 .build(categoryId)
 
         try {
             wordInteractor.addWord(addedWord)
+            router.exit()
         } catch (ex: Throwable) {
             handleException(ex)
         }
     }
 
-    override fun onBackPressed() = router.finishFlow()
+    override fun onBackPressed() = router.exit()
 
     private fun handleException(throwable: Throwable) {
         if (throwable is ViolationException) {

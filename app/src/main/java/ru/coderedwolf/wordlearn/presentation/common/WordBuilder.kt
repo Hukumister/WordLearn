@@ -8,15 +8,11 @@ import ru.coderedwolf.wordlearn.model.WordExample
  */
 class WordBuilder(
         private var word: String = "",
-        private var example: MutableMap<Int, WordExample> = mutableMapOf(),
         private var transcription: String = "",
         private var translation: String = "",
+        private var exampleSet: MutableSet<WordExample> = mutableSetOf(),
         private var association: String = ""
 ) {
-
-    fun addExample(position: Int, wordExample: WordExample) = example.put(position, wordExample)
-
-    fun removeExample(position: Int) = example.remove(position)
 
     fun word(word: String): WordBuilder {
         this.word = word
@@ -38,6 +34,12 @@ class WordBuilder(
         return this
     }
 
+    fun exampleList(list: List<WordExample>): WordBuilder {
+        exampleSet.clear()
+        exampleSet.addAll(list)
+        return this
+    }
+
     fun build(categoryId: Long): Word {
         return Word(
                 categoryId = categoryId,
@@ -45,7 +47,7 @@ class WordBuilder(
                 transcription = transcription,
                 association = association,
                 translation = translation,
-                examplesList = example.values.toList()
+                examplesList = exampleSet.toList()
         )
     }
 }
