@@ -4,6 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -54,4 +58,25 @@ fun Activity.showKeyboard() {
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
+}
+
+fun GroupAdapter<ViewHolder>.find(predicate: (Item) -> Boolean): Item? {
+    for (index in 0 until itemCount) {
+        val item = getItem(index) as? Item
+        if (item != null && predicate(item)) {
+            return item
+        }
+    }
+    return null
+}
+
+
+fun Section.find(predicate: (Item) -> Boolean): Item? {
+    for (index in 0 until itemCount) {
+        val item = getItem(index) as? Item
+        if (item != null && predicate(item)) {
+            return item
+        }
+    }
+    return null
 }
