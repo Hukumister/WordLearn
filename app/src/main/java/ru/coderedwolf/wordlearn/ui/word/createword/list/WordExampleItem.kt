@@ -11,8 +11,8 @@ import ru.coderedwolf.wordlearn.model.word.WordExample
  * @author CodeRedWolf. Date 13.06.2019.
  */
 class WordExampleItem(
-    val wordExample: WordExample,
-    val onRemoveClick: (WordExample) -> Unit
+        val wordExample: WordExample,
+        val onRemoveClick: (WordExample) -> Unit
 ) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -22,4 +22,24 @@ class WordExampleItem(
     }
 
     override fun getLayout(): Int = R.layout.item_word_example
+
+    override fun isSameAs(other: com.xwray.groupie.Item<*>?): Boolean {
+        return if (other is WordExampleItem) {
+            other.wordExample == wordExample
+        } else {
+            false
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is WordExampleItem) {
+            other.wordExample == wordExample
+        } else {
+            false
+        }
+    }
+
+    override fun hashCode(): Int {
+        return wordExample.hashCode()
+    }
 }
