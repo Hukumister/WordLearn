@@ -17,13 +17,13 @@ abstract class FlowFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.layout_container
 
     private val currentFragment
-        get() = childFragmentManager.findFragmentById(R.id.container) as? BaseFragment
+        get() = childFragmentManager.findFragmentById(R.id.fragmentContainer) as? BaseFragment
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
     protected val navigator: Navigator by lazy {
-        object : SupportAppNavigator(this.activity, childFragmentManager, R.id.container) {
+        object : SupportAppNavigator(this.activity, childFragmentManager, R.id.fragmentContainer) {
             override fun activityBack() {
                 onExit()
             }

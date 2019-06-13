@@ -21,14 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="@dimen/spacing_large"
         android:layout_marginEnd="@dimen/material_horizontal_margin"
         android:layout_toStartOf="@id/categoryProgress"
         android:layout_toEndOf="@id/checkbox"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textAppearance="?textAppearanceSubtitle1"
         tools:text="@tools:sample/lorem[8]" />
 
     <TextView
@@ -39,6 +38,6 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/material_horizontal_margin"
         android:maxLines="1"
-        android:textSize="12sp"
+        android:textAppearance="?textAppearanceCaption"
         tools:text="56 %" />
 </RelativeLayout>

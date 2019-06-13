@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Component.Button" parent="Widget.MaterialComponents.Button" />
+
+    <style name="Component.TextButton" parent="Widget.MaterialComponents.Button.TextButton" />
+
+    <style name="Component.DialogButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog" />
+</resources>

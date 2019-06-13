@@ -3,24 +3,26 @@ package ru.coderedwolf.wordlearn.ui.wordscategory
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_words_category_list.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.extension.visibile
-import ru.coderedwolf.wordlearn.model.Category
-import ru.coderedwolf.wordlearn.presentation.WordsCategoryPresenter
+import ru.coderedwolf.wordlearn.extension.visible
+import ru.coderedwolf.wordlearn.model.WordCategory
+import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryPresenter
+import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
+import ru.coderedwolf.wordlearn.ui.global.InputTextDialogFragment
 
 /**
  * @author CodeRedWolf. Date 01.05.2019.
  */
 class WordsCategoryFragment : BaseFragment(),
         WordsCategoryView,
-        CreateCategoryDialog.OnCreateCategory {
+        InputTextDialogFragment.OnClickListener {
 
     override val layoutRes = R.layout.fragment_words_category_list
 
@@ -43,26 +45,28 @@ class WordsCategoryFragment : BaseFragment(),
         }
         categoryAdapter.setOnItemClickListener { item, _ ->
             if (item is WordsCategoryItem) {
-                presenter.onClickCategory(item.category)
+                presenter.onClickCategory(item.wordCategory)
             }
         }
     }
 
-    override fun onCreateCategory(name: String) = presenter.onCreateCategory(name)
+    override fun inputDialogTextAccepted(tag: String, text: String) = presenter.onCreateCategory(text)
 
-    override fun addCategory(index: Int, category: Category) = categoryAdapter.add(index, WordsCategoryItem(category))
+    override fun addCategory(index: Int, wordCategory: WordCategory) = categoryAdapter.add(index, WordsCategoryItem(wordCategory))
 
-    override fun showCreateCategoryDialog() = CreateCategoryDialog.show(childFragmentManager)
+    override fun showCreateCategoryDialog() = InputTextDialogFragment.create(
+            title = getString(R.string.create_category_title)
+    ).show(childFragmentManager, "create_category")
 
-    override fun addAllCategory(list: List<Category>) = categoryAdapter.addAll(list.map { mapToItem(it) })
+    override fun addAllCategory(list: List<WordCategory>) = categoryAdapter.addAll(list.map { mapToItem(it) })
 
-    override fun updateCategoryList(list: List<Category>) = categoryAdapter.updateAsync(list.map { mapToItem(it) })
+    override fun updateCategoryList(list: List<WordCategory>) = categoryAdapter.updateAsync(list.map { mapToItem(it) })
 
-    override fun showLoading(show: Boolean) = progressBar.visibile(show)
+    override fun showLoading(show: Boolean) = progressBar.visible(show)
 
     override fun onBackPressed() = presenter.onBackPressed()
 
-    private fun mapToItem(it: Category): WordsCategoryItem {
+    private fun mapToItem(it: WordCategory): WordsCategoryItem {
         return WordsCategoryItem(it).apply {
             onChecked = { item, isChecked ->
                 presenter.onCheckedCategory(item, isChecked)

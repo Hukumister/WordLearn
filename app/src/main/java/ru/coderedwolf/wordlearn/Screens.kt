@@ -3,6 +3,9 @@ package ru.coderedwolf.wordlearn
 import androidx.fragment.app.Fragment
 import ru.coderedwolf.wordlearn.ui.base.StubFragment
 import ru.coderedwolf.wordlearn.ui.main.MainFlowFragment
+import ru.coderedwolf.wordlearn.ui.word.WordFlowFragment
+import ru.coderedwolf.wordlearn.ui.word.createword.CreateWordFragment
+import ru.coderedwolf.wordlearn.ui.word.wordlist.WordListFragment
 import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
@@ -27,8 +30,15 @@ object Screens {
         override fun getFragment(): Fragment = StubFragment()
     }
 
-    class CategoryWordsFlow(val categoryId: Long) : SupportAppScreen() {
+    class WordScreenFlow(val categoryId: Long, val categoryName: String) : SupportAppScreen() {
+        override fun getFragment() = WordFlowFragment.newInstance(categoryId, categoryName)
+    }
 
-        override fun getFragment() = StubFragment()
+    object WordListScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = WordListFragment()
+    }
+
+    object WordCreateScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = CreateWordFragment()
     }
 }

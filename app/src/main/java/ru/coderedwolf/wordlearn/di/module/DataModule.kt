@@ -1,10 +1,14 @@
 package ru.coderedwolf.wordlearn.di.module
 
+import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractorImpl
+import ru.coderedwolf.wordlearn.domain.interactors.category.WordsCategoryInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.category.WordsCategoryInteractorImpl
+import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper
+import ru.coderedwolf.wordlearn.domain.reporitory.WordRepository
+import ru.coderedwolf.wordlearn.domain.reporitory.WordRepositoryImpl
 import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepository
 import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepositoryImpl
-import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractor
-import ru.coderedwolf.wordlearn.domain.interactors.WordsCategoryInteractorImpl
-import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper
 import toothpick.config.Module
 
 /**
@@ -13,8 +17,13 @@ import toothpick.config.Module
 class DataModule : Module() {
     init {
 
+        //Category words
         bind(WordsCategoryRepository::class.java).to(WordsCategoryRepositoryImpl::class.java)
         bind(WordsCategoryInteractor::class.java).to(WordsCategoryInteractorImpl::class.java)
         bind(CategoryMapper::class.java).singletonInScope()
+
+        //Word
+        bind(WordRepository::class.java).to(WordRepositoryImpl::class.java)
+        bind(WordInteractor::class.java).to(WordInteractorImpl::class.java)
     }
 }

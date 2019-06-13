@@ -3,11 +3,11 @@ package ru.coderedwolf.wordlearn.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import moxy.MvpAppCompatActivity
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.Screens
 import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.extension.setLaunchScreen
-import ru.coderedwolf.wordlearn.moxy.androidx.MvpAppCompatActivity
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -25,17 +25,17 @@ class AppActivity : MvpAppCompatActivity() {
         get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? BaseFragment
 
     private val navigator: Navigator =
-        object : SupportAppNavigator(this, supportFragmentManager, R.id.fragmentContainer) {
-            override fun setupFragmentTransaction(
-                command: Command?,
-                currentFragment: Fragment?,
-                nextFragment: Fragment?,
-                fragmentTransaction: FragmentTransaction
-            ) {
-                //fix incorrect order lifecycle callback of MainFlowFragment
-                fragmentTransaction.setReorderingAllowed(true)
+            object : SupportAppNavigator(this, supportFragmentManager, R.id.fragmentContainer) {
+                override fun setupFragmentTransaction(
+                        command: Command?,
+                        currentFragment: Fragment?,
+                        nextFragment: Fragment?,
+                        fragmentTransaction: FragmentTransaction
+                ) {
+                    //fix incorrect order lifecycle callback of MainFlowFragment
+                    fragmentTransaction.setReorderingAllowed(true)
+                }
             }
-        }
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder

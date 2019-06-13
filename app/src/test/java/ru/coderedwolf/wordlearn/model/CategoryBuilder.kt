@@ -5,8 +5,8 @@ package ru.coderedwolf.wordlearn.model
  */
 object CategoryBuilder {
 
-    fun create(id: Long): Category {
-        return Category(
+    fun create(id: Long): WordCategory {
+        return WordCategory(
                 id = id,
                 name = "Test",
                 isStudy = false,
@@ -14,7 +14,7 @@ object CategoryBuilder {
         )
     }
 
-    fun createList(): List<Category> {
+    fun createList(): List<WordCategory> {
         return listOf(
                 create(1),
                 create(2),

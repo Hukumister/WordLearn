@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import moxy.MvpAppCompatFragment
 import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.di.ScopeManager
 import ru.coderedwolf.wordlearn.extension.scopeName
-import ru.coderedwolf.wordlearn.moxy.androidx.MvpAppCompatFragment
 import timber.log.Timber
 import toothpick.Scope
 import toothpick.Toothpick
@@ -65,6 +65,10 @@ abstract class BaseFragment : MvpAppCompatFragment() {
     //if synchronously call actions on swipeToRefresh in sequence show and hide then swipeToRefresh will not hidden
     protected fun postViewAction(action: () -> Unit) {
         viewHandler.post(action)
+    }
+
+    protected fun postViewAction(delay: Long, action: () -> Unit) {
+        viewHandler.postDelayed(action, delay)
     }
 
     override fun onDestroyView() {

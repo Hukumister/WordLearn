@@ -1,10 +1,34 @@
 <resources>
     <string name="app_name">EnglishLearn</string>
 
-    <!--Category create dialog-->
+    <!--WordCategory create dialog-->
+    <string name="category_title">Категории</string>
     <string name="create_category_title">Создание категории</string>
 
+    <!--Create word-->
+    <string name="create_word_title">Добавление слова</string>
+    <string name="transcription">Транскрипция</string>
+    <string name="association">Ассоциация</string>
+    <string name="translation">Перевод</string>
+    <string name="word">Слово</string>
+
+    <string name="create_word_example">Создание примера</string>
+    <string name="word_example_text">Текст примера</string>
+    <string name="add_example">Добавить пример</string>
+
+    <!--Word list-->
+    <string name="place_holder_no_words">В данной категории нет слов</string>
+
     <!--Common-->
+    <string name="ok">OK</string>
     <string name="create">Создать</string>
     <string name="cancel">Отмена</string>
+    <string name="add">Добавить</string>
+
+    <!--Valid field-->
+    <string name="error_empty">Должно быть заполнено</string>
+
+    <!--Error-->
+    <string name="simple_error_title">Произошла ошибка</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
 </resources>
