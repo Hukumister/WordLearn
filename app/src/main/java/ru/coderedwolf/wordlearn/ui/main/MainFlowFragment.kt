@@ -29,12 +29,12 @@ class MainFlowFragment : BaseFragment() {
             if (screen.screenKey != currentTabFragment?.tag) {
                 selectTab(screen)
             }
-            false
+            true
         }
 
         selectTab(
                 when (currentTabFragment?.tag) {
-                    Screens.LearnScreen.screenKey -> Screens.LearnScreen
+                    Screens.LearnMainScreen.screenKey -> Screens.LearnMainScreen
                     Screens.WordsCategoryScreen.screenKey -> Screens.WordsCategoryScreen
                     else -> Screens.PhrasesScreen
                 }

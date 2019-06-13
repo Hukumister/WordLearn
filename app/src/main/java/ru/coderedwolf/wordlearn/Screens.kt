@@ -2,6 +2,7 @@ package ru.coderedwolf.wordlearn
 
 import androidx.fragment.app.Fragment
 import ru.coderedwolf.wordlearn.ui.base.StubFragment
+import ru.coderedwolf.wordlearn.ui.learn.LearnMainFragment
 import ru.coderedwolf.wordlearn.ui.main.MainFlowFragment
 import ru.coderedwolf.wordlearn.ui.word.WordFlowFragment
 import ru.coderedwolf.wordlearn.ui.word.createword.CreateWordFragment
@@ -16,10 +17,6 @@ object Screens {
 
     object MainScreen : SupportAppScreen() {
         override fun getFragment() = MainFlowFragment()
-    }
-
-    object LearnScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment = StubFragment()
     }
 
     object WordsCategoryScreen : SupportAppScreen() {
@@ -40,5 +37,17 @@ object Screens {
 
     object WordCreateScreen : SupportAppScreen() {
         override fun getFragment(): Fragment = CreateWordFragment()
+    }
+
+    object LearnMainScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = LearnMainFragment()
+    }
+
+    object LearnWordsScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = StubFragment()
+    }
+
+    object LearnPhrasesScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = StubFragment()
     }
 }

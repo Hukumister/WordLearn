@@ -18,7 +18,7 @@ class MainFlowScreenFactory {
                 Screens.PhrasesScreen
             }
             R.id.learn -> {
-                Screens.LearnScreen
+                Screens.LearnMainScreen
             }
             else -> Screens.WordsCategoryScreen
         }
