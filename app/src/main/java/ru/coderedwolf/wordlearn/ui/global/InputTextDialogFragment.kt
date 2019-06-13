@@ -6,7 +6,6 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.layout_input_text_dialog.*

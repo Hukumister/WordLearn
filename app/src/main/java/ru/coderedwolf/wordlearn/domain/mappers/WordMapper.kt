@@ -1,8 +1,8 @@
 package ru.coderedwolf.wordlearn.domain.mappers
 
+import ru.coderedwolf.wordlearn.model.entity.WordEntity
 import ru.coderedwolf.wordlearn.model.word.Word
 import ru.coderedwolf.wordlearn.model.word.WordPreview
-import ru.coderedwolf.wordlearn.model.entity.WordEntity
 import javax.inject.Inject
 
 /**
