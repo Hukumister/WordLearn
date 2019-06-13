@@ -6,11 +6,13 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.layout_input_text_dialog.*
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.args
+
 
 /**
  * @author CodeRedWolf. Date 12.06.2019.
@@ -45,6 +47,11 @@ class InputTextDialogFragment : DialogFragment() {
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         clickListener.inputDialogCanceled(startTag)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireDialog().inputText.requestFocus()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
