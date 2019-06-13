@@ -67,6 +67,10 @@ abstract class BaseFragment : MvpAppCompatFragment() {
         viewHandler.post(action)
     }
 
+    protected fun postViewAction(delay: Long, action: () -> Unit) {
+        viewHandler.postDelayed(action, delay)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         viewHandler.removeCallbacksAndMessages(null)
