@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.model
+package ru.coderedwolf.wordlearn.model.word
 
 import java.util.*
 

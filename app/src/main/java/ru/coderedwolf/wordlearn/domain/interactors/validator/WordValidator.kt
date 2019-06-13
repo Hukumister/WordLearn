@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.domain.interactors.validator
 
 import ru.coderedwolf.wordlearn.domain.system.ResourceProvider
-import ru.coderedwolf.wordlearn.model.Word
+import ru.coderedwolf.wordlearn.model.word.Word
 import javax.inject.Inject
 
 /**

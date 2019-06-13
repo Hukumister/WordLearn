@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.domain.mappers
 
-import ru.coderedwolf.wordlearn.model.Word
-import ru.coderedwolf.wordlearn.model.WordPreview
+import ru.coderedwolf.wordlearn.model.word.Word
+import ru.coderedwolf.wordlearn.model.word.WordPreview
 import ru.coderedwolf.wordlearn.model.entity.WordEntity
 import javax.inject.Inject
 
@@ -13,24 +13,24 @@ class WordMapper @Inject constructor() {
 
     fun convert(wordEntity: WordEntity): Word {
         return Word(
-                wordId = wordEntity.wordId,
-                categoryId = wordEntity.categoryId,
-                examplesList = wordEntity.examplesList,
-                translation = wordEntity.translation,
-                transcription = wordEntity.transcription,
-                word = wordEntity.word,
-                reviewCount = wordEntity.reviewCount,
-                association = wordEntity.phraseToMemorize,
-                lastReviewDate = wordEntity.lastReviewDate
+            wordId = wordEntity.wordId,
+            categoryId = wordEntity.categoryId,
+            examplesList = wordEntity.examplesList,
+            translation = wordEntity.translation,
+            transcription = wordEntity.transcription,
+            word = wordEntity.word,
+            reviewCount = wordEntity.reviewCount,
+            association = wordEntity.phraseToMemorize,
+            lastReviewDate = wordEntity.lastReviewDate
         )
     }
 
     fun convertToPreview(wordEntity: WordEntity): WordPreview {
         return WordPreview(
-                word = wordEntity.word,
-                wordId = wordEntity.wordId!!,
-                reviewCount = wordEntity.reviewCount,
-                translation = wordEntity.translation
+            word = wordEntity.word,
+            wordId = wordEntity.wordId!!,
+            reviewCount = wordEntity.reviewCount,
+            translation = wordEntity.translation
         )
     }
 

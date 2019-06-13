@@ -1,6 +1,6 @@
 package ru.coderedwolf.wordlearn.domain.mappers
 
-import ru.coderedwolf.wordlearn.model.WordCategory
+import ru.coderedwolf.wordlearn.model.word.WordCategory
 import ru.coderedwolf.wordlearn.model.entity.WordCategoryEntity
 import java.util.*
 import javax.inject.Inject
@@ -12,10 +12,10 @@ class CategoryMapper @Inject constructor() {
 
     fun convert(wordCategoryEntity: WordCategoryEntity): WordCategory {
         return WordCategory(
-                id = wordCategoryEntity.id ?: -1,
-                name = wordCategoryEntity.name,
-                isStudy = wordCategoryEntity.isStudy,
-                progress = 0
+            id = wordCategoryEntity.id ?: -1,
+            name = wordCategoryEntity.name,
+            isStudy = wordCategoryEntity.isStudy,
+            progress = 0
         )
     }
 

@@ -2,8 +2,8 @@ package ru.coderedwolf.wordlearn.domain.interactors.word
 
 import ru.coderedwolf.wordlearn.domain.interactors.validator.WordValidator
 import ru.coderedwolf.wordlearn.domain.reporitory.WordRepository
-import ru.coderedwolf.wordlearn.model.Word
-import ru.coderedwolf.wordlearn.model.WordPreview
+import ru.coderedwolf.wordlearn.model.word.Word
+import ru.coderedwolf.wordlearn.model.word.WordPreview
 import javax.inject.Inject
 
 /**

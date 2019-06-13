@@ -4,7 +4,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_preview_word.*
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.model.WordPreview
+import ru.coderedwolf.wordlearn.model.word.WordPreview
 
 /**
  * @author CodeRedWolf. Date 06.06.2019.

@@ -11,7 +11,7 @@ import moxy.presenter.ProvidePresenter
 import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visible
-import ru.coderedwolf.wordlearn.model.WordCategory
+import ru.coderedwolf.wordlearn.model.word.WordCategory
 import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryPresenter
 import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment

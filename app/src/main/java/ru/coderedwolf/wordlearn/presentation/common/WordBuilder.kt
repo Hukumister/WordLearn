@@ -1,17 +1,17 @@
 package ru.coderedwolf.wordlearn.presentation.common
 
-import ru.coderedwolf.wordlearn.model.Word
-import ru.coderedwolf.wordlearn.model.WordExample
+import ru.coderedwolf.wordlearn.model.word.Word
+import ru.coderedwolf.wordlearn.model.word.WordExample
 
 /**
  * @author CodeRedWolf. Date 07.06.2019.
  */
 class WordBuilder(
-        private var word: String = "",
-        private var transcription: String = "",
-        private var translation: String = "",
-        private var exampleSet: MutableSet<WordExample> = mutableSetOf(),
-        private var association: String = ""
+    private var word: String = "",
+    private var transcription: String = "",
+    private var translation: String = "",
+    private var exampleSet: MutableSet<WordExample> = mutableSetOf(),
+    private var association: String = ""
 ) {
 
     fun word(word: String): WordBuilder {
@@ -42,12 +42,12 @@ class WordBuilder(
 
     fun build(categoryId: Long): Word {
         return Word(
-                categoryId = categoryId,
-                word = word,
-                transcription = transcription,
-                association = association,
-                translation = translation,
-                examplesList = exampleSet.toList()
+            categoryId = categoryId,
+            word = word,
+            transcription = transcription,
+            association = association,
+            translation = translation,
+            examplesList = exampleSet.toList()
         )
     }
 }

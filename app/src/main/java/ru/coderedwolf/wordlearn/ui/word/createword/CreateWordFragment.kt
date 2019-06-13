@@ -11,7 +11,7 @@ import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.domain.interactors.validator.Violation
 import ru.coderedwolf.wordlearn.domain.interactors.validator.WordValidator
-import ru.coderedwolf.wordlearn.model.WordExample
+import ru.coderedwolf.wordlearn.model.word.WordExample
 import ru.coderedwolf.wordlearn.presentation.word.create.CreateWordPresenter
 import ru.coderedwolf.wordlearn.presentation.word.create.CreateWordView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment

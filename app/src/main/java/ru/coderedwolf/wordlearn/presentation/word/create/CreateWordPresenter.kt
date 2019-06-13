@@ -6,7 +6,7 @@ import ru.coderedwolf.wordlearn.di.PrimitiveWrapper
 import ru.coderedwolf.wordlearn.di.provider.qualifier.CategoryId
 import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractor
 import ru.coderedwolf.wordlearn.exception.ViolationException
-import ru.coderedwolf.wordlearn.model.WordExample
+import ru.coderedwolf.wordlearn.model.word.WordExample
 import ru.coderedwolf.wordlearn.presentation.base.BasePresenter
 import ru.coderedwolf.wordlearn.presentation.common.WordBuilder
 import ru.coderedwolf.wordlearn.presentation.global.ErrorHandler
