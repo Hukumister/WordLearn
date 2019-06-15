@@ -12,6 +12,16 @@ android {
         versionCode applicationVersionCode
         versionName applicationVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [toothpick_registry_package_name: 'ru.coderedwolf.wordlearn']
+                includeCompileClasspath true
+            }
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         release {
