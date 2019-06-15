@@ -32,11 +32,15 @@ class MainFlowFragment : BaseFragment() {
             true
         }
 
+        if (currentTabFragment == null) {
+            bottomNavigationView.selectedItemId = R.id.learn
+        }
+
         selectTab(
                 when (currentTabFragment?.tag) {
                     Screens.LearnMainScreen.screenKey -> Screens.LearnMainScreen
                     Screens.WordsCategoryScreen.screenKey -> Screens.WordsCategoryScreen
-                    else -> Screens.PhrasesScreen
+                    else -> Screens.LearnMainScreen
                 }
         )
     }

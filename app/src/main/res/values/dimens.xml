@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="material_horizontal_margin">16dp</dimen>
+    <dimen name="material_vertical_margin">16dp</dimen>
     <dimen name="material_list_icon_size">40dp</dimen>
 
     <!-- All components align to an 8dp square baseline grid for mobile, tablet, and desktop. -->
@@ -9,6 +10,8 @@
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
+
+    <dimen name="material_card_corners_radius">8dp</dimen>
 
     <!-- Touch target minimum of 48 x 48 dp -->
     <dimen name="icon_size">48dp</dimen>
