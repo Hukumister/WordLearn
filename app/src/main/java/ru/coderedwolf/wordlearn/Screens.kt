@@ -3,6 +3,7 @@ package ru.coderedwolf.wordlearn
 import androidx.fragment.app.Fragment
 import ru.coderedwolf.wordlearn.ui.base.StubFragment
 import ru.coderedwolf.wordlearn.ui.learn.LearnMainFragment
+import ru.coderedwolf.wordlearn.ui.learn.LearnPhrasesFragment
 import ru.coderedwolf.wordlearn.ui.main.MainFlowFragment
 import ru.coderedwolf.wordlearn.ui.word.WordFlowFragment
 import ru.coderedwolf.wordlearn.ui.word.createword.CreateWordFragment
@@ -48,6 +49,6 @@ object Screens {
     }
 
     object LearnPhrasesScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment = StubFragment()
+        override fun getFragment(): Fragment = LearnPhrasesFragment()
     }
 }
