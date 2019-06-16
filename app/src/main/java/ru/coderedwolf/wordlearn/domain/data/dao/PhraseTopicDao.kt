@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import ru.coderedwolf.wordlearn.model.entity.PhraseTopicEntity
+import ru.coderedwolf.wordlearn.model.entity.TopicAndPhrasesEntity
 
 /**
  * @author CodeRedWolf. Date 14.06.2019.
@@ -27,4 +28,8 @@ interface PhraseTopicDao {
 
     @Query("delete from PhraseTopicEntity where id = :topicId")
     suspend fun remove(topicId: Long)
+
+    @Query("select * from PhraseTopicEntity where isStudy = 1")
+    @Transaction
+    fun findAllStudiedTopicAndPhrases(): List<TopicAndPhrasesEntity>
 }
