@@ -31,5 +31,10 @@ class DataModule : Module() {
         //Word
         bind(WordRepository::class.java).to(WordRepositoryImpl::class.java)
         bind(WordInteractor::class.java).to(WordInteractorImpl::class.java)
+
+        //Phrases
+        bind(PhraseRepository::class.java).to(PhraseRepositoryImpl::class.java)
+        bind(PhraseTopicRepository::class.java).to(PhraseTopicRepositoryImpl::class.java)
+        bind(PhraseTopicInteractor::class.java).to(PhraseTopicInteractorImpl::class.java)
     }
 }

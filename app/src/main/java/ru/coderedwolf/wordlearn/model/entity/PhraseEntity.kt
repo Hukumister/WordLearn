@@ -27,5 +27,5 @@ data class PhraseEntity(
         val textPhrase: String,
         val translation: String,
         val reviewCount: Int,
-        val lastReviewDate: Date
+        val lastReviewDate: Date?
 )

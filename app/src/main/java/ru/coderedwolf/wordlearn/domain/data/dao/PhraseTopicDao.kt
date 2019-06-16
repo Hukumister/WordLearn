@@ -29,6 +29,9 @@ interface PhraseTopicDao {
     @Query("delete from PhraseTopicEntity where id = :topicId")
     suspend fun remove(topicId: Long)
 
+    @Query("update PhraseTopicEntity set isStudy = :isStudy where id = :topicId")
+    suspend fun updateStudy(topicId: Long, isStudy: Boolean)
+
     @Query("select * from PhraseTopicEntity where isStudy = 1")
     @Transaction
     fun findAllStudiedTopicAndPhrases(): List<TopicAndPhrasesEntity>
