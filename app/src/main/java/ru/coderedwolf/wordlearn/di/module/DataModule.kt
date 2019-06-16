@@ -17,6 +17,12 @@ import toothpick.config.Module
 class DataModule : Module() {
     init {
 
+        //init
+        bind(PrePopulateDataBaseInteractor::class.java).to(PrePopulateDataBaseInteractorImpl::class.java)
+        bind(PrePopulatePhraseRepository::class.java).to(PrePopulatePhraseRepositoryImpl::class.java)
+        bind(PhraseAssetRepository::class.java).to(PhraseAssetRepositoryImpl::class.java)
+        bind(CsvReader::class.java).toProvider(CsvReaderProvider::class.java)
+
         //Category words
         bind(WordsCategoryRepository::class.java).to(WordsCategoryRepositoryImpl::class.java)
         bind(WordsCategoryInteractor::class.java).to(WordsCategoryInteractorImpl::class.java)
