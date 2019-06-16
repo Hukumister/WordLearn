@@ -40,7 +40,7 @@ class MainFlowFragment : BaseFragment() {
                 when (currentTabFragment?.tag) {
                     Screens.LearnMainScreen.screenKey -> Screens.LearnMainScreen
                     Screens.WordsCategoryScreen.screenKey -> Screens.WordsCategoryScreen
-                    else -> Screens.LearnMainScreen
+                    else -> Screens.PhraseTopicScreen
                 }
         )
     }
