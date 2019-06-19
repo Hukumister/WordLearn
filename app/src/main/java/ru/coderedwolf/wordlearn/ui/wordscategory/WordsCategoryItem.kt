@@ -5,7 +5,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_category.*
 import org.jetbrains.anko.onCheckedChange
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.model.WordCategory
+import ru.coderedwolf.wordlearn.model.word.WordCategory
 
 /**
  * @author CodeRedWolf. Date 02.05.2019.

@@ -16,4 +16,16 @@ class AddExampleItem(val onAddClick: () -> Unit) : Item() {
     }
 
     override fun getLayout(): Int = R.layout.item_add_example
+
+    override fun isSameAs(other: com.xwray.groupie.Item<*>?): Boolean {
+        return other is AddExampleItem
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is AddExampleItem
+    }
+
+    override fun hashCode(): Int {
+        return javaClass.hashCode()
+    }
 }

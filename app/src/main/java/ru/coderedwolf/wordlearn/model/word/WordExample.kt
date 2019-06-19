@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.model
+package ru.coderedwolf.wordlearn.model.word
 
 /**
  * @author CodeRedWolf. Date 09.06.2019.

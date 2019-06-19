@@ -4,7 +4,7 @@ import kotlinx.coroutines.withContext
 import ru.coderedwolf.wordlearn.domain.data.DataBase
 import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper
 import ru.coderedwolf.wordlearn.domain.system.DispatchersProvider
-import ru.coderedwolf.wordlearn.model.WordCategory
+import ru.coderedwolf.wordlearn.model.word.WordCategory
 import javax.inject.Inject
 
 /**

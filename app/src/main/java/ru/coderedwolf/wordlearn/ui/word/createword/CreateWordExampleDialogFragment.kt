@@ -40,7 +40,7 @@ class CreateWordExampleDialogFragment : DialogFragment() {
             setPositiveButton(R.string.ok) { _, _ ->
                 val exampleText = requireDialog().exampleText.text.toString()
                 val translation = requireDialog().translation.text.toString()
-                if (exampleText.isNotEmpty() && translation.isNotEmpty()) {
+                if (exampleText.isNotEmpty()) {
                     listener.onCreateWordExample(exampleText, translation)
                 }
                 dismissAllowingStateLoss()

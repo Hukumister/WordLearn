@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import ru.coderedwolf.wordlearn.domain.interactors.category.WordsCategoryInteractorImpl
+import ru.coderedwolf.wordlearn.domain.interactors.word.category.WordsCategoryInteractorImpl
 import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepository
 import ru.coderedwolf.wordlearn.model.CategoryBuilder
 

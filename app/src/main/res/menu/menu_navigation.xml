@@ -4,15 +4,15 @@
     <item
         android:id="@+id/words"
         android:icon="@drawable/ic_apps_black_24dp"
-        android:title="words" />
+        android:title="@string/words" />
 
     <item
         android:id="@+id/learn"
         android:icon="@drawable/ic_done_black_24dp"
-        android:title="learn" />
+        android:title="@string/learn" />
 
     <item
         android:id="@+id/phrases"
         android:icon="@drawable/ic_menu_black_24dp"
-        android:title="phrases" />
+        android:title="@string/phrases" />
 </menu>

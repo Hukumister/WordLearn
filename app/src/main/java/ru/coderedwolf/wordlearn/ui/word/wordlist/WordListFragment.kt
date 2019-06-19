@@ -9,7 +9,7 @@ import moxy.presenter.ProvidePresenter
 import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visible
-import ru.coderedwolf.wordlearn.model.WordPreview
+import ru.coderedwolf.wordlearn.model.word.WordPreview
 import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListPresenter
 import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment

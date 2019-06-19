@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">EnglishLearn</string>
 
     <!--WordCategory create dialog-->
     <string name="category_title">Категории</string>
@@ -16,19 +15,18 @@
     <string name="word_example_text">Текст примера</string>
     <string name="add_example">Добавить пример</string>
 
+    <!--Main screen-->
+    <string name="words">Слова</string>
+    <string name="phrases">Фразы</string>
+    <string name="learn">Обучение</string>
+
     <!--Word list-->
     <string name="place_holder_no_words">В данной категории нет слов</string>
 
-    <!--Common-->
-    <string name="ok">OK</string>
-    <string name="create">Создать</string>
-    <string name="cancel">Отмена</string>
-    <string name="add">Добавить</string>
+    <!--Phrase topic-->
+    <string name="phrase_topic_title">Темы</string>
 
-    <!--Valid field-->
-    <string name="error_empty">Должно быть заполнено</string>
-
-    <!--Error-->
-    <string name="simple_error_title">Произошла ошибка</string>
-    <string name="unknown_error">Неизвестная ошибка</string>
+    <!--Learn main screen-->
+    <string name="got_it">Помню</string>
+    <string name="missed_it">Не помню</string>
 </resources>

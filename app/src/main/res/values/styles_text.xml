@@ -104,4 +104,8 @@
     </style>
 
     <style name="TextAppearance.Overline" parent="Base.TextAppearance.Overline" />
+
+    <style name="TextAppearance.Card" parent="Base.TextAppearance.Headline6">
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

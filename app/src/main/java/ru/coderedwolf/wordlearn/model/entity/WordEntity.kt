@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.model.entity
 
 import androidx.room.*
 import ru.coderedwolf.wordlearn.domain.data.converter.WordExampleConverter
-import ru.coderedwolf.wordlearn.model.WordExample
+import ru.coderedwolf.wordlearn.model.word.WordExample
 import java.util.*
 
 /**

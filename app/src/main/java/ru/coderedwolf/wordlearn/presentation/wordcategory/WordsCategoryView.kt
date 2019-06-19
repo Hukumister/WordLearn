@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.presentation.wordcategory
 import moxy.MvpView
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
-import ru.coderedwolf.wordlearn.model.WordCategory
+import ru.coderedwolf.wordlearn.model.word.WordCategory
 
 /**
  * @author CodeRedWolf. Date 01.05.2019.

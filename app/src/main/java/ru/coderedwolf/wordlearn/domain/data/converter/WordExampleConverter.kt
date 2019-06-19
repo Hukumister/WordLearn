@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.domain.data.converter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.coderedwolf.wordlearn.model.WordExample
+import ru.coderedwolf.wordlearn.model.word.WordExample
 
 /**
  * @author CodeRedWolf. Date 06.06.2019.

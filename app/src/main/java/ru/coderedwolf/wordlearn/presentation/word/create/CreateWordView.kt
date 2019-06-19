@@ -5,7 +5,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import ru.coderedwolf.wordlearn.domain.interactors.validator.Violation
-import ru.coderedwolf.wordlearn.model.WordExample
+import ru.coderedwolf.wordlearn.model.word.WordExample
 
 /**
  * @author CodeRedWolf. Date 06.06.2019.
