@@ -4,6 +4,7 @@
     <style name="Component.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?attr/colorPrimary</item>
         <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
