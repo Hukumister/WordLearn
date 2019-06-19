@@ -40,7 +40,7 @@ class LearnPhraseInteractorImpl @Inject constructor(
             .findLearnPhraseGroupByTopic()
 
     private suspend fun updateIfMoreThanDay(phrase: Phrase, newCount: Int): Boolean {
-        return if (timeProvider.moreThanDay(phrase.lastReviewDate)) {
+        return if (phrase.lastReviewDate == null || timeProvider.moreThanDay(phrase.lastReviewDate)) {
             phraseRepository.update(
                     phrase.copy(
                             reviewCount = newCount,
