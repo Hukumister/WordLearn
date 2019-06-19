@@ -24,7 +24,7 @@ class LearnPhrasesPresenter @Inject constructor(
                 .flatten()
 
         viewState.addLearnList(flatten)
-        viewState.showCategoryName(flatten.first().topicTitle)
+        viewState.showCategoryName(flatten.firstOrNull()?.topicTitle.orEmpty())
         viewState.showListLoading(false)
     }
 
