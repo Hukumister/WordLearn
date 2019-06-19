@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.ui.learn
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import com.xwray.groupie.GroupAdapter
@@ -7,10 +8,10 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.Direction
+import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
 import kotlinx.android.synthetic.main.fragment_learn_phrases.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import org.jetbrains.anko.toast
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.model.learn.LearnPhrase
 import ru.coderedwolf.wordlearn.presentation.learn.LearnPhrasesPresenter
@@ -23,9 +24,8 @@ import timber.log.Timber
  * @author CodeRedWolf. Date 14.06.2019.
  */
 class LearnPhrasesFragment : BaseFragment(),
-        LearnPhrasesView,
-        CardStackListenerSimple {
-
+    LearnPhrasesView,
+    CardStackListenerSimple {
 
     override val layoutRes: Int
         get() = R.layout.fragment_learn_phrases
@@ -35,7 +35,7 @@ class LearnPhrasesFragment : BaseFragment(),
 
     @ProvidePresenter
     fun providePresenter(): LearnPhrasesPresenter =
-            scope.getInstance(LearnPhrasesPresenter::class.java)
+        scope.getInstance(LearnPhrasesPresenter::class.java)
 
     private lateinit var manager: CardStackLayoutManager
 
@@ -49,6 +49,16 @@ class LearnPhrasesFragment : BaseFragment(),
             manager.setCanScrollHorizontal(value)
             field = value
         }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    override fun onStop() {
+        super.onStop()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -93,6 +103,10 @@ class LearnPhrasesFragment : BaseFragment(),
         checkForEmpty()
     }
 
+    override fun showInfoCard() {
+
+    }
+
     private fun checkForEmpty() {
         when {
             mainSection.isEmpty() -> presenter.onPhrasesGone()
@@ -109,18 +123,26 @@ class LearnPhrasesFragment : BaseFragment(),
 
     private fun Section.isEmpty(): Boolean = itemCount == 0
 
-    private fun Section.isFirstLoading(): Boolean = getItem(0) is LearnLoadingItem
+    private fun Section.isFirstLoading(): Boolean = if (itemCount > 0) {
+        getItem(0) is LearnLoadingItem
+    } else {
+        false
+    }
 
     private fun initCardStackView() {
         manager.apply {
-            setVisibleCount(1)
+            setVisibleCount(2)
+            setMaxDegree(35f)
             setSwipeThreshold(0.5f)
             setCanScrollVertical(false)
         }
         cardStackView.apply {
             layoutManager = manager
             adapter = phrasesAdapter
-            itemAnimator = null
+            itemAnimator = SlideInDownAnimator().apply {
+                addDuration = 400
+                removeDuration = 400
+            }
         }
     }
 }
