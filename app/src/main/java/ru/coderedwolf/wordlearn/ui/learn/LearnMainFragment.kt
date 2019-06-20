@@ -32,4 +32,6 @@ class LearnMainFragment : BaseFragment() {
         wordButton.onClick { router.navigateTo(Screens.LearnWordsScreen) }
         phraseButton.onClick { router.navigateTo(Screens.LearnPhrasesScreen) }
     }
+
+    override fun onBackPressed() = router.finishChain()
 }

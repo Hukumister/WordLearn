@@ -45,4 +45,6 @@ class PhraseTopicListFragment : BaseFragment(), PhraseTopicView {
             .update(list.map { mapToItem(it) })
 
     private fun mapToItem(it: PhraseTopic) = PhraseTopicItem(it)
+
+    override fun onBackPressed() = presenter.onBackPressed()
 }
