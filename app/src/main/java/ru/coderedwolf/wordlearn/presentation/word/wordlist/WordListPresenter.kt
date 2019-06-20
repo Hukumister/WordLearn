@@ -7,6 +7,7 @@ import ru.coderedwolf.wordlearn.di.PrimitiveWrapper
 import ru.coderedwolf.wordlearn.di.provider.qualifier.CategoryId
 import ru.coderedwolf.wordlearn.di.provider.qualifier.CategoryName
 import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.word.category.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.presentation.base.BasePresenter
 import javax.inject.Inject
 
@@ -18,7 +19,8 @@ class WordListPresenter @Inject constructor(
         @CategoryId categoryIdWrapper: PrimitiveWrapper<Long>,
         @CategoryName categoryNameWrapper: PrimitiveWrapper<String>,
         private val flowRouter: FlowRouter,
-        private val wordInteractor: WordInteractor
+        private val wordInteractor: WordInteractor,
+        private val wordsCategoryInteractor: WordsCategoryInteractor
 ) : BasePresenter<WordListView>() {
 
     private val categoryId: Long = categoryIdWrapper.value
@@ -35,4 +37,8 @@ class WordListPresenter @Inject constructor(
     override fun onBackPressed() = flowRouter.finishFlow()
 
     fun onClickAddWord() = flowRouter.navigateTo(Screens.WordCreateScreen)
+
+    fun onClickActionLearn(checked: Boolean) = launchUI {
+        wordsCategoryInteractor.changeLearnStatus(categoryId, checked)
+    }
 }

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Base" />
+
+    <style name="Base.Component">
+        <item name="android:layout_marginTop">@dimen/spacing_small</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_small</item>
+    </style>
+
+    <style name="Component" parent="Base.Component" />
+
+    <style name="Base.Component.Container">
+        <item name="android:padding">@dimen/spacing_small</item>
+    </style>
+
     <style name="Component.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?attr/colorPrimary</item>
         <item name="titleTextColor">@color/white</item>
@@ -10,5 +23,9 @@
 
     <style name="Component.Toolbar.Navigation">
         <item name="navigationIcon">@drawable/ic_arrow_back_white_24dp</item>
+    </style>
+
+    <style name="Component.Container.ListItem" parent="Base">
+        <item name="android:padding">@dimen/spacing_normal</item>
     </style>
 </resources>

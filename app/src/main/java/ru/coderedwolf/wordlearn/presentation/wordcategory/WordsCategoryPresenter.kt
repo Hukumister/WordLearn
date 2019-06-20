@@ -5,7 +5,6 @@ import ru.coderedwolf.wordlearn.Screens
 import ru.coderedwolf.wordlearn.domain.interactors.word.category.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.model.word.WordCategory
 import ru.coderedwolf.wordlearn.presentation.base.BasePresenter
-import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryItem
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -45,8 +44,4 @@ class WordsCategoryPresenter @Inject constructor(
     fun onClickAddCategory() = viewState.showCreateCategoryDialog()
 
     override fun onBackPressed() = router.finishChain()
-
-    fun onCheckedCategory(categoryItem: WordsCategoryItem, checked: Boolean) {
-        //todo сделать обновление статуса в базе
-    }
 }

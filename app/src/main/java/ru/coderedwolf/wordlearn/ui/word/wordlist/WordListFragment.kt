@@ -1,11 +1,13 @@
 package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import android.os.Bundle
+import androidx.appcompat.widget.AppCompatCheckBox
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_word_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visible
@@ -27,13 +29,25 @@ class WordListFragment : BaseFragment(), WordListView {
 
     @ProvidePresenter
     fun providePresenter(): WordListPresenter =
-        scope.getInstance(WordListPresenter::class.java)
+            scope.getInstance(WordListPresenter::class.java)
 
     private val wordPreviewAdapter = GroupAdapter<ViewHolder>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
+        toolbar.inflateMenu(R.menu.menu_check_box)
+        toolbar.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.action_learn) {
+                val checkBox = item.actionView
+                        .findOptional<AppCompatCheckBox>(R.id.checkBox)
+                        ?: return@setOnMenuItemClickListener false
+                presenter.onClickActionLearn(checkBox.isChecked)
+                true
+            } else {
+                false
+            }
+        }
         wordPreviewList.apply {
             adapter = wordPreviewAdapter
             setHasFixedSize(true)

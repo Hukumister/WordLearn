@@ -32,4 +32,9 @@
     <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
         <item name="android:buttonBarButtonStyle">@style/Component.DialogButton</item>
     </style>
+
+    <style name="WhiteTheme" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
 </resources>

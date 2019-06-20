@@ -141,7 +141,7 @@ class LearnPhrasesFragment : BaseFragment(),
             adapter = phrasesAdapter
             itemAnimator = SlideInDownAnimator().apply {
                 addDuration = 400
-                removeDuration = 400
+                removeDuration = 50
             }
         }
     }

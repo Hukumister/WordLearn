@@ -1,9 +1,8 @@
-package ru.coderedwolf.wordlearn.ui.wordscategory
+package ru.coderedwolf.wordlearn.ui.word.category
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_category.*
-import org.jetbrains.anko.onCheckedChange
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.model.word.WordCategory
 
@@ -13,11 +12,7 @@ import ru.coderedwolf.wordlearn.model.word.WordCategory
 
 class WordsCategoryItem(val wordCategory: WordCategory) : Item() {
 
-    var onChecked: (WordsCategoryItem, Boolean) -> Unit = { _, _ -> }
-
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.checkbox.onCheckedChange { _, isChecked -> onChecked(this@WordsCategoryItem, isChecked) }
-        viewHolder.checkbox.isChecked = wordCategory.isStudy
         viewHolder.categoryName.text = wordCategory.name
     }
 
