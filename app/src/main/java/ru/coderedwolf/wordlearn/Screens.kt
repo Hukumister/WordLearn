@@ -9,7 +9,7 @@ import ru.coderedwolf.wordlearn.ui.phrase.PhraseTopicListFragment
 import ru.coderedwolf.wordlearn.ui.word.WordFlowFragment
 import ru.coderedwolf.wordlearn.ui.word.createword.CreateWordFragment
 import ru.coderedwolf.wordlearn.ui.word.wordlist.WordListFragment
-import ru.coderedwolf.wordlearn.ui.wordscategory.WordsCategoryFragment
+import ru.coderedwolf.wordlearn.ui.word.category.WordsCategoryFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 /**

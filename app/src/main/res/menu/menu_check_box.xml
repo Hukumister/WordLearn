@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_learn"
+        android:checkable="true"
+        android:checked="true"
+        android:title="@string/in_learn"
+        app:actionLayout="@layout/item_action_checkbox"
+        app:showAsAction="ifRoom|withText" />
+</menu>

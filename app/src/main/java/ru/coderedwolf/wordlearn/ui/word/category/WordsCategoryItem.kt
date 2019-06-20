@@ -1,9 +1,8 @@
-package ru.coderedwolf.wordlearn.ui.wordscategory
+package ru.coderedwolf.wordlearn.ui.word.category
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_category.*
-import org.jetbrains.anko.onCheckedChange
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.model.word.WordCategory
 

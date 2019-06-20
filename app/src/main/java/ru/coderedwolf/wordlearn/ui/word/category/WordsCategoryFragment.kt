@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.ui.wordscategory
+package ru.coderedwolf.wordlearn.ui.word.category
 
 import android.os.Bundle
 import android.view.View

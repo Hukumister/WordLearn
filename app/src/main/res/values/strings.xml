@@ -29,4 +29,5 @@
     <!--Learn main screen-->
     <string name="got_it">Помню</string>
     <string name="missed_it">Не помню</string>
+    <string name="in_learn">В обучении</string>
 </resources>

@@ -1,12 +1,13 @@
 package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import android.os.Bundle
-import android.widget.CheckBox
+import androidx.appcompat.widget.AppCompatCheckBox
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_word_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visible
@@ -37,8 +38,11 @@ class WordListFragment : BaseFragment(), WordListView {
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
         toolbar.inflateMenu(R.menu.menu_check_box)
         toolbar.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.action_learn && item.actionView is CheckBox) {
-                presenter.onClickActionLearn((item.actionView as CheckBox).isChecked)
+            if (item.itemId == R.id.action_learn) {
+                val checkBox = item.actionView
+                        .findOptional<AppCompatCheckBox>(R.id.checkBox)
+                        ?: return@setOnMenuItemClickListener false
+                presenter.onClickActionLearn(checkBox.isChecked)
                 true
             } else {
                 false
