@@ -35,4 +35,7 @@ interface PhraseTopicDao {
     @Query("select * from PhraseTopicEntity where isStudy = 1")
     @Transaction
     fun findAllStudiedTopicAndPhrases(): List<TopicAndPhrasesEntity>
+
+    @Query("select count(*) from PhraseEntity")
+    suspend fun count(): Int
 }

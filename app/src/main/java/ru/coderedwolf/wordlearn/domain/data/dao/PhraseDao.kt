@@ -26,4 +26,7 @@ interface PhraseDao {
 
     @Update
     suspend fun update(phraseEntity: PhraseEntity)
+
+    @Query("select count(*) from PhraseEntity")
+    suspend fun count(): Int
 }

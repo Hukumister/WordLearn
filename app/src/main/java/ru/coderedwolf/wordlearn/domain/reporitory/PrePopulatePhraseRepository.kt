@@ -12,6 +12,8 @@ import javax.inject.Inject
  */
 interface PrePopulatePhraseRepository {
 
+    suspend fun phraseCount(): Int
+
     suspend fun saveTopic(phraseTopic: PhraseTopic): PhraseTopic
 
     suspend fun saveAllPhrases(phrases: List<Phrase>)
@@ -25,6 +27,8 @@ class PrePopulatePhraseRepositoryImpl @Inject constructor(
 
     private val phraseTopicDao = dateBase.phraseTopicDao()
     private val phraseDao = dateBase.phraseDao()
+
+    override suspend fun phraseCount(): Int = phraseDao.count()
 
     override suspend fun saveTopic(phraseTopic: PhraseTopic): PhraseTopic {
         val topicEntity = phraseTopicDao.saveAndReturn(phraseTopicMapper.convertToEntity(phraseTopic))

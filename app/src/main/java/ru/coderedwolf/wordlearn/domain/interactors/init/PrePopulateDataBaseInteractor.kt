@@ -2,7 +2,6 @@ package ru.coderedwolf.wordlearn.domain.interactors.init
 
 import ru.coderedwolf.wordlearn.domain.reporitory.PhraseAssetRepository
 import ru.coderedwolf.wordlearn.domain.reporitory.PrePopulatePhraseRepository
-import toothpick.Lazy
 import javax.inject.Inject
 
 /**
@@ -11,22 +10,22 @@ import javax.inject.Inject
 
 interface PrePopulateDataBaseInteractor {
 
-    suspend fun fullDataBase()
+    suspend fun shouldInit(): Boolean
+
+    suspend fun prePopulateDataBase()
 }
 
 class PrePopulateDataBaseInteractorImpl @Inject constructor(
-        private val prePopulatePhraseRepository: Lazy<PrePopulatePhraseRepository>,
-        private val phraseAssetRepository: Lazy<PhraseAssetRepository>
+        private val prePopulatePhraseRepository: PrePopulatePhraseRepository,
+        private val phraseAssetRepository: PhraseAssetRepository
 ) : PrePopulateDataBaseInteractor {
 
-    override suspend fun fullDataBase() {
-        fullPhrases()
-    }
+    override suspend fun shouldInit(): Boolean = prePopulatePhraseRepository.phraseCount() == 0
 
-    private suspend fun fullPhrases() {
-        phraseAssetRepository.get()?.findAllGroupByTopic()?.forEach { (topic, phraseList) ->
-            val savedTopic = prePopulatePhraseRepository.get()?.saveTopic(topic) ?: return@forEach
-            prePopulatePhraseRepository.get()?.saveAllPhrases(phraseList.map { it.copy(topicId = savedTopic.id!!) })
-        }
-    }
+    override suspend fun prePopulateDataBase() = phraseAssetRepository
+            .findAllGroupByTopic()
+            .forEach { (topic, phraseList) ->
+                val savedTopic = prePopulatePhraseRepository.saveTopic(topic)
+                prePopulatePhraseRepository.saveAllPhrases(phraseList.map { it.copy(topicId = savedTopic.id!!) })
+            }
 }

@@ -45,7 +45,7 @@ class PhraseAssetRepositoryImpl @Inject constructor(
                     if (row.fields.size == 1) {
                         topic?.let { topic -> result[topic] = list.toList() }
                         list.clear()
-                        topic = PhraseTopic(title = row.getField(0).trim(), isStudy = false)
+                        topic = PhraseTopic(title = row.getField(0).trim(), isStudy = true)
                     } else {
                         list.add(
                                 Phrase(

@@ -27,5 +27,7 @@ class PhraseTopicListPresenter @Inject constructor(
 
     override fun onViewAttach(view: PhraseTopicView?) = viewState.showAll(topicList)
 
+    override fun onBackPressed() = router.finishChain()
+
     fun onClickTopic(phraseTopic: PhraseTopic) = router.navigateTo(Screens.PhraseFlowScreen(phraseTopic.id!!))
 }
