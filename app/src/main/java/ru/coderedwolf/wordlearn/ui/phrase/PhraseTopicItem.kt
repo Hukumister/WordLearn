@@ -2,34 +2,20 @@ package ru.coderedwolf.wordlearn.ui.phrase
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.item_phrase_topic.view.*
-import org.jetbrains.anko.onCheckedChange
+import kotlinx.android.synthetic.main.item_category.view.*
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.model.phrase.PhraseTopic
 
 /**
  * @author CodeRedWolf. Date 16.06.2019.
  */
-class PhraseTopicItem(
-        val phraseTopic: PhraseTopic,
-        val onCheckedStudy: (PhraseTopic, Boolean) -> Unit
-) : Item() {
-
-    var isChecked: Boolean = phraseTopic.isStudy
+class PhraseTopicItem(val phraseTopic: PhraseTopic) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.checkbox.onCheckedChange { _, _ -> }
-
-        viewHolder.itemView.checkbox.isChecked = isChecked
-        viewHolder.itemView.topicTitle.text = phraseTopic.title
-
-        viewHolder.itemView.checkbox.onCheckedChange { _, isChecked ->
-            this.isChecked = isChecked
-            onCheckedStudy.invoke(phraseTopic, isChecked)
-        }
+        viewHolder.itemView.categoryName.text = phraseTopic.title
     }
 
-    override fun getLayout(): Int = R.layout.item_phrase_topic
+    override fun getLayout(): Int = R.layout.item_category
 
     override fun isSameAs(other: com.xwray.groupie.Item<*>?): Boolean {
         return if (other is PhraseTopicItem) {

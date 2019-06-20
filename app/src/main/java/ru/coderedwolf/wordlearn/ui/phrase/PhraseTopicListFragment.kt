@@ -44,7 +44,5 @@ class PhraseTopicListFragment : BaseFragment(), PhraseTopicView {
     override fun showAll(list: List<PhraseTopic>) = phraseTopicAdapter
             .update(list.map { mapToItem(it) })
 
-    private fun mapToItem(it: PhraseTopic) = PhraseTopicItem(it) { topic, isChecked ->
-        presenter.onChangeStudy(topic, isChecked)
-    }
+    private fun mapToItem(it: PhraseTopic) = PhraseTopicItem(it)
 }

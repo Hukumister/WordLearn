@@ -1,6 +1,7 @@
 package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import android.os.Bundle
+import android.widget.CheckBox
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_word_list.*
@@ -27,13 +28,22 @@ class WordListFragment : BaseFragment(), WordListView {
 
     @ProvidePresenter
     fun providePresenter(): WordListPresenter =
-        scope.getInstance(WordListPresenter::class.java)
+            scope.getInstance(WordListPresenter::class.java)
 
     private val wordPreviewAdapter = GroupAdapter<ViewHolder>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
+        toolbar.inflateMenu(R.menu.menu_check_box)
+        toolbar.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.action_learn && item.actionView is CheckBox) {
+                presenter.onClickActionLearn((item.actionView as CheckBox).isChecked)
+                true
+            } else {
+                false
+            }
+        }
         wordPreviewList.apply {
             adapter = wordPreviewAdapter
             setHasFixedSize(true)

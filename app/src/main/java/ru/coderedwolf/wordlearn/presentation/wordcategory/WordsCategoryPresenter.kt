@@ -45,8 +45,4 @@ class WordsCategoryPresenter @Inject constructor(
     fun onClickAddCategory() = viewState.showCreateCategoryDialog()
 
     override fun onBackPressed() = router.finishChain()
-
-    fun onCheckedCategory(categoryItem: WordsCategoryItem, checked: Boolean) {
-        //todo сделать обновление статуса в базе
-    }
 }

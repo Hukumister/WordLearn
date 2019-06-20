@@ -14,6 +14,8 @@ interface WordsCategoryInteractor {
     suspend fun addCategory(wordCategory: WordCategory): WordCategory
 
     suspend fun remoteCategory(categoryId: Long)
+
+    suspend fun changeLearnStatus(categoryId: Long, isStudy: Boolean)
 }
 
 class WordsCategoryInteractorImpl @Inject constructor(
@@ -25,4 +27,8 @@ class WordsCategoryInteractorImpl @Inject constructor(
     override suspend fun addCategory(wordCategory: WordCategory): WordCategory = wordsCategoryRepository.save(wordCategory)
 
     override suspend fun remoteCategory(categoryId: Long) = wordsCategoryRepository.delete(categoryId)
+
+    override suspend fun changeLearnStatus(categoryId: Long, isStudy: Boolean) {
+
+    }
 }

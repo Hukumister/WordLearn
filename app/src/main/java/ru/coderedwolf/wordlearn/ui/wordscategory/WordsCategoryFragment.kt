@@ -66,11 +66,5 @@ class WordsCategoryFragment : BaseFragment(),
 
     override fun onBackPressed() = presenter.onBackPressed()
 
-    private fun mapToItem(it: WordCategory): WordsCategoryItem {
-        return WordsCategoryItem(it).apply {
-            onChecked = { item, isChecked ->
-                presenter.onCheckedCategory(item, isChecked)
-            }
-        }
-    }
+    private fun mapToItem(it: WordCategory): WordsCategoryItem = WordsCategoryItem(it)
 }

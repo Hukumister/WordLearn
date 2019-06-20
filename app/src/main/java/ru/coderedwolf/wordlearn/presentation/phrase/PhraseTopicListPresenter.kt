@@ -25,17 +25,7 @@ class PhraseTopicListPresenter @Inject constructor(
         viewState.showAll(topicList)
     }
 
-    override fun onViewAttach(view: PhraseTopicView?) {
-        viewState.showAll(topicList)
-    }
-
-    fun onChangeStudy(phraseTopic: PhraseTopic, isChecked: Boolean) = launchUI {
-        phraseTopicInteractor.updateStudy(phraseTopic.id!!, isChecked)
-        val index = topicList.indexOfFirst { topic -> topic.id == phraseTopic.id }
-        if (index != -1) {
-            topicList[index] = phraseTopic.copy(isStudy = isChecked)
-        }
-    }
+    override fun onViewAttach(view: PhraseTopicView?) = viewState.showAll(topicList)
 
     fun onClickTopic(phraseTopic: PhraseTopic) = router.navigateTo(Screens.PhraseFlowScreen(phraseTopic.id!!))
 }
