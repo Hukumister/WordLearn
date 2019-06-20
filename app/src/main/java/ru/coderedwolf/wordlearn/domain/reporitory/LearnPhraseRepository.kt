@@ -15,7 +15,9 @@ import javax.inject.Inject
  */
 interface LearnPhraseRepository {
 
-    suspend fun findLearnPhraseGroupByTopic(): Map<PhraseTopic, List<LearnPhrase>>
+    suspend fun findLearnPhraseGroupByTopic(
+            shuffled: Boolean = false
+    ): Map<PhraseTopic, List<LearnPhrase>>
 }
 
 class LearnPhraseRepositoryImpl @Inject constructor(
@@ -27,24 +29,24 @@ class LearnPhraseRepositoryImpl @Inject constructor(
 
     private val phraseTopicDao = dataBase.phraseTopicDao()
 
-    override suspend fun findLearnPhraseGroupByTopic(): Map<PhraseTopic, List<LearnPhrase>> = withContext(dispatchersProvider.io()) {
+    override suspend fun findLearnPhraseGroupByTopic(
+            shuffled: Boolean
+    ): Map<PhraseTopic, List<LearnPhrase>> = withContext(dispatchersProvider.io()) {
         phraseTopicDao.findAllStudiedTopicAndPhrases()
-                .map { entity -> convertToPair(entity) }
+                .map { entity -> convertToPair(entity, shuffled) }
                 .toMap()
     }
 
-    private fun convertToPair(entity: TopicAndPhrasesEntity) =
-            phraseTopicMapper.convert(entity.phraseTopic) to entity.phrases.map {
-                phraseMapper.convertToLearn(entity.phraseTopic.title, it)
-            }
+    private fun convertToPair(
+            entity: TopicAndPhrasesEntity,
+            shuffled: Boolean
+    ): Pair<PhraseTopic, List<LearnPhrase>> {
+        val topic = phraseTopicMapper.convert(entity.phraseTopic)
 
-    /*mapOf(
-            PhraseTopic(1, "title", true) to listOf(
-                LearnPhrase(1, "title", "text1", "translate"),
-                LearnPhrase(1, "title", "text2", "translate"),
-                LearnPhrase(1, "title", "text3", "translate"),
-                LearnPhrase(1, "title", "text4", "translate"),
-                LearnPhrase(1, "title", "text5", "translate")
-            )
-        )*/
+        val list = entity.phrases.map {
+            phraseMapper.convertToLearn(entity.phraseTopic.title, it)
+        }
+
+        return topic to if (shuffled) list.shuffled() else list
+    }
 }

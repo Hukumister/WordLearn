@@ -57,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_normal"
-            android:drawableTop="@drawable/ic_undo_red_24dp"
-            android:text="@string/missed_it"
+            android:drawableTop="@drawable/ic_undo_green_24dp"
+            android:text="@string/next"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:drawableTop="@drawable/ic_redo_green_24dp"
-            android:text="@string/missed_it"
+            android:text="@string/next"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

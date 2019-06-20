@@ -19,7 +19,7 @@ class LearnPhrasesPresenter @Inject constructor(
     override fun onFirstViewAttach() = launchUI {
         viewState.showListLoading(true)
         val flatten = learnPhraseInteractor
-                .findLearnPhraseGroupByTopic()
+                .findLearnPhraseGroupByTopic(true)
                 .values
                 .flatten()
 
@@ -30,11 +30,7 @@ class LearnPhrasesPresenter @Inject constructor(
 
     override fun onBackPressed() = router.exit()
 
-    fun onMissedPhrase(learnPhrase: LearnPhrase) = launchUI {
-        learnPhraseInteractor.decReviewCountPhrase(learnPhrase.phraseId)
-    }
-
-    fun onGotPhrase(learnPhrase: LearnPhrase) = launchUI {
+    fun onNext(learnPhrase: LearnPhrase) = launchUI {
         learnPhraseInteractor.incReviewCountPhrase(learnPhrase.phraseId)
     }
 

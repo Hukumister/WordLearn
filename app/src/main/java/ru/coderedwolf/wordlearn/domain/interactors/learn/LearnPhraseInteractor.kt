@@ -16,7 +16,9 @@ interface LearnPhraseInteractor {
     suspend fun incReviewCountPhrase(phraseId: Long): Boolean
     suspend fun decReviewCountPhrase(phraseId: Long): Boolean
 
-    suspend fun findLearnPhraseGroupByTopic(): Map<PhraseTopic, List<LearnPhrase>>
+    suspend fun findLearnPhraseGroupByTopic(
+            shuffled: Boolean
+    ): Map<PhraseTopic, List<LearnPhrase>>
 }
 
 
@@ -36,8 +38,10 @@ class LearnPhraseInteractorImpl @Inject constructor(
         return updateIfMoreThanDay(phrase, phrase.reviewCount - 1)
     }
 
-    override suspend fun findLearnPhraseGroupByTopic(): Map<PhraseTopic, List<LearnPhrase>> = learnPhraseRepository
-            .findLearnPhraseGroupByTopic()
+    override suspend fun findLearnPhraseGroupByTopic(
+            shuffled: Boolean
+    ): Map<PhraseTopic, List<LearnPhrase>> = learnPhraseRepository
+            .findLearnPhraseGroupByTopic(shuffled)
 
     private suspend fun updateIfMoreThanDay(phrase: Phrase, newCount: Int): Boolean {
         return if (phrase.lastReviewDate == null || timeProvider.moreThanDay(phrase.lastReviewDate)) {

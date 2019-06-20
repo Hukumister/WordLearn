@@ -24,8 +24,8 @@ import timber.log.Timber
  * @author CodeRedWolf. Date 14.06.2019.
  */
 class LearnPhrasesFragment : BaseFragment(),
-    LearnPhrasesView,
-    CardStackListenerSimple {
+        LearnPhrasesView,
+        CardStackListenerSimple {
 
     override val layoutRes: Int
         get() = R.layout.fragment_learn_phrases
@@ -35,7 +35,7 @@ class LearnPhrasesFragment : BaseFragment(),
 
     @ProvidePresenter
     fun providePresenter(): LearnPhrasesPresenter =
-        scope.getInstance(LearnPhrasesPresenter::class.java)
+            scope.getInstance(LearnPhrasesPresenter::class.java)
 
     private lateinit var manager: CardStackLayoutManager
 
@@ -93,12 +93,8 @@ class LearnPhrasesFragment : BaseFragment(),
     }
 
     override fun onCardSwiped(direction: Direction) {
-        Timber.d("Swipe phrase with position %s and direction %s", manager.topPosition - 1, direction)
-        when (direction) {
-            Direction.Left -> mainSection.getPhrase(manager.topPosition - 1)?.let { presenter.onMissedPhrase(it) }
-            Direction.Right -> mainSection.getPhrase(manager.topPosition - 1)?.let { presenter.onGotPhrase(it) }
-            else -> Timber.e("Unsupported swipe direction")
-        }
+        Timber.d("Swipe phrase with position %s", manager.topPosition - 1)
+        mainSection.getPhrase(manager.topPosition - 1)?.let { presenter.onNext(it) }
         mainSection.remove(mainSection.getItem(manager.topPosition - 1))
         checkForEmpty()
     }
