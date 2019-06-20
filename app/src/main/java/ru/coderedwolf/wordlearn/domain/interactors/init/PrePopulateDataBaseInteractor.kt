@@ -16,7 +16,7 @@ interface PrePopulateDataBaseInteractor {
 
 class PrePopulateDataBaseInteractorImpl @Inject constructor(
         private val prePopulatePhraseRepository: Lazy<PrePopulatePhraseRepository>,
-        private val phraseAssetRepository: PhraseAssetRepository
+        private val phraseAssetRepository: Lazy<PhraseAssetRepository>
 ) : PrePopulateDataBaseInteractor {
 
     override suspend fun fullDataBase() {
@@ -24,7 +24,7 @@ class PrePopulateDataBaseInteractorImpl @Inject constructor(
     }
 
     private suspend fun fullPhrases() {
-        phraseAssetRepository.findAllGroupByTopic().forEach { (topic, phraseList) ->
+        phraseAssetRepository.get()?.findAllGroupByTopic()?.forEach { (topic, phraseList) ->
             val savedTopic = prePopulatePhraseRepository.get()?.saveTopic(topic) ?: return@forEach
             prePopulatePhraseRepository.get()?.saveAllPhrases(phraseList.map { it.copy(topicId = savedTopic.id!!) })
         }
