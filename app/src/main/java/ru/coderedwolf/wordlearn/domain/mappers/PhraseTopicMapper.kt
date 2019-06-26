@@ -11,17 +11,17 @@ class PhraseTopicMapper @Inject constructor() {
 
     fun convert(phraseTopicEntity: PhraseTopicEntity): PhraseTopic {
         return PhraseTopic(
-            id = phraseTopicEntity.id,
-            isStudy = phraseTopicEntity.isStudy,
-            title = phraseTopicEntity.title
+                id = phraseTopicEntity.id,
+                isStudy = phraseTopicEntity.isStudy,
+                title = phraseTopicEntity.title
         )
     }
 
     fun convertToEntity(phraseTopic: PhraseTopic): PhraseTopicEntity {
         return PhraseTopicEntity(
-            id = phraseTopic.id,
-            isStudy = phraseTopic.isStudy,
-            title = phraseTopic.title
+                id = phraseTopic.id,
+                isStudy = phraseTopic.isStudy,
+                title = phraseTopic.title
         )
     }
 }

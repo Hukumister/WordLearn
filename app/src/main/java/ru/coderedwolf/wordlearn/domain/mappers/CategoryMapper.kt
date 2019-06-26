@@ -1,8 +1,8 @@
 package ru.coderedwolf.wordlearn.domain.mappers
 
+import org.threeten.bp.Instant
 import ru.coderedwolf.wordlearn.model.entity.WordCategoryEntity
 import ru.coderedwolf.wordlearn.model.word.WordCategory
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -12,10 +12,10 @@ class CategoryMapper @Inject constructor() {
 
     fun convert(wordCategoryEntity: WordCategoryEntity): WordCategory {
         return WordCategory(
-            id = wordCategoryEntity.id ?: -1,
-            name = wordCategoryEntity.name,
-            isStudy = wordCategoryEntity.isStudy,
-            progress = 0
+                id = wordCategoryEntity.id ?: -1,
+                name = wordCategoryEntity.name,
+                isStudy = wordCategoryEntity.isStudy,
+                progress = 0
         )
     }
 
@@ -24,7 +24,7 @@ class CategoryMapper @Inject constructor() {
                 id = wordCategory.id,
                 name = wordCategory.name,
                 isStudy = wordCategory.isStudy,
-                createDate = Date()
+                createDate = Instant.now()
         )
     }
 }

@@ -11,7 +11,7 @@
         style="@style/Component.Toolbar.Navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Фразы" />
+        app:title="@string/phrases" />
 
     <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/cardStackView"

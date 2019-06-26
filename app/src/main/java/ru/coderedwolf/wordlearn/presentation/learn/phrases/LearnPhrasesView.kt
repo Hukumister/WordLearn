@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.presentation.learn
+package ru.coderedwolf.wordlearn.presentation.learn.phrases
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.ui.learn
+package ru.coderedwolf.wordlearn.ui.learn.phrases
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -18,6 +18,7 @@ import ru.coderedwolf.wordlearn.presentation.learn.phrases.LearnPhrasesPresenter
 import ru.coderedwolf.wordlearn.presentation.learn.phrases.LearnPhrasesView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.coderedwolf.wordlearn.ui.global.CardStackListenerSimple
+import ru.coderedwolf.wordlearn.ui.learn.LearnLoadingItem
 import timber.log.Timber
 
 /**
@@ -29,6 +30,13 @@ class LearnPhrasesFragment : BaseFragment(),
 
     override val layoutRes: Int
         get() = R.layout.fragment_learn_phrases
+
+    companion object {
+
+        private const val VISIBLE_COUNT = 2
+        private const val MAX_DEGREE = 35f
+        private const val SWIPE_THRESHOLD = 0.5f
+    }
 
     @InjectPresenter
     lateinit var presenter: LearnPhrasesPresenter
@@ -127,9 +135,9 @@ class LearnPhrasesFragment : BaseFragment(),
 
     private fun initCardStackView() {
         manager.apply {
-            setVisibleCount(2)
-            setMaxDegree(35f)
-            setSwipeThreshold(0.5f)
+            setVisibleCount(VISIBLE_COUNT)
+            setMaxDegree(MAX_DEGREE)
+            setSwipeThreshold(SWIPE_THRESHOLD)
             setCanScrollVertical(false)
         }
         cardStackView.apply {

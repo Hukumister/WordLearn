@@ -13,24 +13,24 @@ class WordMapper @Inject constructor() {
 
     fun convert(wordEntity: WordEntity): Word {
         return Word(
-            wordId = wordEntity.wordId,
-            categoryId = wordEntity.categoryId,
-            examplesList = wordEntity.examplesList,
-            translation = wordEntity.translation,
-            transcription = wordEntity.transcription,
-            word = wordEntity.word,
-            reviewCount = wordEntity.reviewCount,
-            association = wordEntity.phraseToMemorize,
-            lastReviewDate = wordEntity.lastReviewDate
+                wordId = wordEntity.wordId,
+                categoryId = wordEntity.categoryId,
+                examplesList = wordEntity.examplesList,
+                translation = wordEntity.translation,
+                transcription = wordEntity.transcription,
+                word = wordEntity.word,
+                reviewCount = wordEntity.reviewCount,
+                association = wordEntity.phraseToMemorize,
+                lastReviewDate = wordEntity.lastReviewDate
         )
     }
 
     fun convertToPreview(wordEntity: WordEntity): WordPreview {
         return WordPreview(
-            word = wordEntity.word,
-            wordId = wordEntity.wordId!!,
-            reviewCount = wordEntity.reviewCount,
-            translation = wordEntity.translation
+                word = wordEntity.word,
+                wordId = wordEntity.wordId!!,
+                reviewCount = wordEntity.reviewCount,
+                translation = wordEntity.translation
         )
     }
 
