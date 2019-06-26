@@ -18,6 +18,10 @@ interface WordRepository {
     suspend fun findAllByCategoryId(categoryId: Long): List<Word>
 
     suspend fun save(word: Word): Word
+
+    suspend fun setIsStudy(wordId: Long, isStudy: Boolean)
+
+    suspend fun incReviewCount(wordId: Long)
 }
 
 class WordRepositoryImpl @Inject constructor(
@@ -43,5 +47,13 @@ class WordRepositoryImpl @Inject constructor(
     override suspend fun save(word: Word): Word = withContext(dispatchersProvider.io()) {
         val wordEntity = wordDao.saveAndReturn(wordMapper.convertToEntity(word))
         wordMapper.convert(wordEntity)
+    }
+
+    override suspend fun setIsStudy(wordId: Long, isStudy: Boolean) = withContext(dispatchersProvider.io()) {
+        wordDao.setIsStudy(wordId, isStudy)
+    }
+
+    override suspend fun incReviewCount(wordId: Long) = withContext(dispatchersProvider.io()) {
+        wordDao.incReview(wordId)
     }
 }

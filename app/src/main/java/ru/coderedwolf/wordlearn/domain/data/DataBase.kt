@@ -4,10 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ru.coderedwolf.wordlearn.domain.data.converter.DateConverter
-import ru.coderedwolf.wordlearn.domain.data.dao.PhraseDao
-import ru.coderedwolf.wordlearn.domain.data.dao.PhraseTopicDao
-import ru.coderedwolf.wordlearn.domain.data.dao.WordDao
-import ru.coderedwolf.wordlearn.domain.data.dao.WordsCategoryDao
+import ru.coderedwolf.wordlearn.domain.data.dao.*
 import ru.coderedwolf.wordlearn.model.entity.PhraseEntity
 import ru.coderedwolf.wordlearn.model.entity.PhraseTopicEntity
 import ru.coderedwolf.wordlearn.model.entity.WordCategoryEntity
@@ -28,6 +25,7 @@ import ru.coderedwolf.wordlearn.model.entity.WordEntity
 abstract class DataBase : RoomDatabase() {
 
     abstract fun wordsCategoryDao(): WordsCategoryDao
+    abstract fun categoryAndWordDao(): CategoryAndWordDao
     abstract fun wordDao(): WordDao
 
     abstract fun phraseDao(): PhraseDao

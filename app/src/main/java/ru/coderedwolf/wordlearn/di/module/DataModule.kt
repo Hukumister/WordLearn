@@ -6,6 +6,8 @@ import ru.coderedwolf.wordlearn.domain.interactors.init.PrePopulateDataBaseInter
 import ru.coderedwolf.wordlearn.domain.interactors.init.PrePopulateDataBaseInteractorImpl
 import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnPhraseInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnPhraseInteractorImpl
+import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnWordsInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnWordsInteractorImpl
 import ru.coderedwolf.wordlearn.domain.interactors.phrase.PhraseTopicInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.phrase.PhraseTopicInteractorImpl
 import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractor
@@ -45,5 +47,8 @@ class DataModule : Module() {
         //Learn
         bind(LearnPhraseRepository::class.java).to(LearnPhraseRepositoryImpl::class.java)
         bind(LearnPhraseInteractor::class.java).to(LearnPhraseInteractorImpl::class.java)
+
+        bind(LearnWordsInteractor::class.java).to(LearnWordsInteractorImpl::class.java)
+        bind(LearnWordRepository::class.java).to(LearnWordRepositoryImpl::class.java)
     }
 }

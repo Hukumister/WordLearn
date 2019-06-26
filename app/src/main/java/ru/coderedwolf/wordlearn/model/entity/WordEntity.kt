@@ -29,6 +29,7 @@ data class WordEntity(
         val transcription: String,
         val translation: String,
         val reviewCount: Int,
+        val isStudy: Boolean,
         val lastReviewDate: Instant?,
         val examplesList: List<WordExample>
 )

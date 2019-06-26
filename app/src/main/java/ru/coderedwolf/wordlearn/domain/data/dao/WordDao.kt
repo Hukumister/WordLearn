@@ -26,4 +26,16 @@ interface WordDao {
         val wordId = save(wordEntity)
         return findOne(wordId)
     }
+
+    @Transaction
+    suspend fun incReview(wordId: Long) {
+        val wordEntity = findOne(wordId)
+        setReviewCount(wordId, wordEntity.reviewCount + 1)
+    }
+
+    @Query("update WordEntity set isStudy = :isStudy where wordId = :wordId")
+    suspend fun setIsStudy(wordId: Long, isStudy: Boolean)
+
+    @Query("update WordEntity set reviewCount = :reviewCount where wordId = :wordId")
+    suspend fun setReviewCount(wordId: Long, reviewCount: Int)
 }
