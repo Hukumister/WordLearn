@@ -1,9 +1,9 @@
 package ru.coderedwolf.wordlearn.model.entity
 
 import androidx.room.*
+import org.threeten.bp.Instant
 import ru.coderedwolf.wordlearn.domain.data.converter.WordExampleConverter
 import ru.coderedwolf.wordlearn.model.word.WordExample
-import java.util.*
 
 /**
  * @author CodeRedWolf. Date 05.06.2019.
@@ -29,6 +29,6 @@ data class WordEntity(
         val transcription: String,
         val translation: String,
         val reviewCount: Int,
-        val lastReviewDate: Date?,
+        val lastReviewDate: Instant?,
         val examplesList: List<WordExample>
 )

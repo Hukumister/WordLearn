@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.util.*
+import org.threeten.bp.Instant
 
 /**
  * @author CodeRedWolf. Date 14.06.2019.
@@ -27,5 +27,5 @@ data class PhraseEntity(
         val textPhrase: String,
         val translation: String,
         val reviewCount: Int,
-        val lastReviewDate: Date?
+        val lastReviewDate: Instant?
 )

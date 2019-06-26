@@ -104,6 +104,10 @@ dependencies {
      */
     implementation presentationDependencies.logger
     /**
+     * Time
+     */
+    implementation commonDependencies.time
+    /**
      * Test
      */
     testImplementation testDependencies.junit

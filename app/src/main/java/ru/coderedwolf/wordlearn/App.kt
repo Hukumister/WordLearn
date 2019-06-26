@@ -1,6 +1,7 @@
 package ru.coderedwolf.wordlearn
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import ru.coderedwolf.wordlearn.di.DI
 import ru.coderedwolf.wordlearn.di.module.AppModule
 import ru.coderedwolf.wordlearn.di.module.DataModule
@@ -16,6 +17,7 @@ class App : Application() {
 
         initLogger()
         initToothpick()
+        initThreeTenAbp()
         initAppScope()
     }
 
@@ -35,5 +37,9 @@ class App : Application() {
 
     private fun initAppScope() {
         Toothpick.openScope(DI.APP_SCOPE).installModules(AppModule(this), DataModule())
+    }
+
+    private fun initThreeTenAbp() {
+        AndroidThreeTen.init(this)
     }
 }

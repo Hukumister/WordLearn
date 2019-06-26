@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.domain.system
 
-import android.text.format.DateUtils
-import java.util.*
+import org.threeten.bp.Duration
+import org.threeten.bp.Instant
 import javax.inject.Inject
 
 /**
@@ -9,17 +9,17 @@ import javax.inject.Inject
  */
 interface TimeProvider {
 
-    val nowTime: Date
+    val nowTime: Instant
 
-    fun moreThanDay(date: Date): Boolean
+    fun moreThanDay(instant: Instant): Boolean
 }
 
 class SystemTimeProvider @Inject constructor() : TimeProvider {
 
-    override val nowTime: Date
-        get() = Date()
+    override val nowTime: Instant
+        get() = Instant.now()
 
-    override fun moreThanDay(date: Date): Boolean {
-        return nowTime.time - date.time >= DateUtils.DAY_IN_MILLIS
+    override fun moreThanDay(instant: Instant): Boolean {
+        return Duration.between(nowTime, instant).toHours() >= 12
     }
 }
