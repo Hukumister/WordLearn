@@ -14,8 +14,8 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.model.learn.LearnPhrase
-import ru.coderedwolf.wordlearn.presentation.learn.LearnPhrasesPresenter
-import ru.coderedwolf.wordlearn.presentation.learn.LearnPhrasesView
+import ru.coderedwolf.wordlearn.presentation.learn.phrases.LearnPhrasesPresenter
+import ru.coderedwolf.wordlearn.presentation.learn.phrases.LearnPhrasesView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.coderedwolf.wordlearn.ui.global.CardStackListenerSimple
 import timber.log.Timber
