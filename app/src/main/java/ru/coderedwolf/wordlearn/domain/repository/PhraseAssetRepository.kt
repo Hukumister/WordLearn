@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.domain.reporitory
+package ru.coderedwolf.wordlearn.domain.repository
 
 import android.content.res.AssetManager
 import de.siegmar.fastcsv.reader.CsvReader

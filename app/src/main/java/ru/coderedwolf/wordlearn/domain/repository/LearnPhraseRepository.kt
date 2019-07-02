@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.domain.reporitory
+package ru.coderedwolf.wordlearn.domain.repository
 
 import kotlinx.coroutines.withContext
 import ru.coderedwolf.wordlearn.domain.data.DataBase

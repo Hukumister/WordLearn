@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.domain.interactors.learn
 
-import ru.coderedwolf.wordlearn.domain.reporitory.LearnPhraseRepository
-import ru.coderedwolf.wordlearn.domain.reporitory.PhraseRepository
+import ru.coderedwolf.wordlearn.domain.repository.LearnPhraseRepository
+import ru.coderedwolf.wordlearn.domain.repository.PhraseRepository
 import ru.coderedwolf.wordlearn.domain.system.TimeProvider
 import ru.coderedwolf.wordlearn.model.learn.LearnPhrase
 import ru.coderedwolf.wordlearn.model.phrase.Phrase

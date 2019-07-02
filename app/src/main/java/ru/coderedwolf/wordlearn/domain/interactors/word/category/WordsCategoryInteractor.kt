@@ -1,6 +1,6 @@
 package ru.coderedwolf.wordlearn.domain.interactors.word.category
 
-import ru.coderedwolf.wordlearn.domain.reporitory.WordsCategoryRepository
+import ru.coderedwolf.wordlearn.domain.repository.WordsCategoryRepository
 import ru.coderedwolf.wordlearn.model.word.WordCategory
 import javax.inject.Inject
 

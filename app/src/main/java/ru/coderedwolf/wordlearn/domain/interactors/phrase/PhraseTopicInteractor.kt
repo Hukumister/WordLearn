@@ -1,6 +1,6 @@
 package ru.coderedwolf.wordlearn.domain.interactors.phrase
 
-import ru.coderedwolf.wordlearn.domain.reporitory.PhraseTopicRepository
+import ru.coderedwolf.wordlearn.domain.repository.PhraseTopicRepository
 import ru.coderedwolf.wordlearn.model.phrase.PhraseTopic
 import javax.inject.Inject
 
