@@ -54,6 +54,7 @@
             tools:text="@tools:sample/lorem[15]" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/missItTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_normal"
@@ -64,6 +65,7 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/gotItTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_normal"

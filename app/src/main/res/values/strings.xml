@@ -33,4 +33,7 @@
     <string name="in_learn">В обучении</string>
 
     <string name="loading">Инициализация…</string>
+    
+    <string name="know">Знаю</string>
+    <string name="not_know">Не знаю</string>
 </resources>
