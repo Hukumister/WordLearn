@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.domain.reporitory
+package ru.coderedwolf.wordlearn.domain.repository
 
 import kotlinx.coroutines.withContext
 import ru.coderedwolf.wordlearn.domain.data.DataBase
@@ -19,9 +19,13 @@ interface WordRepository {
 
     suspend fun save(word: Word): Word
 
+    suspend fun saveAll(list: List<Word>)
+
     suspend fun setIsStudy(wordId: Long, isStudy: Boolean)
 
     suspend fun incReviewCount(wordId: Long)
+
+    suspend fun count(): Int
 }
 
 class WordRepositoryImpl @Inject constructor(
@@ -49,11 +53,19 @@ class WordRepositoryImpl @Inject constructor(
         wordMapper.convert(wordEntity)
     }
 
+    override suspend fun saveAll(list: List<Word>) = withContext(dispatchersProvider.io()) {
+        wordDao.saveAll(list.map { wordMapper.convertToEntity(it) })
+    }
+
     override suspend fun setIsStudy(wordId: Long, isStudy: Boolean) = withContext(dispatchersProvider.io()) {
         wordDao.setIsStudy(wordId, isStudy)
     }
 
     override suspend fun incReviewCount(wordId: Long) = withContext(dispatchersProvider.io()) {
         wordDao.incReview(wordId)
+    }
+
+    override suspend fun count(): Int = withContext(dispatchersProvider.io()) {
+        wordDao.count()
     }
 }

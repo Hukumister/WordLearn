@@ -21,6 +21,9 @@ interface WordDao {
     @Insert
     suspend fun save(wordEntity: WordEntity): Long
 
+    @Insert
+    suspend fun saveAll(list: List<WordEntity>)
+
     @Transaction
     suspend fun saveAndReturn(wordEntity: WordEntity): WordEntity {
         val wordId = save(wordEntity)
@@ -38,4 +41,7 @@ interface WordDao {
 
     @Query("update WordEntity set reviewCount = :reviewCount where wordId = :wordId")
     suspend fun setReviewCount(wordId: Long, reviewCount: Int)
+
+    @Query("select count(*) from WordEntity")
+    suspend fun count(): Int
 }
