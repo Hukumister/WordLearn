@@ -12,13 +12,13 @@ import kotlinx.android.synthetic.main.fragment_learn_words.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.coderedwolf.wordlearn.R
+import ru.coderedwolf.wordlearn.extension.visible
 import ru.coderedwolf.wordlearn.model.learn.LearnWord
 import ru.coderedwolf.wordlearn.presentation.learn.word.LearnWordsPresenter
 import ru.coderedwolf.wordlearn.presentation.learn.word.LearnWordsView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.coderedwolf.wordlearn.ui.global.CardStackListenerSimple
 import timber.log.Timber
-import kotlin.random.Random
 
 /**
  * @author CodeRedWolf. Date 22.06.2019.
@@ -58,6 +58,10 @@ class LearnWordsFragment : BaseFragment(),
         initCardStackView()
     }
 
+    override fun showLoading(show: Boolean) {
+        progressBar.visible(show)
+    }
+
     override fun onResume() {
         super.onResume()
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -90,20 +94,24 @@ class LearnWordsFragment : BaseFragment(),
             Direction.Right -> wordsItem.let { presenter.onGotIt(it.learnWord) }
             else -> Timber.e("Unsupported direction on swipe")
         }
+
+        wordAdapter.removeGroup(0)
     }
 
     override fun addAll(learnList: List<LearnWord>) {
-        wordAdapter.addAll(learnList.map { LearnWordsItem(it) })
+        wordAdapter.addAll(learnList.map { word -> LearnWordsItem(word) })
     }
 
     override fun add(learnWord: LearnWord) {
-        val itemCount = wordAdapter.itemCount
-        val index = Random.Default.nextInt(0, itemCount)
-        wordAdapter.add(index, LearnWordsItem(learnWord))
+        wordAdapter.add(LearnWordsItem(learnWord))
     }
 
     override fun showTitle(title: String) {
         toolbar.title = title
+    }
+
+    override fun showSubTitle(subTitle: String) {
+        toolbar.subtitle = subTitle
     }
 
     private fun initCardStackView() {
