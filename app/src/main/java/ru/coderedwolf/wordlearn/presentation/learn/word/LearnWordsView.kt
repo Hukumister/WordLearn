@@ -8,7 +8,10 @@ import ru.coderedwolf.wordlearn.model.learn.LearnWord
  */
 interface LearnWordsView : MvpView {
 
+    fun showLoading(show: Boolean)
+
     fun addAll(learnList: List<LearnWord>)
     fun add(learnWord: LearnWord)
     fun showTitle(title: String)
+    fun showSubTitle(subTitle: String)
 }

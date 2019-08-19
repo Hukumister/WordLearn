@@ -10,9 +10,4 @@ data class LearnWord(
         val categoryName: String,
         var isNewWord: Boolean = true,
         var isRotate: Boolean = false
-) {
-
-    fun toogle() {
-        this.isRotate = !isRotate
-    }
-}
+)

@@ -1,7 +1,10 @@
 package ru.coderedwolf.wordlearn.domain.interactors.learn
 
-import ru.coderedwolf.wordlearn.domain.reporitory.LearnWordRepository
-import ru.coderedwolf.wordlearn.domain.reporitory.WordRepository
+import ru.coderedwolf.wordlearn.di.BatchSizeMemorizedWord
+import ru.coderedwolf.wordlearn.di.BatchSizeNewWord
+import ru.coderedwolf.wordlearn.di.PrimitiveWrapper
+import ru.coderedwolf.wordlearn.domain.repository.LearnWordRepository
+import ru.coderedwolf.wordlearn.domain.repository.WordRepository
 import ru.coderedwolf.wordlearn.model.learn.LearnWord
 import ru.coderedwolf.wordlearn.model.word.Word
 import ru.coderedwolf.wordlearn.model.word.WordCategory
@@ -20,13 +23,17 @@ interface LearnWordsInteractor {
 }
 
 class LearnWordsInteractorImpl @Inject constructor(
-        private val batchSizeNewWord: Int,
+        @BatchSizeNewWord batchSizeNewWordWrapper: PrimitiveWrapper<Int>,
+        @BatchSizeMemorizedWord batchSizeMemorizedWordWrapper: PrimitiveWrapper<Int>,
         private val wordRepository: WordRepository,
         private val learnWordRepository: LearnWordRepository
 ) : LearnWordsInteractor {
 
+    private val batchSizeNewWord = batchSizeNewWordWrapper.value
+    private val batchSizeMemorizedWord = batchSizeMemorizedWordWrapper.value
+
     override suspend fun findAllLearnWords(): List<LearnWord> {
-        val member = learnWordRepository.findMemberWordGroupByCategory(70)
+        val member = learnWordRepository.findMemberWordGroupByCategory(batchSizeMemorizedWord)
         val new = learnWordRepository.findNewWordGroupByCategory(batchSizeNewWord)
 
         val memberLearnList = convertToLearnList(member, false)
@@ -47,6 +54,6 @@ class LearnWordsInteractorImpl @Inject constructor(
     }
 
     override suspend fun markNotLearn(learnWord: LearnWord) {
-        wordRepository.setIsStudy(learnWord.word.wordId!!)
+        wordRepository.setIsStudy(learnWord.word.wordId!!, false)
     }
 }

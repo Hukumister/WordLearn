@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.presentation.learn.word
 
+import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnWordsInteractor
 import ru.coderedwolf.wordlearn.model.learn.LearnWord
 import ru.coderedwolf.wordlearn.presentation.base.BasePresenter
@@ -9,20 +10,31 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 22.06.2019.
  */
+@InjectViewState
 class LearnWordsPresenter @Inject constructor(
         private val router: Router,
         private val learnWordsInteractor: LearnWordsInteractor
 ) : BasePresenter<LearnWordsView>() {
 
     override fun onFirstViewAttach() = launchUI {
+        viewState.showLoading(true)
         val learnList = learnWordsInteractor
                 .findAllLearnWords()
                 .shuffled()
 
+        if (learnList.isNotEmpty()) {
+            viewState.showTitle(learnList.first().categoryName)
+            viewState.showSubTitle("Пройдено ${learnList.first().word.reviewCount}")
+        }
+
         viewState.addAll(learnList)
+        viewState.showLoading(false)
     }
 
-    fun onWordAppear(learnWord: LearnWord) = viewState.showTitle(learnWord.categoryName)
+    fun onWordAppear(learnWord: LearnWord) {
+        viewState.showTitle(learnWord.categoryName)
+        viewState.showSubTitle("Пройдено ${learnWord.word.reviewCount}")
+    }
 
     override fun onBackPressed() = router.exit()
 
