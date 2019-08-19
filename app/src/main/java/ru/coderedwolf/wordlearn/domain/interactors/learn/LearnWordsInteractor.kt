@@ -29,6 +29,7 @@ class LearnWordsInteractorImpl @Inject constructor(
         private val learnWordRepository: LearnWordRepository
 ) : LearnWordsInteractor {
 
+    
     private val batchSizeNewWord = batchSizeNewWordWrapper.value
     private val batchSizeMemorizedWord = batchSizeMemorizedWordWrapper.value
 
