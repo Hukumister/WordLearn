@@ -8,6 +8,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import de.siegmar.fastcsv.reader.CsvParser
+import de.siegmar.fastcsv.reader.CsvRow
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -79,4 +81,18 @@ fun Section.find(predicate: (Item) -> Boolean): Item? {
         }
     }
     return null
+}
+
+fun CsvParser.asSequence(): Sequence<CsvRow> = Sequence {
+    return@Sequence object : Iterator<CsvRow> {
+        private var currentRow: CsvRow? = null
+        override fun hasNext(): Boolean {
+            currentRow = nextRow()
+            return currentRow != null
+        }
+
+        override fun next(): CsvRow {
+            return currentRow!!
+        }
+    }
 }
