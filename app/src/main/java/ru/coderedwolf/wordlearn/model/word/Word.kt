@@ -14,5 +14,6 @@ data class Word(
         val translation: String,
         val examplesList: List<WordExample>,
         val reviewCount: Int = 0,
+        val isStudy: Boolean = true,
         val lastReviewDate: Instant? = null
 )

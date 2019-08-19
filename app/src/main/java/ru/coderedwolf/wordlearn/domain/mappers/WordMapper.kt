@@ -18,6 +18,7 @@ class WordMapper @Inject constructor() {
                 examplesList = wordEntity.examplesList,
                 translation = wordEntity.translation,
                 transcription = wordEntity.transcription,
+                isStudy = wordEntity.isStudy,
                 word = wordEntity.word,
                 reviewCount = wordEntity.reviewCount,
                 association = wordEntity.phraseToMemorize,
@@ -42,6 +43,7 @@ class WordMapper @Inject constructor() {
                 translation = word.translation,
                 transcription = word.transcription,
                 word = word.word,
+                isStudy = word.isStudy,
                 reviewCount = word.reviewCount,
                 phraseToMemorize = word.association,
                 lastReviewDate = word.lastReviewDate
