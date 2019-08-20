@@ -2,15 +2,14 @@ package ru.coderedwolf.wordlearn.ui.word.wordlist
 
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.view.isVisible
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_word_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import org.jetbrains.anko.findOptional
-import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.extension.visible
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.model.word.WordPreview
 import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListPresenter
 import ru.coderedwolf.wordlearn.presentation.word.wordlist.WordListView
@@ -40,7 +39,7 @@ class WordListFragment : BaseFragment(), WordListView {
         toolbar.setOnMenuItemClickListener { item ->
             if (item.itemId == R.id.action_learn) {
                 val checkBox = item.actionView
-                        .findOptional<AppCompatCheckBox>(R.id.checkBox)
+                        .findViewById<AppCompatCheckBox>(R.id.checkBox)
                         ?: return@setOnMenuItemClickListener false
                 presenter.onClickActionLearn(checkBox.isChecked)
                 true
@@ -56,15 +55,11 @@ class WordListFragment : BaseFragment(), WordListView {
     }
 
     override fun showLoading(show: Boolean) {
-        if (show) {
-            progressBar.visible(true)
-        } else {
-            postViewAction(500) { progressBar.visible(false) }
-        }
+
     }
 
     override fun showWords(list: List<WordPreview>) {
-        placeHolder.visible(list.isEmpty())
+        placeHolder.isVisible = list.isEmpty()
         wordPreviewAdapter.update(list.map { WordPreviewItem(it) })
     }
 

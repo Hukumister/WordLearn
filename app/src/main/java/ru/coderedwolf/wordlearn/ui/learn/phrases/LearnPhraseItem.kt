@@ -1,11 +1,11 @@
 package ru.coderedwolf.wordlearn.ui.learn.phrases
 
+import androidx.core.view.isVisible
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_learn_phrase.*
-import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.extension.visible
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.model.learn.LearnPhrase
 
 /**
@@ -14,13 +14,13 @@ import ru.coderedwolf.wordlearn.model.learn.LearnPhrase
 class LearnPhraseItem(val learnPhrase: LearnPhrase) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.visibleButton.onClick {
-            it?.visible(false)
-            viewHolder.phraseTranslation.visible(true)
+        viewHolder.visibleButton.onClick { button ->
+            button.isVisible = false
+            viewHolder.phraseTranslation.isVisible = true
         }
 
-        viewHolder.visibleButton.visible(true)
-        viewHolder.phraseTranslation.visible(false)
+        viewHolder.visibleButton.isVisible = true
+        viewHolder.phraseTranslation.isVisible = false
 
         viewHolder.phraseText.text = learnPhrase.phraseText
         viewHolder.phraseTranslation.text = learnPhrase.phraseTranslate

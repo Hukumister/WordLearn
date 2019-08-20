@@ -2,15 +2,15 @@ package ru.coderedwolf.wordlearn.ui.word.category
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_words_category_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.extension.visible
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.model.word.WordCategory
 import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryPresenter
 import ru.coderedwolf.wordlearn.presentation.wordcategory.WordsCategoryView
@@ -62,7 +62,9 @@ class WordsCategoryFragment : BaseFragment(),
 
     override fun updateCategoryList(list: List<WordCategory>) = categoryAdapter.updateAsync(list.map { mapToItem(it) })
 
-    override fun showLoading(show: Boolean) = progressBar.visible(show)
+    override fun showLoading(show: Boolean) {
+        progressBar.isVisible = show
+    }
 
     override fun onBackPressed() = presenter.onBackPressed()
 

@@ -1,10 +1,11 @@
 package ru.coderedwolf.wordlearn.domain.repository
 
 import android.content.res.AssetManager
+import de.siegmar.fastcsv.reader.CsvParser
 import de.siegmar.fastcsv.reader.CsvReader
+import de.siegmar.fastcsv.reader.CsvRow
 import kotlinx.coroutines.withContext
 import ru.coderedwolf.wordlearn.domain.system.DispatchersProvider
-import ru.coderedwolf.wordlearn.extension.asSequence
 import ru.coderedwolf.wordlearn.model.word.Word
 import java.io.InputStreamReader
 import javax.inject.Inject
@@ -45,6 +46,20 @@ class WordAssetRepositoryImpl @Inject constructor(
                         )
                     }
                     .toList()
+        }
+    }
+
+    private fun CsvParser.asSequence(): Sequence<CsvRow> = Sequence {
+        return@Sequence object : Iterator<CsvRow> {
+            private var currentRow: CsvRow? = null
+            override fun hasNext(): Boolean {
+                currentRow = nextRow()
+                return currentRow != null
+            }
+
+            override fun next(): CsvRow {
+                return currentRow!!
+            }
         }
     }
 }

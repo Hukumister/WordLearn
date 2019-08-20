@@ -32,22 +32,6 @@ fun Navigator.setLaunchScreen(screen: SupportAppScreen) {
     )
 }
 
-fun View.visible(visibility: Boolean) {
-    this.visibility = if (visibility) {
-        View.VISIBLE
-    } else {
-        View.INVISIBLE
-    }
-}
-
-fun View.visibleOrGone(gone: Boolean) {
-    this.visibility = if (gone) {
-        View.VISIBLE
-    } else {
-        View.GONE
-    }
-}
-
 fun Activity.hideKeyboard() {
     currentFocus?.apply {
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -62,37 +46,3 @@ fun Activity.showKeyboard() {
     }
 }
 
-fun GroupAdapter<ViewHolder>.find(predicate: (Item) -> Boolean): Item? {
-    for (index in 0 until itemCount) {
-        val item = getItem(index) as? Item
-        if (item != null && predicate(item)) {
-            return item
-        }
-    }
-    return null
-}
-
-
-fun Section.find(predicate: (Item) -> Boolean): Item? {
-    for (index in 0 until itemCount) {
-        val item = getItem(index) as? Item
-        if (item != null && predicate(item)) {
-            return item
-        }
-    }
-    return null
-}
-
-fun CsvParser.asSequence(): Sequence<CsvRow> = Sequence {
-    return@Sequence object : Iterator<CsvRow> {
-        private var currentRow: CsvRow? = null
-        override fun hasNext(): Boolean {
-            currentRow = nextRow()
-            return currentRow != null
-        }
-
-        override fun next(): CsvRow {
-            return currentRow!!
-        }
-    }
-}

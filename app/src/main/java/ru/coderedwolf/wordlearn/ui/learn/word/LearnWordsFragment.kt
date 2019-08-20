@@ -3,6 +3,7 @@ package ru.coderedwolf.wordlearn.ui.learn.word
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
@@ -12,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_learn_words.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.extension.visible
 import ru.coderedwolf.wordlearn.model.learn.LearnWord
 import ru.coderedwolf.wordlearn.presentation.learn.word.LearnWordsPresenter
 import ru.coderedwolf.wordlearn.presentation.learn.word.LearnWordsView
@@ -59,7 +59,7 @@ class LearnWordsFragment : BaseFragment(),
     }
 
     override fun showLoading(show: Boolean) {
-        progressBar.visible(show)
+        progressBar.isVisible = show
     }
 
     override fun onResume() {
