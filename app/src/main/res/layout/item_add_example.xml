@@ -11,5 +11,5 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginBottom="@dimen/spacing_small"
-        android:text="@string/add_example" />
+        android:text="@string/dialog.create.word.example.example.add" />
 </FrameLayout>

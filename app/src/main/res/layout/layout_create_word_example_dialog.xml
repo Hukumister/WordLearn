@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:id="@+id/layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -12,10 +13,10 @@
         android:layout_marginStart="@dimen/material_horizontal_margin"
         android:layout_marginTop="@dimen/material_horizontal_margin"
         android:layout_marginEnd="@dimen/material_horizontal_margin"
-        android:hint="@string/word_example_text"
+        android:hint="@string/dialog.create.word.example.example.text"
         android:imeOptions="actionNext"
         android:inputType="textAutoComplete"
-        android:lines="1" />
+        android:lines="1"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/translation"
@@ -27,5 +28,6 @@
         android:hint="@string/translation"
         android:imeOptions="actionDone"
         android:inputType="textAutoComplete"
-        android:lines="1" />
+        android:lines="1"/>
+
 </LinearLayout>

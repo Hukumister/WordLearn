@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/WhiteTheme"
     tools:background="@color/colorPrimary">
 
     <androidx.appcompat.widget.AppCompatCheckBox
@@ -12,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/spacing_small"
+        android:buttonTint="@color/white"
         android:text="@string/in_learn"
         android:textAppearance="?textAppearanceSubtitle1"
         android:textColor="@color/white"
-        tools:checked="true" />
+        tools:checked="true"/>
 </FrameLayout>

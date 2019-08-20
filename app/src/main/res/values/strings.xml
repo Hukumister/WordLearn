@@ -11,9 +11,9 @@
     <string name="translation">Перевод</string>
     <string name="word">Слово</string>
 
-    <string name="create_word_example">Создание примера</string>
-    <string name="word_example_text">Текст примера</string>
-    <string name="add_example">Добавить пример</string>
+    <string name="dialog.create.word.example.title">Создание примера</string>
+    <string name="dialog.create.word.example.example.text">Текст примера</string>
+    <string name="dialog.create.word.example.example.add">Добавить пример</string>
 
     <!--Main screen-->
     <string name="words">Слова</string>
