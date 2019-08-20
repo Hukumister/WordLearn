@@ -77,8 +77,6 @@ dependencies {
     implementation commonDependencies.kotlin
     implementation commonDependencies.coroutinesAndroid
     implementation commonDependencies.coroutinesCore
-    implementation commonDependencies.anko
-    implementation commonDependencies.ankoAppcompat
     /**
      * Room
      */
