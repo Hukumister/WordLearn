@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.ui.learn
 
 import android.os.Bundle
 import kotlinx.android.synthetic.main.fragment_learn_main.*
-import org.jetbrains.anko.onClick
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.Screens
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment

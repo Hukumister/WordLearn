@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.fragment_word_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import org.jetbrains.anko.findOptional
-import org.jetbrains.anko.onClick
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visible
 import ru.coderedwolf.wordlearn.model.word.WordPreview

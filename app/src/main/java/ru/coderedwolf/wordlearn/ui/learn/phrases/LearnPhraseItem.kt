@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.ui.learn.phrases
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_learn_phrase.*
-import org.jetbrains.anko.onClick
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.extension.visible
 import ru.coderedwolf.wordlearn.model.learn.LearnPhrase

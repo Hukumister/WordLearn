@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.ui.word.createword.list
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_add_example.*
-import org.jetbrains.anko.onClick
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
 
 /**

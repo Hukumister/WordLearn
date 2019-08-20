@@ -7,7 +7,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_create_word.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import org.jetbrains.anko.onClick
+import ru.coderedwolf.wordlearn.extension.onClick
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.domain.interactors.validator.Violation
 import ru.coderedwolf.wordlearn.domain.interactors.validator.WordValidator
