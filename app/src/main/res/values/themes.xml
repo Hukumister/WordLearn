@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/white</item>
 
         <item name="textAppearanceHeadline1">@style/TextAppearance.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.Headline2</item>
@@ -24,7 +25,8 @@
         <item name="iconSize">@dimen/icon_size</item>
 
         <item name="toolbarStyle">@style/Component.Toolbar</item>
-        <item name="buttonBarButtonStyle">@style/Component.DialogButton</item>
+        <item name="buttonBarButtonStyle">@style/Component.TextButton.Dialog</item>
+
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
@@ -34,11 +36,7 @@
     </style>
 
     <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
-        <item name="android:buttonBarButtonStyle">@style/Component.DialogButton</item>
+        <item name="android:buttonBarButtonStyle">@style/Component.TextButton.Dialog</item>
     </style>
 
-    <style name="WhiteTheme" parent="ThemeOverlay.MaterialComponents.Light">
-        <item name="colorAccent">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
-    </style>
 </resources>

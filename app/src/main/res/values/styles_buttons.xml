@@ -5,5 +5,5 @@
 
     <style name="Component.TextButton" parent="Widget.MaterialComponents.Button.TextButton" />
 
-    <style name="Component.DialogButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog" />
+    <style name="Component.TextButton.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog" />
 </resources>
