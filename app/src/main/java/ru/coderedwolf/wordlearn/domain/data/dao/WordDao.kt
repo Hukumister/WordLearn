@@ -44,4 +44,5 @@ interface WordDao {
 
     @Query("select count(*) from WordEntity")
     suspend fun count(): Int
+
 }

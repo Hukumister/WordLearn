@@ -13,12 +13,16 @@ import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnWordsInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.learn.LearnWordsInteractorImpl
 import ru.coderedwolf.wordlearn.domain.interactors.phrase.PhraseTopicInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.phrase.PhraseTopicInteractorImpl
+import ru.coderedwolf.wordlearn.domain.interactors.rx.word.RxWordInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.rx.word.RxWordInteractorImpl
 import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.word.WordInteractorImpl
 import ru.coderedwolf.wordlearn.domain.interactors.word.category.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.domain.interactors.word.category.WordsCategoryInteractorImpl
 import ru.coderedwolf.wordlearn.domain.mappers.CategoryMapper
 import ru.coderedwolf.wordlearn.domain.repository.*
+import ru.coderedwolf.wordlearn.domain.repository.rx.RxWordRepository
+import ru.coderedwolf.wordlearn.domain.repository.rx.RxWordRepositoryImpl
 import toothpick.config.Module
 
 /**
@@ -43,7 +47,9 @@ class DataModule : Module() {
 
         //Word
         bind(WordRepository::class.java).to(WordRepositoryImpl::class.java)
+        bind(RxWordRepository::class.java).to(RxWordRepositoryImpl::class.java)
         bind(WordInteractor::class.java).to(WordInteractorImpl::class.java)
+        bind(RxWordInteractor::class.java).to(RxWordInteractorImpl::class.java)
         bind(WordAssetRepository::class.java).to(WordAssetRepositoryImpl::class.java)
 
         //Phrases

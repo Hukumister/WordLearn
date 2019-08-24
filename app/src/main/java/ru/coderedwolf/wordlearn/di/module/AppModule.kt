@@ -22,6 +22,7 @@ class AppModule(context: Context) : Module() {
         bind(ErrorHandler::class.java).singletonInScope()
         bind(ResourceProvider::class.java).singletonInScope()
         bind(DispatchersProvider::class.java).to(AppDispatchersProvider::class.java).singletonInScope()
+        bind(SchedulerProvider::class.java).to(AppSchedureProvider::class.java).singletonInScope()
         bind(TimeProvider::class.java).to(SystemTimeProvider::class.java).singletonInScope()
         bind(AssetManager::class.java).toInstance(context.assets)
 
