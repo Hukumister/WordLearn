@@ -64,6 +64,7 @@ dependencies {
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxJava
+    implementation commonDependencies.rxbinding
     /**
      * MviCore
      */
