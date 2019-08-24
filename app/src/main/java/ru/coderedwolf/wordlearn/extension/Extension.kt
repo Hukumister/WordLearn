@@ -1,15 +1,7 @@
 package ru.coderedwolf.wordlearn.extension
 
-import android.app.Activity
-import android.content.Context
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
-import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import de.siegmar.fastcsv.reader.CsvParser
-import de.siegmar.fastcsv.reader.CsvRow
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -32,17 +24,5 @@ fun Navigator.setLaunchScreen(screen: SupportAppScreen) {
     )
 }
 
-fun Activity.hideKeyboard() {
-    currentFocus?.apply {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-    }
-}
-
-fun Activity.showKeyboard() {
-    currentFocus?.apply {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-    }
-}
+fun Fragment.snack(message: String) = Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
 
