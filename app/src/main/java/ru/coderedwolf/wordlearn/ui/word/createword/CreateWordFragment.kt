@@ -13,13 +13,9 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_create_word.*
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.domain.interactors.input.ResourceViolation
-import ru.coderedwolf.wordlearn.domain.interactors.validator.Violation
-import ru.coderedwolf.wordlearn.domain.interactors.validator.WordValidator
 import ru.coderedwolf.wordlearn.extension.onClick
-import ru.coderedwolf.wordlearn.extension.snack
 import ru.coderedwolf.wordlearn.model.word.WordExample
 import ru.coderedwolf.wordlearn.presentation.word.create.CreateWordFeature
-import ru.coderedwolf.wordlearn.presentation.word.create.CreateWordView
 import ru.coderedwolf.wordlearn.ui.base.BaseFragment
 import ru.coderedwolf.wordlearn.ui.global.MessageDialogFragment
 import ru.coderedwolf.wordlearn.ui.word.createword.list.AddExampleItem
@@ -35,7 +31,6 @@ import javax.inject.Inject
  * @author CodeRedWolf. Date 06.06.2019.
  */
 class CreateWordFragment : BaseFragment(),
-        CreateWordView,
         CreateWordExampleDialogFragment.OnCreateExampleListener,
         HasContextExtensions,
         ObservableSource<UiEvent>,
@@ -92,7 +87,7 @@ class CreateWordFragment : BaseFragment(),
     }
 
     override fun accept(viewModel: CreateWordViewModel) {
-        viewModel.error?.let(::snack)
+        viewModel.error?.let(::showError)
         updateExampleList(viewModel.exampleList)
 
         wordLayout.error = (viewModel.wordVerify as? ResourceViolation)?.res?.stringRes()
@@ -100,7 +95,7 @@ class CreateWordFragment : BaseFragment(),
         saveButton.isEnabled = viewModel.enableButtonApply
     }
 
-    override fun updateExampleList(list: List<WordExample>) {
+    private fun updateExampleList(list: List<WordExample>) {
         mainSection.update(list.map { example ->
             WordExampleItem(example) { removeExample ->
                 removeExample
@@ -113,20 +108,15 @@ class CreateWordFragment : BaseFragment(),
     override fun onCreateWordExample(wordExample: WordExample) = source
             .onNext(UiEvent.AddWordExample(wordExample))
 
-    override fun showError(error: String) = MessageDialogFragment.create(
+    private fun showError(error: String) = MessageDialogFragment.create(
             title = getString(R.string.simple_error_title),
             message = error
     ).show(childFragmentManager, "error_dialog")
 
-    override fun showDialogCreateExample() = CreateWordExampleDialogFragment
+    private fun showDialogCreateExample() = CreateWordExampleDialogFragment
             .instance()
             .show(childFragmentManager, "create_word")
-
-    override fun showFieldError(violation: Violation) {
-        translationLayout.error = violation[WordValidator.TRANSLATION_FIELD]
-        wordLayout.error = violation[WordValidator.WORD_FIELD]
-    }
-
+    
     override fun onBackPressed() = router.exit()
 
     override fun onDestroyView() {
