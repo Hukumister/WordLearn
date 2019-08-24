@@ -76,6 +76,7 @@ class CreateWordFeature @Inject constructor(
 
         override fun invoke(state: State, wish: Wish): Observable<out Effect> = when (wish) {
             is Wish.ChangeWord -> Observable.just(wish.word)
+                    .observeOn(scheduler.computation)
                     .map(CharSequence::toString)
                     .verify(SimpleValidator::isNotNullOrEmptyOrBlank)
                     .map(Effect::ChangeWord)
