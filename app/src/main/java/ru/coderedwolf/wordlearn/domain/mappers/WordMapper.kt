@@ -26,6 +26,10 @@ class WordMapper @Inject constructor() {
         )
     }
 
+    fun convertList(list: List<WordEntity>) = list.map(::convert)
+
+    fun convertListToPreview(list: List<WordEntity>) = list.map(::convertToPreview)
+
     fun convertToPreview(wordEntity: WordEntity): WordPreview {
         return WordPreview(
                 word = wordEntity.word,
