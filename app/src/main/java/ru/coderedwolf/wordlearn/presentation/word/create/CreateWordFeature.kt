@@ -117,7 +117,7 @@ class CreateWordFeature @Inject constructor(
             is Effect.HandleWish -> handleWish(state, effect.wish)
             is Effect.SaveResult -> when (effect.determinate) {
                 is Determinate.Error -> state.copy(throwable = effect.determinate.throwable)
-                is Determinate.Completed -> state.copy()
+                is Determinate.Completed -> state.copy()//todo подумать как сделать переход
                 else -> state
             }
         }

@@ -116,7 +116,7 @@ class CreateWordFragment : BaseFragment(),
     private fun showDialogCreateExample() = CreateWordExampleDialogFragment
             .instance()
             .show(childFragmentManager, "create_word")
-    
+
     override fun onBackPressed() = router.exit()
 
     override fun onDestroyView() {
