@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion target_sdk_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+kapt {
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+}
+
+dependencies {
+    implementation commonDeps.kotlin
+    implementation commonDeps.kotlinCoroutines
+    implementation commonDeps.threetenabp
+
+    implementation dataDeps.roomRuntime
+    kapt dataDeps.roomCompiler
+    implementation dataDeps.roomKtx
+
+    implementation dataDeps.gson
+
+    implementation project(':api-wordscategory')
+
+    implementation project(':api-phrase')
+
+    implementation project(':api-word')
+}

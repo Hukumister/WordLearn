@@ -4,9 +4,9 @@ import android.content.res.AssetManager
 import de.siegmar.fastcsv.reader.CsvReader
 import de.siegmar.fastcsv.reader.CsvRow
 import kotlinx.coroutines.withContext
-import ru.coderedwolf.wordlearn.domain.system.DispatchersProvider
-import ru.coderedwolf.wordlearn.model.phrase.Phrase
-import ru.coderedwolf.wordlearn.model.phrase.PhraseTopic
+import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.phrase.model.Phrase
+import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
 import java.io.InputStreamReader
 import javax.inject.Inject
 
@@ -14,14 +14,13 @@ import javax.inject.Inject
  * @author CodeRedWolf. Date 16.06.2019.
  */
 interface PhraseAssetRepository {
-
     suspend fun findAllGroupByTopic(): Map<PhraseTopic, List<Phrase>>
 }
 
 class PhraseAssetRepositoryImpl @Inject constructor(
-        private val assetManager: AssetManager,
-        private val csvReader: CsvReader,
-        private val dispatchersProvider: DispatchersProvider
+    private val assetManager: AssetManager,
+    private val csvReader: CsvReader,
+    private val dispatchersProvider: DispatchersProvider
 ) : PhraseAssetRepository {
 
     companion object {
@@ -48,13 +47,13 @@ class PhraseAssetRepositoryImpl @Inject constructor(
                         topic = PhraseTopic(title = row.getField(0).trim(), isStudy = true)
                     } else {
                         list.add(
-                                Phrase(
-                                        topicId = 0,
-                                        textPhrase = row.getField(0).trim(),
-                                        translation = row.getField(1).trim(),
-                                        reviewCount = 0,
-                                        lastReviewDate = null
-                                )
+                            Phrase(
+                                topicId = 0,
+                                textPhrase = row.getField(0).trim(),
+                                translation = row.getField(1).trim(),
+                                reviewCount = 0,
+                                lastReviewDate = null
+                            )
                         )
                     }
                 }

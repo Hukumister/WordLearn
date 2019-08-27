@@ -1,19 +1,23 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply from: 'dependencies.gradle'
 
 buildscript {
+    ext.kotlin_version = '1.3.50'
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41"
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 allprojects {
     ext {
+        min_sdk_version = 21
+        target_sdk_version = 29
+
         applicationVersionCode = 1
         applicationId = "ru.coderedwolf.worldlearn"
         applicationVersionName = "1.0"
@@ -22,8 +26,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        mavenLocal()
-        maven { url "https://maven.google.com" }
         maven { url 'https://jitpack.io' }
     }
 }

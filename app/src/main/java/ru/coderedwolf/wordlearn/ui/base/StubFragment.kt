@@ -1,9 +1,8 @@
 package ru.coderedwolf.wordlearn.ui.base
 
-import android.os.Bundle
 import ru.coderedwolf.wordlearn.R
+import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.terrakok.cicerone.Router
-import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
@@ -15,11 +14,6 @@ class StubFragment : BaseFragment() {
 
     @Inject
     lateinit var router: Router
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Toothpick.inject(this, scope)
-    }
 
     override fun onBackPressed() {
         router.exit()
