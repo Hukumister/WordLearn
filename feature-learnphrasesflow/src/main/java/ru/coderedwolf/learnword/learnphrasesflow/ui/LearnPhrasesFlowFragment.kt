@@ -24,7 +24,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 14.06.2019.
  */
-class LearnPhrasesFragment : BaseFragment(),
+class LearnPhrasesFlowFragment : BaseFragment(),
     LearnPhrasesView,
     CardStackListenerSimple {
 

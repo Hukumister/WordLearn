@@ -2,6 +2,7 @@ package ru.coderedwolf.learnword.learnphrasesflow.presentation
 
 import moxy.InjectViewState
 import ru.coderedwolf.learnword.learnphrasesflow.domain.interactor.LearnPhraseInteractor
+import ru.coderedwolf.wordlearn.common.di.PerFlow
 import ru.coderedwolf.wordlearn.common.presentation.BasePresenter
 import ru.coderedwolf.wordlearn.phrase.model.LearnPhrase
 import ru.terrakok.cicerone.Router
@@ -10,6 +11,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 14.06.2019.
  */
+@PerFlow
 @InjectViewState
 class LearnPhrasesPresenter @Inject constructor(
     private val router: Router,
