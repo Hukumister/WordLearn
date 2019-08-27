@@ -2,16 +2,22 @@ package ru.coderedwolf.wordlearn.mainflow.ui
 
 import android.os.Bundle
 import kotlinx.android.synthetic.main.fragment_main_flow.*
+import ru.coderedwolf.wordlearn.common.di.ComponentDependenciesProvider
+import ru.coderedwolf.wordlearn.common.di.HasChildDependencies
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.coderedwolf.wordlearn.mainflow.R
 import ru.terrakok.cicerone.android.support.SupportAppScreen
+import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 21.04.2019.
  */
-class MainFlowFragment : BaseFragment() {
+class MainFlowFragment : BaseFragment(), HasChildDependencies {
 
     override val layoutRes = R.layout.fragment_main_flow
+
+    @Inject
+    override lateinit var dependencies: ComponentDependenciesProvider
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment

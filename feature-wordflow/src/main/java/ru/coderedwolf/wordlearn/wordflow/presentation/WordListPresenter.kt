@@ -1,6 +1,7 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
 import moxy.InjectViewState
+import ru.coderedwolf.wordlearn.common.di.PerFragment
 import ru.coderedwolf.wordlearn.common.presentation.BasePresenter
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.wordflow.domain.interactor.WordInteractor
@@ -11,6 +12,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 04.06.2019.
  */
+@PerFragment
 @InjectViewState
 class WordListPresenter @Inject constructor(
     private val categoryId: Long,

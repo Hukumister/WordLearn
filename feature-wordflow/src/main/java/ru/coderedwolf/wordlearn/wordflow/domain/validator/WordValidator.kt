@@ -4,12 +4,11 @@ import ru.coderedwolf.wordlearn.common.domain.system.ResourceProvider
 import ru.coderedwolf.wordlearn.common.domain.validator.BaseValidator
 import ru.coderedwolf.wordlearn.common.domain.validator.Violation
 import ru.coderedwolf.wordlearn.word.model.Word
-import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 09.06.2019.
  */
-class WordValidator @Inject constructor(
+class WordValidator(
     resourceProvider: ResourceProvider
 ) : BaseValidator<Word>(resourceProvider) {
 

@@ -1,6 +1,7 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
 import moxy.InjectViewState
+import ru.coderedwolf.wordlearn.common.di.PerFragment
 import ru.coderedwolf.wordlearn.common.domain.validator.ViolationException
 import ru.coderedwolf.wordlearn.common.presentation.BasePresenter
 import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
@@ -12,10 +13,11 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 06.06.2019.
  */
+@PerFragment
 @InjectViewState
 class CreateWordPresenter @Inject constructor(
     private val categoryId: Long,
-    private val router: FlowRouter,
+    private val flowRouter: FlowRouter,
     private val wordInteractor: WordInteractor,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<CreateWordView>() {
@@ -56,13 +58,13 @@ class CreateWordPresenter @Inject constructor(
 
         try {
             wordInteractor.addWord(addedWord)
-            router.exit()
+            flowRouter.exit()
         } catch (ex: Throwable) {
             handleException(ex)
         }
     }
 
-    override fun onBackPressed() = router.exit()
+    override fun onBackPressed() = flowRouter.exit()
 
     private fun handleException(throwable: Throwable) {
         if (throwable is ViolationException) {
