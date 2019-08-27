@@ -5,6 +5,7 @@ import ru.coderedwolf.wordlearn.learnwordsflow.di.BatchSizeNewWord
 import ru.coderedwolf.wordlearn.learnwordsflow.domain.repository.LearnWordRepository
 import ru.coderedwolf.wordlearn.learnwordsflow.model.LearnWord
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
+import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 22.06.2019.
@@ -15,7 +16,7 @@ interface LearnWordsInteractor {
     suspend fun markNotLearn(learnWord: LearnWord)
 }
 
-class LearnWordsInteractorImpl constructor(
+class LearnWordsInteractorImpl @Inject constructor(
     @BatchSizeNewWord private val batchSizeNewWord: Int,
     @BatchSizeMemorizedWord private val batchSizeMemorizedWord: Int,
     private val wordRepository: WordRepository,

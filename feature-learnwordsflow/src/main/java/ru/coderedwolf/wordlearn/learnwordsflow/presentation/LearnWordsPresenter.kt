@@ -1,16 +1,19 @@
 package ru.coderedwolf.wordlearn.learnwordsflow.presentation
 
 import moxy.InjectViewState
+import ru.coderedwolf.wordlearn.common.di.PerFlow
 import ru.coderedwolf.wordlearn.common.presentation.BasePresenter
 import ru.coderedwolf.wordlearn.learnwordsflow.domain.interactor.LearnWordsInteractor
 import ru.coderedwolf.wordlearn.learnwordsflow.model.LearnWord
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 22.06.2019.
  */
+@PerFlow
 @InjectViewState
-class LearnWordsPresenter constructor(
+class LearnWordsPresenter @Inject constructor(
     private val router: Router,
     private val learnWordsInteractor: LearnWordsInteractor
 ) : BasePresenter<LearnWordsView>() {

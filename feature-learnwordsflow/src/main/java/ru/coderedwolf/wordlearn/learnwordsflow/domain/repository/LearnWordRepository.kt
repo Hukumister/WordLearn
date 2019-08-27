@@ -8,6 +8,7 @@ import ru.coderedwolf.wordlearn.database.mapper.CategoryMapper
 import ru.coderedwolf.wordlearn.database.mapper.WordMapper
 import ru.coderedwolf.wordlearn.word.model.Word
 import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
+import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 14.06.2019.
@@ -17,7 +18,7 @@ interface LearnWordRepository {
     suspend fun findNewWordGroupByCategory(limit: Int): Map<WordCategory, List<Word>>
 }
 
-class LearnWordRepositoryImpl constructor(
+class LearnWordRepositoryImpl @Inject constructor(
     private val categoryAndWordDao: CategoryAndWordDao,
     private val wordMapper: WordMapper,
     private val categoryMapper: CategoryMapper,
