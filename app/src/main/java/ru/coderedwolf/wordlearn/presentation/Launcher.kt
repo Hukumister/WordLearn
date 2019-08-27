@@ -1,8 +1,8 @@
-package ru.coderedwolf.wordlearn.presentation.launcher
+package ru.coderedwolf.wordlearn.presentation
 
 import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.common.presentation.BasePresenter
-import ru.coderedwolf.wordlearn.domain.interactors.init.PrePopulateDataBaseInteractor
+import ru.coderedwolf.wordlearn.domain.interactors.PrePopulateDataBaseInteractor
 import ru.coderedwolf.wordlearn.ui.Flows
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject

@@ -19,7 +19,8 @@ import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 @Module(
     includes = [
         LearnComponentBuilderModule::class,
-        PhraseTopicComponentBuilderModule::class
+        PhraseTopicComponentBuilderModule::class,
+        WordsCategoryComponentBuilderModule::class
     ]
 )
 object MainFlowComponentBuilderModule {

@@ -45,6 +45,7 @@ dependencies {
 
 
     implementation commonDeps.dagger
+    kapt commonDeps.daggerCompiler
 
     /**
      * AndroidX

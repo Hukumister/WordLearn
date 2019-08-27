@@ -32,7 +32,7 @@ class WordsCategoryFragment : BaseFragment(),
     lateinit var presenter: WordsCategoryPresenter
 
     @ProvidePresenter
-    fun providePresenter(): WordsCategoryPresenter = presenter
+    fun providePresenter() = presenter
 
     private val categoryAdapter = GroupAdapter<ViewHolder>()
 

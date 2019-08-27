@@ -10,8 +10,8 @@ import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.extension.showProgressDialog
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
-import ru.coderedwolf.wordlearn.presentation.launcher.Launcher
-import ru.coderedwolf.wordlearn.presentation.launcher.LauncherView
+import ru.coderedwolf.wordlearn.presentation.Launcher
+import ru.coderedwolf.wordlearn.presentation.LauncherView
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator

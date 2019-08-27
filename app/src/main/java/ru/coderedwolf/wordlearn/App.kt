@@ -3,8 +3,10 @@ package ru.coderedwolf.wordlearn
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import ru.coderedwolf.wordlearn.common.di.ComponentDependenciesProvider
+import ru.coderedwolf.wordlearn.common.di.ComponentManager
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.di.HasChildDependencies
+import ru.coderedwolf.wordlearn.di.DaggerBuildersComponent
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,6 +34,7 @@ class App : Application(), HasChildDependencies {
     }
 
     private fun initComponentManager() {
-//        ComponentManager.initBuilders()
+        val builders = DaggerBuildersComponent.create().builders()
+        ComponentManager.initBuilders(builders)
     }
 }

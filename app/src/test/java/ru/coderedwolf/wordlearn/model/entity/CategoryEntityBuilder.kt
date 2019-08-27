@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.model.entity
 
+import org.threeten.bp.Instant
 import ru.coderedwolf.wordlearn.database.entity.WordCategoryEntity
 import java.util.*
 
@@ -8,7 +9,7 @@ import java.util.*
  */
 object CategoryEntityBuilder {
 
-    fun create(id: Long, createDate: Date = Date()): WordCategoryEntity {
+    fun create(id: Long, createDate: Instant = Instant.now()): WordCategoryEntity {
         return WordCategoryEntity(
             id = id,
             name = "test",

@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.ui.base
+package ru.coderedwolf.wordlearn.ui
 
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment

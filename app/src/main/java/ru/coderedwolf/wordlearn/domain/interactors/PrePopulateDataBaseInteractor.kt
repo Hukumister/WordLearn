@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.domain.interactors.init
+package ru.coderedwolf.wordlearn.domain.interactors
 
 import ru.coderedwolf.wordlearn.domain.repository.PhraseAssetRepository
 import ru.coderedwolf.wordlearn.domain.repository.PrePopulatePhraseRepository

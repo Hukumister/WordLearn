@@ -130,4 +130,6 @@ class LearnWordsFlowFragment : BaseFragment(),
             }
         }
     }
+
+    override fun onBackPressed() = presenter.onBackPressed()
 }

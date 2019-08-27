@@ -14,7 +14,7 @@ import javax.inject.Inject
 interface PrePopulatePhraseRepository {
     suspend fun phraseCount(): Int
     suspend fun saveTopic(phraseTopic: PhraseTopic): PhraseTopic
-     suspend fun saveAllPhrases(phrases: List<Phrase>)
+    suspend fun saveAllPhrases(phrases: List<Phrase>)
 }
 
 class PrePopulatePhraseRepositoryImpl @Inject constructor(
