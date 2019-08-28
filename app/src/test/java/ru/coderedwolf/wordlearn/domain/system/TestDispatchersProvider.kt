@@ -2,6 +2,7 @@ package ru.coderedwolf.wordlearn.domain.system
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
 
 /**
  * @author CodeRedWolf. Date 02.05.2019.

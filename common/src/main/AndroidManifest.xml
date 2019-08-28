@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.coderedwolf.wordlearn.common">
+
+    <application android:theme="@style/AppTheme" />
+</manifest>

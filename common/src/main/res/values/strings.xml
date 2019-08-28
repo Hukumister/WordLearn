@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">EnglishLearn</string>
+
+    <!--WordCategory create dialog-->
+    <string name="category_title">Категории</string>
+    <string name="create_category_title">Создание категории</string>
+
+    <!--Create word-->
+    <string name="create_word_title">Добавление слова</string>
+    <string name="transcription">Транскрипция</string>
+    <string name="association">Ассоциация</string>
+    <string name="translation">Перевод</string>
+    <string name="word">Слово</string>
+
+    <string name="dialog.create.word.example.title">Создание примера</string>
+    <string name="dialog.create.word.example.example.text">Текст примера</string>
+    <string name="dialog.create.word.example.example.add">Добавить пример</string>
+
+
+
+    <!--Word list-->
+    <string name="place_holder_no_words">В данной категории нет слов</string>
+
+    <!--Phrase topic-->
+    <string name="phrase_topic_title">Темы</string>
+
+    <!--Learn main screen-->
+    <string name="got_it">Помню</string>
+    <string name="missed_it">Не помню</string>
+    <string name="next">Далее</string>
+    <string name="in_learn">В обучении</string>
+
+    <string name="loading">Инициализация…</string>
+
+    <string name="know">Знаю</string>
+    <string name="not_know">Не знаю</string>
+
+    <string name="words">Слова</string>
+    <string name="phrases">Фразы</string>
+    <string name="learn">Обучение</string>
+</resources>

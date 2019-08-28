@@ -1,50 +1,45 @@
 package ru.coderedwolf.wordlearn.ui
 
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.coderedwolf.wordlearn.R
-import ru.coderedwolf.wordlearn.di.DI
-import ru.coderedwolf.wordlearn.presentation.launcher.Launcher
-import ru.coderedwolf.wordlearn.presentation.launcher.LauncherView
-import ru.coderedwolf.wordlearn.ui.base.BaseFragment
-import ru.coderedwolf.wordlearn.ui.global.ProgressDialog
+import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
+import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
+import ru.coderedwolf.wordlearn.common.extension.showProgressDialog
+import ru.coderedwolf.wordlearn.common.ui.BaseFragment
+import ru.coderedwolf.wordlearn.presentation.Launcher
+import ru.coderedwolf.wordlearn.presentation.LauncherView
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
-import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 21.04.2019.
  */
 class AppActivity : MvpAppCompatActivity(), LauncherView {
+    private val currentFragment: BaseFragment?
+        get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
 
-    companion object {
-
-        private const val PROGRESS_DIALOG = "progress_dialog"
+    private val navigator: Navigator = object : SupportAppNavigator(this, R.id.container) {
+        override fun setupFragmentTransaction(
+            command: Command?,
+            currentFragment: Fragment?,
+            nextFragment: Fragment?,
+            fragmentTransaction: FragmentTransaction
+        ) {
+            //fix incorrect order lifecycle callback of MainFlowFragment
+            fragmentTransaction.setReorderingAllowed(true)
+        }
     }
 
-    private val currentFragment: BaseFragment?
-        get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? BaseFragment
-
-    private val navigator: Navigator =
-            object : SupportAppNavigator(this, supportFragmentManager, R.id.fragmentContainer) {
-                override fun setupFragmentTransaction(
-                        command: Command?,
-                        currentFragment: Fragment?,
-                        nextFragment: Fragment?,
-                        fragmentTransaction: FragmentTransaction
-                ) {
-                    //fix incorrect order lifecycle callback of MainFlowFragment
-                    fragmentTransaction.setReorderingAllowed(true)
-                }
-            }
+    private val componentName
+        get() = javaClass.name
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -58,11 +53,11 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
-        Toothpick.inject(this, Toothpick.openScope(DI.APP_SCOPE))
+        inject(componentName)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_container)
         if (savedInstanceState == null) {
-            launcher.onCouldStart()
+            launcher.onColdStart()
         }
     }
 
@@ -81,11 +76,13 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
     }
 
     override fun blockLoading(show: Boolean) {
-        if (show) {
-            ProgressDialog().show(supportFragmentManager, PROGRESS_DIALOG)
-        } else {
-            (supportFragmentManager.findFragmentByTag(PROGRESS_DIALOG) as? DialogFragment)
-                    ?.dismissAllowingStateLoss()
+        supportFragmentManager.showProgressDialog(show)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) {
+            clearInjector(componentName)
         }
     }
 }

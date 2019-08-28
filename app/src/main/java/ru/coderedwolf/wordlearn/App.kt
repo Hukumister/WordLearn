@@ -2,23 +2,25 @@ package ru.coderedwolf.wordlearn
 
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
-import ru.coderedwolf.wordlearn.di.DI
-import ru.coderedwolf.wordlearn.di.module.AppModule
-import ru.coderedwolf.wordlearn.di.module.DataModule
+import ru.coderedwolf.wordlearn.common.di.ComponentDependenciesProvider
+import ru.coderedwolf.wordlearn.common.di.ComponentManager
+import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
+import ru.coderedwolf.wordlearn.common.di.HasChildDependencies
+import ru.coderedwolf.wordlearn.di.DaggerBuildersComponent
 import timber.log.Timber
-import toothpick.Toothpick
-import toothpick.configuration.Configuration
+import javax.inject.Inject
 
+class App : Application(), HasChildDependencies {
 
-class App : Application() {
+    @Inject
+    override lateinit var dependencies: ComponentDependenciesProvider
 
     override fun onCreate() {
         super.onCreate()
-
         initLogger()
-        initToothpick()
         initThreeTenAbp()
-        initAppScope()
+        initComponentManager()
+        inject(javaClass.name)
     }
 
     private fun initLogger() {
@@ -27,19 +29,12 @@ class App : Application() {
         }
     }
 
-    private fun initToothpick() {
-        if (BuildConfig.DEBUG) {
-            Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
-        } else {
-            Toothpick.setConfiguration(Configuration.forProduction().disableReflection())
-        }
-    }
-
-    private fun initAppScope() {
-        Toothpick.openScope(DI.APP_SCOPE).installModules(AppModule(this), DataModule())
-    }
-
     private fun initThreeTenAbp() {
         AndroidThreeTen.init(this)
+    }
+
+    private fun initComponentManager() {
+        val builders = DaggerBuildersComponent.create().builders()
+        ComponentManager.initBuilders(builders)
     }
 }

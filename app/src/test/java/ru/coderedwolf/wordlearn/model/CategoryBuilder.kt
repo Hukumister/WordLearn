@@ -1,6 +1,6 @@
 package ru.coderedwolf.wordlearn.model
 
-import ru.coderedwolf.wordlearn.model.word.WordCategory
+import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
 
 /**
  * @author CodeRedWolf. Date 02.05.2019.
