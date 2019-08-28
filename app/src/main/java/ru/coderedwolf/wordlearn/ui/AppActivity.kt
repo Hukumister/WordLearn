@@ -7,6 +7,7 @@ import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.coderedwolf.wordlearn.R
+import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.extension.showProgressDialog
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
@@ -37,6 +38,9 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
         }
     }
 
+    private val componentName
+        get() = javaClass.name
+
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
@@ -49,7 +53,7 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
-        inject(javaClass.name)
+        inject(componentName)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_container)
         if (savedInstanceState == null) {
@@ -73,5 +77,12 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
 
     override fun blockLoading(show: Boolean) {
         supportFragmentManager.showProgressDialog(show)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) {
+            clearInjector(componentName)
+        }
     }
 }
