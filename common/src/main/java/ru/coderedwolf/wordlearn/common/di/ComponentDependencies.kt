@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import dagger.MapKey
 import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.terrakok.cicerone.Router
 import kotlin.reflect.KClass
@@ -45,6 +46,7 @@ inline fun <reified T : ComponentDependencies> Fragment.findComponentDependencie
 
 interface CommonDependencies : ComponentDependencies {
     fun dispatchersProvider(): DispatchersProvider
+    fun schedulerProvider(): SchedulerProvider
 }
 
 interface FlowDependencies : CommonDependencies {
