@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.util
+package ru.coderedwolf.wordlearn.common.util
 
 import android.app.Dialog
 import android.content.Context

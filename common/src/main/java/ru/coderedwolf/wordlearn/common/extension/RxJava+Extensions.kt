@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.extension
+package ru.coderedwolf.wordlearn.common.extension
 
 import io.reactivex.Flowable
 import io.reactivex.Observable
