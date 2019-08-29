@@ -42,4 +42,8 @@ class WordMapper {
         phraseToMemorize = word.association,
         lastReviewDate = word.lastReviewDate
     )
+
+    fun convertListToPreview(words: List<WordEntity>) = words.map(::convertToPreview)
+
+    fun convertList(words:List<WordEntity>) = words.map(::convert)
 }
