@@ -6,15 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 
-/**
- * Explicitly request that the current input method's soft input area be
- * shown to the user, if needed.  Call this if the user interacts with
- * your view in such a way that they have expressed they would like to
- * start performing input into it.
- *
- * @param v The currently focused view, which would like to receive
- * soft keyboard input.
- */
+
 object Keyboard {
 
     /**
@@ -77,6 +69,6 @@ object Keyboard {
         return isHided
     }
 
-    private fun getInputMethodManager(context: Context) = context.getSystemService<InputMethodManager?>()
+    private fun getInputMethodManager(context: Context) = context.getSystemService<InputMethodManager>()
 
 }
