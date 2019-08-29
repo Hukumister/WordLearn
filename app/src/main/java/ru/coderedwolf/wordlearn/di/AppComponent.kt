@@ -9,9 +9,11 @@ import ru.coderedwolf.wordlearn.common.di.Injector
 import ru.coderedwolf.wordlearn.common.di.InjectorBuilder
 import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
 import ru.coderedwolf.wordlearn.common.domain.system.ResourceProvider
+import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.system.TimeProvider
 import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
 import ru.coderedwolf.wordlearn.domain.system.AppDispatchersProvider
+import ru.coderedwolf.wordlearn.domain.system.AppSchedulerProvider
 import ru.coderedwolf.wordlearn.domain.system.SystemTimeProvider
 import javax.inject.Singleton
 
@@ -74,6 +76,12 @@ abstract class AppModule {
     abstract fun provideDispatchersProvider(
         appDispatchersProvider: AppDispatchersProvider
     ): DispatchersProvider
+
+    @Binds
+    @Singleton
+    abstract fun providSchedulerProvider(
+        schedulerProvider: AppSchedulerProvider
+    ): SchedulerProvider
 
     @Binds
     @Singleton
