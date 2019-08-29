@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.layout_create_word_example_dialog.*
+import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
 
 /**
@@ -15,16 +16,14 @@ class CreateWordExampleDialogFragment : DialogFragment() {
 
     private val listener
         get() = when {
-            parentFragment is OnClickListener -> parentFragment as OnClickListener
-            activity is OnClickListener -> activity as OnClickListener
-            else -> object : OnClickListener {}
+            parentFragment is OnCreateExampleListener -> parentFragment as OnCreateExampleListener
+            activity is OnCreateExampleListener -> activity as OnCreateExampleListener
+            else -> object : OnCreateExampleListener {}
         }
 
     override fun onResume() {
         super.onResume()
-        if (!showsDialog) {
-            throw IllegalStateException("This fragment should be used only as dialog")
-        }
+        check(showsDialog) { "This fragment should be used only as dialog" }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -39,7 +38,9 @@ class CreateWordExampleDialogFragment : DialogFragment() {
                 val translation = dialog.translation.text.toString()
 
                 if (exampleText.isNotEmpty() && translation.isNotEmpty()) {
-                    listener.onCreateWordExample(exampleText, translation)
+                    listener.onCreateWordExample(
+                        WordExample(example = exampleText, translation = translation)
+                    )
                 }
                 dismissAllowingStateLoss()
             }
@@ -57,9 +58,9 @@ class CreateWordExampleDialogFragment : DialogFragment() {
 
     }
 
-    interface OnClickListener {
+    interface OnCreateExampleListener {
 
-        fun onCreateWordExample(text: String, translation: String) {}
+        fun onCreateWordExample(wordExample: WordExample) {}
 
     }
 }
