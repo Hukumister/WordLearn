@@ -1,8 +1,8 @@
-package ru.coderedwolf.wordlearn.domain.interactors.input
+package ru.coderedwolf.wordlearn.wordflow.presentation
 
-import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.domain.validator.Validated
+import ru.coderedwolf.wordlearn.wordflow.R
 
 
 object SimpleValidator {
