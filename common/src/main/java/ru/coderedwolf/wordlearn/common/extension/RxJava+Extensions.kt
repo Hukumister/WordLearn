@@ -9,8 +9,8 @@ import io.reactivex.annotations.CheckReturnValue
 import io.reactivex.annotations.SchedulerSupport
 import io.reactivex.flowables.ConnectableFlowable
 import io.reactivex.subjects.BehaviorSubject
-import ru.coderedwolf.wordlearn.domain.interactors.input.Verifiable
-import ru.coderedwolf.wordlearn.domain.interactors.input.VerifiableValue
+import ru.coderedwolf.wordlearn.common.domain.validator.Verifiable
+import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
 
 /**
  * Shares the latest item emitted by that Publisher

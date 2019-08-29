@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.common.domain.validator
+package ru.coderedwolf.wordlearn.common.domain.result
 
 import androidx.annotation.IntDef
 import androidx.annotation.IntRange
@@ -27,9 +27,9 @@ sealed class Determinate {
         const val STATE_ERROR = 1 shl 2
 
         @IntDef(
-            STATE_LOADING,
-            STATE_COMPLETED,
-            STATE_ERROR
+                STATE_LOADING,
+                STATE_COMPLETED,
+                STATE_ERROR
         )
         annotation class State
 
@@ -66,7 +66,7 @@ sealed class Determinate {
 @BackpressureSupport(BackpressureKind.UNBOUNDED_IN)
 @SchedulerSupport(SchedulerSupport.NONE)
 fun Completable.asDeterminate(): Observable<Determinate> = andThen(Observable.just<Determinate>(
-    ru.coderedwolf.wordlearn.common.domain.validator.Determinate.Completed
+        Determinate.Completed
 ))
-        .startWith(ru.coderedwolf.wordlearn.common.domain.validator.Determinate.Loading)
-        .onErrorReturn { throwable -> ru.coderedwolf.wordlearn.common.domain.validator.Determinate.Error(throwable) }
+        .startWith(Determinate.Loading)
+        .onErrorReturn { throwable -> Determinate.Error(throwable) }
