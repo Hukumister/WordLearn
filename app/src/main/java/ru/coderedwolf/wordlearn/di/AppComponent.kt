@@ -79,7 +79,7 @@ abstract class AppModule {
 
     @Binds
     @Singleton
-    abstract fun providSchedulerProvider(
+    abstract fun provideSchedulerProvider(
         schedulerProvider: AppSchedulerProvider
     ): SchedulerProvider
 
