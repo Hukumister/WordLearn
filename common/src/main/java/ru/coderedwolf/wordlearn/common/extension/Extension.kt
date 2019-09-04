@@ -1,9 +1,5 @@
 package ru.coderedwolf.wordlearn.common.extension
 
-import android.app.Activity
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.getSystemService
 import androidx.fragment.app.FragmentManager
 import ru.coderedwolf.wordlearn.common.ui.ProgressDialog
 import ru.terrakok.cicerone.Navigator
@@ -22,19 +18,6 @@ fun Navigator.setLaunchScreen(screen: SupportAppScreen) {
             Replace(screen)
         )
     )
-}
-
-fun Activity.hideKeyboard() {
-    currentFocus?.windowToken?.let {
-        getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(it, InputMethodManager.HIDE_NOT_ALWAYS)
-    }
-}
-
-fun Activity.showKeyboard() {
-    currentFocus?.apply {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-    }
 }
 
 fun FragmentManager.showProgressDialog(show: Boolean) {

@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
 import ru.coderedwolf.wordlearn.wordflow.domain.interactor.WordInteractor
+import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordFeature
 import ru.coderedwolf.wordlearn.wordflow.ui.CreateWordFragment
 
 @Module
@@ -18,21 +19,22 @@ object CreateWordComponentBuilderModule {
     @ClassKey(CreateWordFragment::class)
     fun provideCreateWordComponentBuilder() = InjectorBuilder<CreateWordFragment> {
         DaggerCreateWordComponent.builder()
-            .createWordDependencies(findComponentDependencies())
-            .build()
+                .createWordDependencies(findComponentDependencies())
+                .build()
     }
 }
 
 @PerFragment
 @Component(
-    dependencies = [
-        CreateWordDependencies::class
-    ]
+        dependencies = [
+            CreateWordDependencies::class
+        ]
 )
 interface CreateWordComponent : Injector<CreateWordFragment>
 
 interface CreateWordDependencies : ScreenDependencies {
     fun categoryId(): Long
     fun wordInteractor(): WordInteractor
+    fun createWordFeature(): CreateWordFeature
     fun errorHandler(): ErrorHandler
 }

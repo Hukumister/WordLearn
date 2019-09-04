@@ -29,6 +29,7 @@ dependencies {
     kapt commonDeps.daggerCompiler
 
     implementation commonDeps.threetenabp
+    implementation commonDeps.rxJava
 
     implementation loggingDeps.timber
 

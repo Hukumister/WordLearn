@@ -1,84 +1,112 @@
 package ru.coderedwolf.wordlearn.wordflow.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.EditText
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import io.reactivex.ObservableSource
+import io.reactivex.Observer
+import io.reactivex.functions.Consumer
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_create_word.*
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
-import ru.coderedwolf.wordlearn.common.domain.validator.Violation
+import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
+import ru.coderedwolf.wordlearn.common.extension.snack
+import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
+import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
-import ru.coderedwolf.wordlearn.common.ui.MessageDialogFragment
+import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
-import ru.coderedwolf.wordlearn.wordflow.domain.validator.WordValidator
-import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordPresenter
-import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordView
+import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordFeature
+import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewModel
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**
  * @author CodeRedWolf. Date 06.06.2019.
  */
 class CreateWordFragment : BaseFragment(),
-    CreateWordView,
-    CreateWordExampleDialogFragment.OnClickListener {
+        CreateWordExampleDialogFragment.OnCreateExampleListener,
+        ContextExtensionsHolder,
+        ObservableSource<UiEvent>,
+        Consumer<CreateWordViewModel> {
+
+    override val extensionContext: Context
+        get() = requireContext()
+
+    private val source = PublishSubject.create<UiEvent>()
 
     override val layoutRes: Int = R.layout.fragment_create_word
 
-    @Inject
-    @InjectPresenter
-    lateinit var presenter: CreateWordPresenter
-
-    @ProvidePresenter
-    fun providePresenter() = presenter
-
     private val mainSection = Section().apply {
-        setFooter(AddExampleItem { presenter.onClickAddExample() })
+        setFooter(AddExampleItem(::showDialogCreateExample))
     }
     private val wordExampleAdapter = GroupAdapter<ViewHolder>().apply {
         add(mainSection)
     }
 
+    @Inject lateinit var router: FlowRouter
+    @Inject lateinit var createWordFeature: CreateWordFeature
+    @Inject lateinit var errorHandler: ErrorHandler
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
+        toolbar.setNavigationOnClickListener { router.exit() }
         examplesList.apply {
             itemAnimator = null
             adapter = wordExampleAdapter
         }
-        saveButton.onClick {
-            presenter.onClickSave(
-                word = word.text.toString(),
-                translation = translation.text.toString(),
-                association = association.text.toString(),
-                transcription = transcription.text.toString()
-            )
-        }
+
+        saveButton.onClick { source.onNext(UiEvent.ApplyClicked) }
+        listOf(word, translation, transcription, association)
+                .forEach(::connect)
+
+        CreateWordFragmentBindings(this, errorHandler, createWordFeature).setup(this)
     }
 
-    override fun onCreateWordExample(text: String, translation: String) =
-        presenter.onAddWordExample(text, translation)
+    override fun accept(viewModel: CreateWordViewModel) {
+        viewModel.error?.let(::snack)
+        updateExampleList(viewModel.exampleList)
 
-    override fun updateExampleList(list: List<WordExample>) {
+        wordLayout.error = (viewModel.wordVerify as? ResourceViolation)?.res?.stringRes()
+        translationLayout.error = (viewModel.translationVerify as? ResourceViolation)?.res?.stringRes()
+        saveButton.isEnabled = viewModel.enableButtonApply
+    }
+
+    private fun updateExampleList(list: List<WordExample>) {
         mainSection.update(list.map { example ->
-            WordExampleItem(example) { presenter.onRemoveExample(it) }
+            WordExampleItem(example) { removeExample ->
+                removeExample
+                        .let(UiEvent::RemoveWordExample)
+                        .let(source::onNext)
+            }
         })
     }
 
-    override fun showError(error: String) = MessageDialogFragment.create(
-        title = getString(R.string.simple_error_title),
-        message = error
-    ).show(childFragmentManager, "error_dialog")
+    override fun onCreateWordExample(wordExample: WordExample) = source
+            .onNext(UiEvent.AddWordExample(wordExample))
 
-    override fun showDialogCreateExample() = CreateWordExampleDialogFragment.instance()
-        .show(childFragmentManager, "create_word")
+    private fun showDialogCreateExample() = CreateWordExampleDialogFragment.instance()
+            .show(childFragmentManager, "create_word")
 
-    override fun showFieldError(violation: Violation) {
-        translationLayout.error = violation[WordValidator.TRANSLATION_FIELD]
-        wordLayout.error = violation[WordValidator.WORD_FIELD]
+    override fun onBackPressed() = router.exit()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        examplesList.adapter = null
     }
 
-    override fun onBackPressed() = presenter.onBackPressed()
+    override fun subscribe(observer: Observer<in UiEvent>) {
+        source.subscribe(observer)
+    }
+
+    private fun connect(editText: EditText) = RxTextView.textChangeEvents(editText)
+            .skipInitialValue()
+            .map(UiEvent::ChangeText)
+            .subscribe(source)
+
 }
