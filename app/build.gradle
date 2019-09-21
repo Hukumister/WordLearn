@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion target_sdk_version
-    
+
     defaultConfig {
         applicationId applicationId
         minSdkVersion min_sdk_version
@@ -68,11 +68,6 @@ dependencies {
     implementation commonDeps.rxJava
     implementation commonDeps.rxKotlin
     implementation commonDeps.rxAndroid
-    /**
-     * MviCore
-     */
-    implementation presentationDeps.mviCore
-    implementation presentationDeps.mviCoreAndroid
     /**
      * Groupie
      */
