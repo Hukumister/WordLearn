@@ -3,12 +3,12 @@ package ru.coderedwolf.wordlearn.common.presentation
 import androidx.lifecycle.LifecycleOwner
 import com.badoo.mvicore.android.AndroidBindings
 import io.reactivex.disposables.Disposable
-import ru.coderedwolf.wordlearn.common.ui.FeatureDisposeFragment
+import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 
 /**
  * @author CodeRedWolf. Date 22.09.2019.
  */
-abstract class FeatureAndroidBindings<T : FeatureDisposeFragment>(
+abstract class FeatureAndroidBindings<T : BaseFragment>(
         lifecycleOwner: LifecycleOwner
 ) : AndroidBindings<T>(lifecycleOwner) {
 

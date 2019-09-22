@@ -14,16 +14,14 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_create_word.*
 import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
-import ru.coderedwolf.wordlearn.common.extension.snack
-import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
+import ru.coderedwolf.wordlearn.common.ui.event.ChangeText
+import ru.coderedwolf.wordlearn.common.ui.event.UiEvent
 import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
-import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordFeature
-import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewModel
-import ru.terrakok.cicerone.Router
+import ru.coderedwolf.wordlearn.wordflow.presentation.*
 import javax.inject.Inject
 
 /**
@@ -51,7 +49,6 @@ class CreateWordFragment : BaseFragment(),
 
     @Inject lateinit var router: FlowRouter
     @Inject lateinit var createWordFeature: CreateWordFeature
-    @Inject lateinit var errorHandler: ErrorHandler
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -61,15 +58,15 @@ class CreateWordFragment : BaseFragment(),
             adapter = wordExampleAdapter
         }
 
-        saveButton.onClick { source.onNext(UiEvent.ApplyClicked) }
+        saveButton.onClick { source.onNext(SaveClick) }
         listOf(word, translation, transcription, association)
                 .forEach(::connect)
 
-        CreateWordFragmentBindings(this, errorHandler, createWordFeature).setup(this)
+        CreateWordFragmentBindings(this, createWordFeature)
+                .setup(this)
     }
 
     override fun accept(viewModel: CreateWordViewModel) {
-        viewModel.error?.let(::snack)
         updateExampleList(viewModel.exampleList)
 
         wordLayout.error = (viewModel.wordVerify as? ResourceViolation)?.res?.stringRes()
@@ -81,17 +78,17 @@ class CreateWordFragment : BaseFragment(),
         mainSection.update(list.map { example ->
             WordExampleItem(example) { removeExample ->
                 removeExample
-                        .let(UiEvent::RemoveWordExample)
+                        .let(::RemoveWordExample)
                         .let(source::onNext)
             }
         })
     }
 
     override fun onCreateWordExample(wordExample: WordExample) = source
-            .onNext(UiEvent.AddWordExample(wordExample))
+            .onNext(AddWordExample(wordExample))
 
     private fun showDialogCreateExample() = CreateWordExampleDialogFragment.instance()
-            .show(childFragmentManager, "create_word")
+            .show(childFragmentManager, CreateWordExampleDialogFragment.TAG)
 
     override fun onBackPressed() = router.exit()
 
@@ -100,13 +97,12 @@ class CreateWordFragment : BaseFragment(),
         examplesList.adapter = null
     }
 
-    override fun subscribe(observer: Observer<in UiEvent>) {
-        source.subscribe(observer)
-    }
+    override fun subscribe(observer: Observer<in UiEvent>) = source.subscribe(observer)
 
     private fun connect(editText: EditText) = RxTextView.textChangeEvents(editText)
             .skipInitialValue()
-            .map(UiEvent::ChangeText)
+            .map { event -> ChangeText(event.view().id, event.text()) }
+            .autoDisposable()
             .subscribe(source)
 
 }

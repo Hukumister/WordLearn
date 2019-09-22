@@ -5,6 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
+import com.uber.autodispose.ObservableSubscribeProxy
+import com.uber.autodispose.autoDispose
+import io.reactivex.Observable
+import io.reactivex.annotations.CheckReturnValue
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import moxy.MvpAppCompatFragment
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
@@ -51,10 +57,25 @@ abstract class BaseFragment : MvpAppCompatFragment() {
         else -> isRealRemoving()
     }
 
+    private val featureLifecycleScopeProvider = FeatureLifecycleScopeProvider()
+
+    private val featureDisposeCompositeDisposable = CompositeDisposable()
+
     internal fun isRealRemoving(): Boolean = (isRemoving && !instanceStateSaved) || (parentFragment as BaseFragment).isRealRemoving()
 
     @CallSuper
-    open fun onRealRemoving() = clearInjector(fragmentComponentName)
+    open fun onRealRemoving(){
+        featureLifecycleScopeProvider.onDestroy()
+        featureDisposeCompositeDisposable.clear()
+        clearInjector(fragmentComponentName)
+    }
 
     open fun onBackPressed() = Unit
+
+    @CheckReturnValue
+    fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(featureLifecycleScopeProvider)
+
+    fun Disposable.autoDispose() = featureDisposeCompositeDisposable.add(this)
+
+
 }

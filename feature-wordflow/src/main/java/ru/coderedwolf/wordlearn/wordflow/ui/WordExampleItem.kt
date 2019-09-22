@@ -32,14 +32,18 @@ class WordExampleItem(
     }
 
     override fun equals(other: Any?): Boolean {
-        return if (other is WordExampleItem) {
-            other.wordExample == wordExample
-        } else {
-            false
-        }
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as WordExampleItem
+
+        if (wordExample != other.wordExample) return false
+
+        return true
     }
 
     override fun hashCode(): Int {
         return wordExample.hashCode()
     }
+
 }
