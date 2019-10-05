@@ -2,17 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/words"
-        android:icon="@drawable/ic_apps_black_24dp"
-        android:title="@string/words" />
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/bottom.navigation.title.action.search" />
 
     <item
-        android:id="@+id/learn"
-        android:icon="@drawable/ic_done_black_24dp"
-        android:title="@string/learn" />
-
-    <item
-        android:id="@+id/phrases"
+        android:id="@+id/action_words"
         android:icon="@drawable/ic_menu_black_24dp"
-        android:title="@string/phrases" />
+        android:title="@string/bottom.navigation.title.action.words" />
+
+    <item
+        android:id="@+id/action_learn"
+        android:icon="@drawable/ic_done_black_24dp"
+        android:title="@string/bottom.navigation.title.action.learn" />
+
+    <item
+        android:id="@+id/action_phrases"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="@string/bottom.navigation.title.action.phrases" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/bottom.navigation.title.action.settings" />
 </menu>

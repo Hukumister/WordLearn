@@ -23,10 +23,6 @@ class WordsCategoryPresenter @Inject constructor(
 
     override fun onFirstViewAttach() = launchUI {
         viewState.showLoading(true)
-        val list = wordsCategoryInteractor.findAllCategory()
-        viewState.addAllCategory(list)
-        categoryList.addAll(list)
-        viewState.showLoading(false)
     }
 
     override fun onViewAttach(view: WordsCategoryView?) {
