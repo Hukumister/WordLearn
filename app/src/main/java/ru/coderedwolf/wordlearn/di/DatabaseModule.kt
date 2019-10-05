@@ -29,11 +29,6 @@ object DatabaseModule {
     @Provides
     @JvmStatic
     @Singleton
-    fun provideCategoryAndWordDao(dataBase: DataBase) = dataBase.categoryAndWordDao()
-
-    @Provides
-    @JvmStatic
-    @Singleton
     fun provideWordDao(dataBase: DataBase) = dataBase.wordDao()
 
     @Provides

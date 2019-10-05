@@ -7,9 +7,9 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.learnword.learnphrasesflow.domain.interactor.LearnPhraseInteractor
-import ru.coderedwolf.learnword.learnphrasesflow.domain.interactor.LearnPhraseInteractorImpl
+import ru.coderedwolf.learnword.learnphrasesflow.domain.interactor.LearnPhraseInteractorMock
 import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.LearnPhraseRepository
-import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.LearnPhraseRepositoryImpl
+import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.MockLearnPhraseRepository
 import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.PhraseRepository
 import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.PhraseRepositoryImpl
 import ru.coderedwolf.learnword.learnphrasesflow.ui.LearnPhrasesFlowFragment
@@ -28,19 +28,19 @@ object LearnPhrasesFlowComponentBuilderModule {
     @ClassKey(LearnPhrasesFlowFragment::class)
     fun provideLearnPhrasesFlowComponentBuilder() = InjectorBuilder<LearnPhrasesFlowFragment> {
         DaggerLearnPhrasesFlowComponent.builder()
-            .learnPhrasesFlowDependencies(findComponentDependencies())
-            .build()
+                .learnPhrasesFlowDependencies(findComponentDependencies())
+                .build()
     }
 }
 
 @PerFlow
 @Component(
-    modules = [
-        LearnPhrasesFlowModule::class
-    ],
-    dependencies = [
-        LearnPhrasesFlowDependencies::class
-    ]
+        modules = [
+            LearnPhrasesFlowModule::class
+        ],
+        dependencies = [
+            LearnPhrasesFlowDependencies::class
+        ]
 )
 interface LearnPhrasesFlowComponent : Injector<LearnPhrasesFlowFragment>
 
@@ -57,18 +57,18 @@ interface LearnPhrasesFlowModule {
     @Binds
     @PerFlow
     fun provideLearnPhraseRepository(
-        learnPhraseRepositoryImpl: LearnPhraseRepositoryImpl
+            learnPhraseRepositoryImpl: MockLearnPhraseRepository
     ): LearnPhraseRepository
 
     @Binds
     @PerFlow
     fun providePhraseRepository(
-        phraseRepositoryImpl: PhraseRepositoryImpl
+            phraseRepositoryImpl: PhraseRepositoryImpl
     ): PhraseRepository
 
     @Binds
     @PerFlow
     fun provideLearnPhraseInteractor(
-        learnPhraseInteractorImpl: LearnPhraseInteractorImpl
+            learnPhraseInteractorImpl: LearnPhraseInteractorMock
     ): LearnPhraseInteractor
 }

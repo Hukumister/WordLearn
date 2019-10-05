@@ -12,7 +12,7 @@ import ru.coderedwolf.wordlearn.common.domain.validator.NotValid
 import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
 import ru.coderedwolf.wordlearn.common.extension.verify
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
-import ru.coderedwolf.wordlearn.word.domain.repository.RxWordRepository
+import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
 import ru.coderedwolf.wordlearn.word.model.Word
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordFeature.*
@@ -22,7 +22,7 @@ class CreateWordFeature @Inject constructor(
         categoryId: Long,
         router: FlowRouter,
         schedulerProvider: SchedulerProvider,
-        wordInteractor: RxWordRepository
+        wordInteractor: WordRepository
 ) : ActorReducerFeature<Wish, Effect, State, Unit>(
         initialState = State(categoryId),
         newsPublisher = NewsPublisherImpl(router),
@@ -62,7 +62,7 @@ class CreateWordFeature @Inject constructor(
 
     class ActorImpl(
             private val scheduler: SchedulerProvider,
-            private val wordInteractor: RxWordRepository
+            private val wordInteractor: WordRepository
     ) : Actor<State, Wish, Effect> {
 
         override fun invoke(state: State, wish: Wish): Observable<out Effect> = when (wish) {
@@ -94,7 +94,6 @@ class CreateWordFeature @Inject constructor(
                     word = state.word.value,
                     categoryId = state.categoryId,
                     association = state.association,
-                    transcription = state.transcription,
                     translation = state.translation.value,
                     examplesList = state.exampleList
             )
@@ -121,7 +120,6 @@ class CreateWordFeature @Inject constructor(
         }
 
     }
-
 
     class NewsPublisherImpl(private val flowRouter: FlowRouter) : NewsPublisher<Wish, Effect, State, Unit> {
         override fun invoke(wish: Wish, effect: Effect, state: State) = when (effect) {

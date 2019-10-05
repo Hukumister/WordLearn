@@ -1,7 +1,9 @@
 package ru.coderedwolf.learnword.learnphrasesflow.domain.repository
 
+import io.reactivex.Completable
+import io.reactivex.Single
 import kotlinx.coroutines.withContext
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.database.dao.PhraseDao
 import ru.coderedwolf.wordlearn.database.mapper.PhraseMapper
 import ru.coderedwolf.wordlearn.phrase.model.Phrase
@@ -11,37 +13,39 @@ import javax.inject.Inject
  * @author CodeRedWolf. Date 15.06.2019.
  */
 interface PhraseRepository {
-    suspend fun findOne(phraseId: Long): Phrase
-    suspend fun findAllByTopicId(topicId: Long): List<Phrase>
-    suspend fun save(phrase: Phrase): Phrase
-    suspend fun saveAll(phraseList: List<Phrase>)
-    suspend fun update(phrase: Phrase)
+    fun findOne(phraseId: Long): Single<Phrase>
+    fun findAllByTopicId(topicId: Long): Single<List<Phrase>>
+    fun save(phrase: Phrase): Completable
+    fun saveAll(phraseList: List<Phrase>): Completable
+    fun update(phrase: Phrase): Completable
 }
 
 class PhraseRepositoryImpl @Inject constructor(
-    private val phraseDao: PhraseDao,
-    private val phraseMapper: PhraseMapper,
-    private val dispatchersProvider: DispatchersProvider
+        private val phraseDao: PhraseDao,
+        private val phraseMapper: PhraseMapper,
+        private val schedulerProvider: SchedulerProvider
 ) : PhraseRepository {
 
-    override suspend fun findOne(phraseId: Long): Phrase = withContext(dispatchersProvider.io()) {
-        phraseMapper.convert(phraseDao.findOne(phraseId))
-    }
+    override fun findOne(phraseId: Long) = phraseDao.findOne(phraseId)
+            .map(phraseMapper::convert)
+            .subscribeOn(schedulerProvider.io)
 
-    override suspend fun findAllByTopicId(topicId: Long): List<Phrase> = withContext(dispatchersProvider.io()) {
-        phraseDao.findAllByTopic(topicId).map { phraseMapper.convert(it) }
-    }
+    override fun findAllByTopicId(topicId: Long) = phraseDao.findAllByTopic(topicId)
+            .map(phraseMapper::convertList)
+            .subscribeOn(schedulerProvider.io)
 
-    override suspend fun save(phrase: Phrase): Phrase = withContext(dispatchersProvider.io()) {
-        val entity = phraseMapper.convertToEntity(phrase)
-        phraseMapper.convert(phraseDao.saveAndReturn(entity))
-    }
+    override fun save(phrase: Phrase) = phrase
+            .let(phraseMapper::convertToEntity)
+            .let(phraseDao::save)
+            .subscribeOn(schedulerProvider.io)
 
-    override suspend fun update(phrase: Phrase) = withContext(dispatchersProvider.io()) {
-        phraseDao.update(phraseMapper.convertToEntity(phrase))
-    }
+    override fun update(phrase: Phrase) = phrase
+            .let(phraseMapper::convertToEntity)
+            .let(phraseDao::update)
+            .subscribeOn(schedulerProvider.io)
 
-    override suspend fun saveAll(phraseList: List<Phrase>) = withContext(dispatchersProvider.io()) {
-        phraseDao.saveAll(phraseList.map { phraseMapper.convertToEntity(it) })
-    }
+    override fun saveAll(phraseList: List<Phrase>) = phraseList
+            .let(phraseMapper::convertListToEntity)
+            .let(phraseDao::saveAll)
+            .subscribeOn(schedulerProvider.io)
 }

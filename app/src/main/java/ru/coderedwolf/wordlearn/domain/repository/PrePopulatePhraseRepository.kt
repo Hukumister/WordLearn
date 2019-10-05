@@ -23,15 +23,15 @@ class PrePopulatePhraseRepositoryImpl @Inject constructor(
     private val phraseTopicMapper: PhraseTopicMapper,
     private val phraseMapper: PhraseMapper
 ) : PrePopulatePhraseRepository {
-
-    override suspend fun phraseCount(): Int = phraseDao.count()
+    override suspend fun phraseCount(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override suspend fun saveTopic(phraseTopic: PhraseTopic): PhraseTopic {
-        val topicEntity = phraseTopicDao.saveAndReturn(phraseTopicMapper.convertToEntity(phraseTopic))
-        return phraseTopicMapper.convert(topicEntity)
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override suspend fun saveAllPhrases(phrases: List<Phrase>) {
-        phraseDao.saveAll(phrases.map { phraseMapper.convertToEntity(it) })
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

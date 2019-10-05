@@ -1,9 +1,9 @@
 package ru.coderedwolf.wordlearn.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
+import io.reactivex.Completable
+import io.reactivex.Flowable
+import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.entity.PhraseTopicEntity
 import ru.coderedwolf.wordlearn.database.entity.TopicAndPhrasesEntity
 
@@ -13,29 +13,25 @@ import ru.coderedwolf.wordlearn.database.entity.TopicAndPhrasesEntity
 @Dao
 interface PhraseTopicDao {
 
-    @Query("select * from PhraseTopicEntity")
-    suspend fun findAll(): List<PhraseTopicEntity>
+    @Query("SELECT * FROM PhraseTopicEntity")
+    fun findAll(): Single<List<PhraseTopicEntity>>
 
-    @Query("select * from PhraseTopicEntity where id = :topicId")
-    suspend fun findById(topicId: Long): PhraseTopicEntity
+    @Query("SELECT * FROM PhraseTopicEntity WHERE id = :topicId")
+    fun findOne(topicId: Long): Single<PhraseTopicEntity>
 
     @Insert
-    suspend fun save(phraseTopicEntity: PhraseTopicEntity): Long
+    fun save(phraseTopicEntity: PhraseTopicEntity): Completable
 
-    @Transaction
-    suspend fun saveAndReturn(phraseTopicEntity: PhraseTopicEntity): PhraseTopicEntity =
-        findById(save(phraseTopicEntity))
+    @Delete
+    fun remove(phraseTopicEntity: PhraseTopicEntity): Completable
 
-    @Query("delete from PhraseTopicEntity where id = :topicId")
-    suspend fun remove(topicId: Long)
-
-    @Query("update PhraseTopicEntity set isStudy = :isStudy where id = :topicId")
-    suspend fun updateStudy(topicId: Long, isStudy: Boolean)
+    @Query("UPDATE PhraseTopicEntity SET isStudy = :isStudy WHERE id = :topicId")
+    fun updateStudy(topicId: Long, isStudy: Boolean): Completable
 
     @Query("select * from PhraseTopicEntity where isStudy = 1")
     @Transaction
-    fun findAllStudiedTopicAndPhrases(): List<TopicAndPhrasesEntity>
+    fun findAllStudiedTopicAndPhrases(): Single<List<TopicAndPhrasesEntity>>
 
     @Query("select count(*) from PhraseEntity")
-    suspend fun count(): Int
+    fun count(): Flowable<Int>
 }

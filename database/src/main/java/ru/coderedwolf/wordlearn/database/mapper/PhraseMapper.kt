@@ -9,28 +9,32 @@ import ru.coderedwolf.wordlearn.phrase.model.Phrase
  */
 class PhraseMapper {
 
+    fun convertList(list: List<PhraseEntity>) = list.map(::convert)
+
     fun convert(phraseEntity: PhraseEntity) = Phrase(
-        id = phraseEntity.id,
-        topicId = phraseEntity.topicId,
-        translation = phraseEntity.translation,
-        lastReviewDate = phraseEntity.lastReviewDate,
-        reviewCount = phraseEntity.reviewCount,
-        textPhrase = phraseEntity.textPhrase
+            id = phraseEntity.id,
+            topicId = phraseEntity.topicId,
+            translation = phraseEntity.translation,
+            lastReviewDate = phraseEntity.lastReviewDate,
+            reviewCount = phraseEntity.reviewCount,
+            textPhrase = phraseEntity.textPhrase
     )
 
     fun convertToLearn(topicTitle: String, phraseEntity: PhraseEntity) = LearnPhrase(
-        phraseId = phraseEntity.id ?: -1,
-        topicTitle = topicTitle,
-        phraseText = phraseEntity.textPhrase,
-        phraseTranslate = phraseEntity.translation
+            phraseId = phraseEntity.id ?: -1,
+            topicTitle = topicTitle,
+            phraseText = phraseEntity.textPhrase,
+            phraseTranslate = phraseEntity.translation
     )
 
+    fun convertListToEntity(list: List<Phrase>) = list.map(::convertToEntity)
+
     fun convertToEntity(phrase: Phrase) = PhraseEntity(
-        id = phrase.id,
-        topicId = phrase.topicId,
-        translation = phrase.translation,
-        lastReviewDate = phrase.lastReviewDate,
-        reviewCount = phrase.reviewCount,
-        textPhrase = phrase.textPhrase
+            id = phrase.id,
+            topicId = phrase.topicId,
+            translation = phrase.translation,
+            lastReviewDate = phrase.lastReviewDate,
+            reviewCount = phrase.reviewCount,
+            textPhrase = phrase.textPhrase
     )
 }

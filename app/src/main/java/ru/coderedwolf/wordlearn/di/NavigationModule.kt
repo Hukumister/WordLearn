@@ -32,25 +32,25 @@ abstract class NavigationModule {
         @Provides
         @JvmStatic
         @Singleton
-        fun provideReachableFlows() = object : ReachableFlows {
-            override fun learnWordsFlow() = Flows.LearnWords
-
-            override fun learnPhrasesFlow() = Flows.LearnPhrases
-
-            override fun phraseFlow(id: Long) = Flows.Stub
-
-            override fun wordFlow(
-                categoryId: Long,
-                categoryName: String
-            ) = Flows.Word(
-                categoryId = categoryId,
-                categoryName = categoryName
-            )
-        }
+        fun provideReachableFlows() = ReachableFlowsNavigator() as ReachableFlows
     }
 
     @Binds
     abstract fun provideMainFlowReachableFlows(
         reachableFlows: ReachableFlows
     ): MainFlowReachableFlows
+}
+
+class ReachableFlowsNavigator : ReachableFlows {
+
+    override fun learnWordsFlow() = Flows.Stub
+
+    override fun learnPhrasesFlow() = Flows.Stub
+
+    override fun phraseFlow(id: Long) = Flows.Stub
+
+    override fun wordFlow(
+        categoryId: Long,
+        categoryName: String
+    ) = Flows.Stub
 }

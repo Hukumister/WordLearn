@@ -1,9 +1,11 @@
 package ru.coderedwolf.wordlearn.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Transaction
+import io.reactivex.Completable
+import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.entity.WordCategoryEntity
 
 /**
@@ -12,21 +14,15 @@ import ru.coderedwolf.wordlearn.database.entity.WordCategoryEntity
 @Dao
 interface WordsCategoryDao {
 
-    @Query("select * from WordCategoryEntity")
-    suspend fun findAll(): List<WordCategoryEntity>
+    @Query("SELECT * FROM WordCategoryEntity WHERE id=:categoryId")
+    fun findById(categoryId: Long): Single<WordCategoryEntity>
 
-    @Query("select * from WordCategoryEntity where id=:categoryId")
-    suspend fun findById(categoryId: Long): WordCategoryEntity
+    @Query("SELECT * FROM WordCategoryEntity")
+    fun findAll(): Single<List<WordCategoryEntity>>
 
     @Insert
-    suspend fun save(wordCategoryEntity: WordCategoryEntity): Long
+    fun save(wordCategoryEntity: WordCategoryEntity): Completable
 
-    @Transaction
-    suspend fun saveAndReturn(wordCategoryEntity: WordCategoryEntity): WordCategoryEntity {
-        val insertedId = save(wordCategoryEntity)
-        return findById(insertedId)
-    }
-
-    @Query("delete from WordCategoryEntity where id = :categoryId")
-    suspend fun remove(categoryId: Long)
+    @Delete
+    fun remove(wordCategoryEntity: WordCategoryEntity): Completable
 }

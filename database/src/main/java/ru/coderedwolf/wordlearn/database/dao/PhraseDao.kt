@@ -1,6 +1,9 @@
 package ru.coderedwolf.wordlearn.database.dao
 
 import androidx.room.*
+import io.reactivex.Completable
+import io.reactivex.Flowable
+import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.entity.PhraseEntity
 
 /**
@@ -9,24 +12,21 @@ import ru.coderedwolf.wordlearn.database.entity.PhraseEntity
 @Dao
 interface PhraseDao {
 
-    @Query("select * from PhraseEntity where id = :phraseId")
-    suspend fun findOne(phraseId: Long): PhraseEntity
+    @Query("SELECT * FROM PhraseEntity WHERE id = :phraseId")
+    fun findOne(phraseId: Long): Single<PhraseEntity>
 
-    @Query("select * from PhraseEntity where topicId = :topicId")
-    suspend fun findAllByTopic(topicId: Long): List<PhraseEntity>
+    @Query("SELECT * FROM PhraseEntity WHERE topicId = :topicId")
+    fun findAllByTopic(topicId: Long): Single<List<PhraseEntity>>
 
     @Insert
-    suspend fun save(phraseEntity: PhraseEntity): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveAll(phraseEntityList: List<PhraseEntity>)
-
-    @Transaction
-    suspend fun saveAndReturn(phraseEntity: PhraseEntity): PhraseEntity = findOne(save(phraseEntity))
+    fun save(phraseEntity: PhraseEntity): Completable
 
     @Update
-    suspend fun update(phraseEntity: PhraseEntity)
+    fun update(phraseEntity: PhraseEntity): Completable
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveAll(phraseEntityList: List<PhraseEntity>): Completable
 
     @Query("select count(*) from PhraseEntity")
-    suspend fun count(): Int
+    fun count(): Flowable<Int>
 }

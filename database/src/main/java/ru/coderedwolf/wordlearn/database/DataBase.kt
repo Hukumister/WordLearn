@@ -29,7 +29,6 @@ import ru.coderedwolf.wordlearn.database.entity.WordEntity
 )
 abstract class DataBase : RoomDatabase() {
     abstract fun wordsCategoryDao(): WordsCategoryDao
-    abstract fun categoryAndWordDao(): CategoryAndWordDao
     abstract fun wordDao(): WordDao
     abstract fun phraseDao(): PhraseDao
     abstract fun phraseTopicDao(): PhraseTopicDao

@@ -10,7 +10,6 @@ data class Word(
     val categoryId: Long,
     val word: String,
     val association: String,
-    val transcription: String,
     val translation: String,
     val examplesList: List<WordExample>,
     val reviewCount: Int = 0,

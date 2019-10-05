@@ -14,9 +14,9 @@ import javax.inject.Inject
 @PerFragment
 @InjectViewState
 class WordsCategoryPresenter @Inject constructor(
-    private val flowRouter: FlowRouter,
-    private val wordsCategoryInteractor: WordsCategoryInteractor,
-    private val flows: WordsCategoryReachableFlows
+        private val flowRouter: FlowRouter,
+        private val wordsCategoryInteractor: WordsCategoryInteractor,
+        private val flows: WordsCategoryReachableFlows
 ) : BasePresenter<WordsCategoryView>() {
 
     private val categoryList = mutableListOf<WordCategory>()
@@ -41,7 +41,7 @@ class WordsCategoryPresenter @Inject constructor(
     }
 
     fun onClickCategory(wordCategory: WordCategory) =
-        flowRouter.startFlow(flows.wordFlow(wordCategory.id!!, wordCategory.name))
+            flowRouter.startFlow(flows.wordFlow(wordCategory.id!!, wordCategory.name))
 
     fun onClickAddCategory() = viewState.showCreateCategoryDialog()
 

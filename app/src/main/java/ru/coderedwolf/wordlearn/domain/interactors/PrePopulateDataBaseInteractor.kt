@@ -24,8 +24,7 @@ class PrePopulateDataBaseInteractorImpl @Inject constructor(
     private val wordAssetRepository: WordAssetRepository
 ) : PrePopulateDataBaseInteractor {
 
-    override suspend fun shouldInit(): Boolean =
-        prePopulatePhraseRepository.phraseCount() == 0 || wordRepository.count() == 0
+    override suspend fun shouldInit(): Boolean = false
 
     override suspend fun prePopulateDataBase() {
         prepopulatePhrase()
@@ -33,14 +32,14 @@ class PrePopulateDataBaseInteractorImpl @Inject constructor(
     }
 
     private suspend fun prepopulateWords() {
-        val wordCategory = wordsCategoryRepository.save(
+    /*    val wordCategory = wordsCategoryRepository.save(
             ru.coderedwolf.wordlearn.wordscategory.model.WordCategory(
                 name = "Предзаполненые",
                 isStudy = true
             )
         )
         val words = wordAssetRepository.findAllFor(wordCategory.id!!)
-        wordRepository.saveAll(words)
+        wordRepository.saveAll(words)*/
     }
 
     private suspend fun prepopulatePhrase() = phraseAssetRepository.findAllGroupByTopic()
