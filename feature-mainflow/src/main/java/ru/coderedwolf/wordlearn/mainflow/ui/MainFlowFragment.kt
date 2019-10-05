@@ -19,13 +19,10 @@ class MainFlowFragment : BaseFragment(), HasChildDependencies {
 
     override val layoutRes = R.layout.fragment_main_flow
 
-    @Inject
-    override lateinit var dependencies: ComponentDependenciesProvider
+    @Inject override lateinit var dependencies: ComponentDependenciesProvider
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { fragment -> !fragment.isHidden } as? BaseFragment
-
-    private val mainFlowScreenFactory = MainFlowScreenFactory()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,8 +35,8 @@ class MainFlowFragment : BaseFragment(), HasChildDependencies {
 
     override fun onStart() {
         super.onStart()
-        bottomNavigationView.setOnNavigationItemSelectedListener(this::onBottomNavigationItemSelected)
-        bottomNavigationView.setOnNavigationItemReselectedListener(this::onBottomNavigationItemReselected)
+        bottomNavigationView.setOnNavigationItemSelectedListener(::onBottomNavigationItemSelected)
+        bottomNavigationView.setOnNavigationItemReselectedListener(::onBottomNavigationItemReselected)
     }
 
     override fun onStop() {
@@ -49,10 +46,10 @@ class MainFlowFragment : BaseFragment(), HasChildDependencies {
     }
 
     private fun onBottomNavigationItemReselected(item: MenuItem) =
-        mainFlowScreenFactory.findScreen(item.itemId).let(::selectTab)
+        MainFlowScreenFactory.findScreen(item.itemId).let(::selectTab)
 
     private fun onBottomNavigationItemSelected(item: MenuItem): Boolean {
-        mainFlowScreenFactory.findScreen(item.itemId).let(::selectTab)
+        MainFlowScreenFactory.findScreen(item.itemId).let(::selectTab)
         return true
     }
 

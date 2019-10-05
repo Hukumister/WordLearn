@@ -12,10 +12,7 @@ class StubFragment : BaseFragment() {
 
     override val layoutRes = R.layout.fragment_stub
 
-    @Inject
-    lateinit var router: Router
+    @Inject lateinit var router: Router
 
-    override fun onBackPressed() {
-        router.exit()
-    }
+    override fun onBackPressed() = router.exit()
 }

@@ -35,7 +35,4 @@
     <string name="know">Знаю</string>
     <string name="not_know">Не знаю</string>
 
-    <string name="words">Слова</string>
-    <string name="phrases">Фразы</string>
-    <string name="learn">Обучение</string>
 </resources>
