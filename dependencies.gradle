@@ -65,6 +65,7 @@ ext {
     dataDeps = [
             roomRuntime  : "androidx.room:room-runtime:$room_version",
             roomCompiler : "androidx.room:room-compiler:$room_version",
+            roomRx       : "androidx.room:room-rxjava2:$room_version",
             roomKtx      : "androidx.room:room-ktx:$room_version",
 
             collectionKtx: "androidx.collection:collection-ktx:$collection_version",

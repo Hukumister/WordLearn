@@ -30,10 +30,12 @@ dependencies {
     implementation commonDeps.kotlin
     implementation commonDeps.kotlinCoroutines
     implementation commonDeps.threetenabp
+    implementation commonDeps.rxJava
 
     implementation dataDeps.roomRuntime
-    kapt dataDeps.roomCompiler
     implementation dataDeps.roomKtx
+    implementation dataDeps.roomRx
+    kapt dataDeps.roomCompiler
 
     implementation dataDeps.gson
 
