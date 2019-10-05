@@ -1,7 +1,8 @@
 package ru.coderedwolf.wordlearn.common.presentation
 
 import androidx.lifecycle.LifecycleOwner
-import com.badoo.mvicore.android.AndroidBindings
+import com.badoo.mvicore.android.lifecycle.ResumePauseBinderLifecycle
+import com.badoo.mvicore.binder.Binder
 import io.reactivex.disposables.Disposable
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 
@@ -10,9 +11,15 @@ import ru.coderedwolf.wordlearn.common.ui.BaseFragment
  */
 abstract class FeatureAndroidBindings<T : BaseFragment>(
         lifecycleOwner: LifecycleOwner
-) : AndroidBindings<T>(lifecycleOwner) {
+) {
 
-    final override fun setup(view: T) {
+    protected val binder = Binder(
+            lifecycle = ResumePauseBinderLifecycle(
+                    androidLifecycle = lifecycleOwner.lifecycle
+            )
+    )
+
+    fun setup(view: T) {
         val features = initFeatures().invoke(view)
         view.apply { autoDisposeFeatures(features) }
     }

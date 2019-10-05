@@ -9,17 +9,19 @@ import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
  */
 class CategoryMapper {
 
+    fun convertList(list: List<WordCategoryEntity>) = list.map(::convert)
+
     fun convert(wordCategoryEntity: WordCategoryEntity) = WordCategory(
-        id = wordCategoryEntity.id ?: -1,
-        name = wordCategoryEntity.name,
-        isStudy = wordCategoryEntity.isStudy,
-        progress = 0
+            id = wordCategoryEntity.id ?: -1,
+            name = wordCategoryEntity.name,
+            isStudy = wordCategoryEntity.isStudy,
+            progress = 0
     )
 
     fun convertToEntity(wordCategory: WordCategory) = WordCategoryEntity(
-        id = wordCategory.id,
-        name = wordCategory.name,
-        isStudy = wordCategory.isStudy,
-        createDate = Instant.now()
+            id = wordCategory.id,
+            name = wordCategory.name,
+            isStudy = wordCategory.isStudy,
+            createDate = Instant.now()
     )
 }

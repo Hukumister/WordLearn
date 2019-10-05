@@ -26,7 +26,6 @@ data class WordEntity(
     val categoryId: Long,
     val word: String,
     val phraseToMemorize: String,
-    val transcription: String,
     val translation: String,
     val reviewCount: Int,
     val isStudy: Boolean,

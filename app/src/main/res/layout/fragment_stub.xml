@@ -8,7 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_build_blue_24dp"
+        android:drawablePadding="12dp"
         android:text="Under construction"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         tools:ignore="HardcodedText" />
 
 </FrameLayout>

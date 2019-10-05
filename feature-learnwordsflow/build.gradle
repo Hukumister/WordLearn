@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation commonDeps.kotlin
     implementation commonDeps.kotlinCoroutines
+    implementation commonDeps.rxJava
 
     implementation commonDeps.dagger
     kapt commonDeps.daggerCompiler

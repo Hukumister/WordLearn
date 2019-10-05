@@ -6,11 +6,7 @@ import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.common.domain.system.ResourceProvider
 import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
-import ru.coderedwolf.wordlearn.word.domain.repository.RxWordRepository
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
-import ru.coderedwolf.wordlearn.wordflow.domain.interactor.WordInteractor
-import ru.coderedwolf.wordlearn.wordflow.domain.interactor.WordInteractorImpl
-import ru.coderedwolf.wordlearn.wordflow.domain.validator.WordValidator
 import ru.coderedwolf.wordlearn.wordflow.ui.WordFlowFragment
 import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
@@ -38,7 +34,6 @@ object WordFlowComponentBuilderModule {
 @Component(
         modules = [
             FlowNavigationModule::class,
-            WordFlowModule::class,
             ChildDependenciesModule::class
         ],
         dependencies = [
@@ -65,26 +60,8 @@ interface WordFlowComponent : Injector<WordFlowFragment>,
 interface WordFlowDependencies : FlowDependencies {
     fun resourceProvider(): ResourceProvider
     fun wordRepository(): WordRepository
-    fun rxWordRepository(): RxWordRepository
     fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun errorHandler(): ErrorHandler
-}
-
-@Module
-abstract class WordFlowModule {
-    @Module
-    companion object {
-        @Provides
-        @JvmStatic
-        @PerFlow
-        fun provideWordValidator(resourceProvider: ResourceProvider) = WordValidator(resourceProvider)
-    }
-
-    @Binds
-    @PerFlow
-    abstract fun provideWordInteracotor(
-            wordInteractorImpl: WordInteractorImpl
-    ): WordInteractor
 }
 
 @Module

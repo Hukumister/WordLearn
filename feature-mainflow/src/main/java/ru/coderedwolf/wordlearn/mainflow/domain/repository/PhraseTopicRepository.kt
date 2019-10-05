@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.mainflow.domain.repository
 
-import kotlinx.coroutines.withContext
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import io.reactivex.Completable
+import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.dao.PhraseTopicDao
 import ru.coderedwolf.wordlearn.database.mapper.PhraseTopicMapper
 import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
@@ -11,27 +11,24 @@ import javax.inject.Inject
  * @author CodeRedWolf. Date 16.06.2019.
  */
 interface PhraseTopicRepository {
-    suspend fun updateStudy(topicId: Long, isStudy: Boolean)
-    suspend fun findAll(): List<PhraseTopic>
-    suspend fun save(phraseTopic: PhraseTopic): PhraseTopic
+    fun updateStudy(topicId: Long, isStudy: Boolean): Completable
+    fun findAll(): Single<List<PhraseTopic>>
+    fun save(phraseTopic: PhraseTopic): Completable
 }
 
 class PhraseTopicRepositoryImpl @Inject constructor(
-    private val phraseTopicDao: PhraseTopicDao,
-    private val phraseTopicMapper: PhraseTopicMapper,
-    private val dispatchersProvider: DispatchersProvider
+        private val phraseTopicDao: PhraseTopicDao,
+        private val phraseTopicMapper: PhraseTopicMapper
 ) : PhraseTopicRepository {
 
-    override suspend fun save(phraseTopic: PhraseTopic): PhraseTopic = withContext(dispatchersProvider.io()) {
-        val entity = phraseTopicMapper.convertToEntity(phraseTopic)
-        phraseTopicMapper.convert(phraseTopicDao.saveAndReturn(entity))
-    }
+    override fun updateStudy(topicId: Long, isStudy: Boolean) = phraseTopicDao
+            .updateStudy(topicId, isStudy)
 
-    override suspend fun updateStudy(topicId: Long, isStudy: Boolean) = withContext(dispatchersProvider.io()) {
-        phraseTopicDao.updateStudy(topicId, isStudy)
-    }
+    override fun findAll() = phraseTopicDao.findAll()
+            .map(phraseTopicMapper::convertList)
 
-    override suspend fun findAll(): List<PhraseTopic> = withContext(dispatchersProvider.io()) {
-        phraseTopicDao.findAll().map { phraseTopicMapper.convert(it) }
-    }
+    override fun save(phraseTopic: PhraseTopic) = phraseTopic
+            .let(phraseTopicMapper::convertToEntity)
+            .let(phraseTopicDao::save)
+
 }

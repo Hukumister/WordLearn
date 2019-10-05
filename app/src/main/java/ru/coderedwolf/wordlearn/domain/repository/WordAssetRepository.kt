@@ -40,7 +40,6 @@ class WordAssetRepositoryImpl @Inject constructor(
                         translation = row.getField(1),
                         association = row.getField(2).orEmpty(),
                         reviewCount = 0,
-                        transcription = "",
                         examplesList = emptyList()
                     )
                 }

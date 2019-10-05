@@ -12,6 +12,7 @@ import io.reactivex.Observer
 import io.reactivex.functions.Consumer
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_create_word.*
+import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
@@ -47,6 +48,7 @@ class CreateWordFragment : BaseFragment(),
         add(mainSection)
     }
 
+    @Inject lateinit var schedulerProvider: SchedulerProvider
     @Inject lateinit var router: FlowRouter
     @Inject lateinit var createWordFeature: CreateWordFeature
 
@@ -64,6 +66,13 @@ class CreateWordFragment : BaseFragment(),
 
         CreateWordFragmentBindings(this, createWordFeature)
                 .setup(this)
+
+        val subjet = PublishSubject.create<Unit>()
+        createWordFeature.news.subscribe(subjet)
+
+        subjet.subscribe {
+
+        }.autoDispose()
     }
 
     override fun accept(viewModel: CreateWordViewModel) {
@@ -101,6 +110,7 @@ class CreateWordFragment : BaseFragment(),
 
     private fun connect(editText: EditText) = RxTextView.textChangeEvents(editText)
             .skipInitialValue()
+            .observeOn(schedulerProvider.computation)
             .map { event -> ChangeText(event.view().id, event.text()) }
             .autoDisposable()
             .subscribe(source)

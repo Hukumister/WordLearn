@@ -6,7 +6,6 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
-import ru.coderedwolf.wordlearn.wordflow.domain.interactor.WordInteractor
 import ru.coderedwolf.wordlearn.wordflow.ui.WordListFragment
 import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
@@ -34,6 +33,5 @@ interface WordListComponent : Injector<WordListFragment>
 interface WordListDependencies : ScreenDependencies {
     fun categoryId(): Long
     fun categoryName(): String
-    fun wordInteractor(): WordInteractor
     fun wordsCategoryInteractor(): WordsCategoryInteractor
 }

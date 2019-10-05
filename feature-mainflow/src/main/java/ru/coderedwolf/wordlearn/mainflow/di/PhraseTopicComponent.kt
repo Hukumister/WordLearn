@@ -9,8 +9,6 @@ import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.database.dao.PhraseTopicDao
 import ru.coderedwolf.wordlearn.database.mapper.PhraseTopicMapper
-import ru.coderedwolf.wordlearn.mainflow.domain.interactor.PhraseTopicInteractor
-import ru.coderedwolf.wordlearn.mainflow.domain.interactor.PhraseTopicInteractorImpl
 import ru.coderedwolf.wordlearn.mainflow.domain.repository.PhraseTopicRepository
 import ru.coderedwolf.wordlearn.mainflow.domain.repository.PhraseTopicRepositoryImpl
 import ru.coderedwolf.wordlearn.mainflow.presentation.PhraseTopicReachableFlows
@@ -53,10 +51,4 @@ interface PhraseTopicModule {
     fun providePhraseTopicRepository(
         phraseTopicRepositoryImpl: PhraseTopicRepositoryImpl
     ): PhraseTopicRepository
-
-    @Binds
-    @PerFragment
-    fun providePhraseTopicInteractor(
-        phraseTopicInteractorImpl: PhraseTopicInteractorImpl
-    ): PhraseTopicInteractor
 }
