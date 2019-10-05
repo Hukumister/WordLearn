@@ -66,7 +66,7 @@ abstract class BaseFragment : MvpAppCompatFragment() {
     @CallSuper
     open fun onRealRemoving(){
         featureLifecycleScopeProvider.onDestroy()
-        featureDisposeCompositeDisposable.clear()
+        featureDisposeCompositeDisposable.dispose()
         clearInjector(fragmentComponentName)
     }
 
