@@ -1,16 +1,17 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
 import com.badoo.mvicore.element.Actor
+import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.feature.ActorReducerFeature
 import io.reactivex.Observable
-import ru.coderedwolf.wordlearn.common.di.PerFragment
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.validator.NotValid
 import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
 import ru.coderedwolf.wordlearn.common.extension.verify
+import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.word.domain.repository.RxWordRepository
 import ru.coderedwolf.wordlearn.word.model.Word
 import ru.coderedwolf.wordlearn.word.model.WordExample
@@ -19,17 +20,18 @@ import javax.inject.Inject
 
 class CreateWordFeature @Inject constructor(
         categoryId: Long,
+        router: FlowRouter,
         schedulerProvider: SchedulerProvider,
         wordInteractor: RxWordRepository
-) : ActorReducerFeature<Wish, Effect, State, Nothing>(
+) : ActorReducerFeature<Wish, Effect, State, Unit>(
         initialState = State(categoryId),
+        newsPublisher = NewsPublisherImpl(router),
         actor = ActorImpl(schedulerProvider, wordInteractor),
         reducer = ReducerImpl()
 ) {
 
     data class State(
             val categoryId: Long,
-            val throwable: Throwable? = null,
             val word: VerifiableValue<String> = VerifiableValue("", NotValid),
             val translation: VerifiableValue<String> = VerifiableValue("", NotValid),
             val association: String = "",
@@ -65,6 +67,7 @@ class CreateWordFeature @Inject constructor(
 
         override fun invoke(state: State, wish: Wish): Observable<out Effect> = when (wish) {
             is Wish.ChangeWord -> Observable.just(wish.word)
+                    .observeOn(scheduler.computation)
                     .map(CharSequence::toString)
                     .verify(SimpleValidator::isNotNullOrEmptyOrBlank)
                     .map(Effect::ChangeWord)
@@ -106,11 +109,7 @@ class CreateWordFeature @Inject constructor(
             is Effect.ChangeTranslation -> state.copy(translation = effect.translation)
             is Effect.ChangeWord -> state.copy(word = effect.word)
             is Effect.HandleWish -> handleWish(state, effect.wish)
-            is Effect.SaveResult -> when (effect.determinate) {
-                is Determinate.Error -> state.copy(throwable = effect.determinate.throwable)
-                is Determinate.Completed -> state.copy()
-                else -> state
-            }
+            is Effect.SaveResult -> state
         }
 
         private fun handleWish(state: State, wish: Wish) = when (wish) {
@@ -121,6 +120,17 @@ class CreateWordFeature @Inject constructor(
             else -> throw IllegalStateException("Unknown wish for use in reducer")
         }
 
+    }
+
+
+    class NewsPublisherImpl(private val flowRouter: FlowRouter) : NewsPublisher<Wish, Effect, State, Unit> {
+        override fun invoke(wish: Wish, effect: Effect, state: State) = when (effect) {
+            is Effect.SaveResult -> when (effect.determinate) {
+                is Determinate.Completed -> flowRouter.exit()
+                else -> Unit
+            }
+            else -> Unit
+        }
     }
 
 }

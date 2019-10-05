@@ -39,6 +39,11 @@ dependencies {
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
     implementation uiDeps.material
+    
+    implementation commonDeps.autoDispose
+    
+    implementation presentationDeps.mviCore
+    implementation presentationDeps.mviCoreAndroid
 
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
 }

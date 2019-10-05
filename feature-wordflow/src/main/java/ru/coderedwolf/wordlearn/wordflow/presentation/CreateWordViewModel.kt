@@ -10,6 +10,5 @@ data class CreateWordViewModel(
         val wordVerify: Verifiable,
         val translationVerify: Verifiable,
         val enableButtonApply: Boolean,
-        val error: String?,
         val exampleList: List<WordExample>
 )

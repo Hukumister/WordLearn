@@ -39,7 +39,7 @@ class CreateWordExampleDialogFragment : DialogFragment() {
 
                 if (exampleText.isNotEmpty() && translation.isNotEmpty()) {
                     listener.onCreateWordExample(
-                        WordExample(example = exampleText, translation = translation)
+                            WordExample(example = exampleText, translation = translation)
                     )
                 }
                 dismissAllowingStateLoss()
@@ -53,6 +53,8 @@ class CreateWordExampleDialogFragment : DialogFragment() {
     }
 
     companion object {
+
+        const val TAG = "CreateWordExampleDialogFragment"
 
         fun instance(): CreateWordExampleDialogFragment = CreateWordExampleDialogFragment()
 

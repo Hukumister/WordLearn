@@ -53,6 +53,8 @@ dependencies {
     implementation uiDeps.groupie
     implementation uiDeps.groupieExt
 
+    implementation commonDeps.autoDispose
+
     implementation project(':common')
 
     implementation project(':database')
