@@ -29,10 +29,10 @@ import javax.inject.Inject
  * @author CodeRedWolf. Date 06.06.2019.
  */
 class CreateWordFragment : BaseFragment(),
-        CreateWordExampleDialogFragment.OnCreateExampleListener,
-        ContextExtensionsHolder,
-        ObservableSource<UiEvent>,
-        Consumer<CreateWordViewModel> {
+    CreateWordExampleDialogFragment.OnCreateExampleListener,
+    ContextExtensionsHolder,
+    ObservableSource<UiEvent>,
+    Consumer<CreateWordViewModel> {
 
     override val extensionContext: Context
         get() = requireContext()
@@ -62,17 +62,9 @@ class CreateWordFragment : BaseFragment(),
 
         saveButton.onClick { source.onNext(SaveClick) }
         listOf(word, translation, transcription, association)
-                .forEach(::connect)
+            .forEach(::connect)
 
-        CreateWordFragmentBindings(this, createWordFeature)
-                .setup(this)
-
-        val subjet = PublishSubject.create<Unit>()
-        createWordFeature.news.subscribe(subjet)
-
-        subjet.subscribe {
-
-        }.autoDispose()
+        CreateWordFragmentBindings(this, createWordFeature).setup(this)
     }
 
     override fun accept(viewModel: CreateWordViewModel) {
@@ -87,17 +79,17 @@ class CreateWordFragment : BaseFragment(),
         mainSection.update(list.map { example ->
             WordExampleItem(example) { removeExample ->
                 removeExample
-                        .let(::RemoveWordExample)
-                        .let(source::onNext)
+                    .let(::RemoveWordExample)
+                    .let(source::onNext)
             }
         })
     }
 
     override fun onCreateWordExample(wordExample: WordExample) = source
-            .onNext(AddWordExample(wordExample))
+        .onNext(AddWordExample(wordExample))
 
     private fun showDialogCreateExample() = CreateWordExampleDialogFragment.instance()
-            .show(childFragmentManager, CreateWordExampleDialogFragment.TAG)
+        .show(childFragmentManager, CreateWordExampleDialogFragment.TAG)
 
     override fun onBackPressed() = router.exit()
 
@@ -109,10 +101,10 @@ class CreateWordFragment : BaseFragment(),
     override fun subscribe(observer: Observer<in UiEvent>) = source.subscribe(observer)
 
     private fun connect(editText: EditText) = RxTextView.textChangeEvents(editText)
-            .skipInitialValue()
-            .observeOn(schedulerProvider.computation)
-            .map { event -> ChangeText(event.view().id, event.text()) }
-            .autoDisposable()
-            .subscribe(source)
+        .skipInitialValue()
+        .observeOn(schedulerProvider.computation)
+        .map { event -> ChangeText(event.view().id, event.text()) }
+        .autoDisposable()
+        .subscribe(source)
 
 }
