@@ -5,7 +5,6 @@ import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.feature.ActorReducerFeature
 import io.reactivex.Observable
-import ru.coderedwolf.wordlearn.common.di.PerFlow
 import ru.coderedwolf.wordlearn.common.di.PerFragment
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate
@@ -25,11 +24,11 @@ class CreateWordFeature @Inject constructor(
     categoryId: Long,
     router: FlowRouter,
     schedulerProvider: SchedulerProvider,
-    wordInteractor: WordRepository
+    wordRepository: WordRepository
 ) : ActorReducerFeature<Wish, Effect, State, Unit>(
     initialState = State(categoryId),
     newsPublisher = NewsPublisherImpl(router),
-    actor = ActorImpl(schedulerProvider, wordInteractor),
+    actor = ActorImpl(schedulerProvider, wordRepository),
     reducer = ReducerImpl()
 ) {
 
@@ -65,7 +64,7 @@ class CreateWordFeature @Inject constructor(
 
     class ActorImpl(
         private val scheduler: SchedulerProvider,
-        private val wordInteractor: WordRepository
+        private val wordRepository: WordRepository
     ) : Actor<State, Wish, Effect> {
 
         override fun invoke(state: State, wish: Wish): Observable<out Effect> = when (wish) {
@@ -84,7 +83,7 @@ class CreateWordFeature @Inject constructor(
                 .observeOn(scheduler.mainThread)
 
             is Wish.SaveWord -> createWord(state)
-                .flatMapCompletable(wordInteractor::save)
+                .flatMapCompletable(wordRepository::save)
                 .asDeterminate()
                 .map(Effect::SaveResult)
                 .observeOn(scheduler.mainThread)

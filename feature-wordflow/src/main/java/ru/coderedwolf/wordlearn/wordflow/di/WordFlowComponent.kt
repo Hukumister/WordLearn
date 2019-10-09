@@ -73,8 +73,8 @@ interface WordFlowDependencies : FlowDependencies {
 interface CreateWordModule {
     @Binds
     @PerFlow
-    fun providePhraseTopicRepository(
-        phraseTopicRepositoryImpl: WordRepositoryImpl
+    fun provideWordRepository(
+        wordRepositoryImpl: WordRepositoryImpl
     ): WordRepository
 }
 
