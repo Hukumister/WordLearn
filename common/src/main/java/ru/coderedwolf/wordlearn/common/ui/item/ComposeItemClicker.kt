@@ -11,13 +11,13 @@ import kotlin.reflect.KClass
 
 class ComposeItemClicker(
     private val clickerMap: Map<KClass<*>, OnItemClickListener>
-) : OnItemClickListener {
+) : BaseItemClicker<Item<*>>() {
 
     class Builder {
 
         private val clickerMap: MutableMap<KClass<*>, OnItemClickListener> = mutableMapOf()
 
-        fun <T : Any> add(itemClass: KClass<T>, baseItemClicker: BaseItemClicker<T>): Builder {
+        fun <T : Item<*>> add(itemClass: KClass<T>, baseItemClicker: BaseItemClicker<T>): Builder {
             clickerMap[itemClass] = baseItemClicker
             return this
         }
@@ -29,6 +29,5 @@ class ComposeItemClicker(
     override fun onItemClick(item: Item<*>, view: View) {
         clickerMap[item::class]?.onItemClick(item, view)
     }
-
 }
 

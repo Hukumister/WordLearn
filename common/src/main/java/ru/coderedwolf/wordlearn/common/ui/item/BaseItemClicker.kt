@@ -10,7 +10,7 @@ import com.xwray.groupie.OnItemClickListener
 abstract class BaseItemClicker<I> : OnItemClickListener {
 
     @Suppress("UNCHECKED_CAST")
-    final override fun onItemClick(item: Item<*>, view: View) {
+    override fun onItemClick(item: Item<*>, view: View) {
         (item as? I)?.let { typedItem -> onItemClick(typedItem, view) }
     }
 
