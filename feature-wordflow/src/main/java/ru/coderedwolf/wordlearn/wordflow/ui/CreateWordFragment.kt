@@ -21,7 +21,6 @@ import ru.coderedwolf.wordlearn.common.ui.event.ChangeText
 import ru.coderedwolf.wordlearn.common.ui.event.UiEvent
 import ru.coderedwolf.wordlearn.common.ui.item.ComposeItemClicker
 import ru.coderedwolf.wordlearn.common.ui.item.DefaultItemClicker
-import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
 import ru.coderedwolf.wordlearn.wordflow.presentation.*
@@ -32,12 +31,8 @@ import javax.inject.Inject
  */
 class CreateWordFragment : BaseFragment(),
     CreateWordExampleDialogFragment.OnCreateExampleListener,
-    ContextExtensionsHolder,
     ObservableSource<UiEvent>,
     Consumer<CreateWordViewModel> {
-
-    override val extensionContext: Context
-        get() = requireContext()
 
     private val source = PublishSubject.create<UiEvent>()
 
@@ -63,6 +58,7 @@ class CreateWordFragment : BaseFragment(),
         }
 
         val itemClicker = ComposeItemClicker.Builder()
+            .add(WordExampleItem::class, DefaultItemClicker(::onClickRemoveExample))
             .add(AddExampleItem::class, DefaultItemClicker { showDialogCreateExample() })
             .build()
 
@@ -76,6 +72,10 @@ class CreateWordFragment : BaseFragment(),
             .setup(this)
     }
 
+    private fun onClickRemoveExample(item: WordExampleItem) = item.wordExample
+        .let(::RemoveWordExample)
+        .let(source::onNext)
+
     override fun accept(viewModel: CreateWordViewModel) {
         updateExampleList(viewModel.exampleList)
 
@@ -85,13 +85,7 @@ class CreateWordFragment : BaseFragment(),
     }
 
     private fun updateExampleList(list: List<WordExample>) {
-        mainSection.update(list.map { example ->
-            WordExampleItem(example) { removeExample ->
-                removeExample
-                    .let(::RemoveWordExample)
-                    .let(source::onNext)
-            }
-        })
+        mainSection.update(list.map(::WordExampleItem))
     }
 
     override fun onCreateWordExample(wordExample: WordExample) = source
