@@ -5,7 +5,7 @@ import android.view.View
 /**
  * @author CodeRedWolf. Date 10.10.2019.
  */
-class DefaultItemClicker<I>(
+class DefaultItemClicker<I : BaseItem>(
     private val clickConsumer: (I) -> Unit
 ) : BaseItemClicker<I>() {
 

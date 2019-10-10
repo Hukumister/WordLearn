@@ -1,7 +1,6 @@
 package ru.coderedwolf.wordlearn.common.ui.item
 
 import android.view.View
-import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 import kotlin.reflect.KClass
 
@@ -11,13 +10,13 @@ import kotlin.reflect.KClass
 
 class ComposeItemClicker(
     private val clickerMap: Map<KClass<*>, OnItemClickListener>
-) : BaseItemClicker<Item<*>>() {
+) : BaseItemClicker<BaseItem>() {
 
     class Builder {
 
         private val clickerMap: MutableMap<KClass<*>, OnItemClickListener> = mutableMapOf()
 
-        fun <T : Item<*>> add(itemClass: KClass<T>, baseItemClicker: BaseItemClicker<T>): Builder {
+        fun <T : BaseItem> add(itemClass: KClass<T>, baseItemClicker: BaseItemClicker<T>): Builder {
             clickerMap[itemClass] = baseItemClicker
             return this
         }
@@ -26,8 +25,9 @@ class ComposeItemClicker(
 
     }
 
-    override fun onItemClick(item: Item<*>, view: View) {
+    override fun onItemClick(item: BaseItem, view: View) {
         clickerMap[item::class]?.onItemClick(item, view)
     }
+
 }
 
