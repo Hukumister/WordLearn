@@ -5,6 +5,7 @@ import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.feature.ActorReducerFeature
 import io.reactivex.Observable
+import ru.coderedwolf.wordlearn.common.di.PerFragment
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
@@ -18,25 +19,26 @@ import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordFeature.*
 import javax.inject.Inject
 
+@PerFragment
 class CreateWordFeature @Inject constructor(
-        categoryId: Long,
-        router: FlowRouter,
-        schedulerProvider: SchedulerProvider,
-        wordInteractor: WordRepository
+    categoryId: Long,
+    router: FlowRouter,
+    schedulerProvider: SchedulerProvider,
+    wordRepository: WordRepository
 ) : ActorReducerFeature<Wish, Effect, State, Unit>(
-        initialState = State(categoryId),
-        newsPublisher = NewsPublisherImpl(router),
-        actor = ActorImpl(schedulerProvider, wordInteractor),
-        reducer = ReducerImpl()
+    initialState = State(categoryId),
+    newsPublisher = NewsPublisherImpl(router),
+    actor = ActorImpl(schedulerProvider, wordRepository),
+    reducer = ReducerImpl()
 ) {
 
     data class State(
-            val categoryId: Long,
-            val word: VerifiableValue<String> = VerifiableValue("", NotValid),
-            val translation: VerifiableValue<String> = VerifiableValue("", NotValid),
-            val association: String = "",
-            val transcription: String = "",
-            val exampleList: List<WordExample> = emptyList()
+        val categoryId: Long,
+        val word: VerifiableValue<String> = VerifiableValue("", NotValid),
+        val translation: VerifiableValue<String> = VerifiableValue("", NotValid),
+        val association: String = "",
+        val transcription: String = "",
+        val exampleList: List<WordExample> = emptyList()
     )
 
     sealed class Wish {
@@ -61,41 +63,41 @@ class CreateWordFeature @Inject constructor(
     }
 
     class ActorImpl(
-            private val scheduler: SchedulerProvider,
-            private val wordInteractor: WordRepository
+        private val scheduler: SchedulerProvider,
+        private val wordRepository: WordRepository
     ) : Actor<State, Wish, Effect> {
 
         override fun invoke(state: State, wish: Wish): Observable<out Effect> = when (wish) {
             is Wish.ChangeWord -> Observable.just(wish.word)
-                    .observeOn(scheduler.computation)
-                    .map(CharSequence::toString)
-                    .verify(SimpleValidator::isNotNullOrEmptyOrBlank)
-                    .map(Effect::ChangeWord)
-                    .observeOn(scheduler.mainThread)
+                .observeOn(scheduler.computation)
+                .map(CharSequence::toString)
+                .verify(SimpleValidator::isNotNullOrEmptyOrBlank)
+                .map(Effect::ChangeWord)
+                .observeOn(scheduler.mainThread)
 
             is Wish.ChangeTranslation -> Observable.just(wish.translation)
-                    .observeOn(scheduler.computation)
-                    .map(CharSequence::toString)
-                    .verify(SimpleValidator::isNotNullOrEmptyOrBlank)
-                    .map(Effect::ChangeTranslation)
-                    .observeOn(scheduler.mainThread)
+                .observeOn(scheduler.computation)
+                .map(CharSequence::toString)
+                .verify(SimpleValidator::isNotNullOrEmptyOrBlank)
+                .map(Effect::ChangeTranslation)
+                .observeOn(scheduler.mainThread)
 
             is Wish.SaveWord -> createWord(state)
-                    .flatMapCompletable(wordInteractor::save)
-                    .asDeterminate()
-                    .map(Effect::SaveResult)
-                    .observeOn(scheduler.mainThread)
+                .flatMapCompletable(wordRepository::save)
+                .asDeterminate()
+                .map(Effect::SaveResult)
+                .observeOn(scheduler.mainThread)
 
             else -> Observable.just(wish).map(Effect::HandleWish)
         }
 
         private fun createWord(state: State): Observable<Word> {
             val word = Word(
-                    word = state.word.value,
-                    categoryId = state.categoryId,
-                    association = state.association,
-                    translation = state.translation.value,
-                    examplesList = state.exampleList
+                word = state.word.value,
+                categoryId = state.categoryId,
+                association = state.association,
+                translation = state.translation.value,
+                examplesList = state.exampleList
             )
             return Observable.just(word)
         }
@@ -121,7 +123,8 @@ class CreateWordFeature @Inject constructor(
 
     }
 
-    class NewsPublisherImpl(private val flowRouter: FlowRouter) : NewsPublisher<Wish, Effect, State, Unit> {
+    class NewsPublisherImpl(private val flowRouter: FlowRouter) :
+        NewsPublisher<Wish, Effect, State, Unit> {
         override fun invoke(wish: Wish, effect: Effect, state: State) = when (effect) {
             is Effect.SaveResult -> when (effect.determinate) {
                 is Determinate.Completed -> flowRouter.exit()

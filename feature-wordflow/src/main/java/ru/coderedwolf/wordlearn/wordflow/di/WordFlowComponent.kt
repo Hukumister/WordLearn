@@ -6,15 +6,18 @@ import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.common.domain.system.ResourceProvider
 import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
+import ru.coderedwolf.wordlearn.database.dao.WordDao
+import ru.coderedwolf.wordlearn.database.mapper.WordMapper
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
+import ru.coderedwolf.wordlearn.wordflow.domain.repository.WordRepositoryImpl
 import ru.coderedwolf.wordlearn.wordflow.ui.WordFlowFragment
 import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
 @Module(
-        includes = [
-            WordListComponentBuilderModule::class,
-            CreateWordComponentBuilderModule::class
-        ]
+    includes = [
+        WordListComponentBuilderModule::class,
+        CreateWordComponentBuilderModule::class
+    ]
 )
 object WordFlowComponentBuilderModule {
     @Provides
@@ -23,26 +26,27 @@ object WordFlowComponentBuilderModule {
     @ClassKey(WordFlowFragment::class)
     fun provideWordFlowComponentBuilder() = InjectorBuilder<WordFlowFragment> {
         DaggerWordFlowComponent.builder()
-                .categoryId(categoryId)
-                .categoryName(categoryName)
-                .wordFlowDependencies(findComponentDependencies())
-                .build()
+            .categoryId(categoryId)
+            .categoryName(categoryName)
+            .wordFlowDependencies(findComponentDependencies())
+            .build()
     }
 }
 
 @PerFlow
 @Component(
-        modules = [
-            FlowNavigationModule::class,
-            ChildDependenciesModule::class
-        ],
-        dependencies = [
-            WordFlowDependencies::class
-        ]
+    modules = [
+        CreateWordModule::class,
+        FlowNavigationModule::class,
+        ChildDependenciesModule::class
+    ],
+    dependencies = [
+        WordFlowDependencies::class
+    ]
 )
 interface WordFlowComponent : Injector<WordFlowFragment>,
-        WordListDependencies,
-        CreateWordDependencies {
+    WordListDependencies,
+    CreateWordDependencies {
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -59,9 +63,19 @@ interface WordFlowComponent : Injector<WordFlowFragment>,
 
 interface WordFlowDependencies : FlowDependencies {
     fun resourceProvider(): ResourceProvider
-    fun wordRepository(): WordRepository
+    fun wordDao(): WordDao
+    fun wordMapper(): WordMapper
     fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun errorHandler(): ErrorHandler
+}
+
+@Module
+interface CreateWordModule {
+    @Binds
+    @PerFlow
+    fun provideWordRepository(
+        wordRepositoryImpl: WordRepositoryImpl
+    ): WordRepository
 }
 
 @Module
@@ -70,13 +84,13 @@ interface ChildDependenciesModule {
     @IntoMap
     @ComponentDependenciesKey(WordListDependencies::class)
     fun provideWordListDependencies(
-            wordFlowComponent: WordFlowComponent
+        wordFlowComponent: WordFlowComponent
     ): ComponentDependencies
 
     @Binds
     @IntoMap
     @ComponentDependenciesKey(CreateWordDependencies::class)
     fun provideCreateWordDependencies(
-            wordFlowComponent: WordFlowComponent
+        wordFlowComponent: WordFlowComponent
     ): ComponentDependencies
 }
