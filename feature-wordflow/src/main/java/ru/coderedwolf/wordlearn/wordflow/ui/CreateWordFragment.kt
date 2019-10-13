@@ -19,7 +19,8 @@ import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.coderedwolf.wordlearn.common.ui.event.ChangeText
 import ru.coderedwolf.wordlearn.common.ui.event.UiEvent
-import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
+import ru.coderedwolf.wordlearn.common.ui.item.ComposeItemClicker
+import ru.coderedwolf.wordlearn.common.ui.item.DefaultItemClicker
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
 import ru.coderedwolf.wordlearn.wordflow.presentation.*
@@ -34,15 +35,12 @@ class CreateWordFragment : BaseFragment(),
     ObservableSource<UiEvent>,
     Consumer<CreateWordViewModel> {
 
-    override val extensionContext: Context
-        get() = requireContext()
-
     private val source = PublishSubject.create<UiEvent>()
 
     override val layoutRes: Int = R.layout.fragment_create_word
 
     private val mainSection = Section().apply {
-        setFooter(AddExampleItem(::showDialogCreateExample))
+        setFooter(AddExampleItem())
     }
     private val wordExampleAdapter = GroupAdapter<ViewHolder>().apply {
         add(mainSection)
@@ -60,6 +58,13 @@ class CreateWordFragment : BaseFragment(),
             adapter = wordExampleAdapter
         }
 
+        val itemClicker = ComposeItemClicker.Builder()
+            .add(WordExampleItem::class, DefaultItemClicker(::onClickRemoveExample))
+            .add(AddExampleItem::class, DefaultItemClicker { showDialogCreateExample() })
+            .build()
+
+        wordExampleAdapter.setOnItemClickListener(itemClicker)
+
         saveButton.onClick { source.onNext(SaveClick) }
         listOf(word, translation, transcription, association)
             .forEach(::connect)
@@ -67,11 +72,15 @@ class CreateWordFragment : BaseFragment(),
         CreateWordFragmentBindings(this, createWordFeature).setup(this)
     }
 
+    private fun onClickRemoveExample(item: WordExampleItem) = item.wordExample
+        .let(::RemoveWordExample)
+        .let(source::onNext)
+
     override fun accept(viewModel: CreateWordViewModel) {
         updateExampleList(viewModel.exampleList)
 
-        wordLayout.error = (viewModel.wordVerify as? ResourceViolation)?.res?.stringRes()
-        translationLayout.error = (viewModel.translationVerify as? ResourceViolation)?.res?.stringRes()
+        wordLayout.error = (viewModel.wordVerify as? ResourceViolation)?.res?.resString()
+        translationLayout.error = (viewModel.translationVerify as? ResourceViolation)?.res?.resString()
         saveButton.isEnabled = viewModel.enableButtonApply
     }
 
