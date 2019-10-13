@@ -31,6 +31,7 @@ import javax.inject.Inject
  */
 class CreateWordFragment : BaseFragment(),
     CreateWordExampleDialogFragment.OnCreateExampleListener,
+    ContextExtensionsHolder,
     ObservableSource<UiEvent>,
     Consumer<CreateWordViewModel> {
 
@@ -68,8 +69,7 @@ class CreateWordFragment : BaseFragment(),
         listOf(word, translation, transcription, association)
             .forEach(::connect)
 
-        CreateWordFragmentBindings(this, createWordFeature)
-            .setup(this)
+        CreateWordFragmentBindings(this, createWordFeature).setup(this)
     }
 
     private fun onClickRemoveExample(item: WordExampleItem) = item.wordExample
@@ -85,7 +85,13 @@ class CreateWordFragment : BaseFragment(),
     }
 
     private fun updateExampleList(list: List<WordExample>) {
-        mainSection.update(list.map(::WordExampleItem))
+        mainSection.update(list.map { example ->
+            WordExampleItem(example) { removeExample ->
+                removeExample
+                    .let(::RemoveWordExample)
+                    .let(source::onNext)
+            }
+        })
     }
 
     override fun onCreateWordExample(wordExample: WordExample) = source
