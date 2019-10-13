@@ -29,6 +29,7 @@ dependencies {
     implementation commonDeps.kotlin
     implementation commonDeps.kotlinCoroutines
     implementation commonDeps.rxJava
+    implementation commonDeps.rxKotlin
 
     implementation commonDeps.dagger
     kapt commonDeps.daggerCompiler
@@ -39,6 +40,9 @@ dependencies {
     kapt presentationDeps.moxyCompiler
 
     implementation presentationDeps.cicerone
+
+    implementation presentationDeps.mviCore
+    implementation presentationDeps.mviCoreAndroid
 
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx

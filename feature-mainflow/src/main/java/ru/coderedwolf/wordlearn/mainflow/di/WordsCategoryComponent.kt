@@ -7,7 +7,7 @@ import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.mainflow.presentation.WordsCategoryReachableFlows
-import ru.coderedwolf.wordlearn.mainflow.ui.WordsCategoryFragment
+import ru.coderedwolf.wordlearn.mainflow.ui.word.set.WordSetFragment
 import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
 @Module
@@ -15,8 +15,8 @@ object WordsCategoryComponentBuilderModule {
     @Provides
     @JvmStatic
     @IntoMap
-    @ClassKey(WordsCategoryFragment::class)
-    fun provideWordsCategoryComponentBuilder() = InjectorBuilder<WordsCategoryFragment> {
+    @ClassKey(WordSetFragment::class)
+    fun provideWordsCategoryComponentBuilder() = InjectorBuilder<WordSetFragment> {
         DaggerWordsCategoryComponent.builder()
             .wordsCategoryDependencies(findComponentDependencies())
             .build()
@@ -29,7 +29,7 @@ object WordsCategoryComponentBuilderModule {
         WordsCategoryDependencies::class
     ]
 )
-interface WordsCategoryComponent : Injector<WordsCategoryFragment>
+interface WordsCategoryComponent : Injector<WordSetFragment>
 
 interface WordsCategoryDependencies : ScreenDependencies {
     fun wordsCategoryInteractor(): WordsCategoryInteractor
