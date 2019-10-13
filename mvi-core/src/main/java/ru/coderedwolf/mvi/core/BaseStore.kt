@@ -51,7 +51,7 @@ abstract class BaseStore<Action, State, Effect, Event>(
     @CallSuper
     override fun unBindView() = viewBind?.dispose() ?: Unit
 
-    abstract fun onNavigationEvent(event: Event)
+    open fun onNavigationEvent(event: Event) = Unit
 
     @CallSuper
     override fun onCleared() = wiring.dispose()
@@ -61,7 +61,7 @@ abstract class BaseStore<Action, State, Effect, Event>(
             .withLatestFrom(state)
             .observeOn(schedulerProvider.single)
             .map { (effect, state) ->
-                val newState =  reducer.reduce(state, effect)
+                val newState = reducer.reduce(state, effect)
                 navigator.handle(newState, effect)?.let(events::onNext)
                 newState
             }
