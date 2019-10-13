@@ -4,25 +4,25 @@
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="@string/bottom.navigation.title.action.search" />
+        android:title="@string/bottom_navigation_title_action_search" />
 
     <item
         android:id="@+id/action_words"
         android:icon="@drawable/ic_menu_black_24dp"
-        android:title="@string/bottom.navigation.title.action.words" />
+        android:title="@string/bottom_navigation_title_action_words" />
 
     <item
         android:id="@+id/action_learn"
         android:icon="@drawable/ic_done_black_24dp"
-        android:title="@string/bottom.navigation.title.action.learn" />
+        android:title="@string/bottom_navigation_title_action_learn" />
 
     <item
         android:id="@+id/action_phrases"
         android:icon="@drawable/ic_menu_black_24dp"
-        android:title="@string/bottom.navigation.title.action.phrases" />
+        android:title="@string/bottom_navigation_title_action_phrases" />
 
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:title="@string/bottom.navigation.title.action.settings" />
+        android:title="@string/bottom_navigation_title_action_settings" />
 </menu>

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="bottom.navigation.title.action.words">Слова</string>
-    <string name="bottom.navigation.title.action.search">Поиск</string>
-    <string name="bottom.navigation.title.action.settings">Настройки</string>
-    <string name="bottom.navigation.title.action.phrases">Фразы</string>
-    <string name="bottom.navigation.title.action.learn">Обучение</string>
+    <string name="bottom_navigation_title_action_words">Слова</string>
+    <string name="bottom_navigation_title_action_search">Поиск</string>
+    <string name="bottom_navigation_title_action_settings">Настройки</string>
+    <string name="bottom_navigation_title_action_phrases">Фразы</string>
+    <string name="bottom_navigation_title_action_learn">Обучение</string>
+
+    <string name="fragment_word_set_user_title">Мои наборы</string>
+    <string name="fragment_word_set_completed_title">Готовые наборы</string>
+
 </resources>
