@@ -83,6 +83,4 @@ abstract class BaseFragment : MvpAppCompatFragment(), ContextExtensionsHolder {
     fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(featureLifecycleScopeProvider)
 
     fun Disposable.autoDispose() = featureDisposeCompositeDisposable.add(this)
-
-
 }
