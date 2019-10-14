@@ -17,8 +17,9 @@ abstract class BaseViewModelStore<Action, State, Effect, Event>(
     initialState: State,
     private val reducer: Reducer<State, Effect>,
     private val schedulerProvider: SchedulerProvider,
-    private val navigator: Navigator<State, Effect, Event>,
-    private val middleWare: MiddleWare<Action, State, Effect>
+    private val middleWare: MiddleWare<Action, State, Effect>,
+    private val navigator: Navigator<State, Effect, Event>? = null,
+    private val bootstrapper: Bootstrapper<Action>? = null
 ) : ViewModel(), Store<Action, State> {
 
     private val wiring = CompositeDisposable()
@@ -49,7 +50,7 @@ abstract class BaseViewModelStore<Action, State, Effect, Event>(
     }
 
     @CallSuper
-    override fun unBindView() = viewBind?.dispose() ?: Unit
+    override fun unbindView() = viewBind?.dispose() ?: Unit
 
     open fun onNavigationEvent(event: Event) = Unit
 
@@ -62,7 +63,7 @@ abstract class BaseViewModelStore<Action, State, Effect, Event>(
             .observeOn(schedulerProvider.single)
             .map { (effect, state) ->
                 val newState = reducer.reduce(state, effect)
-                navigator.handle(newState, effect)?.let(events::onNext)
+                navigator?.handle(newState, effect)?.let(events::onNext)
                 newState
             }
             .distinctUntilChanged()
@@ -79,6 +80,11 @@ abstract class BaseViewModelStore<Action, State, Effect, Event>(
             .observeOn(schedulerProvider.mainThread)
             .subscribe(::onNavigationEvent)
             .addTo(wiring)
+
+        bootstrapper
+            ?.invoke()
+            ?.subscribe(actions::onNext)
+            ?.addTo(wiring)
     }
 
 }
