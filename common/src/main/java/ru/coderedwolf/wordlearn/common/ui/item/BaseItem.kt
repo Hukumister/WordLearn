@@ -2,6 +2,7 @@ package ru.coderedwolf.wordlearn.common.ui.item
 
 import android.view.View
 import androidx.annotation.CallSuper
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.OnItemLongClickListener
@@ -9,7 +10,7 @@ import com.xwray.groupie.OnItemLongClickListener
 /**
  * @author CodeRedWolf. Date 10.10.2019.
  */
-abstract class BaseItem : Item<BaseViewHolder>() {
+abstract class BaseItem : Item<GroupieViewHolder>() {
 
     interface ClickableItem {
 
@@ -28,10 +29,10 @@ abstract class BaseItem : Item<BaseViewHolder>() {
     @CallSuper
     override fun isSameAs(other: Item<*>?): Boolean = viewType != other?.viewType
 
-    override fun createViewHolder(itemView: View): BaseViewHolder = BaseViewHolder(itemView)
+    override fun createViewHolder(itemView: View): GroupieViewHolder = GroupieViewHolder(itemView)
 
     override fun bind(
-        viewHolder: BaseViewHolder,
+        viewHolder: GroupieViewHolder,
         position: Int,
         payloads: MutableList<Any>,
         onItemClickListener: OnItemClickListener?,
@@ -47,7 +48,7 @@ abstract class BaseItem : Item<BaseViewHolder>() {
         super.bind(viewHolder, position, payloads, onItemClickListener, onItemLongClickListener)
     }
 
-    override fun unbind(viewHolder: BaseViewHolder) {
+    override fun unbind(viewHolder: GroupieViewHolder) {
         super.unbind(viewHolder)
         if (this is ClickableItem && this.isClickable) {
             unBindClickListener()
