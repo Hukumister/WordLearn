@@ -28,10 +28,11 @@ ext {
 
     / ui /
     appcompat_version = '1.1.0-rc01'
+    fragment_version = '1.1.0'
     material_version = '1.1.0-alpha09'
     constraintlayout_version = '1.1.3'
     core_version = '1.1.0-rc03'
-    groupie_version = '2.5.1'
+    groupie_version = '2.7.0'
     glide_version = '4.9.0'
 
     / testing /
@@ -99,6 +100,7 @@ ext {
             material        : "com.google.android.material:material:$material_version",
             constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintlayout_version",
             coreKtx         : "androidx.core:core-ktx:$core_version",
+            fragmentKtx     : "androidx.fragment:fragment-ktx:$fragment_version",
 
             groupie         : "com.xwray:groupie:$groupie_version",
             groupieExt      : "com.xwray:groupie-kotlin-android-extensions:$groupie_version",

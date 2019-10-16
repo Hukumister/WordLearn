@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation commonDeps.kotlin
-    implementation commonDeps.kotlinCoroutines
+
     implementation commonDeps.rxJava
     implementation commonDeps.rxKotlin
 
@@ -36,24 +36,22 @@ dependencies {
 
     implementation commonDeps.threetenabp
 
-    implementation presentationDeps.moxyAndroidX
-    kapt presentationDeps.moxyCompiler
-
     implementation presentationDeps.cicerone
-
-    implementation presentationDeps.mviCore
-    implementation presentationDeps.mviCoreAndroid
 
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
+    implementation uiDeps.fragmentKtx
     implementation uiDeps.material
     implementation uiDeps.constraintLayout
+
     implementation uiDeps.groupie
     implementation uiDeps.groupieExt
 
     implementation project(':common')
 
     implementation project(':database')
+
+    implementation project(':mvi-core')
 
     implementation project(':api-wordscategory')
 
