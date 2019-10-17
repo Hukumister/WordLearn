@@ -8,7 +8,6 @@ import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.mainflow.presentation.WordsCategoryReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.ui.word.set.WordSetFragment
-import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
 @Module
 object WordsCategoryComponentBuilderModule {
@@ -32,6 +31,5 @@ object WordsCategoryComponentBuilderModule {
 interface WordsCategoryComponent : Injector<WordSetFragment>
 
 interface WordsCategoryDependencies : ScreenDependencies {
-    fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun wordsCategoryReachableFlows(): WordsCategoryReachableFlows
 }

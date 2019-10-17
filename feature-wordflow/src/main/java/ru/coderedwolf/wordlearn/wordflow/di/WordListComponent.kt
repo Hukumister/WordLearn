@@ -33,5 +33,4 @@ interface WordListComponent : Injector<WordListFragment>
 interface WordListDependencies : ScreenDependencies {
     fun categoryId(): Long
     fun categoryName(): String
-    fun wordsCategoryInteractor(): WordsCategoryInteractor
 }

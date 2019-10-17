@@ -14,7 +14,6 @@ import ru.coderedwolf.wordlearn.mainflow.presentation.MainFlowReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.PhraseTopicReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.WordsCategoryReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.ui.MainFlowFragment
-import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
 @Module(
     includes = [
@@ -86,6 +85,5 @@ interface ChildDependenciesModule {
 interface MainFlowDependencies : FlowDependencies {
     fun phraseTopicDao(): PhraseTopicDao
     fun phraseTopicMapper(): PhraseTopicMapper
-    fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun mainFlowReachableScreens(): MainFlowReachableFlows
 }
