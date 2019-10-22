@@ -10,7 +10,7 @@ import com.xwray.groupie.OnItemLongClickListener
 /**
  * @author CodeRedWolf. Date 10.10.2019.
  */
-abstract class BaseItem : Item<GroupieViewHolder>() {
+abstract class BaseItem : Item<BaseViewHolder>() {
 
     interface ClickableItem {
 
@@ -29,10 +29,10 @@ abstract class BaseItem : Item<GroupieViewHolder>() {
     @CallSuper
     override fun isSameAs(other: Item<*>?): Boolean = viewType != other?.viewType
 
-    override fun createViewHolder(itemView: View): GroupieViewHolder = GroupieViewHolder(itemView)
+    override fun createViewHolder(itemView: View): BaseViewHolder = BaseViewHolder(itemView)
 
     override fun bind(
-        viewHolder: GroupieViewHolder,
+        viewHolder: BaseViewHolder,
         position: Int,
         payloads: MutableList<Any>,
         onItemClickListener: OnItemClickListener?,
@@ -48,7 +48,7 @@ abstract class BaseItem : Item<GroupieViewHolder>() {
         super.bind(viewHolder, position, payloads, onItemClickListener, onItemLongClickListener)
     }
 
-    override fun unbind(viewHolder: GroupieViewHolder) {
+    override fun unbind(viewHolder: BaseViewHolder) {
         super.unbind(viewHolder)
         if (this is ClickableItem && this.isClickable) {
             unBindClickListener()

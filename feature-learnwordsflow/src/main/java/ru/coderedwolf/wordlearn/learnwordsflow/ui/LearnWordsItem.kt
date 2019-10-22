@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.learnwordsflow.ui
 
 import androidx.core.view.isVisible
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.item_learn_word.*
 import ru.coderedwolf.wordlearn.common.extension.onClick
 import ru.coderedwolf.wordlearn.learnwordsflow.R
@@ -16,7 +16,7 @@ class LearnWordsItem(
     val learnWord: LearnWord
 ) : Item() {
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.wordTranslation.isVisible = false
         viewHolder.visibleButton.isVisible = true
         when {
@@ -26,7 +26,7 @@ class LearnWordsItem(
         }
     }
 
-    private fun bindSimpleWord(viewHolder: ViewHolder, word: Word) {
+    private fun bindSimpleWord(viewHolder: GroupieViewHolder, word: Word) {
         viewHolder.wordText.text = word.word
         viewHolder.wordTranslation.text = word.translation
 
@@ -36,14 +36,14 @@ class LearnWordsItem(
         bindVisibleClick(viewHolder)
     }
 
-    private fun bindRotateWord(viewHolder: ViewHolder, word: Word) {
+    private fun bindRotateWord(viewHolder: GroupieViewHolder, word: Word) {
         viewHolder.wordText.text = word.translation
         viewHolder.wordTranslation.text = word.word
 
         bindVisibleClick(viewHolder)
     }
 
-    private fun bindNewWord(viewHolder: ViewHolder, word: Word) {
+    private fun bindNewWord(viewHolder: GroupieViewHolder, word: Word) {
         bindSimpleWord(viewHolder, word)
 
         viewHolder.gotItTextView.text = viewHolder.itemView.context.getString(R.string.know)
@@ -51,7 +51,7 @@ class LearnWordsItem(
         bindVisibleClick(viewHolder)
     }
 
-    private fun bindVisibleClick(viewHolder: ViewHolder) {
+    private fun bindVisibleClick(viewHolder: GroupieViewHolder) {
         viewHolder.visibleButton.onClick { button ->
             button.isVisible = false
             viewHolder.wordTranslation.isVisible = true
