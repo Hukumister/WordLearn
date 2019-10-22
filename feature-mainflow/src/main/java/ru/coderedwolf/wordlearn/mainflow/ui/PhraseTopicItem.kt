@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.mainflow.ui
 
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_category.view.*
 import ru.coderedwolf.wordlearn.mainflow.R
 import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
@@ -11,7 +11,7 @@ import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
  */
 class PhraseTopicItem(val phraseTopic: PhraseTopic) : Item() {
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.categoryName.text = phraseTopic.title
     }
 

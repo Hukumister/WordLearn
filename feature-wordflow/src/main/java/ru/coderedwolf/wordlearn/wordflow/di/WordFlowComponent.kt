@@ -65,7 +65,6 @@ interface WordFlowDependencies : FlowDependencies {
     fun resourceProvider(): ResourceProvider
     fun wordDao(): WordDao
     fun wordMapper(): WordMapper
-    fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun errorHandler(): ErrorHandler
 }
 

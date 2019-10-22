@@ -32,6 +32,5 @@ object WordsCategoryComponentBuilderModule {
 interface WordsCategoryComponent : Injector<WordsCategoryFragment>
 
 interface WordsCategoryDependencies : ScreenDependencies {
-    fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun wordsCategoryReachableFlows(): WordsCategoryReachableFlows
 }

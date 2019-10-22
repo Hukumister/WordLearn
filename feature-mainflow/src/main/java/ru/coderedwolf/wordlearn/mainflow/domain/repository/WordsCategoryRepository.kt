@@ -24,7 +24,6 @@ class WordsCategoryRepositoryImpl @Inject constructor(
     override fun findAll() = categoryDao.findAll()
             .map(mapper::convertList)
 
-
     override fun save(wordCategory: WordCategory) = wordCategory
             .let(mapper::convertToEntity)
             .let(categoryDao::save)

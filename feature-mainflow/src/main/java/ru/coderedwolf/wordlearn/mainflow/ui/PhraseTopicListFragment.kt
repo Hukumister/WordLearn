@@ -2,7 +2,7 @@ package ru.coderedwolf.wordlearn.mainflow.ui
 
 import android.os.Bundle
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_phrase_topic_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -19,14 +19,14 @@ import javax.inject.Inject
 class PhraseTopicListFragment : BaseFragment(), PhraseTopicView {
     override val layoutRes: Int = R.layout.fragment_phrase_topic_list
 
-    @Inject
+//    @Inject
     @InjectPresenter
     lateinit var presenter: PhraseTopicListPresenter
 
     @ProvidePresenter
     fun providePresenter(): PhraseTopicListPresenter = presenter
 
-    private val phraseTopicAdapter = GroupAdapter<ViewHolder>()
+    private val phraseTopicAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

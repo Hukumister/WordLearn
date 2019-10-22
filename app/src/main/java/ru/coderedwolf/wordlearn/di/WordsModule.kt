@@ -24,9 +24,4 @@ interface WordsModule {
             wordsCategoryRepositoryImpl: WordsCategoryRepositoryImpl
     ): WordsCategoryRepository
 
-    @Binds
-    @Singleton
-    fun provideWordsCategoryInteractor(
-            wordsCategoryInteractorImpl: WordsCategoryInteractorImpl
-    ): WordsCategoryInteractor
 }
