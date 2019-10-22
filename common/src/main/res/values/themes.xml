@@ -22,6 +22,9 @@
         <item name="textAppearanceButton">@style/TextAppearance.Button</item>
         <item name="textAppearanceOverline">@style/TextAppearance.Overline</item>
 
+        <item name="listPreferredItemPaddingTop">@dimen/spacing_small</item>
+        <item name="listPreferredItemPaddingBottom">@dimen/spacing_small</item>
+
         <item name="iconSize">@dimen/icon_size</item>
 
         <item name="toolbarStyle">@style/Component.Toolbar</item>

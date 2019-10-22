@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.common.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,19 @@ import moxy.MvpAppCompatFragment
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.di.generateComponentName
+import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
 const val STATE_COMPONENT_NAME = "state_component_name"
 
-abstract class BaseFragment : MvpAppCompatFragment() {
-    protected abstract val layoutRes: Int
-    private lateinit var fragmentComponentName: String
+abstract class BaseFragment : MvpAppCompatFragment(), ContextExtensionsHolder {
+
+    private var fragmentComponentName: String = ""
     private var instanceStateSaved: Boolean = false
+
+    override val extensionContext: Context
+        get() = requireContext()
+
+    protected abstract val layoutRes: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         fragmentComponentName = savedInstanceState?.getString(STATE_COMPONENT_NAME) ?: generateComponentName()
@@ -76,6 +83,4 @@ abstract class BaseFragment : MvpAppCompatFragment() {
     fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(featureLifecycleScopeProvider)
 
     fun Disposable.autoDispose() = featureDisposeCompositeDisposable.add(this)
-
-
 }

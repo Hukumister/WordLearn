@@ -5,7 +5,7 @@ import androidx.annotation.IntDef
 /**
  * @author CodeRedWolf. Date 24.08.2019.
  */
-sealed class Result<T> {
+sealed class Product<out T> {
 
     companion object {
 
@@ -25,19 +25,19 @@ sealed class Result<T> {
     @State
     abstract val state: Int
 
-    object Loading : Result<Nothing>() {
+    object Loading : Product<Nothing>() {
 
         @State
         override val state: Int = STATE_LOADING
     }
 
-    data class Data<T>(val value: T) : Result<T>() {
+    data class Data<T>(val value: T) : Product<T>() {
 
         @State
         override val state: Int = STATE_SUCCESS
     }
 
-    data class Error(val throwable: Throwable) : Result<Nothing>() {
+    data class Error(val throwable: Throwable) : Product<Nothing>() {
 
         @State
         override val state: Int = STATE_ERROR
