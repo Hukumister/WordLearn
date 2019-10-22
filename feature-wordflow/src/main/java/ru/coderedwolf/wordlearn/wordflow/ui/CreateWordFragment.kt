@@ -6,7 +6,7 @@ import android.widget.EditText
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.functions.Consumer
@@ -31,7 +31,6 @@ import javax.inject.Inject
  */
 class CreateWordFragment : BaseFragment(),
     CreateWordExampleDialogFragment.OnCreateExampleListener,
-    ContextExtensionsHolder,
     ObservableSource<UiEvent>,
     Consumer<CreateWordViewModel> {
 
@@ -42,7 +41,7 @@ class CreateWordFragment : BaseFragment(),
     private val mainSection = Section().apply {
         setFooter(AddExampleItem())
     }
-    private val wordExampleAdapter = GroupAdapter<ViewHolder>().apply {
+    private val wordExampleAdapter = GroupAdapter<GroupieViewHolder>().apply {
         add(mainSection)
     }
 
@@ -85,13 +84,7 @@ class CreateWordFragment : BaseFragment(),
     }
 
     private fun updateExampleList(list: List<WordExample>) {
-        mainSection.update(list.map { example ->
-            WordExampleItem(example) { removeExample ->
-                removeExample
-                    .let(::RemoveWordExample)
-                    .let(source::onNext)
-            }
-        })
+        mainSection.update(list.map(::WordExampleItem))
     }
 
     override fun onCreateWordExample(wordExample: WordExample) = source
