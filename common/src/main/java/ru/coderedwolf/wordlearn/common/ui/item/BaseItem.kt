@@ -2,7 +2,6 @@ package ru.coderedwolf.wordlearn.common.ui.item
 
 import android.view.View
 import androidx.annotation.CallSuper
-import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.OnItemLongClickListener

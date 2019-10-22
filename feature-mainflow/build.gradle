@@ -50,8 +50,6 @@ dependencies {
 
     implementation project(':database')
 
-    implementation project(':mvi-core')
-
     implementation project(':api-wordscategory')
 
     implementation project(':api-phrase')

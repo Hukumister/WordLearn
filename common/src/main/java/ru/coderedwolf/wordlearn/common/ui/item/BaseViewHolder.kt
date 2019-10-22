@@ -15,7 +15,7 @@ typealias BaseAdapter = GroupAdapter<GroupieViewHolder>
 
 class BaseViewHolder(
     override val containerView: View
-) : com.xwray.groupie.GroupieViewHolder(containerView), LayoutContainer, ContextExtensionsHolder {
+) : GroupieViewHolder(containerView), LayoutContainer, ContextExtensionsHolder {
 
     override val extensionContext: Context
         get() = containerView.context
