@@ -57,6 +57,8 @@ dependencies {
 
     implementation project(':common')
 
+    implementation project(':mvicore')
+
     implementation project(':database')
 
     implementation project(':api-wordscategory')

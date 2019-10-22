@@ -4,7 +4,7 @@ import android.content.res.AssetManager
 import de.siegmar.fastcsv.reader.CsvReader
 import de.siegmar.fastcsv.reader.CsvRow
 import kotlinx.coroutines.withContext
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.DispatchersProvider
 import ru.coderedwolf.wordlearn.phrase.model.Phrase
 import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
 import java.io.InputStreamReader

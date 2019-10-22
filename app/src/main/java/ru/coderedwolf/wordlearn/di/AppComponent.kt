@@ -7,7 +7,7 @@ import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.App
 import ru.coderedwolf.wordlearn.common.di.Injector
 import ru.coderedwolf.wordlearn.common.di.InjectorBuilder
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.DispatchersProvider
 import ru.coderedwolf.wordlearn.common.domain.system.ResourceProvider
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.system.TimeProvider

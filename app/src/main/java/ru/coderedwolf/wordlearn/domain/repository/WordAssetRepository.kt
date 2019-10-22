@@ -5,7 +5,7 @@ import de.siegmar.fastcsv.reader.CsvParser
 import de.siegmar.fastcsv.reader.CsvReader
 import de.siegmar.fastcsv.reader.CsvRow
 import kotlinx.coroutines.withContext
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.DispatchersProvider
 import ru.coderedwolf.wordlearn.word.model.Word
 import java.io.InputStreamReader
 import javax.inject.Inject

@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.common.di
 import android.content.Context
 import androidx.fragment.app.Fragment
 import dagger.MapKey
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.DispatchersProvider
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.terrakok.cicerone.Router

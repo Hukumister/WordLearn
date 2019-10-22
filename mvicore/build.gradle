@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion target_sdk_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation commonDeps.kotlin
+    implementation commonDeps.kotlinCoroutines
+
+    implementation presentationDeps.cicerone
+    implementation presentationDeps.lifecycleViewModel
+    implementation presentationDeps.lifecycleCommon
+
+    implementation uiDeps.appcompat
+    implementation uiDeps.coreKtx
+
+    implementation project(':common')
+}

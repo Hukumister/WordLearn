@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.domain.system
 
 import kotlinx.coroutines.Dispatchers
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
+import ru.coderedwolf.wordlearn.common.DispatchersProvider
 import javax.inject.Inject
 
 class AppDispatchersProvider @Inject constructor() : DispatchersProvider {
