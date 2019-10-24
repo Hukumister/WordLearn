@@ -1,4 +1,4 @@
-include ':common',
+include ':common', ':mvi-core',
 
         ':api-word',
         ':api-phrase',
