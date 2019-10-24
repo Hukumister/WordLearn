@@ -13,13 +13,13 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 /**
  * @author CodeRedWolf. Date 13.10.2019.
  */
-abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
-    protected val schedulerProvider: SchedulerProvider,
+abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent, News>(
     initialState: State,
+    bootstrapper: Bootstrapper<Action>? = null,
+    private val schedulerProvider: SchedulerProvider,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
-    private val navigator: Navigator<State, Effect, NavigationEvent>? = null,
-    private val bootstrapper: Bootstrapper<Action>? = null
+    private val navigator: Navigator<State, Effect, NavigationEvent>? = null
 ) : ViewModel(), Store<Action, State> {
 
     private val wiring = CompositeDisposable()
@@ -28,17 +28,14 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
     private val stateSubject = BehaviorSubject.createDefault(initialState)
     private val actionSubject = PublishSubject.create<Action>()
     private val effectSubject = PublishSubject.create<Effect>()
+
     private val navigationEventSubject = PublishSubject.create<NavigationEvent>()
 
     init {
         effectSubject
             .withLatestFrom(stateSubject)
             .observeOn(schedulerProvider.single)
-            .map { (effect, state) ->
-                val newState = reducer.invoke(state, effect)
-                navigator?.invoke(newState, effect)?.let(navigationEventSubject::onNext)
-                newState
-            }
+            .map { (effect, state) -> reduceInvoke(state, effect) }
             .distinctUntilChanged()
             .subscribe(stateSubject::onNext)
             .addTo(wiring)
@@ -83,4 +80,19 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
 
     @CallSuper
     override fun onCleared() = wiring.dispose()
+
+    private fun reduceInvoke(
+        state: State,
+        effect: Effect
+    ): State = reducer
+        .invoke(state, effect)
+        .also { newState -> navigatorInvoke(newState, effect) }
+
+    private fun navigatorInvoke(
+        newState: State,
+        effect: Effect
+    ) = navigator
+        ?.invoke(newState, effect)
+        ?.let(navigationEventSubject::onNext)
+
 }
