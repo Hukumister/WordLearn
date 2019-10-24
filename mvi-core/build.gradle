@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion target_sdk_version
 
@@ -17,10 +17,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    androidExtensions {
-        experimental = true
-    }
 }
 
 dependencies {
@@ -29,10 +25,8 @@ dependencies {
     implementation commonDeps.rxJava
     implementation commonDeps.rxKotlin
 
-    implementation dataDeps.lifecycleKtx
-    implementation dataDeps.lifecycleCommon
-    implementation dataDeps.lifecycleViewModel
-    implementation dataDeps.lifecycleRuntime
+    implementation presentationDeps.lifecycleViewModel
+    implementation presentationDeps.lifecycleCommon
 
     implementation project(':common')
 

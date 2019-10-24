@@ -13,37 +13,64 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 /**
  * @author CodeRedWolf. Date 13.10.2019.
  */
-abstract class BaseViewModelStore<Action, State, Effect, Event>(
+abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
+    protected val schedulerProvider: SchedulerProvider,
     initialState: State,
     private val reducer: Reducer<State, Effect>,
-    private val schedulerProvider: SchedulerProvider,
-    private val middleWare: MiddleWare<Action, State, Effect>,
-    private val navigator: Navigator<State, Effect, Event>? = null,
+    private val middleware: Middleware<Action, State, Effect>,
+    private val navigator: Navigator<State, Effect, NavigationEvent>? = null,
     private val bootstrapper: Bootstrapper<Action>? = null
 ) : ViewModel(), Store<Action, State> {
 
     private val wiring = CompositeDisposable()
     private var viewBind: Disposable? = null
 
-    private val state = BehaviorSubject.createDefault(initialState)
-    private val actions = PublishSubject.create<Action>()
-    private val effect = PublishSubject.create<Effect>()
-    private val events = PublishSubject.create<Event>()
+    private val stateSubject = BehaviorSubject.createDefault(initialState)
+    private val actionSubject = PublishSubject.create<Action>()
+    private val effectSubject = PublishSubject.create<Effect>()
+    private val navigationEventSubject = PublishSubject.create<NavigationEvent>()
 
     init {
-        initStore()
+        effectSubject
+            .withLatestFrom(stateSubject)
+            .observeOn(schedulerProvider.single)
+            .map { (effect, state) ->
+                val newState = reducer.invoke(state, effect)
+                navigator?.invoke(newState, effect)?.let(navigationEventSubject::onNext)
+                newState
+            }
+            .distinctUntilChanged()
+            .subscribe(stateSubject::onNext)
+            .addTo(wiring)
+
+        actionSubject
+            .withLatestFrom(stateSubject)
+            .flatMap { (action, state) -> middleware.invoke(action, state) }
+            .subscribe(effectSubject::onNext)
+            .addTo(wiring)
+
+        navigationEventSubject
+            .observeOn(schedulerProvider.mainThread)
+            .subscribe(::onNavigationEvent)
+            .addTo(wiring)
+
+        bootstrapper
+            ?.invoke()
+            ?.subscribe(actionSubject::onNext)
+            ?.addTo(wiring)
     }
 
     @CallSuper
     override fun bindView(mviView: MviView<Action, State>) {
         val disposable = CompositeDisposable()
-        state
+
+        stateSubject
             .observeOn(schedulerProvider.mainThread)
             .subscribe(mviView::render)
             .addTo(disposable)
 
         mviView.actions
-            .subscribe(actions::onNext)
+            .subscribe(actionSubject::onNext)
             .addTo(disposable)
 
         viewBind = disposable
@@ -52,39 +79,8 @@ abstract class BaseViewModelStore<Action, State, Effect, Event>(
     @CallSuper
     override fun unbindView() = viewBind?.dispose() ?: Unit
 
-    open fun onNavigationEvent(event: Event) = Unit
+    open fun onNavigationEvent(event: NavigationEvent) = Unit
 
     @CallSuper
     override fun onCleared() = wiring.dispose()
-
-    private fun initStore() {
-        effect
-            .withLatestFrom(state)
-            .observeOn(schedulerProvider.single)
-            .map { (effect, state) ->
-                val newState = reducer.reduce(state, effect)
-                navigator?.handle(newState, effect)?.let(events::onNext)
-                newState
-            }
-            .distinctUntilChanged()
-            .subscribe(state::onNext)
-            .addTo(wiring)
-
-        actions
-            .withLatestFrom(state)
-            .flatMap { (action, state) -> middleWare.handle(action, state) }
-            .subscribe(effect::onNext)
-            .addTo(wiring)
-
-        events
-            .observeOn(schedulerProvider.mainThread)
-            .subscribe(::onNavigationEvent)
-            .addTo(wiring)
-
-        bootstrapper
-            ?.invoke()
-            ?.subscribe(actions::onNext)
-            ?.addTo(wiring)
-    }
-
 }

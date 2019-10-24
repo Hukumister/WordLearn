@@ -1,7 +1,7 @@
 ext {
     / common /
-    kotlin_coroutines_version = '1.3.0-RC2'
-    dagger_version = '2.24'
+    kotlin_coroutines_version = '1.3.2'
+    dagger_version = '2.25.2'
     threetenabp_version = '1.2.1'
     rx_binding_version = "2.2.0"
     rx_java_version = "2.2.11"
@@ -16,12 +16,12 @@ ext {
     preference_version = '1.1.0-rc01'
     moshi_version = '1.8.0'
     gson_version = '2.8.5'
-    live_data_version = '2.1.0'
 
     / presentation /
     moxy_version = '2.0-alpha05'
     cicerone_version = '5.0.0'
     mvicore_version = '1.2.3'
+    lifecycle_version = '2.1.0'
 
     / logging /
     timber_version = '4.7.1'
@@ -64,34 +64,32 @@ ext {
     ]
 
     dataDeps = [
-            roomRuntime       : "androidx.room:room-runtime:$room_version",
-            roomCompiler      : "androidx.room:room-compiler:$room_version",
-            roomRx            : "androidx.room:room-rxjava2:$room_version",
-            roomKtx           : "androidx.room:room-ktx:$room_version",
+            roomRuntime  : "androidx.room:room-runtime:$room_version",
+            roomCompiler : "androidx.room:room-compiler:$room_version",
+            roomRx       : "androidx.room:room-rxjava2:$room_version",
+            roomKtx      : "androidx.room:room-ktx:$room_version",
 
-            collectionKtx     : "androidx.collection:collection-ktx:$collection_version",
+            collectionKtx: "androidx.collection:collection-ktx:$collection_version",
 
-            preference        : "androidx.preference:preference:$preference_version",
+            preference   : "androidx.preference:preference:$preference_version",
 
-            moshi             : "com.squareup.moshi:moshi:$moshi_version",
-            moshiCodegen      : "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version",
+            moshi        : "com.squareup.moshi:moshi:$moshi_version",
+            moshiCodegen : "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version",
 
-            gson              : "com.google.code.gson:gson:$gson_version",
-
-            lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime:$live_data_version",
-            lifecycleCommon   : "androidx.lifecycle:lifecycle-common-java8:$live_data_version",
-            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$live_data_version",
-            lifecycleKtx      : "androidx.lifecycle:lifecycle-livedata-ktx:$live_data_version"
+            gson         : "com.google.code.gson:gson:$gson_version"
     ]
 
     presentationDeps = [
-            mviCore       : "com.github.badoo.mvicore:mvicore:$mvicore_version",
-            mviCoreAndroid: "com.github.badoo.mvicore:mvicore-android:$mvicore_version",
+            mviCore           : "com.github.badoo.mvicore:mvicore:$mvicore_version",
+            mviCoreAndroid    : "com.github.badoo.mvicore:mvicore-android:$mvicore_version",
 
-            cicerone      : "ru.terrakok.cicerone:cicerone:$cicerone_version",
+            cicerone          : "ru.terrakok.cicerone:cicerone:$cicerone_version",
 
-            moxyCompiler  : "com.github.moxy-community:moxy-compiler:$moxy_version",
-            moxyAndroidX  : "com.github.moxy-community:moxy-androidx:$moxy_version"
+            moxyCompiler      : "com.github.moxy-community:moxy-compiler:$moxy_version",
+            moxyAndroidX      : "com.github.moxy-community:moxy-androidx:$moxy_version",
+
+            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            lifecycleCommon   : "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     ]
 
     uiDeps = [

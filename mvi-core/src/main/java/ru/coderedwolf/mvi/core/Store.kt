@@ -6,6 +6,5 @@ package ru.coderedwolf.mvi.core
 interface Store<Action, State> {
 
     fun bindView(mviView: MviView<Action, State>)
-
     fun unbindView()
 }
