@@ -1,6 +1,5 @@
 package ru.coderedwolf.wordlearn.wordflow.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -21,6 +20,7 @@ import ru.coderedwolf.wordlearn.common.ui.event.ChangeText
 import ru.coderedwolf.wordlearn.common.ui.event.UiEvent
 import ru.coderedwolf.wordlearn.common.ui.item.ComposeItemClicker
 import ru.coderedwolf.wordlearn.common.ui.item.DefaultItemClicker
+import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
 import ru.coderedwolf.wordlearn.wordflow.presentation.*
@@ -85,13 +85,7 @@ class CreateWordFragment : BaseFragment(),
     }
 
     private fun updateExampleList(list: List<WordExample>) {
-        mainSection.update(list.map { example ->
-            WordExampleItem(example) { removeExample ->
-                removeExample
-                    .let(::RemoveWordExample)
-                    .let(source::onNext)
-            }
-        })
+        mainSection.update(list.map { example -> WordExampleItem(example) })
     }
 
     override fun onCreateWordExample(wordExample: WordExample) = source
