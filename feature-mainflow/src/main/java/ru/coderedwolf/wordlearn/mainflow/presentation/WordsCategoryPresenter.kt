@@ -4,7 +4,6 @@ import moxy.InjectViewState
 import ru.coderedwolf.wordlearn.common.di.PerFragment
 import ru.coderedwolf.wordlearn.common.presentation.BasePresenter
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
-import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
 import javax.inject.Inject
 
@@ -15,14 +14,13 @@ import javax.inject.Inject
 @InjectViewState
 class WordsCategoryPresenter @Inject constructor(
         private val flowRouter: FlowRouter,
-        private val wordsCategoryInteractor: WordsCategoryInteractor,
         private val flows: WordsCategoryReachableFlows
 ) : BasePresenter<WordsCategoryView>() {
 
     private val categoryList = mutableListOf<WordCategory>()
 
     override fun onFirstViewAttach() = launchUI {
-        viewState.showLoading(true)
+//        viewState.showLoading(true)
     }
 
     override fun onViewAttach(view: WordsCategoryView?) {
@@ -31,9 +29,9 @@ class WordsCategoryPresenter @Inject constructor(
 
     fun onCreateCategory(categoryName: String) = launchUI {
         val category = WordCategory(name = categoryName, isStudy = false)
-        val insertedCategory = wordsCategoryInteractor.addCategory(category)
-        categoryList.add(0, insertedCategory)
-        viewState.addCategory(0, insertedCategory)
+//        val insertedCategory = wordsCategoryInteractor.addCategory(category)
+//        categoryList.add(0, insertedCategory)
+//        viewState.addCategory(0, insertedCategory)
     }
 
     fun onClickCategory(wordCategory: WordCategory) =
