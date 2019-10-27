@@ -37,8 +37,8 @@ class ItemAsyncAdapter<ItemModel : Any>(
         }
     }
 
-    fun updateItems(list: List<ItemModel>) {
-        items = list
+    fun updateItems(items: List<ItemModel>) {
+        this.items = items
     }
 
     private fun <VH : BaseViewHolder> bindClicker(adapter: ClickableAdapter, viewHolder: VH) {
