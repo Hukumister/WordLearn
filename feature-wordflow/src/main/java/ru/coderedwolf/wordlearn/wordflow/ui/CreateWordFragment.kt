@@ -1,12 +1,8 @@
 package ru.coderedwolf.wordlearn.wordflow.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.functions.Consumer
@@ -17,13 +13,15 @@ import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
+import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultClicker
+import ru.coderedwolf.wordlearn.common.ui.adapter.ItemAsyncAdapter
 import ru.coderedwolf.wordlearn.common.ui.event.ChangeText
 import ru.coderedwolf.wordlearn.common.ui.event.UiEvent
-import ru.coderedwolf.wordlearn.common.ui.item.ComposeItemClicker
-import ru.coderedwolf.wordlearn.common.ui.item.DefaultItemClicker
+import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
 import ru.coderedwolf.wordlearn.wordflow.presentation.*
+import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewModel.Item
 import javax.inject.Inject
 
 /**
@@ -39,31 +37,29 @@ class CreateWordFragment : BaseFragment(),
 
     override val layoutRes: Int = R.layout.fragment_create_word
 
-    private val mainSection = Section().apply {
-        setFooter(AddExampleItem())
-    }
-    private val wordExampleAdapter = GroupAdapter<ViewHolder>().apply {
-        add(mainSection)
-    }
 
-    @Inject lateinit var schedulerProvider: SchedulerProvider
-    @Inject lateinit var router: FlowRouter
-    @Inject lateinit var createWordFeature: CreateWordFeature
+    private lateinit var wordExampleAdapter: ItemAsyncAdapter<Item>
+
+    @Inject
+    lateinit var schedulerProvider: SchedulerProvider
+    @Inject
+    lateinit var router: FlowRouter
+    @Inject
+    lateinit var createWordFeature: CreateWordFeature
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         toolbar.setNavigationOnClickListener { router.exit() }
+
+        wordExampleAdapter = ItemAsyncAdapter.Builder<Item>()
+            .add(WordExampleAdapterDelegates(), DefaultClicker { showDialogCreateExample() })
+            .add(CreateWordAdapterDelegate(), DefaultClicker(::onClickRemoveExample))
+            .build()
+
         examplesList.apply {
             itemAnimator = null
             adapter = wordExampleAdapter
         }
-
-        val itemClicker = ComposeItemClicker.Builder()
-            .add(WordExampleItem::class, DefaultItemClicker(::onClickRemoveExample))
-            .add(AddExampleItem::class, DefaultItemClicker { showDialogCreateExample() })
-            .build()
-
-        wordExampleAdapter.setOnItemClickListener(itemClicker)
 
         saveButton.onClick { source.onNext(SaveClick) }
         listOf(word, translation, transcription, association)
@@ -72,7 +68,7 @@ class CreateWordFragment : BaseFragment(),
         CreateWordFragmentBindings(this, createWordFeature).setup(this)
     }
 
-    private fun onClickRemoveExample(item: WordExampleItem) = item.wordExample
+    private fun onClickRemoveExample(item: Item.WordExampleItem) = item.wordExample
         .let(::RemoveWordExample)
         .let(source::onNext)
 
@@ -84,15 +80,7 @@ class CreateWordFragment : BaseFragment(),
         saveButton.isEnabled = viewModel.enableButtonApply
     }
 
-    private fun updateExampleList(list: List<WordExample>) {
-        mainSection.update(list.map { example ->
-            WordExampleItem(example) { removeExample ->
-                removeExample
-                    .let(::RemoveWordExample)
-                    .let(source::onNext)
-            }
-        })
-    }
+    private fun updateExampleList(list: List<Item>) = wordExampleAdapter.updateItems(list)
 
     override fun onCreateWordExample(wordExample: WordExample) = source
         .onNext(AddWordExample(wordExample))

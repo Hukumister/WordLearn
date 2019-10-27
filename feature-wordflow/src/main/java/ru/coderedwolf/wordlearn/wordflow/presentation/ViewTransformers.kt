@@ -4,6 +4,7 @@ import ru.coderedwolf.wordlearn.common.ui.event.ChangeText
 import ru.coderedwolf.wordlearn.common.ui.event.UiEvent
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
+import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewModel.Item
 
 /**
  * @author CodeRedWolf. Date 22.09.2019.
@@ -11,10 +12,10 @@ import ru.coderedwolf.wordlearn.wordflow.R
 class ViewModelTransformer : (CreateWordFeature.State) -> CreateWordViewModel {
 
     override fun invoke(state: CreateWordFeature.State): CreateWordViewModel = CreateWordViewModel(
-            enableButtonApply = state.word.isValid && state.translation.isValid,
-            wordVerify = state.word.verifiable,
-            translationVerify = state.translation.verifiable,
-            exampleList = state.exampleList
+        enableButtonApply = state.word.isValid && state.translation.isValid,
+        wordVerify = state.word.verifiable,
+        translationVerify = state.translation.verifiable,
+        exampleList = state.exampleList.map(Item::WordExampleItem) + Item.AddItem
     )
 
 }
