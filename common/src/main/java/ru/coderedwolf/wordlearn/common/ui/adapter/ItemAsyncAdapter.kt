@@ -81,8 +81,9 @@ class ItemAsyncAdapter<ItemModel : Any>(
         private val clickers: SparseArrayCompat<ItemClicker<*, out BaseViewHolder>> = SparseArrayCompat()
         private var diffCallback: DiffUtil.ItemCallback<ItemModel> = NoneDiffUtilItemCallback()
 
-        fun with(diffCallback: DiffUtil.ItemCallback<ItemModel>) {
+        fun with(diffCallback: DiffUtil.ItemCallback<ItemModel>): Builder<ItemModel> {
             this.diffCallback = diffCallback
+            return this
         }
 
         fun add(
