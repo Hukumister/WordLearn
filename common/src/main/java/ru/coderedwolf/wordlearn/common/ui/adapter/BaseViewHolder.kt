@@ -1,9 +1,8 @@
-package ru.coderedwolf.wordlearn.common.ui.item
+package ru.coderedwolf.wordlearn.common.ui.adapter
 
 import android.content.Context
 import android.view.View
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
@@ -11,11 +10,9 @@ import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
  * @author CodeRedWolf. Date 10.10.2019.
  */
 
-typealias BaseAdapter = GroupAdapter<GroupieViewHolder>
-
-class BaseViewHolder(
+open class BaseViewHolder(
     override val containerView: View
-) : GroupieViewHolder(containerView), LayoutContainer, ContextExtensionsHolder {
+) : RecyclerView.ViewHolder(containerView), LayoutContainer, ContextExtensionsHolder {
 
     override val extensionContext: Context
         get() = containerView.context
