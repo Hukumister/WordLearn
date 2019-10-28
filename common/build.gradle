@@ -25,6 +25,8 @@ dependencies {
     implementation commonDeps.kotlin
     implementation commonDeps.kotlinCoroutines
 
+    implementation uiDeps.adapterDelegate
+
     implementation commonDeps.dagger
     kapt commonDeps.daggerCompiler
 

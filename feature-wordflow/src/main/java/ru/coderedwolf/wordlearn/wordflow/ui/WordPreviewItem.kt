@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.wordflow.ui
 
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_preview_word.*
 import ru.coderedwolf.wordlearn.word.model.WordPreview
 import ru.coderedwolf.wordlearn.wordflow.R
@@ -12,7 +12,7 @@ import ru.coderedwolf.wordlearn.wordflow.R
 class WordPreviewItem(val wordPreview: WordPreview) : Item() {
 
     //todo заменить на нормальный текст
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val wordText = "${wordPreview.word} - ${wordPreview.translation}"
         viewHolder.wordText.text = wordText
         viewHolder.reviewCountText.text = wordPreview.reviewCount.toString()

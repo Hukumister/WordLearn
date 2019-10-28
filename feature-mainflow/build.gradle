@@ -38,6 +38,11 @@ dependencies {
 
     implementation presentationDeps.cicerone
 
+    implementation presentationDeps.moxyAndroidX
+    kapt presentationDeps.moxyCompiler
+
+    implementation uiDeps.adapterDelegate
+
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
     implementation uiDeps.fragmentKtx
