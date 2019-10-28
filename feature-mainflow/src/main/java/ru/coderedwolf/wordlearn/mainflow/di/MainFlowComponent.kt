@@ -1,5 +1,7 @@
 package ru.coderedwolf.wordlearn.mainflow.di
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Component
 import dagger.Module
@@ -7,12 +9,14 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
+import ru.coderedwolf.wordlearn.common.presentation.ViewModelFactory
 import ru.coderedwolf.wordlearn.database.dao.PhraseTopicDao
 import ru.coderedwolf.wordlearn.database.mapper.PhraseTopicMapper
 import ru.coderedwolf.wordlearn.mainflow.presentation.LearnReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.MainFlowReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.PhraseTopicReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.WordsCategoryReachableFlows
+import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel
 import ru.coderedwolf.wordlearn.mainflow.ui.MainFlowFragment
 
 @Module(
@@ -38,6 +42,7 @@ object MainFlowComponentBuilderModule {
 @Component(
     modules = [
         FlowNavigationModule::class,
+        ViewModelModule::class,
         ChildDependenciesModule::class
     ],
     dependencies = [
@@ -80,6 +85,18 @@ interface ChildDependenciesModule {
     @IntoMap
     @ComponentDependenciesKey(WordsCategoryDependencies::class)
     fun provideWordsCategoryDependencies(mainFlowComponent: MainFlowComponent): ComponentDependencies
+}
+
+interface ViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WordSetUserViewModel::class)
+    fun bindUserViewModel(wordSetUserViewModel: WordSetUserViewModel): ViewModel
+
+    @Binds
+    fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
 }
 
 interface MainFlowDependencies : FlowDependencies {
