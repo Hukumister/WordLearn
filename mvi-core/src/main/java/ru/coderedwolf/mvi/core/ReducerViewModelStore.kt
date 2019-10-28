@@ -16,16 +16,14 @@ abstract class ReducerViewModelStore<Action, State, Event>(
     initialState = initialState,
     reducer = reducer,
     schedulerProvider = schedulerProvider,
-    middleWare = BypassMiddleWare<State, Action>(),
+    middleware = BypassMiddleware<State, Action>(),
     navigator = navigator,
     bootstrapper = bootstrapper
 ) {
 
-    class BypassMiddleWare<State, Action> : MiddleWare<Action, State, Action> {
+    class BypassMiddleware<State, Action> : Middleware<Action, State, Action> {
 
-        override fun handle(action: Action, state: State): Observable<Action> =
+        override fun invoke(action: Action, state: State): Observable<Action> =
             Observable.just(action)
-
     }
-
 }
