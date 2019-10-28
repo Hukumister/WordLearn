@@ -13,7 +13,7 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 /**
  * @author CodeRedWolf. Date 13.10.2019.
  */
-abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent, News>(
+abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
     initialState: State,
     bootstrapper: Bootstrapper<Action>? = null,
     private val schedulerProvider: SchedulerProvider,
