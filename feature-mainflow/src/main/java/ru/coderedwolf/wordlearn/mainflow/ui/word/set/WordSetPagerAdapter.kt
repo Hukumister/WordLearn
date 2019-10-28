@@ -21,6 +21,7 @@ class WordSetPagerAdapter(
 
     override fun getItem(position: Int): Fragment = when (position) {
         0 -> WordSetUserFragment.newInstance()
+        1 -> WordSetUserFragment.newInstance()
         else -> throw IllegalStateException("Unknown fragment position")
     }
 
