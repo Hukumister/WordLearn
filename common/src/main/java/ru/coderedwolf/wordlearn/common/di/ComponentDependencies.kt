@@ -2,6 +2,7 @@ package ru.coderedwolf.wordlearn.common.di
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import dagger.MapKey
 import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
@@ -44,7 +45,7 @@ inline fun <reified T : ComponentDependencies> Fragment.findComponentDependencie
     return depsProvider.dependencies[T::class.java] as T
 }
 
-interface CommonDependencies : ComponentDependencies {
+interface CommonDependencies : ComponentDependencies, ViewModelDependencies {
     fun dispatchersProvider(): DispatchersProvider
     fun schedulerProvider(): SchedulerProvider
 }
@@ -55,4 +56,8 @@ interface FlowDependencies : CommonDependencies {
 
 interface ScreenDependencies : CommonDependencies {
     fun flowRouter(): FlowRouter
+}
+
+interface ViewModelDependencies {
+    fun viewModelFactory(): ViewModelProvider.Factory
 }
