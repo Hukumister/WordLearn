@@ -92,11 +92,11 @@ abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
     ): State = reducer
         .invoke(state, effect)
         .also { newState ->
-            navigatorInvoke(newState, effect)
+            postChangedState(newState, effect)
             viewEventProducerInvoke(newState, effect)
         }
 
-    private fun navigatorInvoke(
+    private fun postChangedState(
         newState: State,
         effect: Effect
     ) = stateEffectPairSubject.onNext(newState to effect)
