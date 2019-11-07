@@ -44,4 +44,6 @@ dependencies {
     implementation project(':api-phrase')
 
     implementation project(':api-word')
+
+    implementation project(':api-wordset')
 }
