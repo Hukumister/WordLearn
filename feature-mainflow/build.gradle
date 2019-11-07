@@ -57,5 +57,7 @@ dependencies {
 
     implementation project(':api-wordscategory')
 
+    implementation project(':api-wordset')
+
     implementation project(':api-phrase')
 }
