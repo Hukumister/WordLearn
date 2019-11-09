@@ -11,6 +11,11 @@ import ru.coderedwolf.wordlearn.mainflow.R
  */
 class WordSetFragment : BaseFragment() {
 
+    companion object {
+
+        fun newInstance() = WordSetFragment()
+    }
+
     override val layoutRes = R.layout.fragment_word_set
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
