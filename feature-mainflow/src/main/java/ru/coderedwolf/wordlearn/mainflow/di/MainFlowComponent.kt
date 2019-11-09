@@ -1,7 +1,5 @@
 package ru.coderedwolf.wordlearn.mainflow.di
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Component
 import dagger.Module
@@ -9,20 +7,17 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
-import ru.coderedwolf.wordlearn.common.presentation.ViewModelFactory
-import ru.coderedwolf.wordlearn.database.dao.PhraseTopicDao
-import ru.coderedwolf.wordlearn.database.mapper.PhraseTopicMapper
+import ru.coderedwolf.wordlearn.database.dao.WordSetDao
+import ru.coderedwolf.wordlearn.database.mapper.WordSetMapper
 import ru.coderedwolf.wordlearn.mainflow.presentation.LearnReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.MainFlowReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.PhraseTopicReachableFlows
 import ru.coderedwolf.wordlearn.mainflow.presentation.WordsCategoryReachableFlows
-import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel
 import ru.coderedwolf.wordlearn.mainflow.ui.MainFlowFragment
 
 @Module(
     includes = [
         LearnComponentBuilderModule::class,
-        PhraseTopicComponentBuilderModule::class,
         WordsCategoryComponentBuilderModule::class
     ]
 )
@@ -41,8 +36,8 @@ object MainFlowComponentBuilderModule {
 @PerFlow
 @Component(
     modules = [
-        FlowNavigationModule::class,
         ViewModelModule::class,
+        FlowNavigationModule::class,
         ChildDependenciesModule::class
     ],
     dependencies = [
@@ -51,10 +46,13 @@ object MainFlowComponentBuilderModule {
 )
 interface MainFlowComponent : Injector<MainFlowFragment>,
     LearnDependencies,
-    PhraseTopicDependencies,
-    WordsCategoryDependencies
+    WordSetUserDependencies
 
-@Module
+@Module(
+    includes = [
+        WordSetModule::class
+    ]
+)
 interface ChildDependenciesModule {
     @Binds
     fun provideLearnReachableScreens(
@@ -78,29 +76,15 @@ interface ChildDependenciesModule {
 
     @Binds
     @IntoMap
-    @ComponentDependenciesKey(PhraseTopicDependencies::class)
-    fun providePhraseTopicDependencies(mainFlowComponent: MainFlowComponent): ComponentDependencies
-
-    @Binds
-    @IntoMap
-    @ComponentDependenciesKey(WordsCategoryDependencies::class)
-    fun provideWordsCategoryDependencies(mainFlowComponent: MainFlowComponent): ComponentDependencies
-}
-
-interface ViewModelModule {
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(WordSetUserViewModel::class)
-    fun bindUserViewModel(wordSetUserViewModel: WordSetUserViewModel): ViewModel
-
-    @Binds
-    fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+    @ComponentDependenciesKey(WordSetUserDependencies::class)
+    fun provideWordSetUserComponentDependencies(mainFlowComponent: MainFlowComponent): ComponentDependencies
 
 }
 
 interface MainFlowDependencies : FlowDependencies {
-    fun phraseTopicDao(): PhraseTopicDao
-    fun phraseTopicMapper(): PhraseTopicMapper
+
+    fun wordSetDao(): WordSetDao
+    fun wordSetMapper(): WordSetMapper
+
     fun mainFlowReachableScreens(): MainFlowReachableFlows
 }
