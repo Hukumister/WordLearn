@@ -37,7 +37,6 @@ object AppComponentBuilderModule {
         NavigationModule::class,
         DatabaseModule::class,
         WordsModule::class,
-        ViewModelModule::class,
         PrepopulateModule::class,
         ChildComponentsDependenciesModule::class
     ]

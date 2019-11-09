@@ -45,7 +45,7 @@ inline fun <reified T : ComponentDependencies> Fragment.findComponentDependencie
     return depsProvider.dependencies[T::class.java] as T
 }
 
-interface CommonDependencies : ComponentDependencies, ViewModelDependencies {
+interface CommonDependencies : ComponentDependencies {
     fun dispatchersProvider(): DispatchersProvider
     fun schedulerProvider(): SchedulerProvider
 }

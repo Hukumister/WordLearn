@@ -1,21 +1,17 @@
-package ru.coderedwolf.wordlearn.di
+package ru.coderedwolf.wordlearn.common.di
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import ru.coderedwolf.wordlearn.common.presentation.ViewModelFactory
-import javax.inject.Singleton
 
 /**
  * @author CodeRedWolf. Date 04.11.2019.
  */
 @Module
-interface ViewModelModule {
+interface ViewModelFactoryModule {
 
     @Binds
-    @Singleton
-    fun provideViewModelFactory(
-        viewModelFactory: ViewModelFactory
-    ): ViewModelProvider.Factory
+    fun provideViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 
 }
