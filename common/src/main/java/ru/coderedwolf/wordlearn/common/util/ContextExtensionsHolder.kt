@@ -8,6 +8,8 @@ import androidx.annotation.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import ru.coderedwolf.wordlearn.common.domain.resource.FormattedText
+import ru.coderedwolf.wordlearn.common.domain.resource.FormattedTextFormat
 
 interface ContextExtensionsHolder {
 
@@ -63,5 +65,8 @@ interface ContextExtensionsHolder {
     @CheckResult
     fun @receiver:AttrRes Int.drawableAttr(context: Context = extensionContext): Drawable? =
         Themes.resolveDrawableAttr(context, this)
+
+    @CheckResult
+    fun FormattedText.format(): CharSequence = FormattedTextFormat.format(extensionContext, this)
 
 }
