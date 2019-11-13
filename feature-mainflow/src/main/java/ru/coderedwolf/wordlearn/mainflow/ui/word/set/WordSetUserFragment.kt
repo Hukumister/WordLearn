@@ -28,7 +28,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 11.10.2019.
  */
-class WordSetUserFragment : BaseFragment(),
+class WordSetUserFragment : BaseFragment(R.layout.fragment_word_user_set),
     MviView<Action, WordSetUserViewState, ViewEvent> {
 
     companion object {
@@ -41,8 +41,6 @@ class WordSetUserFragment : BaseFragment(),
     private val wordSetUserViewModel: WordSetUserViewModel by viewModels {
         viewModelFactory
     }
-
-    override val layoutRes: Int = R.layout.fragment_word_user_set
 
     private val source = PublishSubject.create<Action>()
 
