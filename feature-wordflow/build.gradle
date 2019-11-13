@@ -40,8 +40,6 @@ dependencies {
     implementation commonDeps.rxBind
 
     implementation presentationDeps.cicerone
-    implementation presentationDeps.mviCore
-    implementation presentationDeps.mviCoreAndroid
 
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
