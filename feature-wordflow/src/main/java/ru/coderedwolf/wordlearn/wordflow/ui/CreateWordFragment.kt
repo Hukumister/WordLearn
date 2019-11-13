@@ -34,9 +34,6 @@ class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
 
     private val source = PublishSubject.create<UiEvent>()
 
-    override val layoutRes: Int = R.layout.fragment_create_word
-
-
     private lateinit var wordExampleAdapter: ItemAsyncAdapter<Item>
 
     @Inject
