@@ -51,13 +51,10 @@ private fun <T : ComponentDependencies> Fragment.findDepsFromParents(clazz: Clas
 
 @Suppress("UNCHECKED_CAST")
 private fun <T : ComponentDependencies> Any.findDeps(clazz: Class<T>): T? {
-    if (this is HasChildDependencies) {
-        val deps = dependencies[clazz]
-        if (clazz.isInstance(deps)) {
-            return deps as T
-        }
-    }
-    return null
+    if (this !is HasChildDependencies) return null
+    return dependencies[clazz]
+        ?.takeIf(clazz::isInstance)
+        ?.let(clazz::cast)
 }
 
 interface CommonDependencies : ComponentDependencies {
