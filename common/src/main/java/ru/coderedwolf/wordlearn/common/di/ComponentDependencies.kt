@@ -21,27 +21,43 @@ interface HasChildDependencies {
 @MapKey
 annotation class ComponentDependenciesKey(val value: KClass<out ComponentDependencies>)
 
-inline fun <reified T : ComponentDependencies> Context.findComponentDependencies(): T {
-    val depsProvider: HasChildDependencies =
-        if (applicationContext is HasChildDependencies) {
-            applicationContext as HasChildDependencies
-        } else {
-            throw IllegalStateException("Can't find suitable ${HasChildDependencies::class.java.simpleName} for $this")
+inline fun <reified T : ComponentDependencies> Context.findComponentDependencies(): T =
+    findComponentDependencies(T::class.java)
+
+fun <T : ComponentDependencies> Context.findComponentDependencies(clazz: Class<T>): T =
+    applicationContext?.findDeps(clazz)
+        ?: throw IllegalStateException("Can't find suitable ${HasChildDependencies::class.java.simpleName} for $this")
+
+inline fun <reified T : ComponentDependencies> Fragment.findComponentDependencies(): T =
+    findComponentDependencies(T::class.java)
+
+fun <T : ComponentDependencies> Fragment.findComponentDependencies(clazz: Class<T>): T =
+    findDepsFromParents(clazz)
+        ?: activity?.findDeps(clazz)
+        ?: activity?.application?.findDeps(clazz)
+        ?: throw IllegalStateException("Can't find suitable ${HasChildDependencies::class.java.simpleName} for $this")
+
+private fun <T : ComponentDependencies> Fragment.findDepsFromParents(clazz: Class<T>): T? {
+    var depsProviderFragment = parentFragment
+    while (depsProviderFragment != null) {
+        val deps = depsProviderFragment.findDeps(clazz)
+        if (deps != null) {
+            return deps
         }
-    return depsProvider.dependencies[T::class.java] as T
+        depsProviderFragment = depsProviderFragment.parentFragment
+    }
+    return null
 }
 
-inline fun <reified T : ComponentDependencies> Fragment.findComponentDependencies(): T {
-    var depsProviderFragment = parentFragment
-    while (depsProviderFragment !is HasChildDependencies?) {
-        depsProviderFragment = depsProviderFragment?.parentFragment
+@Suppress("UNCHECKED_CAST")
+private fun <T : ComponentDependencies> Any.findDeps(clazz: Class<T>): T? {
+    if (this is HasChildDependencies) {
+        val deps = dependencies[clazz]
+        if (clazz.isInstance(deps)) {
+            return deps as T
+        }
     }
-    val depsProvider: HasChildDependencies = depsProviderFragment ?: when {
-        activity is HasChildDependencies -> activity as HasChildDependencies
-        activity?.application is HasChildDependencies -> activity?.application as HasChildDependencies
-        else -> throw IllegalStateException("Can't find suitable ${HasChildDependencies::class.java.simpleName} for $this")
-    }
-    return depsProvider.dependencies[T::class.java] as T
+    return null
 }
 
 interface CommonDependencies : ComponentDependencies {
