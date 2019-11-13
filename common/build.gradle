@@ -35,7 +35,6 @@ dependencies {
 
     implementation loggingDeps.timber
 
-    implementation presentationDeps.moxyAndroidX
     implementation presentationDeps.cicerone
 
     implementation uiDeps.appcompat

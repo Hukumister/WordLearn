@@ -12,7 +12,6 @@ import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.LearnPhraseRe
 import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.MockLearnPhraseRepository
 import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.PhraseRepository
 import ru.coderedwolf.learnword.learnphrasesflow.domain.repository.PhraseRepositoryImpl
-import ru.coderedwolf.learnword.learnphrasesflow.ui.LearnPhrasesFlowFragment
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.common.domain.system.TimeProvider
 import ru.coderedwolf.wordlearn.database.dao.PhraseDao

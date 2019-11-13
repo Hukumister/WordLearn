@@ -7,7 +7,6 @@ import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
 import ru.coderedwolf.wordlearn.mainflow.presentation.WordsCategoryReachableFlows
-import ru.coderedwolf.wordlearn.mainflow.ui.WordsCategoryFragment
 
 @Module
 object WordsCategoryComponentBuilderModule {
