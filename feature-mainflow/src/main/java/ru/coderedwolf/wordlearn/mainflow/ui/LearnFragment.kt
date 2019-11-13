@@ -12,8 +12,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 14.06.2019.
  */
-class LearnFragment : BaseFragment() {
-    override val layoutRes = R.layout.fragment_learn
+class LearnFragment : BaseFragment(R.layout.fragment_learn) {
 
     @Inject
     lateinit var flowRouter: FlowRouter

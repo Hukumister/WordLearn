@@ -6,8 +6,4 @@ import ru.coderedwolf.wordlearn.mainflow.R
 /**
  * @author CodeRedWolf. Date 06.10.2019.
  */
-class StubFragment : BaseFragment() {
-
-    override val layoutRes = R.layout.fragment_stub
-
-}
+class StubFragment : BaseFragment(R.layout.fragment_stub)

@@ -21,17 +21,15 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 01.05.2019.
  */
-class WordsCategoryFragment : BaseFragment(),
+class WordsCategoryFragment : BaseFragment(R.layout.fragment_words_category_list),
     WordsCategoryView,
     InputTextDialogFragment.OnClickListener {
 
-    override val layoutRes = R.layout.fragment_words_category_list
-
-    @Inject
-    @InjectPresenter
+//    @Inject
+//    @InjectPresenter
     lateinit var presenter: WordsCategoryPresenter
 
-    @ProvidePresenter
+//    @ProvidePresenter
     fun providePresenter() = presenter
 
     private val categoryAdapter = GroupAdapter<GroupieViewHolder>()
@@ -51,7 +49,8 @@ class WordsCategoryFragment : BaseFragment(),
         }
     }
 
-    override fun inputDialogTextAccepted(tag: String, text: String) = presenter.onCreateCategory(text)
+    override fun inputDialogTextAccepted(tag: String, text: String) =
+        presenter.onCreateCategory(text)
 
     override fun addCategory(index: Int, wordCategory: WordCategory) = categoryAdapter.add(
         index,
@@ -62,9 +61,11 @@ class WordsCategoryFragment : BaseFragment(),
         title = getString(R.string.create_category_title)
     ).show(childFragmentManager, "create_category")
 
-    override fun addAllCategory(list: List<WordCategory>) = categoryAdapter.addAll(list.map { mapToItem(it) })
+    override fun addAllCategory(list: List<WordCategory>) =
+        categoryAdapter.addAll(list.map { mapToItem(it) })
 
-    override fun updateCategoryList(list: List<WordCategory>) = categoryAdapter.updateAsync(list.map { mapToItem(it) })
+    override fun updateCategoryList(list: List<WordCategory>) =
+        categoryAdapter.updateAsync(list.map { mapToItem(it) })
 
     override fun showLoading(show: Boolean) {
         progressBar.isVisible = show

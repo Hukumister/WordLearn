@@ -24,11 +24,9 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 14.06.2019.
  */
-class LearnPhrasesFlowFragment : BaseFragment(),
+class LearnPhrasesFlowFragment : BaseFragment(R.layout.fragment_learn_phrases),
     LearnPhrasesView,
     CardStackListenerSimple {
-
-    override val layoutRes = R.layout.fragment_learn_phrases
 
     companion object {
 
@@ -37,11 +35,11 @@ class LearnPhrasesFlowFragment : BaseFragment(),
         private const val SWIPE_THRESHOLD = 0.5f
     }
 
-    @Inject
-    @InjectPresenter
+//    @Inject
+//    @InjectPresenter
     lateinit var presenter: LearnPhrasesPresenter
 
-    @ProvidePresenter
+//    @ProvidePresenter
     fun providePresenter() = presenter
 
     private lateinit var manager: CardStackLayoutManager

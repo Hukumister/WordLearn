@@ -16,14 +16,13 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 16.06.2019.
  */
-class PhraseTopicListFragment : BaseFragment(), PhraseTopicView {
-    override val layoutRes: Int = R.layout.fragment_phrase_topic_list
+class PhraseTopicListFragment : BaseFragment(R.layout.fragment_phrase_topic_list), PhraseTopicView {
 
 //    @Inject
-    @InjectPresenter
+//    @InjectPresenter
     lateinit var presenter: PhraseTopicListPresenter
 
-    @ProvidePresenter
+//    @ProvidePresenter
     fun providePresenter(): PhraseTopicListPresenter = presenter
 
     private val phraseTopicAdapter = GroupAdapter<GroupieViewHolder>()
