@@ -8,6 +8,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_create_word.*
 import ru.coderedwolf.mvi.core.MviView
+import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
@@ -82,7 +83,9 @@ class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
 
         wordLayout.error = (state.word.verifiable as? ResourceViolation)?.res?.resString()
         translationLayout.error = (state.translation.verifiable as? ResourceViolation)?.res?.resString()
-        saveButton.isEnabled = state.saveButtonEnable
+        saveButton.isEnabled = state.word.isValid
+                && state.translation.isValid
+                && state.determinate !is Determinate.Loading
     }
 
     private fun onClickRemoveExample(item: Item.WordExampleItem) = item.wordExample

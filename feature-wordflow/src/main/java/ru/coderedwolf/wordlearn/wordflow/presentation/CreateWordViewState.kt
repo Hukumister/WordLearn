@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
+import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.validator.NotValid
 import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
 import ru.coderedwolf.wordlearn.word.model.WordExample
@@ -9,7 +10,7 @@ import ru.coderedwolf.wordlearn.word.model.WordExample
  */
 data class CreateWordViewState(
     val categoryId: Long,
-    val saveButtonEnable: Boolean = false,
+    val determinate: Determinate = Determinate.Completed,
     val word: VerifiableValue<String> = VerifiableValue("", NotValid),
     val translation: VerifiableValue<String> = VerifiableValue("", NotValid),
     val association: String = "",

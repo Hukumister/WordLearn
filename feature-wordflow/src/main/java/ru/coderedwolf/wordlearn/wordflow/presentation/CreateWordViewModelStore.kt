@@ -92,7 +92,7 @@ class CreateWordViewModelStore @Inject constructor(
 
             is Action.AddExample -> state.copy(exampleListItem = state.exampleListItem + action.example.toItem())
             is Action.RemoveExample -> state.copy(exampleListItem = state.exampleListItem - action.example.toItem())
-
+            is Action.SaveWordResult -> state.copy(determinate = action.determinate)
             else -> state
         }
 
