@@ -1,5 +1,6 @@
-include ':common', ':mvi-core', ':api-wordset',
-
+include ':common',
+        ':mvi-core',
+        ':api-wordset',
         ':api-word',
         ':api-phrase',
         ':api-wordscategory',
