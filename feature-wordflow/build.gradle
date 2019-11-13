@@ -42,8 +42,6 @@ dependencies {
     implementation uiDeps.adapterDelegate
 
     implementation presentationDeps.cicerone
-    implementation presentationDeps.mviCore
-    implementation presentationDeps.mviCoreAndroid
 
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
@@ -63,4 +61,6 @@ dependencies {
     implementation project(':api-word')
 
     implementation project(':api-wordset')
+
+    implementation project(':mvi-core')
 }

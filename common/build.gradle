@@ -45,9 +45,6 @@ dependencies {
     implementation uiDeps.groupieExt
 
     implementation commonDeps.autoDispose
-    
-    implementation presentationDeps.mviCore
-    implementation presentationDeps.mviCoreAndroid
 
     implementation presentationDeps.lifecycleViewModel
     implementation presentationDeps.lifecycleCommon
