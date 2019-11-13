@@ -5,7 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_words_category_list.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -34,7 +34,7 @@ class WordsCategoryFragment : BaseFragment(),
     @ProvidePresenter
     fun providePresenter() = presenter
 
-    private val categoryAdapter = GroupAdapter<ViewHolder>()
+    private val categoryAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

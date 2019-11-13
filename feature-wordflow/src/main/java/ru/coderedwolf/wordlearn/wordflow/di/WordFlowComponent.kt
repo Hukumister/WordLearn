@@ -11,7 +11,6 @@ import ru.coderedwolf.wordlearn.database.mapper.WordMapper
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
 import ru.coderedwolf.wordlearn.wordflow.domain.repository.WordRepositoryImpl
 import ru.coderedwolf.wordlearn.wordflow.ui.WordFlowFragment
-import ru.coderedwolf.wordlearn.wordscategory.domain.WordsCategoryInteractor
 
 @Module(
     includes = [
@@ -65,7 +64,6 @@ interface WordFlowDependencies : FlowDependencies {
     fun resourceProvider(): ResourceProvider
     fun wordDao(): WordDao
     fun wordMapper(): WordMapper
-    fun wordsCategoryInteractor(): WordsCategoryInteractor
     fun errorHandler(): ErrorHandler
 }
 

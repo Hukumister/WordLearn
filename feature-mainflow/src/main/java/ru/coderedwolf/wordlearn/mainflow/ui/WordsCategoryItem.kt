@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.mainflow.ui
 
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_category.*
 import ru.coderedwolf.wordlearn.mainflow.R
 import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
@@ -12,7 +12,7 @@ import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
 
 class WordsCategoryItem(val wordCategory: WordCategory) : Item() {
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.categoryName.text = wordCategory.name
     }
 

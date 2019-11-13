@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Section
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.Direction
 import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
@@ -47,7 +47,7 @@ class LearnPhrasesFlowFragment : BaseFragment(),
     private lateinit var manager: CardStackLayoutManager
 
     private val mainSection = Section()
-    private val phrasesAdapter = GroupAdapter<ViewHolder>().apply {
+    private val phrasesAdapter = GroupAdapter<GroupieViewHolder>().apply {
         add(mainSection)
     }
 

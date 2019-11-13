@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation commonDeps.kotlin
-    implementation commonDeps.kotlinCoroutines
+
     implementation commonDeps.rxJava
 
     implementation commonDeps.dagger
@@ -35,15 +35,19 @@ dependencies {
 
     implementation commonDeps.threetenabp
 
+    implementation presentationDeps.cicerone
+
     implementation presentationDeps.moxyAndroidX
     kapt presentationDeps.moxyCompiler
 
-    implementation presentationDeps.cicerone
+    implementation uiDeps.adapterDelegate
 
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
+    implementation uiDeps.fragmentKtx
     implementation uiDeps.material
     implementation uiDeps.constraintLayout
+
     implementation uiDeps.groupie
     implementation uiDeps.groupieExt
 

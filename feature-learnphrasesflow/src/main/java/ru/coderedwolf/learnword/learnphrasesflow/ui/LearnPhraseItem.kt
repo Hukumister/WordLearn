@@ -2,7 +2,7 @@ package ru.coderedwolf.learnword.learnphrasesflow.ui
 
 import androidx.core.view.isVisible
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.item_learn_phrase.*
 import ru.coderedwolf.learnword.learnphrasesflow.R
 import ru.coderedwolf.wordlearn.common.extension.onClick
@@ -13,7 +13,7 @@ import ru.coderedwolf.wordlearn.phrase.model.LearnPhrase
  */
 class LearnPhraseItem(val learnPhrase: LearnPhrase) : Item() {
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.visibleButton.onClick { button ->
             button.isVisible = false
             viewHolder.phraseTranslation.isVisible = true

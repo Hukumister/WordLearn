@@ -1,14 +1,14 @@
 package ru.coderedwolf.learnword.learnphrasesflow.ui
 
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import ru.coderedwolf.learnword.learnphrasesflow.R
 
 /**
  * @author CodeRedWolf. Date 14.06.2019.
  */
 class LearnLoadingItem : Item() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         //ignore
     }
 

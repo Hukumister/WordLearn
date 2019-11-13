@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.Direction
 import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
@@ -46,7 +46,7 @@ class LearnWordsFlowFragment : BaseFragment(),
     @ProvidePresenter
     fun providePresenter() = presenter
 
-    private val wordAdapter = GroupAdapter<ViewHolder>()
+    private val wordAdapter = GroupAdapter<GroupieViewHolder>()
     private lateinit var manager: CardStackLayoutManager
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -94,8 +94,6 @@ class LearnWordsFlowFragment : BaseFragment(),
             Direction.Right -> wordsItem.let { presenter.onGotIt(it.learnWord) }
             else -> Timber.e("Unsupported direction on swipe")
         }
-
-        wordAdapter.removeGroup(0)
     }
 
     override fun addAll(learnList: List<LearnWord>) {
