@@ -1,14 +1,9 @@
-include ':common', ':mvi-core', ':api-wordset',
-
+include ':common',
+        ':mvi-core',
         ':api-word',
         ':api-phrase',
         ':api-wordscategory',
-
         ':database',
-
         ':feature-mainflow',
         ':feature-wordflow',
-        ':feature-learnwordsflow',
-        ':feature-learnphrasesflow',
-
         ':app'

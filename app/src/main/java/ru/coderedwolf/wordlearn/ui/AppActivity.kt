@@ -1,18 +1,14 @@
 package ru.coderedwolf.wordlearn.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import moxy.MvpAppCompatActivity
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 import ru.coderedwolf.wordlearn.R
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
-import ru.coderedwolf.wordlearn.common.extension.showProgressDialog
+import ru.coderedwolf.wordlearn.common.extension.setLaunchScreen
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
-import ru.coderedwolf.wordlearn.presentation.Launcher
-import ru.coderedwolf.wordlearn.presentation.LauncherView
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -22,7 +18,8 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 21.04.2019.
  */
-class AppActivity : MvpAppCompatActivity(), LauncherView {
+class AppActivity : AppCompatActivity() {
+
     private val currentFragment: BaseFragment?
         get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
 
@@ -44,20 +41,13 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    @Inject
-    @InjectPresenter
-    lateinit var launcher: Launcher
-
-    @ProvidePresenter
-    fun providePresenter(): Launcher = launcher
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         inject(componentName)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_container)
-        if (savedInstanceState == null) {
-            launcher.onColdStart()
+        if (supportFragmentManager.fragments.isEmpty()) {
+            navigator.setLaunchScreen(Flows.Main)
         }
     }
 
@@ -73,10 +63,6 @@ class AppActivity : MvpAppCompatActivity(), LauncherView {
 
     override fun onBackPressed() {
         currentFragment?.onBackPressed() ?: super.onBackPressed()
-    }
-
-    override fun blockLoading(show: Boolean) {
-        supportFragmentManager.showProgressDialog(show)
     }
 
     override fun onDestroy() {

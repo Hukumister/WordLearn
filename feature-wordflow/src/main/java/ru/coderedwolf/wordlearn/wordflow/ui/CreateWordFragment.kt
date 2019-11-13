@@ -27,7 +27,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 06.06.2019.
  */
-class CreateWordFragment : BaseFragment(),
+class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
     CreateWordExampleDialogFragment.OnCreateExampleListener,
     ObservableSource<UiEvent>,
     Consumer<CreateWordViewModel> {

@@ -24,7 +24,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 22.06.2019.
  */
-class LearnWordsFlowFragment : BaseFragment(),
+class LearnWordsFlowFragment : BaseFragment(R.layout.fragment_learn_words),
     LearnWordsView,
     CardStackListenerSimple {
 
@@ -37,13 +37,11 @@ class LearnWordsFlowFragment : BaseFragment(),
         private const val LOADING_MORE_THRESHOLD = 5
     }
 
-    override val layoutRes = R.layout.fragment_learn_words
-
-    @Inject
-    @InjectPresenter
+//    @Inject
+//    @InjectPresenter
     lateinit var presenter: LearnWordsPresenter
 
-    @ProvidePresenter
+//    @ProvidePresenter
     fun providePresenter() = presenter
 
     private val wordAdapter = GroupAdapter<GroupieViewHolder>()

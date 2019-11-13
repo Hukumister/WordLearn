@@ -15,9 +15,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 21.04.2019.
  */
-class MainFlowFragment : BaseFragment(), HasChildDependencies {
-
-    override val layoutRes = R.layout.fragment_main_flow
+class MainFlowFragment : BaseFragment(R.layout.fragment_main_flow), HasChildDependencies {
 
     @Inject override lateinit var dependencies: ComponentDependenciesProvider
 

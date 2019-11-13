@@ -2,17 +2,15 @@ package ru.coderedwolf.wordlearn.common.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import com.uber.autodispose.ObservableSubscribeProxy
 import com.uber.autodispose.autoDispose
 import io.reactivex.Observable
 import io.reactivex.annotations.CheckReturnValue
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import moxy.MvpAppCompatFragment
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.di.generateComponentName
@@ -20,7 +18,7 @@ import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
 const val STATE_COMPONENT_NAME = "state_component_name"
 
-abstract class BaseFragment : MvpAppCompatFragment(), ContextExtensionsHolder {
+abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes), ContextExtensionsHolder {
 
     private var fragmentComponentName: String = ""
     private var instanceStateSaved: Boolean = false
@@ -28,16 +26,11 @@ abstract class BaseFragment : MvpAppCompatFragment(), ContextExtensionsHolder {
     override val extensionContext: Context
         get() = requireContext()
 
-    protected abstract val layoutRes: Int
-
     override fun onCreate(savedInstanceState: Bundle?) {
         fragmentComponentName = savedInstanceState?.getString(STATE_COMPONENT_NAME) ?: generateComponentName()
         inject(fragmentComponentName)
         super.onCreate(savedInstanceState)
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        inflater.inflate(layoutRes, container, false)
 
     override fun onResume() {
         super.onResume()
@@ -68,10 +61,11 @@ abstract class BaseFragment : MvpAppCompatFragment(), ContextExtensionsHolder {
 
     private val featureDisposeCompositeDisposable = CompositeDisposable()
 
-    internal fun isRealRemoving(): Boolean = (isRemoving && !instanceStateSaved) || (parentFragment as BaseFragment).isRealRemoving()
+    internal fun isRealRemoving(): Boolean =
+        (isRemoving && !instanceStateSaved) || (parentFragment as BaseFragment).isRealRemoving()
 
     @CallSuper
-    open fun onRealRemoving(){
+    open fun onRealRemoving() {
         featureLifecycleScopeProvider.onDestroy()
         featureDisposeCompositeDisposable.dispose()
         clearInjector(fragmentComponentName)

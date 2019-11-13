@@ -84,11 +84,6 @@ dependencies {
     implementation dataDeps.roomKtx
     kapt dataDeps.roomCompiler
     /**
-     * Moxy
-     */
-    implementation presentationDeps.moxyAndroidX
-    kapt presentationDeps.moxyCompiler
-    /**
      * Gson
      */
     implementation dataDeps.gson
@@ -132,9 +127,5 @@ dependencies {
     implementation project(':feature-mainflow')
 
     implementation project(':feature-wordflow')
-
-    implementation project(':feature-learnwordsflow')
-
-    implementation project(':feature-learnphrasesflow')
 
 }
