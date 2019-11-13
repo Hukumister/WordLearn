@@ -13,14 +13,15 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 /**
  * @author CodeRedWolf. Date 13.10.2019.
  */
-abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
+abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
     initialState: State,
     bootstrapper: Bootstrapper<Action>? = null,
     private val schedulerProvider: SchedulerProvider,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
-    private val navigator: Navigator<State, Effect, NavigationEvent>? = null
-) : ViewModel(), Store<Action, State> {
+    private val viewEventProducer: ViewEventProducer<State, Effect, ViewEvent>? = null,
+    private val navigator: Navigator<State, Effect>? = null
+) : ViewModel(), Store<Action, State, ViewEvent> {
 
     private val wiring = CompositeDisposable()
     private var viewBind: Disposable? = null
@@ -28,8 +29,9 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
     private val stateSubject = BehaviorSubject.createDefault(initialState)
     private val actionSubject = PublishSubject.create<Action>()
     private val effectSubject = PublishSubject.create<Effect>()
+    private val viewEventSubject = PublishSubject.create<ViewEvent>()
 
-    private val navigationEventSubject = PublishSubject.create<NavigationEvent>()
+    private val stateEffectPairSubject = PublishSubject.create<Pair<State, Effect>>()
 
     init {
         effectSubject
@@ -46,9 +48,9 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
             .subscribe(effectSubject::onNext)
             .addTo(wiring)
 
-        navigationEventSubject
+        stateEffectPairSubject
             .observeOn(schedulerProvider.mainThread)
-            .subscribe(::onNavigationEvent)
+            .subscribe { (state, effect) -> navigator?.invoke(state, effect) }
             .addTo(wiring)
 
         bootstrapper
@@ -58,8 +60,13 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
     }
 
     @CallSuper
-    override fun bindView(mviView: MviView<Action, State>) {
+    override fun bindView(mviView: MviView<Action, State, ViewEvent>) {
         val disposable = CompositeDisposable()
+
+        viewEventSubject
+            .observeOn(schedulerProvider.mainThread)
+            .subscribe(mviView::route)
+            .addTo(disposable)
 
         stateSubject
             .observeOn(schedulerProvider.mainThread)
@@ -76,8 +83,6 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
     @CallSuper
     override fun unbindView() = viewBind?.dispose() ?: Unit
 
-    open fun onNavigationEvent(event: NavigationEvent) = Unit
-
     @CallSuper
     override fun onCleared() = wiring.dispose()
 
@@ -86,13 +91,20 @@ abstract class BaseViewModelStore<Action, State, Effect, NavigationEvent>(
         effect: Effect
     ): State = reducer
         .invoke(state, effect)
-        .also { newState -> navigatorInvoke(newState, effect) }
+        .also { newState ->
+            postChangedState(newState, effect)
+            viewEventProducerInvoke(newState, effect)
+        }
 
-    private fun navigatorInvoke(
+    private fun postChangedState(
         newState: State,
         effect: Effect
-    ) = navigator
-        ?.invoke(newState, effect)
-        ?.let(navigationEventSubject::onNext)
+    ) = stateEffectPairSubject.onNext(newState to effect)
 
+    private fun viewEventProducerInvoke(
+        newState: State,
+        effect: Effect
+    ) = viewEventProducer
+        ?.invoke(newState, effect)
+        ?.let(viewEventSubject::onNext)
 }
