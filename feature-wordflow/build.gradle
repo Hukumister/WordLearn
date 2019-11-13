@@ -39,9 +39,6 @@ dependencies {
     implementation commonDeps.rxAndroid
     implementation commonDeps.rxBind
 
-    implementation presentationDeps.moxyAndroidX
-    kapt presentationDeps.moxyCompiler
-
     implementation presentationDeps.cicerone
     implementation presentationDeps.mviCore
     implementation presentationDeps.mviCoreAndroid

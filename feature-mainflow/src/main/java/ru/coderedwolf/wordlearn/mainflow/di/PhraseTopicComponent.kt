@@ -12,7 +12,6 @@ import ru.coderedwolf.wordlearn.database.mapper.PhraseTopicMapper
 import ru.coderedwolf.wordlearn.mainflow.domain.repository.PhraseTopicRepository
 import ru.coderedwolf.wordlearn.mainflow.domain.repository.PhraseTopicRepositoryImpl
 import ru.coderedwolf.wordlearn.mainflow.presentation.PhraseTopicReachableFlows
-import ru.coderedwolf.wordlearn.mainflow.ui.PhraseTopicListFragment
 
 @Module
 object PhraseTopicComponentBuilderModule {
