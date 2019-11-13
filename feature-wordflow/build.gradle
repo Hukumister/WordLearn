@@ -39,6 +39,8 @@ dependencies {
     implementation commonDeps.rxAndroid
     implementation commonDeps.rxBind
 
+    implementation uiDeps.adapterDelegate
+
     implementation presentationDeps.cicerone
     implementation presentationDeps.mviCore
     implementation presentationDeps.mviCoreAndroid
