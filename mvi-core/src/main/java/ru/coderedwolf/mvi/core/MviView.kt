@@ -9,5 +9,5 @@ interface MviView<Action, State, Event> {
 
     val actions: Observable<Action>
     fun render(state: State)
-    fun route(event: Event)
+    fun route(event: Event) = Unit
 }
