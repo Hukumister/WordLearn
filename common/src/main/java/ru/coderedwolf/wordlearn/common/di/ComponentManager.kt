@@ -26,18 +26,14 @@ object ComponentManager {
 
     @Suppress("UNCHECKED_CAST")
     fun <T : Any> T.inject(injectorName: String) {
-        val injectorBuilder = builders[javaClass] as? InjectorBuilder<T> ?: return
-        getOrPutInjector(injectorName, injectorBuilder).inject(this)
+        var injector = injectors[injectorName]
+        if (injector == null) {
+            val injectorBuilder = builders[javaClass] as? InjectorBuilder<T> ?: return
+            injector = injectorBuilder.build(this)
+            injectors[injectorName] = injector
+        }
+        (injector as Injector<T>).inject(this)
     }
-
-    @Suppress("UNCHECKED_CAST")
-    fun <T> T.getOrPutInjector(
-        injectorName: String,
-        injectorBuilder: InjectorBuilder<T>
-    ): Injector<T> = injectors.getOrPut(injectorName, { injectorBuilder.build(this) }) as Injector<T>
-
-    @Suppress("UNCHECKED_CAST")
-    fun <T> getInjector(injectorName: String): Injector<T> = injectors.getValue(injectorName) as Injector<T>
 
     fun clearInjector(injectorName: String) {
         injectors.remove(injectorName)
