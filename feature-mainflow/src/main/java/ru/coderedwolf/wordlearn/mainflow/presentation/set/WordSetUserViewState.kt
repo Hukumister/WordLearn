@@ -1,6 +1,8 @@
 package ru.coderedwolf.wordlearn.mainflow.presentation.set
 
 import ru.coderedwolf.wordlearn.common.domain.result.Product
+import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.Button
+import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.ButtonAdapterDelegate
 import ru.coderedwolf.wordlearn.mainflow.ui.word.set.list.WordSetDelegate
 
 /**
@@ -13,7 +15,7 @@ data class WordSetUserViewState(
 
     sealed class Item {
 
-        object AddWordSetItem : Item()
+        class AddWordSetItem(button: Button) : Item(), ButtonAdapterDelegate.RenderContract by button
 
         data class WordSetItem(
             override val title: CharSequence,

@@ -18,8 +18,7 @@ class WordSetDelegate<ItemModel> : ItemAdapterDelegate<ItemModel, RenderContact>
         @get:ColorInt val color: Int
     }
 
-    override val layoutRes: Int
-        get() = R.layout.item_word_set
+    override val layoutRes: Int = R.layout.item_word_set
 
     override fun isForViewType(item: ItemModel): Boolean = item is RenderContact
 
