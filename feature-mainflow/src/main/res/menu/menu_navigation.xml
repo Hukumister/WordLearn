@@ -7,9 +7,9 @@
         android:title="@string/bottom_navigation_title_action_search" />
 
     <item
-        android:id="@+id/action_words"
+        android:id="@+id/action_word_set"
         android:icon="@drawable/ic_menu_black_24dp"
-        android:title="@string/bottom_navigation_title_action_words" />
+        android:title="@string/bottom_navigation_title_action_word_set" />
 
     <item
         android:id="@+id/action_learn"
