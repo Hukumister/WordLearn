@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:text="@string/add" />
+                android:text="@string/action_add" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>
