@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import ru.coderedwolf.wordlearn.mainflow.R
+import ru.coderedwolf.wordlearn.mainflow.ui.StubFragment
+import ru.coderedwolf.wordlearn.mainflow.ui.word.set.user.WordSetUserFragment
 
 /**
  * @author CodeRedWolf. Date 11.10.2019.
@@ -21,7 +23,7 @@ class WordSetPagerAdapter(
 
     override fun getItem(position: Int): Fragment = when (position) {
         0 -> WordSetUserFragment.newInstance()
-        1 -> WordSetUserFragment.newInstance()
+        1 -> StubFragment()
         else -> throw IllegalStateException("Unknown fragment position")
     }
 
