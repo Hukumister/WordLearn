@@ -31,7 +31,11 @@
 
         <item name="toolbarStyle">@style/Component.Toolbar</item>
         <item name="buttonBarButtonStyle">@style/Component.TextButton.Dialog</item>
+        <item name="buttonStyle">@style/Component.Button</item>
 
+        <item name="textInputLayoutStyle">
+            @style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
+        </item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
