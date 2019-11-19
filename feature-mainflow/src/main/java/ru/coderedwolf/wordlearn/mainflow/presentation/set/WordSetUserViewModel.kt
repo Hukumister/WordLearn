@@ -2,16 +2,16 @@ package ru.coderedwolf.wordlearn.mainflow.presentation.set
 
 import io.reactivex.Observable
 import ru.coderedwolf.api.wordset.domain.repository.WordSetRepository
+import ru.coderedwolf.api.wordset.model.WordSet
 import ru.coderedwolf.mvi.core.*
 import ru.coderedwolf.wordlearn.common.domain.result.Product
 import ru.coderedwolf.wordlearn.common.domain.result.asProduct
-import ru.coderedwolf.wordlearn.common.domain.result.mapProduct
+import ru.coderedwolf.wordlearn.common.domain.result.map
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.util.asObservable
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel.Action
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel.ViewEvent
-import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewState.Item
 import ru.coderedwolf.wordlearn.mainflow.ui.MainFlowScreens
 import javax.inject.Inject
 
@@ -39,7 +39,7 @@ class WordSetUserViewModel @Inject constructor(
         object LoadList : Action()
         data class WordSetClick(val id: Long) : Action()
 
-        data class LoadListResult(val list: Product<List<Item>>) : Action()
+        data class LoadListResult(val list: Product<List<WordSet>>) : Action()
     }
 
     sealed class ViewEvent {
@@ -49,7 +49,10 @@ class WordSetUserViewModel @Inject constructor(
     private class ReducerImpl : Reducer<WordSetUserViewState, Action> {
 
         override fun invoke(state: WordSetUserViewState, action: Action): WordSetUserViewState = when (action) {
-            is Action.LoadListResult -> state.copy(items = action.list)
+            is Action.LoadListResult -> {
+                val items = action.list.map(WordSetUserFactory::item)
+                state.copy(items = items)
+            }
             else -> state
         }
 
@@ -58,7 +61,7 @@ class WordSetUserViewModel @Inject constructor(
     private class NavigatorImpl(private val router: FlowRouter) : Navigator<WordSetUserViewState, Action> {
 
         override fun invoke(state: WordSetUserViewState, action: Action) = when (action) {
-            is Action.WordSetClick -> router.navigateTo(MainFlowScreens.WordsCategory)
+            is Action.WordSetClick -> router.navigateTo(MainFlowScreens.WordSet)
             is Action.Back -> router.exit()
             else -> Unit
         }
@@ -84,9 +87,8 @@ class WordSetUserViewModel @Inject constructor(
     ) : Middleware<Action, WordSetUserViewState, Action> {
 
         override fun invoke(action: Action, state: WordSetUserViewState): Observable<Action> = when (action) {
-            is Action.LoadList -> wordSetRepository.findAllUserSet()
+            is Action.LoadList -> wordSetRepository.observableAllUserSet()
                 .asProduct()
-                .mapProduct(WordSetUserFactory::item)
                 .map(Action::LoadListResult)
             else -> action.asObservable()
         }
