@@ -7,7 +7,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
-        style="@style/Component.Button"
+        style="?buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="?listPreferredItemPaddingStart"
