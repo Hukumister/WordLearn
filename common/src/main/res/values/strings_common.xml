@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Common-->
-    <string name="ok">OK</string>
-    <string name="create">Создать</string>
-    <string name="cancel">Отмена</string>
-    <string name="add">Добавить</string>
+    <string name="action_ok">OK</string>
+    <string name="action_create">Создать</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_add">Добавить</string>
+    <string name="action_save">Сохранить</string>
 
     <!--Valid field-->
     <string name="error_empty">Должно быть заполнено</string>
