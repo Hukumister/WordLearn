@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.common.domain.result
 
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.annotations.CheckReturnValue
@@ -41,8 +42,19 @@ fun <T> Single<T>.asProduct(): Observable<Product<T>> = map<Product<T>> { data -
     .startWith(Product.Loading)
 
 /**
- * Single<T> -> Observable<Product<T>>
+ * Flowable<T> -> Observable<Product<T>>
  * Wrap T to Product<T>
+ */
+@CheckReturnValue
+@SchedulerSupport(SchedulerSupport.NONE)
+fun <T> Flowable<T>.asProduct(): Observable<Product<T>> = map<Product<T>> { data -> Product.Data(data) }
+    .onErrorReturn { throwable -> Product.Error(throwable) }
+    .toObservable()
+    .startWith(Product.Loading)
+
+/**
+ * Observable<Product<T>> -> Observable<Product<R>>
+ * Map value of income product T to value R of result Product<R>
  */
 @CheckReturnValue
 @SchedulerSupport(SchedulerSupport.NONE)
