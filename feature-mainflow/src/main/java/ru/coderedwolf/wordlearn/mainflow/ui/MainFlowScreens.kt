@@ -1,10 +1,11 @@
 package ru.coderedwolf.wordlearn.mainflow.ui
 
+import ru.coderedwolf.wordlearn.mainflow.ui.word.set.WordSetFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object MainFlowScreens {
-    object WordsCategory : SupportAppScreen() {
-        override fun getFragment() = StubFragment()
+    object WordSet : SupportAppScreen() {
+        override fun getFragment() = WordSetFragment.newInstance()
     }
 
     object PhraseTopic : SupportAppScreen() {

@@ -1,4 +1,4 @@
-package ru.coderedwolf.wordlearn.mainflow.ui.word.set
+package ru.coderedwolf.wordlearn.mainflow.ui.word.set.user
 
 import android.os.Bundle
 import android.view.View
