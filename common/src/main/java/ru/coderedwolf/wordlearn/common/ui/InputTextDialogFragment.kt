@@ -81,7 +81,7 @@ class InputTextDialogFragment : DialogFragment() {
         val textButton = if (positiveText.isNotEmpty()) {
             positiveText
         } else {
-            getString(R.string.ok)
+            getString(R.string.action_ok)
         }
         setPositiveButton(textButton) { _, _ ->
             val string = requireDialog().inputText.text.toString()
