@@ -19,7 +19,6 @@ ext {
 
     / presentation /
     cicerone_version = '5.0.0'
-    mvicore_version = '1.2.3'
     lifecycle_version = '2.1.0'
 
     / logging /
@@ -81,9 +80,6 @@ ext {
     ]
 
     presentationDeps = [
-            mviCore           : "com.github.badoo.mvicore:mvicore:$mvicore_version",
-            mviCoreAndroid    : "com.github.badoo.mvicore:mvicore-android:$mvicore_version",
-
             cicerone          : "ru.terrakok.cicerone:cicerone:$cicerone_version",
 
             lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
