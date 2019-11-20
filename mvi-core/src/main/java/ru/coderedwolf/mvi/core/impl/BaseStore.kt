@@ -1,27 +1,31 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.core.impl
 
-import androidx.annotation.CallSuper
-import androidx.lifecycle.ViewModel
+import android.os.Looper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
+import ru.coderedwolf.mvi.core.MviView
+import ru.coderedwolf.mvi.core.Store
+import ru.coderedwolf.mvi.core.elements.*
+import ru.coderedwolf.mvi.core.schedule.SchedulerProvider
 
 /**
- * @author CodeRedWolf. Date 13.10.2019.
+ * @author CodeRedWolf.
  */
-abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
+class BaseStore<Action, State, ViewEvent, Effect>(
     initialState: State,
-    bootstrapper: Bootstrapper<Action>? = null,
-    private val schedulerProvider: SchedulerProvider,
+    private val mainScheduler: SchedulerProvider,
+    private val singleScheduler: SchedulerProvider,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
+    private val bootstrapper: Bootstrapper<Action>? = null,
     private val viewEventProducer: ViewEventProducer<State, Effect, ViewEvent>? = null,
     private val navigator: Navigator<State, Effect>? = null
-) : ViewModel(), Store<Action, State, ViewEvent> {
+) : Store<Action, State, ViewEvent> {
 
     private val wiring = CompositeDisposable()
     private var viewBind: Disposable? = null
@@ -33,10 +37,10 @@ abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
 
     private val stateEffectPairSubject = PublishSubject.create<Pair<State, Effect>>()
 
-    init {
+    fun initStore() {
         effectSubject
             .withLatestFrom(stateSubject)
-            .observeOn(schedulerProvider.single)
+            .observeOn(singleScheduler.invoke())
             .map { (effect, state) -> reduceInvoke(state, effect) }
             .distinctUntilChanged()
             .subscribe(stateSubject::onNext)
@@ -49,7 +53,7 @@ abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
             .addTo(wiring)
 
         stateEffectPairSubject
-            .observeOn(schedulerProvider.mainThread)
+            .observeOn(mainScheduler.invoke())
             .subscribe { (state, effect) -> navigator?.invoke(state, effect) }
             .addTo(wiring)
 
@@ -59,32 +63,35 @@ abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
             ?.addTo(wiring)
     }
 
-    @CallSuper
+    fun destroyStore() = wiring.dispose()
+
     override fun bindView(mviView: MviView<Action, State, ViewEvent>) {
+        check(Looper.myLooper() == Looper.getMainLooper()) { "bindView must be called only from main thread" }
+        check(viewBind?.isDisposed ?: true) { "View bind didn't dispose last time" }
+
         val disposable = CompositeDisposable()
 
         viewEventSubject
-            .observeOn(schedulerProvider.mainThread)
+            .observeOn(mainScheduler.invoke())
             .subscribe(mviView::route)
             .addTo(disposable)
 
-        stateSubject
-            .observeOn(schedulerProvider.mainThread)
+        disposable += stateSubject
+            .observeOn(mainScheduler.invoke())
             .subscribe(mviView::render)
             .addTo(disposable)
 
-        mviView.actions
+        disposable += mviView.actions
             .subscribe(actionSubject::onNext)
             .addTo(disposable)
 
         viewBind = disposable
     }
 
-    @CallSuper
-    override fun unbindView() = viewBind?.dispose() ?: Unit
-
-    @CallSuper
-    override fun onCleared() = wiring.dispose()
+    override fun unbindView() {
+        check(Looper.myLooper() == Looper.getMainLooper()) { "unbindView must be called only from main thread" }
+        viewBind?.dispose()
+    }
 
     private fun reduceInvoke(
         state: State,
@@ -107,4 +114,5 @@ abstract class BaseViewModelStore<Action, State, Effect, ViewEvent>(
     ) = viewEventProducer
         ?.invoke(newState, effect)
         ?.let(viewEventSubject::onNext)
+
 }

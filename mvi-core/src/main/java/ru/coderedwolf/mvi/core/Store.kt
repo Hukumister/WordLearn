@@ -5,6 +5,13 @@ package ru.coderedwolf.mvi.core
  */
 interface Store<Action, State, ViewEvent> {
 
+    /**
+     *
+     */
     fun bindView(mviView: MviView<Action, State, ViewEvent>)
+
+    /**
+     *
+     */
     fun unbindView()
 }
