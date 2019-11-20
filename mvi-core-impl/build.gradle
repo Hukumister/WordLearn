@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+
 android {
     compileSdkVersion target_sdk_version
 
@@ -22,8 +23,18 @@ android {
 dependencies {
     implementation commonDeps.kotlin
 
+    /**
+     * Rx java
+     */
     implementation commonDeps.rxJava
     implementation commonDeps.rxKotlin
+    implementation commonDeps.rxAndroid
 
-    testImplementation testDeps.junit
+    /**
+     * ViewModel
+     */
+    implementation presentationDeps.lifecycleViewModel
+    implementation presentationDeps.lifecycleCommon
+
+    implementation project(':mvi-core')
 }
