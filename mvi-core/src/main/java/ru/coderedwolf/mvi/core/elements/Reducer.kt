@@ -1,4 +1,4 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.core.elements
 
 /**
  * @author CodeRedWolf. Date 13.10.2019.

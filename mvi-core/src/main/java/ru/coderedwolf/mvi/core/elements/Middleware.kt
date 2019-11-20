@@ -1,4 +1,4 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.core.elements
 
 import io.reactivex.Observable
 
