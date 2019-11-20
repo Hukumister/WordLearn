@@ -1,10 +1,10 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
 import io.reactivex.Observable
-import ru.coderedwolf.mvi.core.Middleware
-import ru.coderedwolf.mvi.core.Navigator
-import ru.coderedwolf.mvi.core.OnlyActionViewModelStore
-import ru.coderedwolf.mvi.core.Reducer
+import ru.coderedwolf.mvi.core.elements.Middleware
+import ru.coderedwolf.mvi.core.elements.Navigator
+import ru.coderedwolf.viewmodel.OnlyActionViewModelStore
+import ru.coderedwolf.mvi.core.elements.Reducer
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
@@ -20,11 +20,9 @@ import javax.inject.Inject
 class CreateWordViewModelStore @Inject constructor(
     categoryId: Long,
     router: FlowRouter,
-    schedulerProvider: SchedulerProvider,
     wordRepository: WordRepository
 ) : OnlyActionViewModelStore<Action, CreateWordViewState, Nothing>(
     initialState = CreateWordViewState(categoryId),
-    schedulerProvider = schedulerProvider,
     navigator = NavigatorImpl(router),
     middleware = MiddleWareImpl(wordRepository),
     reducer = ReducerImpl()
@@ -100,7 +98,8 @@ class CreateWordViewModelStore @Inject constructor(
 
     }
 
-    class NavigatorImpl(private val flowRouter: FlowRouter) : Navigator<CreateWordViewState, Action> {
+    class NavigatorImpl(private val flowRouter: FlowRouter) :
+        Navigator<CreateWordViewState, Action> {
 
         override fun invoke(state: CreateWordViewState, action: Action) = when (action) {
             is Action.SaveWordResult -> when (action.determinate) {

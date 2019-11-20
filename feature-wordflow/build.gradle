@@ -59,4 +59,6 @@ dependencies {
     implementation project(':api-word')
 
     implementation project(':mvi-core')
+    implementation project(':mvi-core-impl')
+
 }
