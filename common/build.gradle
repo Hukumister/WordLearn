@@ -47,4 +47,8 @@ dependencies {
     implementation commonDeps.autoDispose
 
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
+
+    implementation project(':mvi-core')
+
+    implementation project(':mvi-core-impl')
 }
