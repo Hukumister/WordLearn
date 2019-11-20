@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_word_user_set.*
-import ru.coderedwolf.mvi.core.MviView
+import ru.coderedwolf.mvi.core.Store
 import ru.coderedwolf.wordlearn.common.domain.result.Product
-import ru.coderedwolf.wordlearn.common.ui.BaseFragment
+import ru.coderedwolf.wordlearn.common.ui.MviFragment
 import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultClicker
 import ru.coderedwolf.wordlearn.common.ui.adapter.ItemAsyncAdapter
 import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.ButtonAdapterDelegate
@@ -28,8 +28,7 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 11.10.2019.
  */
-class WordSetUserFragment : BaseFragment(R.layout.fragment_word_user_set),
-    MviView<Action, WordSetUserViewState, ViewEvent> {
+class WordSetUserFragment : MviFragment<Action, WordSetUserViewState, ViewEvent>(R.layout.fragment_word_user_set) {
 
     companion object {
 
@@ -42,23 +41,13 @@ class WordSetUserFragment : BaseFragment(R.layout.fragment_word_user_set),
         viewModelFactory
     }
 
-    private val source = PublishSubject.create<Action>()
+    override val store: Store<Action, WordSetUserViewState, ViewEvent> = wordSetUserViewModel
 
     private val itemAdapter: ItemAsyncAdapter<Item> by unsafeLazy {
         ItemAsyncAdapter.Builder<Item>()
             .add(WordSetDelegate())
             .add(ButtonAdapterDelegate(), DefaultClicker(::onClickAddSet))
             .build()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        wordSetUserViewModel.bindView(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        wordSetUserViewModel.unbindView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,10 +61,7 @@ class WordSetUserFragment : BaseFragment(R.layout.fragment_word_user_set),
 
     }
 
-    private fun onClickAddSet(item: Item) = source.onNext(Action.CreateNew)
-
-    override val actions: Observable<Action>
-        get() = source.hide()
+    private fun onClickAddSet(item: Item) = postAction(Action.CreateNew)
 
     override fun render(state: WordSetUserViewState) = when (val items = state.items) {
         is Product.Data -> itemAdapter.updateItems(items.value)

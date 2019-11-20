@@ -3,11 +3,11 @@ package ru.coderedwolf.wordlearn.mainflow.presentation.set
 import io.reactivex.Observable
 import ru.coderedwolf.api.wordset.domain.repository.WordSetRepository
 import ru.coderedwolf.api.wordset.model.WordSet
-import ru.coderedwolf.mvi.core.*
+import ru.coderedwolf.mvi.core.elements.*
+import ru.coderedwolf.viewmodel.OnlyActionViewModelStore
 import ru.coderedwolf.wordlearn.common.domain.result.Product
 import ru.coderedwolf.wordlearn.common.domain.result.asProduct
 import ru.coderedwolf.wordlearn.common.domain.result.map
-import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.util.asObservable
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel.Action
@@ -19,7 +19,6 @@ import javax.inject.Inject
  * @author CodeRedWolf. Date 11.10.2019.
  */
 class WordSetUserViewModel @Inject constructor(
-    schedulerProvider: SchedulerProvider,
     wordSetRepository: WordSetRepository,
     router: FlowRouter
 ) : OnlyActionViewModelStore<Action, WordSetUserViewState, ViewEvent>(
@@ -27,7 +26,6 @@ class WordSetUserViewModel @Inject constructor(
     bootstrapper = BootstrapperImpl(),
     reducer = ReducerImpl(),
     navigator = NavigatorImpl(router),
-    schedulerProvider = schedulerProvider,
     viewEventProducer = ViewEventProducerImpl(),
     middleware = MiddleWareImpl(wordSetRepository)
 ) {
