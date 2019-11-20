@@ -61,8 +61,8 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes), Co
 
     private val featureDisposeCompositeDisposable = CompositeDisposable()
 
-    internal fun isRealRemoving(): Boolean =
-        (isRemoving && !instanceStateSaved) || (parentFragment as BaseFragment).isRealRemoving()
+    private fun isRealRemoving(): Boolean =
+        (isRemoving && !instanceStateSaved) || (parentFragment as? BaseFragment)?.isRealRemoving() ?: false
 
     @CallSuper
     open fun onRealRemoving() {

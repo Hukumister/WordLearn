@@ -1,7 +1,7 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.viewmodel
 
 import io.reactivex.Observable
-import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
+import ru.coderedwolf.mvi.core.elements.*
 
 /**
  * @author CodeRedWolf. Date 14.10.2019.
@@ -9,14 +9,12 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 abstract class ReducerViewModelStore<Action, State, ViewEvent>(
     initialState: State,
     reducer: Reducer<State, Action>,
-    schedulerProvider: SchedulerProvider,
     viewEventProducer: ViewEventProducer<State, Action, ViewEvent>? = null,
     navigator: Navigator<State, Action>? = null,
     bootstrapper: Bootstrapper<Action>? = null
 ) : OnlyActionViewModelStore<Action, State, ViewEvent>(
     initialState = initialState,
     reducer = reducer,
-    schedulerProvider = schedulerProvider,
     middleware = BypassMiddleware<State, Action>(),
     navigator = navigator,
     viewEventProducer = viewEventProducer,

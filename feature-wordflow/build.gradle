@@ -63,4 +63,6 @@ dependencies {
     implementation project(':api-wordset')
 
     implementation project(':mvi-core')
+    implementation project(':mvi-core-impl')
+
 }

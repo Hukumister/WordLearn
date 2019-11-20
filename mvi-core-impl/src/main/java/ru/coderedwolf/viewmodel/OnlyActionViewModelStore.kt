@@ -1,6 +1,6 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.viewmodel
 
-import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
+import ru.coderedwolf.mvi.core.elements.*
 
 /**
  * @author CodeRedWolf. Date 08.11.2019.
@@ -8,15 +8,13 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 abstract class OnlyActionViewModelStore<Action, State, ViewEvent>(
     initialState: State,
     reducer: Reducer<State, Action>,
-    schedulerProvider: SchedulerProvider,
     middleware: Middleware<Action, State, Action>,
     viewEventProducer: ViewEventProducer<State, Action, ViewEvent>? = null,
     navigator: Navigator<State, Action>? = null,
     bootstrapper: Bootstrapper<Action>? = null
-) : BaseViewModelStore<Action, State, Action, ViewEvent>(
+) : BaseViewModelStore<Action, State, ViewEvent, Action>(
     initialState = initialState,
     reducer = reducer,
-    schedulerProvider = schedulerProvider,
     middleware = middleware,
     navigator = navigator,
     viewEventProducer = viewEventProducer,

@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.coderedwolf.mvi.core" />
+<manifest package="ru.coderedwolf.mvi.core" />

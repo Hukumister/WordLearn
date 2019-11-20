@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_create_word.*
-import ru.coderedwolf.mvi.core.MviView
+import ru.coderedwolf.mvi.core.Store
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
-import ru.coderedwolf.wordlearn.common.ui.BaseFragment
+import ru.coderedwolf.wordlearn.common.ui.MviFragment
 import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultClicker
 import ru.coderedwolf.wordlearn.common.ui.adapter.ItemAsyncAdapter
 import ru.coderedwolf.wordlearn.word.model.WordExample
@@ -27,14 +25,8 @@ import javax.inject.Inject
 /**
  * @author CodeRedWolf. Date 06.06.2019.
  */
-class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
-    CreateWordExampleDialogFragment.OnCreateExampleListener,
-    MviView<Action, CreateWordViewState, Nothing> {
-
-    override val actions: Observable<Action>
-        get() = source.hide()
-
-    private val source = PublishSubject.create<Action>()
+class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.layout.fragment_create_word),
+    CreateWordExampleDialogFragment.OnCreateExampleListener {
 
     private lateinit var wordExampleAdapter: ItemAsyncAdapter<Item>
 
@@ -44,6 +36,8 @@ class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
     @Inject lateinit var schedulerProvider: SchedulerProvider
     @Inject lateinit var router: FlowRouter
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override val store: Store<Action, CreateWordViewState, Nothing> = viewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -59,23 +53,13 @@ class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
             adapter = wordExampleAdapter
         }
 
-        saveButton.onClick { source.onNext(Action.SaveWord) }
+        saveButton.onClick { postAction(Action.SaveWord) }
 
         word.connect(Action::ChangeWord)
         transcription.connect(Action::ChangeTranscription)
         translation.connect(Action::ChangeTranslation)
         association.connect(Action::ChangeAssociation)
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.bindView(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.unbindView()
     }
 
     override fun render(state: CreateWordViewState) {
@@ -90,13 +74,13 @@ class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
 
     private fun onClickRemoveExample(item: Item.WordExampleItem) = item.wordExample
         .let(Action::RemoveExample)
-        .let(source::onNext)
+        .let(::postAction)
 
     private fun updateExampleList(list: List<Item>) = wordExampleAdapter.updateItems(list)
 
     override fun onCreateWordExample(wordExample: WordExample) = wordExample
         .let(Action::AddExample)
-        .let(source::onNext)
+        .let(::postAction)
 
     private fun showDialogCreateExample() = CreateWordExampleDialogFragment.instance()
         .show(childFragmentManager, CreateWordExampleDialogFragment.TAG)
@@ -115,6 +99,6 @@ class CreateWordFragment : BaseFragment(R.layout.fragment_create_word),
         .observeOn(schedulerProvider.computation)
         .map { event -> action(event.text()) }
         .autoDisposable()
-        .subscribe(source)
+        .subscribe(::postAction)
 
 }
