@@ -4,7 +4,6 @@ import android.os.Looper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -76,12 +75,12 @@ class BaseStore<Action, State, ViewEvent, Effect>(
             .subscribe(mviView::route)
             .addTo(disposable)
 
-        disposable += stateSubject
+        stateSubject
             .observeOn(mainScheduler.invoke())
             .subscribe(mviView::render)
             .addTo(disposable)
 
-        disposable += mviView.actions
+        mviView.actions
             .subscribe(actionSubject::onNext)
             .addTo(disposable)
 
