@@ -1,6 +1,5 @@
 package ru.coderedwolf.mvi.core.impl
 
-import android.os.Looper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
@@ -65,7 +64,6 @@ class BaseStore<Action, State, ViewEvent, Effect>(
     fun destroyStore() = wiring.dispose()
 
     override fun bindView(mviView: MviView<Action, State, ViewEvent>) {
-        check(Looper.myLooper() == Looper.getMainLooper()) { "bindView must be called only from main thread" }
         check(viewBind?.isDisposed ?: true) { "View bind didn't dispose last time" }
 
         val disposable = CompositeDisposable()
@@ -88,7 +86,6 @@ class BaseStore<Action, State, ViewEvent, Effect>(
     }
 
     override fun unbindView() {
-        check(Looper.myLooper() == Looper.getMainLooper()) { "unbindView must be called only from main thread" }
         viewBind?.dispose()
     }
 
