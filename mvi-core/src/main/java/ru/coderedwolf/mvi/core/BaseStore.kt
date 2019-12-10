@@ -1,23 +1,20 @@
-package ru.coderedwolf.mvi.core.impl
+package ru.coderedwolf.mvi.core
 
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import ru.coderedwolf.mvi.core.MviView
-import ru.coderedwolf.mvi.core.Store
 import ru.coderedwolf.mvi.core.elements.*
-import ru.coderedwolf.mvi.core.schedule.SchedulerProvider
 
 /**
  * @author CodeRedWolf.
  */
-class BaseStore<Action, State, ViewEvent, Effect>(
+open class BaseStore<Action, State, ViewEvent, Effect>(
     initialState: State,
-    private val mainScheduler: SchedulerProvider,
-    private val singleScheduler: SchedulerProvider,
+    private val mainScheduler: Scheduler,
+    private val singleScheduler: Scheduler,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
     private val bootstrapper: Bootstrapper<Action>? = null,
@@ -25,8 +22,8 @@ class BaseStore<Action, State, ViewEvent, Effect>(
     private val navigator: Navigator<State, Effect>? = null
 ) : Store<Action, State, ViewEvent> {
 
-    private val wiring = CompositeDisposable()
-    private var viewBind: Disposable? = null
+    private val viewBind = CompositeDisposable()
+    private val wiring = CompositeDisposable(viewBind)
 
     private val stateSubject = BehaviorSubject.createDefault(initialState)
     private val actionSubject = PublishSubject.create<Action>()
@@ -38,7 +35,7 @@ class BaseStore<Action, State, ViewEvent, Effect>(
     fun initStore() {
         effectSubject
             .withLatestFrom(stateSubject)
-            .observeOn(singleScheduler.invoke())
+            .observeOn(singleScheduler)
             .map { (effect, state) -> reduceInvoke(state, effect) }
             .distinctUntilChanged()
             .subscribe(stateSubject::onNext)
@@ -51,7 +48,7 @@ class BaseStore<Action, State, ViewEvent, Effect>(
             .addTo(wiring)
 
         stateEffectPairSubject
-            .observeOn(mainScheduler.invoke())
+            .observeOn(mainScheduler)
             .subscribe { (state, effect) -> navigator?.invoke(state, effect) }
             .addTo(wiring)
 
@@ -64,29 +61,25 @@ class BaseStore<Action, State, ViewEvent, Effect>(
     fun destroyStore() = wiring.dispose()
 
     override fun bindView(mviView: MviView<Action, State, ViewEvent>) {
-        check(viewBind?.isDisposed ?: true) { "View bind didn't dispose last time" }
-
-        val disposable = CompositeDisposable()
+        check(viewBind.size() == 0) { "View bind didn't dispose last time" }
 
         viewEventSubject
-            .observeOn(mainScheduler.invoke())
+            .observeOn(mainScheduler)
             .subscribe(mviView::route)
-            .addTo(disposable)
+            .addTo(viewBind)
 
         stateSubject
-            .observeOn(mainScheduler.invoke())
+            .observeOn(mainScheduler)
             .subscribe(mviView::render)
-            .addTo(disposable)
+            .addTo(viewBind)
 
         mviView.actions
             .subscribe(actionSubject::onNext)
-            .addTo(disposable)
-
-        viewBind = disposable
+            .addTo(viewBind)
     }
 
     override fun unbindView() {
-        viewBind?.dispose()
+        viewBind.clear()
     }
 
     private fun reduceInvoke(
@@ -110,5 +103,4 @@ class BaseStore<Action, State, ViewEvent, Effect>(
     ) = viewEventProducer
         ?.invoke(newState, effect)
         ?.let(viewEventSubject::onNext)
-
 }

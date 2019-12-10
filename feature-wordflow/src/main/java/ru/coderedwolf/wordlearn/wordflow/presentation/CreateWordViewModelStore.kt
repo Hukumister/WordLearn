@@ -7,7 +7,6 @@ import ru.coderedwolf.viewmodel.OnlyActionViewModelStore
 import ru.coderedwolf.mvi.core.elements.Reducer
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate
-import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
