@@ -2,6 +2,7 @@ package ru.coderedwolf.mvi.core
 
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
 import io.reactivex.subjects.BehaviorSubject
@@ -14,7 +15,6 @@ import ru.coderedwolf.mvi.core.elements.*
 open class BaseStore<Action, State, ViewEvent, Effect>(
     initialState: State,
     private val mainScheduler: Scheduler,
-    private val singleScheduler: Scheduler,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
     private val bootstrapper: Bootstrapper<Action>? = null,
@@ -33,11 +33,11 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
     private val stateEffectPairSubject = PublishSubject.create<Pair<State, Effect>>()
 
     fun initStore() {
-        effectSubject
-            .withLatestFrom(stateSubject)
-            .observeOn(singleScheduler)
+        Observables.zip(
+            effectSubject,
+            stateSubject
+        )
             .map { (effect, state) -> reduceInvoke(state, effect) }
-            .distinctUntilChanged()
             .subscribe(stateSubject::onNext)
             .addTo(wiring)
 
@@ -61,6 +61,7 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
     fun destroyStore() = wiring.dispose()
 
     override fun bindView(mviView: MviView<Action, State, ViewEvent>) {
+        check(!wiring.isDisposed) { "Attempt to bind view after the store was destroyed" }
         check(viewBind.size() == 0) { "View bind didn't dispose last time" }
 
         viewEventSubject
@@ -69,6 +70,7 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
             .addTo(viewBind)
 
         stateSubject
+            .distinctUntilChanged()
             .observeOn(mainScheduler)
             .subscribe(mviView::render)
             .addTo(viewBind)
