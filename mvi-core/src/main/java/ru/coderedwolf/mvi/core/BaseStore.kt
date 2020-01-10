@@ -2,10 +2,11 @@ package ru.coderedwolf.mvi.core
 
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.Observables
+import io.reactivex.processors.BehaviorProcessor
+import io.reactivex.processors.PublishProcessor
+import io.reactivex.rxkotlin.Flowables
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
-import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import ru.coderedwolf.mvi.core.elements.*
 
@@ -15,6 +16,7 @@ import ru.coderedwolf.mvi.core.elements.*
 open class BaseStore<Action, State, ViewEvent, Effect>(
     initialState: State,
     private val mainScheduler: Scheduler,
+    private val singleScheduler: Scheduler,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
     private val bootstrapper: Bootstrapper<Action>? = null,
@@ -25,18 +27,19 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
     private val viewBind = CompositeDisposable()
     private val wiring = CompositeDisposable(viewBind)
 
-    private val stateSubject = BehaviorSubject.createDefault(initialState)
-    private val actionSubject = PublishSubject.create<Action>()
-    private val effectSubject = PublishSubject.create<Effect>()
-    private val viewEventSubject = PublishSubject.create<ViewEvent>()
+    private val stateSubject = BehaviorProcessor.createDefault(initialState)
+    private val actionSubject = PublishProcessor.create<Action>()
+    private val effectSubject = PublishProcessor.create<Effect>()
+    private val viewEventSubject = PublishProcessor.create<ViewEvent>()
 
     private val stateEffectPairSubject = PublishSubject.create<Pair<State, Effect>>()
 
     fun initStore() {
-        Observables.zip(
+        Flowables.zip(
             effectSubject,
             stateSubject
         )
+            .observeOn(singleScheduler)
             .map { (effect, state) -> reduceInvoke(state, effect) }
             .subscribe(stateSubject::onNext)
             .addTo(wiring)

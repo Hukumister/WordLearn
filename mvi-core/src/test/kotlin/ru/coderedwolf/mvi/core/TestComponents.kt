@@ -1,5 +1,6 @@
 package ru.coderedwolf.mvi.core
 
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.observers.TestObserver
@@ -66,21 +67,21 @@ class TestMiddleware(
     private val asyncWorkScheduler: Scheduler
 ) : Middleware<TestAction, TestState, TestEffect> {
 
-    override fun invoke(action: TestAction, state: TestState): Observable<TestEffect> = when (action) {
-        Unfulfillable -> Observable.empty()
-        FulfillableInstantly -> Observable.just(InstantEffect(1))
-        is FulfillableAsync -> Observable.just(DELAYED_FULFILL_AMOUNT)
+    override fun invoke(action: TestAction, state: TestState): Flowable<TestEffect> = when (action) {
+        Unfulfillable -> Flowable.empty()
+        FulfillableInstantly -> Flowable.just(InstantEffect(1))
+        is FulfillableAsync -> Flowable.just(DELAYED_FULFILL_AMOUNT)
             .delay(action.delayMs, TimeUnit.MILLISECONDS, asyncWorkScheduler)
             .map<TestEffect>(::FinishedAsync)
             .startWith(StartedAsync)
-        TranslatesTo3Effects -> Observable.just(
+        TranslatesTo3Effects -> Flowable.just(
             MultipleEffect1,
             MultipleEffect2,
             MultipleEffect3
         )
         MaybeFulfillable ->
-            if (state.counter % 3 == 0) Observable.just<TestEffect>(ConditionalThingHappened(CONDITIONAL_MULTIPLIER))
-            else Observable.empty<TestEffect>()
+            if (state.counter % 3 == 0) Flowable.just<TestEffect>(ConditionalThingHappened(CONDITIONAL_MULTIPLIER))
+            else Flowable.empty<TestEffect>()
     }
 }
 
