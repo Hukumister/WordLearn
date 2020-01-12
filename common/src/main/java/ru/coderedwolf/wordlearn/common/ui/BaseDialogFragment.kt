@@ -73,7 +73,7 @@ abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
     private val featureDisposeCompositeDisposable = CompositeDisposable()
 
     internal fun isRealRemoving(): Boolean =
-        (isRemoving && !instanceStateSaved) || (parentFragment as BaseFragment).isRealRemoving()
+        (isRemoving && !instanceStateSaved) || (parentFragment as BaseDialogFragment).isRealRemoving()
 
     @CallSuper
     open fun onRealRemoving() {
