@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="listPreferredItemPaddingTop" format="dimension|reference"/>
-    <attr name="listPreferredItemPaddingBottom" format="dimension|reference"/>
+    <attr name="listPreferredItemPaddingTop" format="dimension|reference" />
+    <attr name="listPreferredItemPaddingBottom" format="dimension|reference" />
 
+    <attr name="textInputLayoutStyle" format="reference" />
 </resources>

@@ -29,6 +29,7 @@ dependencies {
     implementation commonDeps.kotlin
 
     implementation commonDeps.rxJava
+    implementation commonDeps.rxKotlin
 
     implementation commonDeps.dagger
     kapt commonDeps.daggerCompiler
@@ -45,14 +46,16 @@ dependencies {
     implementation uiDeps.material
     implementation uiDeps.constraintLayout
 
-    implementation uiDeps.groupie
-    implementation uiDeps.groupieExt
-
     implementation project(':common')
 
     implementation project(':database')
 
+    implementation project(':mvi-core')
+    implementation project(':mvi-core-impl')
+
     implementation project(':api-wordscategory')
+
+    implementation project(':api-wordset')
 
     implementation project(':api-phrase')
 }

@@ -5,10 +5,7 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import ru.coderedwolf.wordlearn.database.DataBase
-import ru.coderedwolf.wordlearn.database.mapper.CategoryMapper
-import ru.coderedwolf.wordlearn.database.mapper.PhraseMapper
-import ru.coderedwolf.wordlearn.database.mapper.PhraseTopicMapper
-import ru.coderedwolf.wordlearn.database.mapper.WordMapper
+import ru.coderedwolf.wordlearn.database.mapper.*
 import javax.inject.Singleton
 
 @Module
@@ -44,6 +41,11 @@ object DatabaseModule {
     @Provides
     @JvmStatic
     @Singleton
+    fun provideWordSetDao(dataBase: DataBase) = dataBase.wordSetDao()
+
+    @Provides
+    @JvmStatic
+    @Singleton
     fun provideCategoryMapper() = CategoryMapper()
 
     @Provides
@@ -55,6 +57,11 @@ object DatabaseModule {
     @JvmStatic
     @Singleton
     fun providePhraseTopicMapper() = PhraseTopicMapper()
+
+    @Provides
+    @JvmStatic
+    @Singleton
+    fun provideWordSetMapper() = WordSetMapper()
 
     @Provides
     @JvmStatic

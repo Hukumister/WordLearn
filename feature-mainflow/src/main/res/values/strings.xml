@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="bottom_navigation_title_action_words">Слова</string>
+    <string name="bottom_navigation_title_action_word_set">Наборы слов</string>
     <string name="bottom_navigation_title_action_search">Поиск</string>
     <string name="bottom_navigation_title_action_settings">Настройки</string>
     <string name="bottom_navigation_title_action_phrases">Фразы</string>

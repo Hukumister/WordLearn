@@ -1,5 +1,7 @@
 include ':common',
+        ':mvi-core-impl',
         ':mvi-core',
+        ':api-wordset',
         ':api-word',
         ':api-phrase',
         ':api-wordscategory',

@@ -7,7 +7,7 @@ import ru.coderedwolf.wordlearn.common.ui.adapter.ClickableAdapter
 import ru.coderedwolf.wordlearn.common.ui.adapter.ItemAdapterDelegate
 import ru.coderedwolf.wordlearn.common.ui.adapter.OnViewHolderClickListener
 import ru.coderedwolf.wordlearn.wordflow.R
-import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewModel.Item
+import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewState.Item
 
 /**
  * @author CodeRedWolf. Date 27.10.2019.
@@ -36,16 +36,16 @@ class WordExampleAdapterDelegates : ItemAdapterDelegate<Item, Item.WordExampleIt
 
 }
 
-class CreateWordAdapterDelegate : ItemAdapterDelegate<Item, Item.AddItem>(), ClickableAdapter {
+class CreateWordAdapterDelegate : ItemAdapterDelegate<Item, Item.AddButtonItem>(), ClickableAdapter {
 
     override val layoutRes: Int
         get() = R.layout.item_add_example
 
-    override fun isForViewType(item: Item): Boolean = item is Item.AddItem
+    override fun isForViewType(item: Item): Boolean = item is Item.AddButtonItem
 
-    override fun onBindView(item: Item.AddItem, holder: BaseViewHolder) = Unit
+    override fun onBindView(item: Item.AddButtonItem, holder: BaseViewHolder) = Unit
 
-    override fun getItem(item: Item): Item.AddItem = item as Item.AddItem
+    override fun getItem(item: Item): Item.AddButtonItem = item as Item.AddButtonItem
 
     override fun bindClickListener(viewHolder: BaseViewHolder, listener: OnViewHolderClickListener) {
         viewHolder.itemView.addButton.setOnClickListener { view -> listener(viewHolder, view) }

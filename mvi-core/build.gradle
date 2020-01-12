@@ -15,7 +15,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 }
 
@@ -24,11 +24,6 @@ dependencies {
 
     implementation commonDeps.rxJava
     implementation commonDeps.rxKotlin
-
-    implementation presentationDeps.lifecycleViewModel
-    implementation presentationDeps.lifecycleCommon
-
-    implementation project(':common')
 
     testImplementation testDeps.junit
 }

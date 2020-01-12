@@ -21,7 +21,7 @@
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="10"
-        tools:listitem="@layout/item_category" />
+        tools:listitem="@layout/item_word_set" />
 
     <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addCategoryFab"

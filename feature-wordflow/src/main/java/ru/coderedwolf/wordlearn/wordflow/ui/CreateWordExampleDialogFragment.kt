@@ -30,8 +30,8 @@ class CreateWordExampleDialogFragment : DialogFragment() {
         return AlertDialog.Builder(requireContext()).apply {
             setTitle(R.string.dialog_create_word_example_title)
             setView(R.layout.layout_create_word_example_dialog)
-            setNegativeButton(R.string.cancel) { _, _ -> dismissAllowingStateLoss() }
-            setPositiveButton(R.string.ok) { _, _ ->
+            setNegativeButton(R.string.action_cancel) { _, _ -> dismissAllowingStateLoss() }
+            setPositiveButton(R.string.action_ok) { _, _ ->
                 val dialog = requireDialog()
 
                 val exampleText = dialog.exampleText.text.toString()
