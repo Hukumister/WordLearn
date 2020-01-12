@@ -13,16 +13,16 @@ import ru.coderedwolf.mvi.core.elements.*
 /**
  * @author CodeRedWolf.
  */
-open class BaseStore<Action, State, ViewEvent, Effect>(
+open class BaseStore<Action, State, Event, Effect>(
     initialState: State,
     private val mainScheduler: Scheduler,
     private val singleScheduler: Scheduler,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
     private val bootstrapper: Bootstrapper<Action>? = null,
-    private val viewEventProducer: ViewEventProducer<State, Effect, ViewEvent>? = null,
+    private val eventProducer: EventProducer<State, Effect, Event>? = null,
     private val navigator: Navigator<State, Effect>? = null
-) : Store<Action, State, ViewEvent> {
+) : LifecycleStore<Action, State, Event> {
 
     private val viewBind = CompositeDisposable()
     private val wiring = CompositeDisposable(viewBind)
@@ -30,11 +30,11 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
     private val stateSubject = BehaviorProcessor.createDefault(initialState)
     private val actionSubject = PublishProcessor.create<Action>()
     private val effectSubject = PublishProcessor.create<Effect>()
-    private val viewEventSubject = PublishProcessor.create<ViewEvent>()
+    private val eventSubject = PublishProcessor.create<Event>()
 
     private val stateEffectPairSubject = PublishSubject.create<Pair<State, Effect>>()
 
-    fun initStore() {
+    override fun create() {
         Flowables.zip(
             effectSubject,
             stateSubject
@@ -61,13 +61,13 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
             ?.addTo(wiring)
     }
 
-    fun destroyStore() = wiring.dispose()
+    override fun destroy() = wiring.dispose()
 
-    override fun bindView(mviView: MviView<Action, State, ViewEvent>) {
+    override fun bindView(mviView: MviView<Action, State, Event>) {
         check(!wiring.isDisposed) { "Attempt to bind view after the store was destroyed" }
         check(viewBind.size() == 0) { "View bind didn't dispose last time" }
 
-        viewEventSubject
+        eventSubject
             .observeOn(mainScheduler)
             .subscribe(mviView::route)
             .addTo(viewBind)
@@ -105,7 +105,7 @@ open class BaseStore<Action, State, ViewEvent, Effect>(
     private fun viewEventProducerInvoke(
         newState: State,
         effect: Effect
-    ) = viewEventProducer
+    ) = eventProducer
         ?.invoke(newState, effect)
-        ?.let(viewEventSubject::onNext)
+        ?.let(eventSubject::onNext)
 }

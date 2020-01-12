@@ -20,7 +20,7 @@ abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
     mainScheduler: Scheduler = AndroidSchedulers.mainThread(),
     middleware: Middleware<Action, State, Effect>,
     bootstrapper: Bootstrapper<Action>? = null,
-    viewEventProducer: ViewEventProducer<State, Effect, ViewEvent>? = null,
+    EventProducer: EventProducer<State, Effect, ViewEvent>? = null,
     navigator: Navigator<State, Effect>? = null
 ) : ViewModel(), Store<Action, State, ViewEvent> {
 
@@ -31,9 +31,9 @@ abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
         mainScheduler = mainScheduler,
         reducer = reducer,
         middleware = middleware,
-        viewEventProducer = viewEventProducer,
+        eventProducer = EventProducer,
         navigator = navigator
-    ).also { store -> store.initStore() }
+    ).apply { create() }
 
     @CallSuper
     override fun bindView(mviView: MviView<Action, State, ViewEvent>) = storeDelegate.bindView(mviView)
@@ -41,6 +41,6 @@ abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
     @CallSuper
     override fun unbindView() = storeDelegate.unbindView()
 
-    override fun onCleared() = storeDelegate.destroyStore()
+    override fun onCleared() = storeDelegate.destroy()
 
 }

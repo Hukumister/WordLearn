@@ -1,10 +1,11 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import ru.coderedwolf.mvi.core.elements.Middleware
 import ru.coderedwolf.mvi.core.elements.Navigator
-import ru.coderedwolf.viewmodel.OnlyActionViewModelStore
 import ru.coderedwolf.mvi.core.elements.Reducer
+import ru.coderedwolf.viewmodel.OnlyActionViewModelStore
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate
 import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
@@ -44,15 +45,15 @@ class CreateWordViewModelStore @Inject constructor(
         private val wordRepository: WordRepository
     ) : Middleware<Action, CreateWordViewState, Action> {
 
-        override fun invoke(action: Action, state: CreateWordViewState): Observable<Action> = when (action) {
+        override fun invoke(action: Action, state: CreateWordViewState): Flowable<Action> = when (action) {
             is Action.SaveWord -> createWord(state)
                 .flatMapCompletable(wordRepository::save)
                 .asDeterminate()
                 .map(Action::SaveWordResult)
-            else -> Observable.just(action)
+            else -> Flowable.just(action)
         }
 
-        private fun createWord(state: CreateWordViewState): Observable<Word> {
+        private fun createWord(state: CreateWordViewState): Flowable<Word> {
             val word = Word(
                 word = state.word.value,
                 categoryId = state.categoryId,
@@ -62,7 +63,7 @@ class CreateWordViewModelStore @Inject constructor(
                     .filterIsInstance<Item.WordExampleItem>()
                     .map(Item.WordExampleItem::wordExample)
             )
-            return Observable.just(word)
+            return Flowable.just(word)
         }
 
     }

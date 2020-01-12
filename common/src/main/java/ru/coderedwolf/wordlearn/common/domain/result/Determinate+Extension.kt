@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.common.domain.result
 import androidx.annotation.IntDef
 import androidx.annotation.IntRange
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.annotations.BackpressureKind
 import io.reactivex.annotations.BackpressureSupport
 import io.reactivex.annotations.CheckReturnValue
@@ -27,9 +27,9 @@ sealed class Determinate {
         const val STATE_ERROR = 1 shl 2
 
         @IntDef(
-                STATE_LOADING,
-                STATE_COMPLETED,
-                STATE_ERROR
+            STATE_LOADING,
+            STATE_COMPLETED,
+            STATE_ERROR
         )
         annotation class State
 
@@ -48,8 +48,8 @@ sealed class Determinate {
     }
 
     data class Error(
-            val throwable: Throwable,
-            override val timestamp: Long = System.currentTimeMillis()
+        val throwable: Throwable,
+        override val timestamp: Long = System.currentTimeMillis()
     ) : Determinate() {
 
         override val state: Int = STATE_ERROR
@@ -65,8 +65,10 @@ sealed class Determinate {
 @CheckReturnValue
 @BackpressureSupport(BackpressureKind.UNBOUNDED_IN)
 @SchedulerSupport(SchedulerSupport.NONE)
-fun Completable.asDeterminate(): Observable<Determinate> = andThen(Observable.just<Determinate>(
+fun Completable.asDeterminate(): Flowable<Determinate> = andThen(
+    Flowable.just<Determinate>(
         Determinate.Completed
-))
-        .startWith(Determinate.Loading)
-        .onErrorReturn { throwable -> Determinate.Error(throwable) }
+    )
+)
+    .startWith(Determinate.Loading)
+    .onErrorReturn { throwable -> Determinate.Error(throwable) }

@@ -9,7 +9,7 @@ abstract class OnlyActionViewModelStore<Action, State, ViewEvent>(
     initialState: State,
     reducer: Reducer<State, Action>,
     middleware: Middleware<Action, State, Action>,
-    viewEventProducer: ViewEventProducer<State, Action, ViewEvent>? = null,
+    EventProducer: EventProducer<State, Action, ViewEvent>? = null,
     navigator: Navigator<State, Action>? = null,
     bootstrapper: Bootstrapper<Action>? = null
 ) : BaseViewModelStore<Action, State, ViewEvent, Action>(
@@ -17,6 +17,6 @@ abstract class OnlyActionViewModelStore<Action, State, ViewEvent>(
     reducer = reducer,
     middleware = middleware,
     navigator = navigator,
-    viewEventProducer = viewEventProducer,
+    EventProducer = EventProducer,
     bootstrapper = bootstrapper
 )

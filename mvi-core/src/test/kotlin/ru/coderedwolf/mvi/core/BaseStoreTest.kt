@@ -38,7 +38,7 @@ class BaseStoreTest {
             middleware = TestMiddleware(asyncWorkScheduler),
             navigator = TestNavigator()
         )
-        baseStore.initStore()
+        baseStore.create()
 
         actions = PublishSubject.create()
 
@@ -158,7 +158,7 @@ class BaseStoreTest {
 
         asyncWorkScheduler.advanceTimeBy(5, TimeUnit.MILLISECONDS)
 
-        baseStore.destroyStore()
+        baseStore.destroy()
 
         asyncWorkScheduler.advanceTimeBy(10, TimeUnit.MILLISECONDS)
 
