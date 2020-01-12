@@ -9,7 +9,7 @@ import ru.coderedwolf.mvi.core.elements.*
 abstract class ReducerViewModelStore<Action, State, ViewEvent>(
     initialState: State,
     reducer: Reducer<State, Action>,
-    EventProducer: EventProducer<State, Action, ViewEvent>? = null,
+    eventProducer: EventProducer<State, Action, ViewEvent>? = null,
     navigator: Navigator<State, Action>? = null,
     bootstrapper: Bootstrapper<Action>? = null
 ) : OnlyActionViewModelStore<Action, State, ViewEvent>(
@@ -17,7 +17,7 @@ abstract class ReducerViewModelStore<Action, State, ViewEvent>(
     reducer = reducer,
     middleware = BypassMiddleware<State, Action>(),
     navigator = navigator,
-    EventProducer = EventProducer,
+    eventProducer = eventProducer,
     bootstrapper = bootstrapper
 ) {
 

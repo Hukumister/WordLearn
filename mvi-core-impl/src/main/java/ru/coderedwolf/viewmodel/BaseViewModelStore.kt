@@ -20,7 +20,7 @@ abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
     mainScheduler: Scheduler = AndroidSchedulers.mainThread(),
     middleware: Middleware<Action, State, Effect>,
     bootstrapper: Bootstrapper<Action>? = null,
-    EventProducer: EventProducer<State, Effect, ViewEvent>? = null,
+    eventProducer: EventProducer<State, Effect, ViewEvent>? = null,
     navigator: Navigator<State, Effect>? = null
 ) : ViewModel(), Store<Action, State, ViewEvent> {
 
@@ -31,7 +31,7 @@ abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
         mainScheduler = mainScheduler,
         reducer = reducer,
         middleware = middleware,
-        eventProducer = EventProducer,
+        eventProducer = eventProducer,
         navigator = navigator
     ).apply { create() }
 
