@@ -31,7 +31,7 @@ object CreateWordComponentBuilderModule {
 )
 interface CreateWordComponent : Injector<CreateWordFragment>
 
-interface CreateWordDependencies : ScreenDependencies {
+interface CreateWordDependencies : ScreenDependencies, ViewModelDependencies {
     fun categoryId(): Long
     fun wordRepository(): WordRepository
     fun errorHandler(): ErrorHandler

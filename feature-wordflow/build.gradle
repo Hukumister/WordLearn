@@ -39,6 +39,8 @@ dependencies {
     implementation commonDeps.rxAndroid
     implementation commonDeps.rxBind
 
+    implementation uiDeps.adapterDelegate
+
     implementation presentationDeps.cicerone
 
     implementation uiDeps.appcompat
@@ -57,6 +59,8 @@ dependencies {
     implementation project(':api-wordscategory')
 
     implementation project(':api-word')
+
+    implementation project(':api-wordset')
 
     implementation project(':mvi-core')
     implementation project(':mvi-core-impl')

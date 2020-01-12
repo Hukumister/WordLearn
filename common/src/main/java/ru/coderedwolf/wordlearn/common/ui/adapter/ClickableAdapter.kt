@@ -9,8 +9,9 @@ typealias OnViewHolderClickListener = (BaseViewHolder, View) -> Unit
 
 interface ClickableAdapter {
 
-    fun bindClickListener(viewHolder: BaseViewHolder, listener: OnViewHolderClickListener)
+    fun bindClickListener(viewHolder: BaseViewHolder, listener: OnViewHolderClickListener) =
+        viewHolder.containerView.setOnClickListener { view -> listener(viewHolder, view) }
 
-    fun unbindClickListener(viewHolder: BaseViewHolder)
+    fun unbindClickListener(viewHolder: BaseViewHolder) = viewHolder.containerView.setOnClickListener(null)
 
 }

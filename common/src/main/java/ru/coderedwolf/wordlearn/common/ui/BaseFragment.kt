@@ -16,7 +16,7 @@ import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.di.generateComponentName
 import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
-const val STATE_COMPONENT_NAME = "state_component_name"
+private const val STATE_COMPONENT_NAME = "state_component_name"
 
 abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes), ContextExtensionsHolder {
 

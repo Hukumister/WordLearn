@@ -24,12 +24,18 @@
 
         <item name="listPreferredItemPaddingTop">@dimen/spacing_small</item>
         <item name="listPreferredItemPaddingBottom">@dimen/spacing_small</item>
+        <item name="listPreferredItemPaddingStart">@dimen/spacing_normal</item>
+        <item name="listPreferredItemPaddingEnd">@dimen/spacing_normal</item>
 
         <item name="iconSize">@dimen/icon_size</item>
 
         <item name="toolbarStyle">@style/Component.Toolbar</item>
         <item name="buttonBarButtonStyle">@style/Component.TextButton.Dialog</item>
+        <item name="buttonStyle">@style/Component.Button</item>
 
+        <item name="textInputLayoutStyle">
+            @style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
+        </item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
     </style>

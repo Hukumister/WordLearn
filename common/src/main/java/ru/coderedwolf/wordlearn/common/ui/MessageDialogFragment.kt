@@ -64,7 +64,7 @@ class MessageDialogFragment : DialogFragment() {
         val textButton = if (positiveText.isNotEmpty()) {
             positiveText
         } else {
-            getString(R.string.ok)
+            getString(R.string.action_ok)
         }
         setPositiveButton(textButton) { _, _ ->
             dismissAllowingStateLoss()
