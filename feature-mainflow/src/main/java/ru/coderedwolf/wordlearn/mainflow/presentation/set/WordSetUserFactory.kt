@@ -1,6 +1,7 @@
 package ru.coderedwolf.wordlearn.mainflow.presentation.set
 
 import ru.coderedwolf.api.wordset.model.WordSet
+import ru.coderedwolf.wordlearn.common.domain.resource.toStringRes
 import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.Button
 import ru.coderedwolf.wordlearn.mainflow.R
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewState.Item.AddWordSetItem
