@@ -47,9 +47,8 @@ fun <T> Single<T>.asProduct(): Observable<Product<T>> = map<Product<T>> { data -
  */
 @CheckReturnValue
 @SchedulerSupport(SchedulerSupport.NONE)
-fun <T> Flowable<T>.asProduct(): Observable<Product<T>> = map<Product<T>> { data -> Product.Data(data) }
+fun <T> Flowable<T>.asProduct(): Flowable<Product<T>> = map<Product<T>> { data -> Product.Data(data) }
     .onErrorReturn { throwable -> Product.Error(throwable) }
-    .toObservable()
     .startWith(Product.Loading)
 
 /**

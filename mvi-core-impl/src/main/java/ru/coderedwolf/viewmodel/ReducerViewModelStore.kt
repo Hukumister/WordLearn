@@ -1,6 +1,6 @@
 package ru.coderedwolf.viewmodel
 
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import ru.coderedwolf.mvi.core.elements.*
 
 /**
@@ -9,7 +9,7 @@ import ru.coderedwolf.mvi.core.elements.*
 abstract class ReducerViewModelStore<Action, State, ViewEvent>(
     initialState: State,
     reducer: Reducer<State, Action>,
-    viewEventProducer: ViewEventProducer<State, Action, ViewEvent>? = null,
+    eventProducer: EventProducer<State, Action, ViewEvent>? = null,
     navigator: Navigator<State, Action>? = null,
     bootstrapper: Bootstrapper<Action>? = null
 ) : OnlyActionViewModelStore<Action, State, ViewEvent>(
@@ -17,13 +17,13 @@ abstract class ReducerViewModelStore<Action, State, ViewEvent>(
     reducer = reducer,
     middleware = BypassMiddleware<State, Action>(),
     navigator = navigator,
-    viewEventProducer = viewEventProducer,
+    eventProducer = eventProducer,
     bootstrapper = bootstrapper
 ) {
 
     class BypassMiddleware<State, Action> : Middleware<Action, State, Action> {
 
-        override fun invoke(action: Action, state: State): Observable<Action> =
-            Observable.just(action)
+        override fun invoke(action: Action, state: State): Flowable<Action> =
+            Flowable.just(action)
     }
 }

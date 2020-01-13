@@ -1,5 +1,6 @@
 package ru.coderedwolf.wordlearn.mainflow.presentation.set
 
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import ru.coderedwolf.api.wordset.domain.repository.WordSetRepository
 import ru.coderedwolf.api.wordset.model.WordSet
@@ -9,6 +10,7 @@ import ru.coderedwolf.wordlearn.common.domain.result.Product
 import ru.coderedwolf.wordlearn.common.domain.result.asProduct
 import ru.coderedwolf.wordlearn.common.domain.result.map
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
+import ru.coderedwolf.wordlearn.common.util.asFlowable
 import ru.coderedwolf.wordlearn.common.util.asObservable
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel.Action
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel.ViewEvent
@@ -26,7 +28,7 @@ class WordSetUserViewModel @Inject constructor(
     bootstrapper = BootstrapperImpl(),
     reducer = ReducerImpl(),
     navigator = NavigatorImpl(router),
-    viewEventProducer = ViewEventProducerImpl(),
+    eventProducer = ViewEventProducerImpl(),
     middleware = MiddleWareImpl(wordSetRepository)
 ) {
 
@@ -66,7 +68,7 @@ class WordSetUserViewModel @Inject constructor(
 
     }
 
-    private class ViewEventProducerImpl : ViewEventProducer<WordSetUserViewState, Action, ViewEvent> {
+    private class ViewEventProducerImpl : EventProducer<WordSetUserViewState, Action, ViewEvent> {
 
         override fun invoke(state: WordSetUserViewState, action: Action): ViewEvent? = when (action) {
             is Action.CreateNew -> ViewEvent.CreateNewDialog
@@ -84,11 +86,11 @@ class WordSetUserViewModel @Inject constructor(
         private val wordSetRepository: WordSetRepository
     ) : Middleware<Action, WordSetUserViewState, Action> {
 
-        override fun invoke(action: Action, state: WordSetUserViewState): Observable<Action> = when (action) {
+        override fun invoke(action: Action, state: WordSetUserViewState): Flowable<Action> = when (action) {
             is Action.LoadList -> wordSetRepository.observableAllUserSet()
                 .asProduct()
                 .map(Action::LoadListResult)
-            else -> action.asObservable()
+            else -> action.asFlowable()
         }
 
     }
