@@ -27,7 +27,7 @@ abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
     private val storeDelegate = BaseStore(
         initialState = initialState,
         bootstrapper = bootstrapper,
-        singleScheduler = singleScheduler,
+        reducerScheduler = singleScheduler,
         mainScheduler = mainScheduler,
         reducer = reducer,
         middleware = middleware,

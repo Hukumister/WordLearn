@@ -18,7 +18,7 @@ class BaseStoreTest {
     private lateinit var states: TestObserver<TestState>
     private lateinit var actions: PublishSubject<TestAction>
     private lateinit var mainScheduler: TestScheduler
-    private lateinit var singleScheduler: TestScheduler
+    private lateinit var reducerScheduler: TestScheduler
     private lateinit var asyncWorkScheduler: TestScheduler
     private lateinit var view: TestView
 
@@ -26,13 +26,12 @@ class BaseStoreTest {
     fun prepare() {
 
         mainScheduler = TestScheduler()
-        singleScheduler = TestScheduler()
-
+        reducerScheduler = TestScheduler()
         asyncWorkScheduler = TestScheduler()
 
         baseStore = BaseStore(
             initialState = TestState(),
-            singleScheduler = singleScheduler,
+            reducerScheduler = reducerScheduler,
             mainScheduler = mainScheduler,
             reducer = TestReducer(),
             middleware = TestMiddleware(asyncWorkScheduler),
@@ -86,7 +85,7 @@ class BaseStoreTest {
 
         actions.forEach { action ->
             this.actions.onNext(action)
-            singleScheduler.triggerActions()
+            reducerScheduler.triggerActions()
         }
 
         mainScheduler.triggerActions()
@@ -105,7 +104,7 @@ class BaseStoreTest {
 
         actions.forEach { action ->
             this.actions.onNext(action)
-            singleScheduler.triggerActions()
+            reducerScheduler.triggerActions()
         }
         mainScheduler.triggerActions()
 
@@ -127,7 +126,7 @@ class BaseStoreTest {
 
         actions.forEach { action ->
             this.actions.onNext(action)
-            singleScheduler.triggerActions()
+            reducerScheduler.triggerActions()
         }
         mainScheduler.triggerActions()
 
@@ -146,7 +145,7 @@ class BaseStoreTest {
 
         actions.onNext(FulfillableAsync(mockServerDelayMs))
 
-        singleScheduler.triggerActions()
+        reducerScheduler.triggerActions()
         mainScheduler.triggerActions()
 
         assertEquals(2, states.onNextEvents().size)
@@ -176,7 +175,7 @@ class BaseStoreTest {
 
         actions.onNext(FulfillableAsync(mockServerDelayMs))
 
-        singleScheduler.triggerActions()
+        reducerScheduler.triggerActions()
         mainScheduler.triggerActions()
 
         assertEquals(2, states.onNextEvents().size)
@@ -196,7 +195,7 @@ class BaseStoreTest {
 
         baseStore.bindView(view)
 
-        singleScheduler.triggerActions()
+        reducerScheduler.triggerActions()
         mainScheduler.triggerActions()
 
         val stateAfterRebind = states.onNextEvents().last()
