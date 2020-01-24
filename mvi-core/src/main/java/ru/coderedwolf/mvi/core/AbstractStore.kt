@@ -76,12 +76,9 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
     private fun produceEventFlowable(
         state: State,
         effect: Effect
-    ): Flowable<Event> = if (eventProducer != null) {
-        val event = eventProducer.invoke(state, effect)
-        Flowable.just(event)
-    } else {
-        Flowable.empty<Event>()
-    }
+    ): Flowable<Event> = eventProducer?.invoke(state, effect)
+        ?.let { event -> Flowable.just(event) }
+        ?: Flowable.empty<Event>()
 
 //    override fun add(disposable: Disposable): Boolean = compositeDisposable.add(disposable)
 //
