@@ -1,4 +1,4 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.store
 
 import io.reactivex.Flowable
 import ru.coderedwolf.mvi.elements.Bootstrapper

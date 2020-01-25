@@ -1,5 +1,6 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.store
 
+import ru.coderedwolf.mvi.core.AbstractStore
 import ru.coderedwolf.mvi.elements.Bootstrapper
 import ru.coderedwolf.mvi.elements.EventProducer
 import ru.coderedwolf.mvi.elements.Middleware
