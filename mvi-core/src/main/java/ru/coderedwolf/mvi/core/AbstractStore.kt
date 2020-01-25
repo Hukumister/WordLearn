@@ -70,9 +70,6 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
             .distinctUntilChanged()
             .hide()
 
-    protected val effectSource: Flowable<Effect>
-        get() = effectProcessor.hide()
-
     override fun accept(action: Action) {
         actionProcessor.offer(action)
     }
