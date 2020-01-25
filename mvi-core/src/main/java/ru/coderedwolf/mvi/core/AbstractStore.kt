@@ -31,8 +31,6 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
     private val effectProcessor = PublishProcessor.create<Effect>()
     private val eventProcessor = BehaviorProcessor.create<Event>()
 
-    private val stateEffectProcessor = PublishProcessor.create<Pair<State, Effect>>()
-
     init {
         compositeDisposable += Flowables.zip(
             stateProcessor,
