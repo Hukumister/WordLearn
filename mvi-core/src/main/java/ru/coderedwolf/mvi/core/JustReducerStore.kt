@@ -1,10 +1,10 @@
 package ru.coderedwolf.mvi.core
 
 import io.reactivex.Flowable
-import ru.coderedwolf.mvi.core.elements.Bootstrapper
-import ru.coderedwolf.mvi.core.elements.EventProducer
-import ru.coderedwolf.mvi.core.elements.Middleware
-import ru.coderedwolf.mvi.core.elements.Reducer
+import ru.coderedwolf.mvi.elements.Bootstrapper
+import ru.coderedwolf.mvi.elements.EventProducer
+import ru.coderedwolf.mvi.elements.Middleware
+import ru.coderedwolf.mvi.elements.Reducer
 
 open class JustReducerStore<Action : Any, State : Any, Event : Any>(
     initialState: State,

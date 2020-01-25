@@ -1,8 +1,8 @@
-package ru.coderedwolf.mvi.core.elements
+package ru.coderedwolf.mvi.elements
 
 import io.reactivex.Observable
 
 /**
- * @author CodeRedWolf. Date 14.10.2019.
+ * @author HaronCode.
  */
 typealias Bootstrapper<Action> = () -> Observable<Action>

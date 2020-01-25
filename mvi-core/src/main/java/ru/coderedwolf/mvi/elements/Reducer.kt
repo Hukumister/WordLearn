@@ -1,6 +1,6 @@
-package ru.coderedwolf.mvi.core.elements
+package ru.coderedwolf.mvi.elements
 
 /**
- * @author CodeRedWolf. Date 13.10.2019.
+ * @author HaronCode.
  */
 typealias Reducer<State, Effect> = (state: State, effect: Effect) -> State

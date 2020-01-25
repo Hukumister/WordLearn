@@ -1,6 +1,6 @@
-package ru.coderedwolf.mvi.core.elements
+package ru.coderedwolf.mvi.elements
 
 /**
- * @author CodeRedWolf. Date 05.11.2019.
+ * @author HaronCode.
  */
 typealias EventProducer<State, Effect, Event> = (state: State, effect: Effect) -> Event?

@@ -8,10 +8,10 @@ import io.reactivex.rxkotlin.Flowables
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
 import org.reactivestreams.Publisher
-import ru.coderedwolf.mvi.core.elements.Bootstrapper
-import ru.coderedwolf.mvi.core.elements.EventProducer
-import ru.coderedwolf.mvi.core.elements.Middleware
-import ru.coderedwolf.mvi.core.elements.Reducer
+import ru.coderedwolf.mvi.elements.Bootstrapper
+import ru.coderedwolf.mvi.elements.EventProducer
+import ru.coderedwolf.mvi.elements.Middleware
+import ru.coderedwolf.mvi.elements.Reducer
 
 /**
  * @author HaronCode.
