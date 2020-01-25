@@ -5,9 +5,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.Flowables
-import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
 import org.reactivestreams.Publisher
+import ru.coderedwolf.mvi.core.elements.Bootstrapper
 import ru.coderedwolf.mvi.core.elements.EventProducer
 import ru.coderedwolf.mvi.core.elements.Middleware
 import ru.coderedwolf.mvi.core.elements.Reducer
@@ -19,6 +20,7 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
     initialState: State,
     private val reducer: Reducer<State, Effect>,
     private val middleware: Middleware<Action, State, Effect>,
+    bootstrapper: Bootstrapper<Action>? = null,
     private val eventProducer: EventProducer<State, Effect, Event>? = null
 ) : Store<Action, State, Event> {
 
@@ -32,25 +34,32 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
     private val eventProcessor = BehaviorProcessor.create<Event>()
 
     init {
-        compositeDisposable += Flowables.zip(
+        Flowables.zip(
             stateProcessor,
             effectProcessor
         )
             .scan(initialState) { _, (state, effect) -> reducer.invoke(state, effect) }
             .subscribe(stateProcessor::onNext, ::onError)
+            .addTo(compositeDisposable)
 
-        compositeDisposable += actionProcessor
+        actionProcessor
             .doOnNext(::onAction)
             .withLatestFrom(stateProcessor)
             .flatMap { (action, state) -> middleware.invoke(action, state) }
             .subscribe(effectProcessor::onNext, ::onError)
+            .addTo(compositeDisposable)
 
-        compositeDisposable += Flowables.zip(
+        Flowables.zip(
             stateProcessor.skip(1),
             effectProcessor
         )
             .flatMap { (state, effect) -> produceEventFlowable(state, effect) }
             .subscribe(eventProcessor::onNext, ::onError)
+            .addTo(compositeDisposable)
+
+        bootstrapper?.invoke()
+            ?.subscribe(::accept, ::onError)
+            ?.addTo(compositeDisposable)
     }
 
     override val eventSource: Publisher<Event>
