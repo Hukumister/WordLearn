@@ -8,6 +8,7 @@ import io.reactivex.rxkotlin.Flowables
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
 import org.reactivestreams.Publisher
+import org.reactivestreams.Subscriber
 import ru.coderedwolf.mvi.elements.Bootstrapper
 import ru.coderedwolf.mvi.elements.EventProducer
 import ru.coderedwolf.mvi.elements.Middleware
@@ -50,7 +51,7 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
             .addTo(compositeDisposable)
 
         Flowables.zip(
-            stateProcessor.skip(1),
+            stateProcessor.skip(1), //skip initial state
             effectProcessor
         )
             .flatMap { (state, effect) -> produceEventFlowable(state, effect) }
@@ -65,10 +66,9 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
     override val eventSource: Publisher<Event>
         get() = eventProcessor.hide()
 
-    override val stateSource: Publisher<State>
-        get() = stateProcessor
-            .distinctUntilChanged()
-            .hide()
+    override fun subscribe(subscriber: Subscriber<in State>) = stateProcessor
+        .distinctUntilChanged()
+        .subscribe(subscriber)
 
     override fun accept(action: Action) {
         actionProcessor.offer(action)

@@ -1,15 +1,9 @@
 package ru.coderedwolf.mvi.core
 
-import io.reactivex.ObservableSource
 import io.reactivex.functions.Consumer
+import org.reactivestreams.Publisher
 
 /**
- * @author HaronCode. Date 13.10.2019.
+ * @author HaronCode.
  */
-interface StoreView<Action : Any, State : Any, Event : Any> : Consumer<State> {
-
-    val actionSource: ObservableSource<Action>
-
-    fun onEvent(event: Event)
-
-}
+interface StoreView<Action : Any, State : Any> : Consumer<State>, Publisher<Action>

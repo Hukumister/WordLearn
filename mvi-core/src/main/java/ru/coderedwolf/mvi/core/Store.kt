@@ -5,11 +5,9 @@ import io.reactivex.functions.Consumer
 import org.reactivestreams.Publisher
 
 /**
- * @author HaronCode. Date 13.10.2019.
+ * @author HaronCode.
  */
-interface Store<Action : Any, State : Any, Event : Any> : Consumer<Action>, Disposable {
-
-    val stateSource: Publisher<State>
+interface Store<Action : Any, State : Any, Event : Any> : Consumer<Action>, Publisher<State>, Disposable {
 
     val eventSource: Publisher<Event>
 
