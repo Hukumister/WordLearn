@@ -87,7 +87,7 @@ class BaseStoreTest {
         actions.forEach { action ->
             this.actions.onNext(action)
         }
-        
+
         assertEquals(1 + actions.size, states.onNextEvents().size)
     }
 
