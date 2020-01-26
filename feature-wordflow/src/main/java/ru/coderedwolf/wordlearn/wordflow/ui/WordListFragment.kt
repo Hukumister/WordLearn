@@ -9,7 +9,7 @@ import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.coderedwolf.wordlearn.wordflow.R
 
 /**
- * @author CodeRedWolf. Date 04.06.2019.
+ * @author HaronCode. Date 04.06.2019.
  */
 class WordListFragment : BaseFragment(R.layout.fragment_word_list) {
 
