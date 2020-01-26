@@ -22,4 +22,4 @@ inline infix fun <Out : Any, In : Any> Pair<Publisher<Out>, Consumer<In>>.with(
 )
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun <T : Any> noneTranformer(): Transformer<T, T> = { input -> input }
+inline fun <T : Any> noneTransformer(): Transformer<T, T> = { input -> input }
