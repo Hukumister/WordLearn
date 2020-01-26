@@ -1,52 +1,54 @@
 package ru.coderedwolf.mvi.core
 
 import io.reactivex.observers.TestObserver
+import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.TestScheduler
 import io.reactivex.subjects.PublishSubject
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import ru.coderedwolf.mvi.binder.ConnectionViewBinder
+import ru.coderedwolf.mvi.binder.noneTransformer
+import ru.coderedwolf.mvi.binder.with
 import ru.coderedwolf.mvi.core.TestAction.*
+import ru.coderedwolf.mvi.store.BaseStore
 import java.util.concurrent.TimeUnit
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
 class BaseStoreTest {
 
     private lateinit var baseStore: BaseStore<TestAction, TestState, TestViewEvent, TestEffect>
     private lateinit var states: TestObserver<TestState>
-    private lateinit var actions: PublishSubject<TestAction>
-    private lateinit var mainScheduler: TestScheduler
-    private lateinit var reducerScheduler: TestScheduler
+
     private lateinit var asyncWorkScheduler: TestScheduler
+
+    private lateinit var actions: PublishProcessor<TestAction>
     private lateinit var view: TestView
+
+    private lateinit var testBinder: ConnectionViewBinder<TestAction, TestState, TestViewEvent>
 
     @Before
     fun prepare() {
-
-        mainScheduler = TestScheduler()
-        reducerScheduler = TestScheduler()
         asyncWorkScheduler = TestScheduler()
 
         baseStore = BaseStore(
             initialState = TestState(),
-            reducerScheduler = reducerScheduler,
-            mainScheduler = mainScheduler,
             reducer = TestReducer(),
-            middleware = TestMiddleware(asyncWorkScheduler),
-            navigator = TestNavigator()
+            middleware = TestMiddleware(asyncWorkScheduler)
         )
-        baseStore.create()
 
-        actions = PublishSubject.create()
+        testBinder = ConnectionViewBinder { view ->
+            add(baseStore to view with noneTransformer())
+            add(view to baseStore with noneTransformer())
+        }
+        actions = PublishProcessor.create()
 
         states = TestObserver()
 
         view = TestView(actions, states)
-        baseStore.bindView(view)
-
-        mainScheduler.triggerActions()
+        testBinder.bind(view)
     }
 
     @Test
@@ -70,7 +72,6 @@ class BaseStoreTest {
         )
 
         actions.forEach(this.actions::onNext)
-        mainScheduler.triggerActions()
 
         assertEquals(1, states.onNextEvents().size)
     }
@@ -85,12 +86,8 @@ class BaseStoreTest {
 
         actions.forEach { action ->
             this.actions.onNext(action)
-            reducerScheduler.triggerActions()
         }
-
-        mainScheduler.triggerActions()
-
-
+        
         assertEquals(1 + actions.size, states.onNextEvents().size)
     }
 
@@ -104,9 +101,7 @@ class BaseStoreTest {
 
         actions.forEach { action ->
             this.actions.onNext(action)
-            reducerScheduler.triggerActions()
         }
-        mainScheduler.triggerActions()
 
         assertEquals(1 + actions.size * 3, states.onNextEvents().size)
     }
@@ -126,9 +121,7 @@ class BaseStoreTest {
 
         actions.forEach { action ->
             this.actions.onNext(action)
-            reducerScheduler.triggerActions()
         }
-        mainScheduler.triggerActions()
 
         assertEquals(8 + 1, states.onNextEvents().size)
         val expectedState = TestState(
@@ -145,9 +138,6 @@ class BaseStoreTest {
 
         actions.onNext(FulfillableAsync(mockServerDelayMs))
 
-        reducerScheduler.triggerActions()
-        mainScheduler.triggerActions()
-
         assertEquals(2, states.onNextEvents().size)
 
         val stateBeforeDestroy = states.onNextEvents().last()
@@ -157,11 +147,9 @@ class BaseStoreTest {
 
         asyncWorkScheduler.advanceTimeBy(5, TimeUnit.MILLISECONDS)
 
-        baseStore.destroy()
+        testBinder.dispose()
 
         asyncWorkScheduler.advanceTimeBy(10, TimeUnit.MILLISECONDS)
-
-        mainScheduler.triggerActions()
 
         val stateAfterDestroy = states.onNextEvents().last()
 
@@ -175,9 +163,6 @@ class BaseStoreTest {
 
         actions.onNext(FulfillableAsync(mockServerDelayMs))
 
-        reducerScheduler.triggerActions()
-        mainScheduler.triggerActions()
-
         assertEquals(2, states.onNextEvents().size)
 
         val stateBeforeUnbind = states.onNextEvents().last()
@@ -187,16 +172,11 @@ class BaseStoreTest {
 
         asyncWorkScheduler.advanceTimeBy(5, TimeUnit.MILLISECONDS)
 
-        baseStore.unbindView()
+        testBinder.unbind()
 
         asyncWorkScheduler.advanceTimeBy(10, TimeUnit.MILLISECONDS)
 
-        mainScheduler.triggerActions()
-
-        baseStore.bindView(view)
-
-        reducerScheduler.triggerActions()
-        mainScheduler.triggerActions()
+        testBinder.bind(view)
 
         val stateAfterRebind = states.onNextEvents().last()
 

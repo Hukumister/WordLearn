@@ -4,17 +4,18 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.observers.TestObserver
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.processors.PublishProcessor
+import org.reactivestreams.Subscriber
 import ru.coderedwolf.mvi.core.TestAction.*
 import ru.coderedwolf.mvi.core.TestEffect.*
-import ru.coderedwolf.mvi.core.elements.Bootstrapper
-import ru.coderedwolf.mvi.core.elements.Middleware
-import ru.coderedwolf.mvi.core.elements.Navigator
-import ru.coderedwolf.mvi.core.elements.Reducer
+import ru.coderedwolf.mvi.elements.Bootstrapper
+import ru.coderedwolf.mvi.elements.Middleware
+import ru.coderedwolf.mvi.elements.Navigator
+import ru.coderedwolf.mvi.elements.Reducer
 import java.util.concurrent.TimeUnit
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
 
 const val INITIAL_COUNTER = 10
@@ -54,12 +55,12 @@ class TestReducer : Reducer<TestState, TestEffect> {
 
     override fun invoke(state: TestState, effect: TestEffect): TestState = when (effect) {
         is InstantEffect -> state.copy(counter = state.counter + effect.amount)
-        StartedAsync -> state.copy(loading = true)
         is FinishedAsync -> state.copy(counter = state.counter + effect.amount, loading = false)
+        is ConditionalThingHappened -> state.copy(counter = state.counter * effect.multiplier)
+        StartedAsync -> state.copy(loading = true)
         MultipleEffect1,
         MultipleEffect2,
         MultipleEffect3 -> state.copy(counter = state.counter + 1)
-        is ConditionalThingHappened -> state.copy(counter = state.counter * effect.multiplier)
     }
 }
 
@@ -100,13 +101,16 @@ class TestNavigator : Navigator<TestState, TestEffect> {
 }
 
 class TestView(
-    testActionSubject: PublishSubject<TestAction>,
+    private val testActionSubject: PublishProcessor<TestAction>,
     private val testStateObserver: TestObserver<TestState>
-) : MviView<TestAction, TestState, TestViewEvent> {
+) : StoreView<TestAction, TestState> {
 
-    override val actions: Observable<TestAction> = testActionSubject.hide()
-
-    override fun render(state: TestState) {
+    override fun accept(state: TestState) {
         testStateObserver.onNext(state)
+    }
+
+    override fun subscribe(subscriber: Subscriber<in TestAction>) {
+        testActionSubject
+            .subscribe(subscriber)
     }
 }
