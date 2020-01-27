@@ -9,7 +9,7 @@ import ru.coderedwolf.mvi.core.EventListener
 import ru.coderedwolf.mvi.core.Store
 import ru.coderedwolf.mvi.core.StoreView
 import ru.coderedwolf.mvi.elements.Navigator
-import ru.coderedwolf.mvi.routing.EventListenerConnecton
+import ru.coderedwolf.mvi.routing.EventListenerConnection
 import ru.coderedwolf.mvi.routing.NavigationConnection
 
 abstract class ViewModelBinder<Action : Any, State : Any, ViewState : Any, Event : Any>(
@@ -42,7 +42,7 @@ abstract class ViewModelBinder<Action : Any, State : Any, ViewState : Any, Event
         store: Store<*, *, Event>,
         scheduler: Scheduler,
         eventListener: EventListener<Event>
-    ) = EventListenerConnecton(
+    ) = EventListenerConnection(
         store = store,
         eventListener = eventListener,
         scheduler = scheduler

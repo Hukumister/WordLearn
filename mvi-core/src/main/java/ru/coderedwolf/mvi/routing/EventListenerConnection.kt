@@ -6,7 +6,7 @@ import ru.coderedwolf.mvi.binder.Connection
 import ru.coderedwolf.mvi.core.EventListener
 import ru.coderedwolf.mvi.core.Store
 
-class EventListenerConnecton<Event : Any>(
+class EventListenerConnection<Event : Any>(
     store: Store<*, *, Event>,
     eventListener: EventListener<Event>,
     scheduler: Scheduler

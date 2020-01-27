@@ -28,8 +28,6 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
     private val compositeDisposable = CompositeDisposable()
 
     private val stateProcessor = BehaviorProcessor.createDefault(initialState)
-    private val viewStateProcessor = BehaviorProcessor.create<State>()
-
     private val actionProcessor = PublishProcessor.create<Action>()
     private val effectProcessor = PublishProcessor.create<Effect>()
     private val eventProcessor = BehaviorProcessor.create<Event>()
@@ -39,7 +37,7 @@ abstract class AbstractStore<Action : Any, State : Any, Event : Any, Effect : An
             stateProcessor,
             effectProcessor
         )
-            .scan(initialState) { _, (state, effect) -> reducer.invoke(state, effect) }
+            .map { (state, effect) -> reducer.invoke(state, effect) }
             .subscribe(stateProcessor::onNext, ::onError)
             .addTo(compositeDisposable)
 
