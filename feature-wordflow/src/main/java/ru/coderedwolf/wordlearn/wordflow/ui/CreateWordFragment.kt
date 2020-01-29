@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jakewharton.rxbinding2.widget.RxTextView
 import kotlinx.android.synthetic.main.fragment_create_word.*
 import ru.coderedwolf.fragment.MviFragment
-import ru.coderedwolf.mvi.core.EventListener
+import ru.coderedwolf.mvi.routing.EventListener
 import ru.coderedwolf.viewmodel.ViewModelBinder
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider

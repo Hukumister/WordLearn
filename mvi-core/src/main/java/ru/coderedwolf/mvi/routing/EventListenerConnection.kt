@@ -2,16 +2,15 @@ package ru.coderedwolf.mvi.routing
 
 import io.reactivex.Scheduler
 import io.reactivex.functions.Consumer
-import ru.coderedwolf.mvi.binder.Connection
-import ru.coderedwolf.mvi.core.EventListener
-import ru.coderedwolf.mvi.core.Store
+import org.reactivestreams.Publisher
+import ru.coderedwolf.mvi.connection.BaseConnectionRule
 
 class EventListenerConnection<Event : Any>(
-    store: Store<*, *, Event>,
+    eventPublisher: Publisher<Event>,
     eventListener: EventListener<Event>,
     scheduler: Scheduler
-) : Connection<Event, Event>(
-    publisher = store.eventSource,
+) : BaseConnectionRule<Event, Event>(
+    publisher = eventPublisher,
     consumer = Consumer { event -> eventListener.onEvent(event) },
     transformer = { input -> input.observeOn(scheduler) }
 )

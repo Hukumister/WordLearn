@@ -2,7 +2,7 @@ package ru.coderedwolf.viewmodel
 
 import io.reactivex.Scheduler
 import ru.coderedwolf.mvi.core.Store
-import ru.coderedwolf.mvi.elements.Navigator
+import ru.coderedwolf.mvi.core.elements.Navigator
 
 /**
  * @author HaronCode. Date 13.10.2019.

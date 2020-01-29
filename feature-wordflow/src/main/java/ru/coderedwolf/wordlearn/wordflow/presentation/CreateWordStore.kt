@@ -1,9 +1,9 @@
 package ru.coderedwolf.wordlearn.wordflow.presentation
 
 import io.reactivex.Flowable
-import ru.coderedwolf.mvi.elements.EventProducer
-import ru.coderedwolf.mvi.elements.Middleware
-import ru.coderedwolf.mvi.elements.Reducer
+import ru.coderedwolf.mvi.core.elements.EventProducer
+import ru.coderedwolf.mvi.core.elements.Middleware
+import ru.coderedwolf.mvi.core.elements.Reducer
 import ru.coderedwolf.mvi.store.OnlyActionStore
 import ru.coderedwolf.wordlearn.common.domain.result.Determinate
 import ru.coderedwolf.wordlearn.common.domain.result.asDeterminate

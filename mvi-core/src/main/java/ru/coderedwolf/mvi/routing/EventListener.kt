@@ -1,4 +1,4 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.routing
 
 interface EventListener<Event : Any> {
 

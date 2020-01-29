@@ -1,4 +1,4 @@
-package ru.coderedwolf.mvi.core
+package ru.coderedwolf.mvi.store
 
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -9,10 +9,11 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.withLatestFrom
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
-import ru.coderedwolf.mvi.elements.Bootstrapper
-import ru.coderedwolf.mvi.elements.EventProducer
-import ru.coderedwolf.mvi.elements.Middleware
-import ru.coderedwolf.mvi.elements.Reducer
+import ru.coderedwolf.mvi.core.Store
+import ru.coderedwolf.mvi.core.elements.Bootstrapper
+import ru.coderedwolf.mvi.core.elements.EventProducer
+import ru.coderedwolf.mvi.core.elements.Middleware
+import ru.coderedwolf.mvi.core.elements.Reducer
 
 /**
  * @author HaronCode.

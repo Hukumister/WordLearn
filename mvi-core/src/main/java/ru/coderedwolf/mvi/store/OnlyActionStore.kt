@@ -1,9 +1,9 @@
 package ru.coderedwolf.mvi.store
 
-import ru.coderedwolf.mvi.elements.Bootstrapper
-import ru.coderedwolf.mvi.elements.EventProducer
-import ru.coderedwolf.mvi.elements.Middleware
-import ru.coderedwolf.mvi.elements.Reducer
+import ru.coderedwolf.mvi.core.elements.Bootstrapper
+import ru.coderedwolf.mvi.core.elements.EventProducer
+import ru.coderedwolf.mvi.core.elements.Middleware
+import ru.coderedwolf.mvi.core.elements.Reducer
 
 open class OnlyActionStore<Action : Any, State : Any, Event : Any>(
     initialState: State,
