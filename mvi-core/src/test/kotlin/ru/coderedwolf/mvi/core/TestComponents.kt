@@ -8,10 +8,10 @@ import io.reactivex.processors.PublishProcessor
 import org.reactivestreams.Subscriber
 import ru.coderedwolf.mvi.core.TestAction.*
 import ru.coderedwolf.mvi.core.TestEffect.*
-import ru.coderedwolf.mvi.elements.Bootstrapper
-import ru.coderedwolf.mvi.elements.Middleware
-import ru.coderedwolf.mvi.elements.Navigator
-import ru.coderedwolf.mvi.elements.Reducer
+import ru.coderedwolf.mvi.core.elements.Bootstrapper
+import ru.coderedwolf.mvi.core.elements.Middleware
+import ru.coderedwolf.mvi.core.elements.Navigator
+import ru.coderedwolf.mvi.core.elements.Reducer
 import java.util.concurrent.TimeUnit
 
 /**

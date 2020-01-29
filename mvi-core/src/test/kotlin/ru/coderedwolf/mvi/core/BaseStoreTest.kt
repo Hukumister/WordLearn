@@ -3,13 +3,12 @@ package ru.coderedwolf.mvi.core
 import io.reactivex.observers.TestObserver
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.TestScheduler
-import io.reactivex.subjects.PublishSubject
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import ru.coderedwolf.mvi.binder.ConnectionViewBinder
-import ru.coderedwolf.mvi.binder.noneTransformer
-import ru.coderedwolf.mvi.binder.with
+import ru.coderedwolf.mvi.connection.noneTransformer
+import ru.coderedwolf.mvi.connection.with
 import ru.coderedwolf.mvi.core.TestAction.*
 import ru.coderedwolf.mvi.store.BaseStore
 import java.util.concurrent.TimeUnit
@@ -27,7 +26,7 @@ class BaseStoreTest {
     private lateinit var actions: PublishProcessor<TestAction>
     private lateinit var view: TestView
 
-    private lateinit var testBinder: ConnectionViewBinder<TestAction, TestState, TestViewEvent>
+    private lateinit var testBinder: ConnectionViewBinder<TestAction, TestState>
 
     @Before
     fun prepare() {
@@ -48,7 +47,7 @@ class BaseStoreTest {
         states = TestObserver()
 
         view = TestView(actions, states)
-        testBinder.bind(view)
+        testBinder.bindView(view)
     }
 
     @Test
@@ -172,11 +171,11 @@ class BaseStoreTest {
 
         asyncWorkScheduler.advanceTimeBy(5, TimeUnit.MILLISECONDS)
 
-        testBinder.unbind()
+        testBinder.unbindView()
 
         asyncWorkScheduler.advanceTimeBy(10, TimeUnit.MILLISECONDS)
 
-        testBinder.bind(view)
+        testBinder.bindView(view)
 
         val stateAfterRebind = states.onNextEvents().last()
 

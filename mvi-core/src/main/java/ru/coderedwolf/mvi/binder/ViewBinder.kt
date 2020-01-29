@@ -1,11 +1,10 @@
 package ru.coderedwolf.mvi.binder
 
-import io.reactivex.disposables.Disposable
 import ru.coderedwolf.mvi.core.StoreView
 
-interface ViewBinder<Action : Any, State : Any, Event : Any> : Disposable {
+interface ViewBinder<Action : Any, State : Any> {
 
-    fun bind(storeView: StoreView<Action, State>)
+    fun bindView(storeView: StoreView<Action, State>)
 
-    fun unbind()
+    fun unbindView()
 }

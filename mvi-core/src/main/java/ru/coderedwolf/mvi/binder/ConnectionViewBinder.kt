@@ -1,43 +1,31 @@
 package ru.coderedwolf.mvi.binder
 
-import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import ru.coderedwolf.mvi.connection.ConnectionRule
 import ru.coderedwolf.mvi.core.StoreView
 
-class ConnectionViewBinder<Action : Any, State : Any, Event : Any>(
-    private val createConnection: MutableList<Connection<*, *>>.(StoreView<Action, State>) -> Unit
-) : ViewBinder<Action, State, Event> {
+class ConnectionViewBinder<Action : Any, State : Any>(
+    private val connectionFactory: (StoreView<Action, State>) -> List<ConnectionRule>
+) : ViewBinder<Action, State> {
 
-    private val compositeDisposable = CompositeDisposable()
-    private var childBinder: ConnectionViewBinder<Action, State, Event>? = null
+    private var childBinder: ConnectionViewBinder<Action, State>? = null
+    private var connectionDisposable = CompositeDisposable()
 
-    override fun bind(storeView: StoreView<Action, State>) {
-        val connectionList = mutableListOf<Connection<*, *>>()
-        connectionList.createConnection(storeView)
-        connectionList.forEach { connection -> connect(connection) }
+    override fun bindView(storeView: StoreView<Action, State>) {
+        val connectionRuleList = connectionFactory.invoke(storeView)
+        connectionRuleList.forEach { connectionRule -> connectionRule.connect().addTo(connectionDisposable) }
 
-        childBinder?.bind(storeView)
+        childBinder?.bindView(storeView)
     }
 
-    fun addChild(binder: ConnectionViewBinder<Action, State, Event>) {
-        childBinder = binder
+    fun addChild(child: ConnectionViewBinder<Action, State>) {
+        childBinder = child
     }
 
-    private fun <In : Any, Out : Any> connect(
-        connection: Connection<In, Out>
-    ) = Flowable.fromPublisher(connection.publisher)
-        .compose(connection.transformer)
-        .subscribe(connection.consumer)
-        .addTo(compositeDisposable)
-
-    override fun unbind() {
-        compositeDisposable.clear()
-        childBinder?.unbind()
+    override fun unbindView() {
+        childBinder?.unbindView()
+        connectionDisposable.dispose()
     }
-
-    override fun isDisposed() = compositeDisposable.isDisposed
-
-    override fun dispose() = compositeDisposable.dispose()
 
 }
