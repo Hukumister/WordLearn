@@ -93,12 +93,6 @@ class TestBootstrapper : Bootstrapper<TestAction> {
     }
 }
 
-class TestNavigator : Navigator<TestState, TestEffect> {
-
-    override fun invoke(state: TestState, effect: TestEffect) {
-
-    }
-}
 
 class TestView(
     private val testActionSubject: PublishProcessor<TestAction>,

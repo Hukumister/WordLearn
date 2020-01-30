@@ -5,25 +5,15 @@ import ru.coderedwolf.mvi.connection.ConnectionRule
 import ru.coderedwolf.mvi.core.StoreView
 
 fun <Action : Any, State : Any> binding(
-    listener: ConnectionViewBindingBuilder.(storeView: StoreView<Action, State>) -> Unit
+    listener: MutableList<ConnectionRule>.(storeView: StoreView<Action, State>) -> Unit
 ): ConnectionViewBinder<Action, State> {
-    val connectionViewBindingBuilder = ConnectionViewBindingBuilder()
+    val connectionViewBindingBuilder = mutableListOf<ConnectionRule>()
 
     return ConnectionViewBinder { storeView ->
-        connectionViewBindingBuilder.listener(storeView)
-        connectionViewBindingBuilder.createConnectionList()
+        connectionViewBindingBuilder.apply { listener(storeView) }
     }
 }
 
-
-class ConnectionViewBindingBuilder {
-
-    private val connectionRuleList = mutableListOf<ConnectionRule>()
-
-    fun connection(rule: () -> ConnectionRule?) {
-        rule.invoke()?.let(connectionRuleList::add)
-    }
-
-    fun createConnectionList() = connectionRuleList.toList()
-
+inline fun MutableList<ConnectionRule>.connection(rule: () -> ConnectionRule) {
+    rule.invoke().let(::add)
 }

@@ -11,7 +11,6 @@ import ru.coderedwolf.mvi.core.elements.Navigator
 class NavigationConnection<State : Any, Event : Any>(
     statePublisher: Publisher<State>,
     eventPublisher: Publisher<Event>,
-    private val scheduler: Scheduler,
     private val navigator: Navigator<State, Event>
 ) : BaseConnectionRule<Pair<State, Event>, Pair<State, Event>>(
     publisher = Flowables.combineLatest(
@@ -19,5 +18,5 @@ class NavigationConnection<State : Any, Event : Any>(
         Flowable.fromPublisher(eventPublisher)
     ),
     consumer = Consumer { (state, event) -> navigator.invoke(state, event) },
-    transformer = { input -> input.observeOn(scheduler) }
+    transformer = { input -> input }
 )

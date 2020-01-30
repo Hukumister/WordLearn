@@ -7,8 +7,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import ru.coderedwolf.mvi.binder.ConnectionViewBinder
-import ru.coderedwolf.mvi.connection.noneTransformer
-import ru.coderedwolf.mvi.connection.with
+import ru.coderedwolf.mvi.binder.dsl.binding
+import ru.coderedwolf.mvi.binder.dsl.noneTransformer
+import ru.coderedwolf.mvi.binder.dsl.with
 import ru.coderedwolf.mvi.core.TestAction.*
 import ru.coderedwolf.mvi.store.BaseStore
 import java.util.concurrent.TimeUnit
@@ -38,9 +39,9 @@ class BaseStoreTest {
             middleware = TestMiddleware(asyncWorkScheduler)
         )
 
-        testBinder = ConnectionViewBinder { view ->
-            add(baseStore to view with noneTransformer())
-            add(view to baseStore with noneTransformer())
+        testBinder = binding { view ->
+            connection { baseStore to view with noneTransformer() }
+            connection { view to baseStore with noneTransformer() }
         }
         actions = PublishProcessor.create()
 
@@ -146,7 +147,8 @@ class BaseStoreTest {
 
         asyncWorkScheduler.advanceTimeBy(5, TimeUnit.MILLISECONDS)
 
-        testBinder.dispose()
+        testBinder.unbindView()
+        baseStore.dispose()
 
         asyncWorkScheduler.advanceTimeBy(10, TimeUnit.MILLISECONDS)
 
