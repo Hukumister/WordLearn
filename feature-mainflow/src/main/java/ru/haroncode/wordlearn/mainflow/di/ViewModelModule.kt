@@ -20,6 +20,4 @@ interface ViewModelModule : ViewModelFactoryModule {
     fun wordSetViewModel(
         wordSetUserViewModel: WordSetUserViewModel
     ): ViewModel
-
 }
-

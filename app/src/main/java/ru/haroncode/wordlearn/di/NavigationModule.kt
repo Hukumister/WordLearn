@@ -3,12 +3,12 @@ package ru.haroncode.wordlearn.di
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 import ru.haroncode.wordlearn.mainflow.presentation.MainFlowReachableFlows
 import ru.haroncode.wordlearn.presentation.ReachableFlows
 import ru.haroncode.wordlearn.ui.Flows
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
-import javax.inject.Singleton
 
 @Module
 abstract class NavigationModule {

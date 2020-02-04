@@ -11,5 +11,4 @@ object SimpleValidator {
     } else {
         Validated
     }
-
 }

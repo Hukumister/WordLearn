@@ -74,7 +74,6 @@ abstract class BaseFragment @JvmOverloads constructor(
 
     @CallSuper
 
-
     @CheckReturnValue
     fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(fragmentScopeProvider)
 }

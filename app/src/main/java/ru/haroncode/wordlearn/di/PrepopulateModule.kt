@@ -16,5 +16,4 @@ abstract class PrepopulateModule {
             setFieldSeparator(';')
         }
     }
-
 }

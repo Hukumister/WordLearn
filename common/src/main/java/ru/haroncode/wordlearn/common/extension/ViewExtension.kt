@@ -9,9 +9,8 @@ import com.google.android.material.snackbar.Snackbar
  */
 
 inline fun View.onClick(
-        crossinline consumer: (View) -> Unit
+    crossinline consumer: (View) -> Unit
 ) = setOnClickListener { view -> consumer(view) }
-
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun Fragment.snack(message: String) =

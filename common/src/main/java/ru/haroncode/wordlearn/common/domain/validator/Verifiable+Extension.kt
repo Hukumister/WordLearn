@@ -10,7 +10,6 @@ import ru.haroncode.wordlearn.common.domain.resource.toStringRes
 sealed class Verifiable {
 
     abstract val isValid: Boolean
-
 }
 
 object Validated : Verifiable() {
@@ -34,4 +33,3 @@ data class ResourceViolation(
         vararg args: Any?
     ) : this(isValid, stringRes.toStringRes(args))
 }
-

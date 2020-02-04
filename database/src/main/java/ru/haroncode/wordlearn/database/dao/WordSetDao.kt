@@ -24,5 +24,4 @@ interface WordSetDao {
 
     @Query("SELECT * FROM WordSetEntity WHERE isUserSet = :isUserSet")
     fun observableAllFilterUserSet(isUserSet: Boolean): Flowable<List<WordSetEntity>>
-
 }

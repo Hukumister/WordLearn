@@ -2,6 +2,7 @@ package ru.haroncode.wordlearn.mainflow.presentation.set
 
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import javax.inject.Inject
 import ru.haroncode.api.wordset.domain.repository.WordSetRepository
 import ru.haroncode.api.wordset.model.WordSet
 import ru.haroncode.mvi.core.elements.*
@@ -15,7 +16,6 @@ import ru.haroncode.wordlearn.common.util.asObservable
 import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewModel.Action
 import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewModel.ViewEvent
 import ru.haroncode.wordlearn.mainflow.ui.MainFlowScreens
-import javax.inject.Inject
 
 /**
  * @author HaronCode. Date 11.10.2019.
@@ -55,7 +55,6 @@ class WordSetUserViewModel @Inject constructor(
             }
             else -> state
         }
-
     }
 
     private class NavigatorImpl(private val router: FlowRouter) : Navigator<WordSetUserViewState, Action> {
@@ -65,7 +64,6 @@ class WordSetUserViewModel @Inject constructor(
             is Action.Back -> router.exit()
             else -> Unit
         }
-
     }
 
     private class ViewEventProducerImpl : EventProducer<WordSetUserViewState, Action, ViewEvent> {
@@ -74,7 +72,6 @@ class WordSetUserViewModel @Inject constructor(
             is Action.CreateNew -> ViewEvent.CreateNewDialog
             else -> null
         }
-
     }
 
     private class BootstrapperImpl : Bootstrapper<Action> {
@@ -92,15 +89,6 @@ class WordSetUserViewModel @Inject constructor(
                 .map(Action::LoadListResult)
             else -> action.asFlowable()
         }
-
     }
     //endregion
-
 }
-
-
-
-
-
-
-

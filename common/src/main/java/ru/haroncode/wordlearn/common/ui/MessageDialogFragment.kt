@@ -31,7 +31,6 @@ class MessageDialogFragment : DialogFragment() {
             setUpNegativeButton(negativeText)
         }.create()
 
-
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         clickListener.dialogCanceled(startTag)

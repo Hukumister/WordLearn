@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 import ru.haroncode.wordlearn.database.DataBase
 import ru.haroncode.wordlearn.database.mapper.*
-import javax.inject.Singleton
 
 @Module
 object DatabaseModule {

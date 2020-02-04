@@ -6,7 +6,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 
-
 object Keyboard {
 
     /**
@@ -15,7 +14,7 @@ object Keyboard {
      * your view in such a way that they have expressed they would like to
      * start performing input into it.
      *
-     * @param v         The currently focused view, which would like to receive
+     * @param v The currently focused view, which would like to receive
      * soft keyboard input.
      * @param forceShow Provides additional operating flags.
      */
@@ -40,7 +39,7 @@ object Keyboard {
     @JvmStatic
     fun hide(dialog: Dialog?): Boolean {
         if (dialog != null) {
-            //Find the currently focused view, so we can grab the correct window token from it.
+            // Find the currently focused view, so we can grab the correct window token from it.
             val view = dialog.currentFocus
             return hide(view)
         }
@@ -70,5 +69,4 @@ object Keyboard {
     }
 
     private fun getInputMethodManager(context: Context) = context.getSystemService<InputMethodManager>()
-
 }

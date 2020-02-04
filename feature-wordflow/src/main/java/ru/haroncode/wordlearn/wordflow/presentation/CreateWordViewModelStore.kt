@@ -1,6 +1,7 @@
 package ru.haroncode.wordlearn.wordflow.presentation
 
 import io.reactivex.Flowable
+import javax.inject.Inject
 import ru.haroncode.mvi.core.elements.Middleware
 import ru.haroncode.mvi.core.elements.Navigator
 import ru.haroncode.mvi.core.elements.Reducer
@@ -15,7 +16,6 @@ import ru.haroncode.wordlearn.word.model.Word
 import ru.haroncode.wordlearn.word.model.WordExample
 import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewModelStore.Action
 import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewState.Item
-import javax.inject.Inject
 
 class CreateWordViewModelStore @Inject constructor(
     categoryId: Long,
@@ -65,7 +65,6 @@ class CreateWordViewModelStore @Inject constructor(
             )
             return Flowable.just(word)
         }
-
     }
 
     class ReducerImpl : Reducer<CreateWordViewState, Action> {
@@ -95,7 +94,6 @@ class CreateWordViewModelStore @Inject constructor(
         }
 
         private fun WordExample.toItem(): Item.WordExampleItem = Item.WordExampleItem(this)
-
     }
 
     class NavigatorImpl(private val flowRouter: FlowRouter) :
@@ -108,7 +106,5 @@ class CreateWordViewModelStore @Inject constructor(
             }
             else -> Unit
         }
-
     }
-
 }

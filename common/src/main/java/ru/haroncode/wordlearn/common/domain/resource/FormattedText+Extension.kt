@@ -20,7 +20,6 @@ sealed class FormattedText : Parcelable {
     }
 
     override fun describeContents(): Int = 0
-
 }
 
 @Parcelize
@@ -41,7 +40,6 @@ class StringResFormatted(
             parcel.writeInt(stringRes)
             parcel.writeArray(args)
         }
-
     }
 
     override fun equals(other: Any?): Boolean {
@@ -61,7 +59,6 @@ class StringResFormatted(
         result = 31 * result + args.contentHashCode()
         return result
     }
-
 }
 
 @Parcelize
@@ -85,7 +82,6 @@ class CharSequenceFormatted(
             TextUtils.writeToParcel(value, parcel, flags)
             parcel.writeArray(args)
         }
-
     }
 
     override fun equals(other: Any?): Boolean {
@@ -105,7 +101,6 @@ class CharSequenceFormatted(
         result = 31 * result + args.contentHashCode()
         return result
     }
-
 }
 
 fun @receiver:StringRes Int.toStringRes(args: Any? = null) = StringResFormatted(this, args)

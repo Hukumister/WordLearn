@@ -1,6 +1,5 @@
 package ru.haroncode.wordlearn.common.ui
 
-
 import com.uber.autodispose.ScopeProvider
 import io.reactivex.CompletableSource
 import io.reactivex.subjects.BehaviorSubject
@@ -16,5 +15,4 @@ class FragmentLifecycleScopeProvider : ScopeProvider {
 
     override fun requestScope(): CompletableSource = lifecycleSubject.hide()
             .ignoreElements()
-
 }

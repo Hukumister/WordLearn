@@ -13,5 +13,4 @@ interface ClickableAdapter {
         viewHolder.containerView.setOnClickListener { view -> listener(viewHolder, view) }
 
     fun unbindClickListener(viewHolder: BaseViewHolder) = viewHolder.containerView.setOnClickListener(null)
-
 }

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_word_user_set.*
 import ru.haroncode.mvi.core.Store
 import ru.haroncode.wordlearn.common.domain.result.Product
@@ -21,7 +22,6 @@ import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewModel.Vie
 import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewState
 import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewState.Item
 import ru.haroncode.wordlearn.mainflow.ui.word.set.list.WordSetDelegate
-import javax.inject.Inject
 
 /**
  * @author HaronCode.
@@ -56,7 +56,6 @@ class WordSetUserFragment : MviFragment<Action, WordSetUserViewState, ViewEvent>
             layoutManager = LinearLayoutManager(requireContext())
             adapter = itemAdapter
         }
-
     }
 
     private fun onClickAddSet(item: Item) = postAction(Action.CreateNew)
@@ -69,5 +68,4 @@ class WordSetUserFragment : MviFragment<Action, WordSetUserViewState, ViewEvent>
     override fun route(event: ViewEvent) = when (event) {
         is ViewEvent.CreateNewDialog -> Toast.makeText(requireContext(), "Dialog", Toast.LENGTH_SHORT).show()
     }
-
 }

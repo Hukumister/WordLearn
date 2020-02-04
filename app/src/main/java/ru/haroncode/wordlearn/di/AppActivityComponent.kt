@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import javax.inject.Singleton
 import ru.haroncode.wordlearn.common.di.ComponentDependencies
 import ru.haroncode.wordlearn.common.di.Injector
 import ru.haroncode.wordlearn.common.di.InjectorBuilder
@@ -12,7 +13,6 @@ import ru.haroncode.wordlearn.common.di.findComponentDependencies
 import ru.haroncode.wordlearn.ui.AppActivity
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-import javax.inject.Singleton
 
 @Module
 object AppActivityComponentBuilderModule {

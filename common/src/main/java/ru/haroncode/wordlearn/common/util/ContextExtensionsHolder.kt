@@ -67,5 +67,4 @@ interface ContextExtensionsHolder {
 
     @CheckResult
     fun FormattedText.format(): CharSequence = FormattedTextFormat.format(extensionContext, this)
-
 }

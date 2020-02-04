@@ -15,5 +15,4 @@ class DefaultItemClicker<ItemModel, VH : BaseViewHolder>(
     override fun invoke(holder: VH, view: View, item: ItemModel) = consumer(item)
 
     override fun onUnbindClicker(holder: VH) = Unit
-
 }

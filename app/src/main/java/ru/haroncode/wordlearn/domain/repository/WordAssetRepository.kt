@@ -3,8 +3,8 @@ package ru.haroncode.wordlearn.domain.repository
 import android.content.res.AssetManager
 import de.siegmar.fastcsv.reader.CsvReader
 import io.reactivex.Single
-import ru.haroncode.wordlearn.word.model.Word
 import javax.inject.Inject
+import ru.haroncode.wordlearn.word.model.Word
 
 /**
  * @author HaronCode.
@@ -24,5 +24,4 @@ class WordAssetRepositoryImpl @Inject constructor(
     }
 
     override fun findAllFor(categoryId: Long): Single<List<Word>> = Single.never()
-
 }

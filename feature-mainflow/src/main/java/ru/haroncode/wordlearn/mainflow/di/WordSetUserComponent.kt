@@ -41,5 +41,4 @@ interface WordSetModule {
     fun wordSetRepository(
         wordSetRepositoryImpl: WordSetRepositoryImpl
     ): WordSetRepository
-
 }

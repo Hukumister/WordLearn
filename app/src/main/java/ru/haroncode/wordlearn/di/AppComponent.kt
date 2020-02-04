@@ -4,12 +4,12 @@ import android.content.Context
 import dagger.*
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import javax.inject.Singleton
 import ru.haroncode.wordlearn.App
 import ru.haroncode.wordlearn.common.di.Injector
 import ru.haroncode.wordlearn.common.di.InjectorBuilder
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
 import ru.haroncode.wordlearn.domain.system.AppSchedulerProvider
-import javax.inject.Singleton
 
 @Module
 object AppComponentBuilderModule {

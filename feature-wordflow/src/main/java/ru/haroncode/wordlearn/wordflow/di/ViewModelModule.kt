@@ -17,5 +17,4 @@ interface ViewModelModule : ViewModelFactoryModule {
     fun wordSetViewModel(
         createWordViewModelStore: CreateWordViewModelStore
     ): ViewModel
-
 }

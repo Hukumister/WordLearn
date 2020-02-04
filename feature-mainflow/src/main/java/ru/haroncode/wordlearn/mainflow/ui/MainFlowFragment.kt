@@ -2,6 +2,7 @@ package ru.haroncode.wordlearn.mainflow.ui
 
 import android.os.Bundle
 import android.view.MenuItem
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_main_flow.*
 import ru.haroncode.wordlearn.common.di.ComponentDependenciesProvider
 import ru.haroncode.wordlearn.common.di.HasChildDependencies
@@ -10,7 +11,6 @@ import ru.haroncode.wordlearn.common.util.change
 import ru.haroncode.wordlearn.common.util.into
 import ru.haroncode.wordlearn.mainflow.R
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import javax.inject.Inject
 
 /**
  * @author HaronCode.

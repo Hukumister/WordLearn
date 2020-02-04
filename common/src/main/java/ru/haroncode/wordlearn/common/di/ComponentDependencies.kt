@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dagger.MapKey
+import kotlin.reflect.KClass
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
 import ru.haroncode.wordlearn.common.presentation.FlowRouter
 import ru.terrakok.cicerone.Router
-import kotlin.reflect.KClass
 
 interface ComponentDependencies
 

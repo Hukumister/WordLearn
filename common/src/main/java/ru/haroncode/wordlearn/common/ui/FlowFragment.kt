@@ -1,6 +1,7 @@
 package ru.haroncode.wordlearn.common.ui
 
 import android.os.Bundle
+import javax.inject.Inject
 import ru.haroncode.wordlearn.common.R
 import ru.haroncode.wordlearn.common.extension.setLaunchScreen
 import ru.terrakok.cicerone.Navigator
@@ -8,7 +9,6 @@ import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import javax.inject.Inject
 
 abstract class FlowFragment : BaseFragment(R.layout.layout_container) {
 

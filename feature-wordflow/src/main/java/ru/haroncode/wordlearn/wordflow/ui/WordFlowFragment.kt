@@ -1,11 +1,11 @@
 package ru.haroncode.wordlearn.wordflow.ui
 
 import androidx.fragment.app.Fragment
+import javax.inject.Inject
 import ru.haroncode.wordlearn.common.di.ComponentDependenciesProvider
 import ru.haroncode.wordlearn.common.di.HasChildDependencies
 import ru.haroncode.wordlearn.common.extension.args
 import ru.haroncode.wordlearn.common.ui.FlowFragment
-import javax.inject.Inject
 
 /**
  * @author HaronCode.

@@ -1,13 +1,13 @@
 package ru.haroncode.wordlearn.mainflow.ui
 
 import android.os.Bundle
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_learn.*
 import ru.haroncode.wordlearn.common.extension.onClick
 import ru.haroncode.wordlearn.common.presentation.FlowRouter
 import ru.haroncode.wordlearn.common.ui.BaseFragment
 import ru.haroncode.wordlearn.mainflow.R
 import ru.haroncode.wordlearn.mainflow.presentation.LearnReachableFlows
-import javax.inject.Inject
 
 /**
  * @author HaronCode.

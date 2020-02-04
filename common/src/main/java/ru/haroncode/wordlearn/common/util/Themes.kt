@@ -46,5 +46,4 @@ object Themes {
         context.theme.resolveAttribute(attr, value, true)
         return value
     }
-
 }

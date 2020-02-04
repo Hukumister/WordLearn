@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply from: "$project.rootDir/сodequality/ktlint.gradle"
 
 android {
     compileSdkVersion target_sdk_version

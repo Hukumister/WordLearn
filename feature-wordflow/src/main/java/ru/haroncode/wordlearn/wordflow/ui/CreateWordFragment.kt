@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import com.jakewharton.rxbinding2.widget.RxTextView
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_create_word.*
 import ru.haroncode.mvi.core.Store
 import ru.haroncode.wordlearn.common.domain.result.Determinate
@@ -20,7 +21,6 @@ import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewModelStore
 import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewModelStore.Action
 import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewState
 import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewState.Item
-import javax.inject.Inject
 
 /**
  * @author HaronCode.
@@ -30,7 +30,7 @@ class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.l
 
     private lateinit var wordExampleAdapter: ItemAsyncAdapter<Item>
 
-    //todo add correct init
+    // todo add correct init
     private lateinit var viewModel: CreateWordViewModelStore
 
     @Inject lateinit var schedulerProvider: SchedulerProvider
@@ -59,7 +59,6 @@ class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.l
         transcription.connect(Action::ChangeTranscription)
         translation.connect(Action::ChangeTranslation)
         association.connect(Action::ChangeAssociation)
-
     }
 
     override fun render(state: CreateWordViewState) {
@@ -67,9 +66,9 @@ class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.l
 
         wordLayout.error = (state.word.verifiable as? ResourceViolation)?.formattedText?.format()
         translationLayout.error = (state.translation.verifiable as? ResourceViolation)?.formattedText?.format()
-        saveButton.isEnabled = state.word.isValid
-                && state.translation.isValid
-                && state.determinate !is Determinate.Loading
+        saveButton.isEnabled = state.word.isValid &&
+                state.translation.isValid &&
+                state.determinate !is Determinate.Loading
     }
 
     private fun onClickRemoveExample(item: Item.WordExampleItem) = item.wordExample
@@ -100,5 +99,4 @@ class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.l
         .map { event -> action(event.text()) }
         .autoDisposable()
         .subscribe(::postAction)
-
 }

@@ -78,7 +78,6 @@ interface ChildDependenciesModule {
     @IntoMap
     @ComponentDependenciesKey(WordSetUserDependencies::class)
     fun provideWordSetUserComponentDependencies(mainFlowComponent: MainFlowComponent): ComponentDependencies
-
 }
 
 interface MainFlowDependencies : FlowDependencies {

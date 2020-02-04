@@ -15,5 +15,4 @@ interface WordSetRepository {
 
     fun findAllUserSet(): Single<List<WordSet>>
     fun observableAllUserSet(): Flowable<List<WordSet>>
-
 }

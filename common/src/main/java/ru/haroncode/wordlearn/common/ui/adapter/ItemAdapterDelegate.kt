@@ -32,6 +32,4 @@ abstract class ItemAdapterDelegate<ItemModel, RenderContract> :
     abstract fun onBindView(item: RenderContract, holder: BaseViewHolder)
 
     abstract fun getItem(item: ItemModel): RenderContract
-
 }
-

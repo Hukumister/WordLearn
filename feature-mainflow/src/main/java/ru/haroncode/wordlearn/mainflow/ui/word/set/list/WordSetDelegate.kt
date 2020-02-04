@@ -28,5 +28,4 @@ class WordSetDelegate<ItemModel> : ItemAdapterDelegate<ItemModel, RenderContact>
         containerView.titleView.text = item.title
         containerView.imageView.setBackgroundColor(item.color)
     }
-
 }

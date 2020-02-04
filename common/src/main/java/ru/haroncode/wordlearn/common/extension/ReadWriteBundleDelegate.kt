@@ -75,4 +75,3 @@ fun <T : Any> setToBundle(bundle: Bundle, key: String, value: T) {
         else -> throw IllegalStateException("Type ${value.javaClass.canonicalName} of property $key is not supported")
     }
 }
-

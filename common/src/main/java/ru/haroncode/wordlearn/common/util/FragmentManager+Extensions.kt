@@ -13,7 +13,6 @@ inline fun FragmentManager.transaction(
     .apply(body)
     .apply { if (allowStateLoss) commitNowAllowingStateLoss() else commitNow() }
 
-
 data class Change(
     val containerId: Int,
     val newScreen: SupportAppScreen

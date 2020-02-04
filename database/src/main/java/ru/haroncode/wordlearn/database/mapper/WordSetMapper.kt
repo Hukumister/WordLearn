@@ -23,5 +23,4 @@ class WordSetMapper {
         color = wordSet.color,
         title = wordSet.title
     )
-
 }

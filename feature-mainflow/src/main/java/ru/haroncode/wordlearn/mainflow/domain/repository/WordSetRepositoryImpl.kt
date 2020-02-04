@@ -3,12 +3,12 @@ package ru.haroncode.wordlearn.mainflow.domain.repository
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
+import javax.inject.Inject
 import ru.haroncode.api.wordset.domain.repository.WordSetRepository
 import ru.haroncode.api.wordset.model.WordSet
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
 import ru.haroncode.wordlearn.database.dao.WordSetDao
 import ru.haroncode.wordlearn.database.mapper.WordSetMapper
-import javax.inject.Inject
 
 /**
  * @author HaronCode. Date 04.11.2019.
@@ -38,5 +38,4 @@ class WordSetRepositoryImpl @Inject constructor(
         .observableAllFilterUserSet(isUserSet = true)
         .subscribeOn(schedulerProvider.io)
         .map(wordSetMapper::convertList)
-
 }

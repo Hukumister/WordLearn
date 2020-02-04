@@ -33,7 +33,6 @@ class WordExampleAdapterDelegates : ItemAdapterDelegate<Item, Item.WordExampleIt
     override fun unbindClickListener(viewHolder: BaseViewHolder) {
         viewHolder.itemView.removeButton.setOnClickListener(null)
     }
-
 }
 
 class CreateWordAdapterDelegate : ItemAdapterDelegate<Item, Item.AddButtonItem>(), ClickableAdapter {
@@ -54,5 +53,4 @@ class CreateWordAdapterDelegate : ItemAdapterDelegate<Item, Item.AddButtonItem>(
     override fun unbindClickListener(viewHolder: BaseViewHolder) {
         viewHolder.itemView.addButton.setOnClickListener(null)
     }
-
 }

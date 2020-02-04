@@ -20,7 +20,5 @@ interface ItemClicker<ItemModel, VH : BaseViewHolder> {
         override fun invoke(holder: VH, view: View, item: ItemModel) = Unit
 
         override fun onUnbindClicker(holder: VH) = Unit
-
     }
-
 }

@@ -21,6 +21,5 @@ data class WordSetUserViewState(
             override val title: CharSequence,
             override val color: Int
         ) : Item(), WordSetDelegate.RenderContact
-
     }
 }

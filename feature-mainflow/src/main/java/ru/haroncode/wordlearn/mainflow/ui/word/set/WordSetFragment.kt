@@ -23,5 +23,4 @@ class WordSetFragment : BaseFragment(R.layout.fragment_word_set) {
         viewPager.adapter = wordSetPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
     }
-
 }

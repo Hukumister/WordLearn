@@ -2,10 +2,10 @@ package ru.haroncode.wordlearn.mainflow.domain.repository
 
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
 import ru.haroncode.wordlearn.database.dao.PhraseTopicDao
 import ru.haroncode.wordlearn.database.mapper.PhraseTopicMapper
 import ru.haroncode.wordlearn.phrase.model.PhraseTopic
-import javax.inject.Inject
 
 /**
  * @author HaronCode. Date 16.06.2019.
@@ -17,8 +17,8 @@ interface PhraseTopicRepository {
 }
 
 class PhraseTopicRepositoryImpl @Inject constructor(
-        private val phraseTopicDao: PhraseTopicDao,
-        private val phraseTopicMapper: PhraseTopicMapper
+    private val phraseTopicDao: PhraseTopicDao,
+    private val phraseTopicMapper: PhraseTopicMapper
 ) : PhraseTopicRepository {
 
     override fun updateStudy(topicId: Long, isStudy: Boolean) = phraseTopicDao
@@ -30,5 +30,4 @@ class PhraseTopicRepositoryImpl @Inject constructor(
     override fun save(phraseTopic: PhraseTopic) = phraseTopic
             .let(phraseTopicMapper::convertToEntity)
             .let(phraseTopicDao::save)
-
 }

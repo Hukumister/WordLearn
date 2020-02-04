@@ -72,5 +72,4 @@ object FormattedTextFormat {
     }
 
     private fun <T : Any> defaultFormatArgument(argument: T) = argument.toString()
-
 }

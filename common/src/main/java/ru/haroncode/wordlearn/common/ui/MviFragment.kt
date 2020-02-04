@@ -31,5 +31,4 @@ abstract class MviFragment<Action, State, ViewEvent> @JvmOverloads constructor(
     }
 
     fun postAction(action: Action) = source.onNext(action)
-
 }

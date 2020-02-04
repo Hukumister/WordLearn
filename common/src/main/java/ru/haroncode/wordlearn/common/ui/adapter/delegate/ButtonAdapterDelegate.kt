@@ -38,5 +38,4 @@ class ButtonAdapterDelegate<Item> : ItemAdapterDelegate<Item, RenderContract>(),
     override fun unbindClickListener(viewHolder: BaseViewHolder) = with(viewHolder) {
         itemView.button.setOnClickListener(null)
     }
-
 }

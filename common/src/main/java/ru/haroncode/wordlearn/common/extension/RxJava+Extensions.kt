@@ -32,7 +32,7 @@ fun <T> Flowable<T>.startWith(single: Single<T>): Flowable<T> =
 @BackpressureSupport(BackpressureKind.FULL)
 @SchedulerSupport(SchedulerSupport.NONE)
 fun <T : Any> Flowable<T>.verify(
-        acceptor: (T) -> Verifiable
+    acceptor: (T) -> Verifiable
 ): Flowable<VerifiableValue<T>> = map { value ->
     val acceptable = acceptor.invoke(value)
     VerifiableValue(value, acceptable)
@@ -42,7 +42,7 @@ fun <T : Any> Flowable<T>.verify(
 @BackpressureSupport(BackpressureKind.FULL)
 @SchedulerSupport(SchedulerSupport.NONE)
 fun <T : Any> Observable<T>.verify(
-        acceptor: (T) -> Verifiable
+    acceptor: (T) -> Verifiable
 ): Observable<VerifiableValue<T>> = map { value ->
     val acceptable = acceptor.invoke(value)
     VerifiableValue(value, acceptable)

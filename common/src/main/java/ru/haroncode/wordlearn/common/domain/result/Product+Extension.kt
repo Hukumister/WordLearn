@@ -17,7 +17,6 @@ sealed class Product<out T> {
     data class Data<T>(val value: T) : Product<T>()
 
     data class Error(val throwable: Throwable) : Product<Nothing>()
-
 }
 
 inline fun <T, R> Product<T>.map(crossinline mapper: (T) -> R): Product<R> = when (this) {

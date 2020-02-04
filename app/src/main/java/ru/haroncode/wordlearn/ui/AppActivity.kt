@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import javax.inject.Inject
 import ru.haroncode.wordlearn.R
 import ru.haroncode.wordlearn.common.di.ComponentManager.clearInjector
 import ru.haroncode.wordlearn.common.di.ComponentManager.inject
@@ -13,7 +14,6 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
-import javax.inject.Inject
 
 /**
  * @author HaronCode.
@@ -30,7 +30,7 @@ class AppActivity : AppCompatActivity() {
             nextFragment: Fragment?,
             fragmentTransaction: FragmentTransaction
         ) {
-            //fix incorrect order lifecycle callback of MainFlowFragment
+            // fix incorrect order lifecycle callback of MainFlowFragment
             fragmentTransaction.setReorderingAllowed(true)
         }
     }

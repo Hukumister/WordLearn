@@ -11,5 +11,4 @@ class NoneDiffUtilItemCallback<Item : Any> : DiffUtil.ItemCallback<Item>() {
     override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean = false
 
     override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean = false
-
 }

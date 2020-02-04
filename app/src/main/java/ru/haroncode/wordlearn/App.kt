@@ -2,13 +2,13 @@ package ru.haroncode.wordlearn
 
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
+import javax.inject.Inject
 import ru.haroncode.wordlearn.common.di.ComponentDependenciesProvider
 import ru.haroncode.wordlearn.common.di.ComponentManager
 import ru.haroncode.wordlearn.common.di.ComponentManager.inject
 import ru.haroncode.wordlearn.common.di.HasChildDependencies
 import ru.haroncode.wordlearn.di.DaggerBuildersComponent
 import timber.log.Timber
-import javax.inject.Inject
 
 class App : Application(), HasChildDependencies {
 

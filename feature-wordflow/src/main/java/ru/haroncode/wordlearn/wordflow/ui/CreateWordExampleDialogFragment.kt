@@ -57,12 +57,10 @@ class CreateWordExampleDialogFragment : DialogFragment() {
         const val TAG = "CreateWordExampleDialogFragment"
 
         fun instance(): CreateWordExampleDialogFragment = CreateWordExampleDialogFragment()
-
     }
 
     interface OnCreateExampleListener {
 
         fun onCreateWordExample(wordExample: WordExample) {}
-
     }
 }

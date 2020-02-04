@@ -11,7 +11,6 @@ import ru.haroncode.wordlearn.wordflow.R
  */
 class WordListFragment : BaseFragment(R.layout.fragment_word_list) {
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         toolbar.setNavigationOnClickListener { }
@@ -30,5 +29,4 @@ class WordListFragment : BaseFragment(R.layout.fragment_word_list) {
             setHasFixedSize(true)
         }
     }
-
 }

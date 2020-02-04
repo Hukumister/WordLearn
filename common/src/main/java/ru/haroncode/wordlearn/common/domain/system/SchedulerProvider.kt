@@ -14,5 +14,4 @@ interface SchedulerProvider {
     val computation: Scheduler
 
     val mainThread: Scheduler
-
 }

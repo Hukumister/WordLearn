@@ -32,7 +32,6 @@ sealed class Determinate {
             STATE_ERROR
         )
         annotation class State
-
     }
 
     object Loading : Determinate() {
@@ -52,7 +51,6 @@ sealed class Determinate {
 
         override val state: Int = STATE_ERROR
     }
-
 }
 
 /**
