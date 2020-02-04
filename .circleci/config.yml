@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
 
-    working_directory: ~/project/WordLearn
+    working_directory: ~/project/
 
     docker:
       - image: circleci/android:api-28
