@@ -5,7 +5,7 @@ import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 interface LearnWordRepository {
     suspend fun findMemberWordGroupByCategory(limit: Int): Map<WordCategory, List<Word>>

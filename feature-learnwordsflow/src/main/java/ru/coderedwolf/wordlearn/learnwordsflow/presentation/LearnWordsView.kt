@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.StateStrategyType
 import ru.coderedwolf.wordlearn.learnwordsflow.model.LearnWord
 
 /**
- * @author CodeRedWolf. Date 22.06.2019.
+ * @author HaronCode. Date 22.06.2019.
  */
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface LearnWordsView : MvpView {

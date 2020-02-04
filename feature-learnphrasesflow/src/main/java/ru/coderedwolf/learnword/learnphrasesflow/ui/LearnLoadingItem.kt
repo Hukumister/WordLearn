@@ -5,7 +5,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import ru.coderedwolf.learnword.learnphrasesflow.R
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 class LearnLoadingItem : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

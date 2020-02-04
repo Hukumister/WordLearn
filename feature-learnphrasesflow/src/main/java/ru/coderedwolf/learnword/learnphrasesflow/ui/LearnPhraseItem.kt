@@ -9,7 +9,7 @@ import ru.coderedwolf.wordlearn.common.extension.onClick
 import ru.coderedwolf.wordlearn.phrase.model.LearnPhrase
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 class LearnPhraseItem(val learnPhrase: LearnPhrase) : Item() {
 

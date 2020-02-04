@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.learnwordsflow.model.LearnWord
 import ru.coderedwolf.wordlearn.word.model.Word
 
 /**
- * @author CodeRedWolf. Date 22.06.2019.
+ * @author HaronCode. Date 22.06.2019.
  */
 class LearnWordsItem(
     val learnWord: LearnWord

@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.phrase.model.Phrase
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 15.06.2019.
+ * @author HaronCode. Date 15.06.2019.
  */
 interface PhraseRepository {
     fun findOne(phraseId: Long): Single<Phrase>
