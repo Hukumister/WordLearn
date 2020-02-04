@@ -2,6 +2,8 @@ version: 2
 jobs:
   build:
 
+    working_directory: ~/project/WordLearn
+
     docker:
       - image: circleci/android:api-28
 
@@ -11,9 +13,10 @@ jobs:
     steps:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      #      - run:
-      #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-      #         command: sudo chmod +x ./gradlew
+
+      - run:
+          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          command: sudo chmod +x ./gradlew
 
       - run:
           name: Download Dependencies
