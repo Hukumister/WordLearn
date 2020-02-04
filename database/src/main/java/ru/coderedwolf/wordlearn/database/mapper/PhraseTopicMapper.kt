@@ -4,7 +4,7 @@ import ru.coderedwolf.wordlearn.database.entity.PhraseTopicEntity
 import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
 
 /**
- * @author HaronCode. Date 16.06.2019.
+ * @author HaronCode.
  */
 class PhraseTopicMapper {
 

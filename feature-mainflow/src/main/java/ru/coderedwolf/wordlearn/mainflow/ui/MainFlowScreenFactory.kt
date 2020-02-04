@@ -4,7 +4,7 @@ import ru.coderedwolf.wordlearn.mainflow.R
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 /**
- * @author HaronCode. Date 01.05.2019.
+ * @author HaronCode.
  */
 object MainFlowScreenFactory {
 

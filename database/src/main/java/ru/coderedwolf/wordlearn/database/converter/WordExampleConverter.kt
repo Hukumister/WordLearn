@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken
 import ru.coderedwolf.wordlearn.word.model.WordExample
 
 /**
- * @author HaronCode. Date 06.06.2019.
+ * @author HaronCode.
  */
 class WordExampleConverter {
 

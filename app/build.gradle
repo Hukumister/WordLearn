@@ -68,11 +68,6 @@ dependencies {
     implementation commonDeps.rxKotlin
     implementation commonDeps.rxAndroid
     /**
-     * Groupie
-     */
-    implementation uiDeps.groupie
-    implementation uiDeps.groupieExt
-    /**
      * Glide
      */
     implementation uiDeps.glide

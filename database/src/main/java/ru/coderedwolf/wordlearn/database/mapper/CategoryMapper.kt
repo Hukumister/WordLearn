@@ -5,7 +5,7 @@ import ru.coderedwolf.wordlearn.database.entity.WordCategoryEntity
 import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
 
 /**
- * @author HaronCode. Date 02.05.2019.
+ * @author HaronCode.
  */
 class CategoryMapper {
 

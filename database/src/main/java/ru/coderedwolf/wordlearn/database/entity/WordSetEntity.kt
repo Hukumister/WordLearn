@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * @author HaronCode. Date 04.11.2019.
+ * @author HaronCode.
  */
 @Entity
 data class WordSetEntity(

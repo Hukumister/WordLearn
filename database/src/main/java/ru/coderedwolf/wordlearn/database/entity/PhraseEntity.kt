@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import org.threeten.bp.Instant
 
 /**
- * @author HaronCode. Date 14.06.2019.
+ * @author HaronCode.
  */
 @Entity(
     foreignKeys = [

@@ -5,7 +5,7 @@ import ru.coderedwolf.wordlearn.phrase.model.LearnPhrase
 import ru.coderedwolf.wordlearn.phrase.model.Phrase
 
 /**
- * @author HaronCode. Date 16.06.2019.
+ * @author HaronCode.
  */
 class PhraseMapper {
 

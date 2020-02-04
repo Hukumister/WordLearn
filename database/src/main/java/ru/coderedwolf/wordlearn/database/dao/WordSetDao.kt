@@ -8,7 +8,7 @@ import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.entity.WordSetEntity
 
 /**
- * @author HaronCode. Date 04.11.2019.
+ * @author HaronCode.
  */
 @Dao
 interface WordSetDao {

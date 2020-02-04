@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * @author HaronCode. Date 14.06.2019.
+ * @author HaronCode.
  */
 @Entity
 data class PhraseTopicEntity(

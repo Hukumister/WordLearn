@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.common.ui.FlowFragment
 import javax.inject.Inject
 
 /**
- * @author HaronCode. Date 04.06.2019.
+ * @author HaronCode.
  */
 class WordFlowFragment : FlowFragment(), HasChildDependencies {
     var categoryId: Long by args()

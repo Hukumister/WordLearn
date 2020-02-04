@@ -60,10 +60,8 @@ interface WordFlowComponent : Injector<WordFlowFragment>,
 }
 
 interface WordFlowDependencies : FlowDependencies {
-    fun resourceProvider(): ResourceProvider
     fun wordDao(): WordDao
     fun wordMapper(): WordMapper
-    fun errorHandler(): ErrorHandler
 }
 
 @Module

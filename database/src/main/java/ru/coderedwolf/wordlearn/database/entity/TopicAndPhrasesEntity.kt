@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 /**
- * @author HaronCode. Date 16.06.2019.
+ * @author HaronCode.
  */
 data class TopicAndPhrasesEntity(
     @Embedded val phraseTopic: PhraseTopicEntity,

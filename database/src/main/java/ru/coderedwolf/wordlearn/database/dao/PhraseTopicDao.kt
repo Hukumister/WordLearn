@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.database.entity.PhraseTopicEntity
 import ru.coderedwolf.wordlearn.database.entity.TopicAndPhrasesEntity
 
 /**
- * @author HaronCode. Date 14.06.2019.
+ * @author HaronCode.
  */
 @Dao
 interface PhraseTopicDao {
@@ -28,10 +28,10 @@ interface PhraseTopicDao {
     @Query("UPDATE PhraseTopicEntity SET isStudy = :isStudy WHERE id = :topicId")
     fun updateStudy(topicId: Long, isStudy: Boolean): Completable
 
-    @Query("select * from PhraseTopicEntity where isStudy = 1")
+    @Query("SELECT * FROM PhraseTopicEntity WHERE isStudy = 1")
     @Transaction
     fun findAllStudiedTopicAndPhrases(): Single<List<TopicAndPhrasesEntity>>
 
-    @Query("select count(*) from PhraseEntity")
+    @Query("SELECT count(*) FROM PhraseEntity")
     fun count(): Flowable<Int>
 }

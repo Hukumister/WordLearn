@@ -4,6 +4,6 @@ import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.coderedwolf.wordlearn.mainflow.R
 
 /**
- * @author HaronCode. Date 06.10.2019.
+ * @author HaronCode.
  */
 class StubFragment : BaseFragment(R.layout.fragment_stub)

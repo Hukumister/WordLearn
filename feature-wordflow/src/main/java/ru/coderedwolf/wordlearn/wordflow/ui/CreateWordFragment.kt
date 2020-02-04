@@ -23,7 +23,7 @@ import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewState.Item
 import javax.inject.Inject
 
 /**
- * @author HaronCode. Date 06.06.2019.
+ * @author HaronCode.
  */
 class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.layout.fragment_create_word),
     CreateWordExampleDialogFragment.OnCreateExampleListener {
@@ -65,8 +65,8 @@ class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.l
     override fun render(state: CreateWordViewState) {
         updateExampleList(state.exampleListItem)
 
-        wordLayout.error = (state.word.verifiable as? ResourceViolation)?.res?.resString()
-        translationLayout.error = (state.translation.verifiable as? ResourceViolation)?.res?.resString()
+        wordLayout.error = (state.word.verifiable as? ResourceViolation)?.formattedText?.format()
+        translationLayout.error = (state.translation.verifiable as? ResourceViolation)?.formattedText?.format()
         saveButton.isEnabled = state.word.isValid
                 && state.translation.isValid
                 && state.determinate !is Determinate.Loading

@@ -46,8 +46,6 @@ dependencies {
     implementation uiDeps.coreKtx
     implementation uiDeps.material
     implementation uiDeps.constraintLayout
-    implementation uiDeps.groupie
-    implementation uiDeps.groupieExt
 
     implementation commonDeps.autoDispose
 

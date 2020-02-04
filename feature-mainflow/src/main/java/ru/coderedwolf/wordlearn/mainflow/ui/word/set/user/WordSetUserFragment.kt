@@ -24,7 +24,7 @@ import ru.coderedwolf.wordlearn.mainflow.ui.word.set.list.WordSetDelegate
 import javax.inject.Inject
 
 /**
- * @author HaronCode. Date 11.10.2019.
+ * @author HaronCode.
  */
 class WordSetUserFragment : MviFragment<Action, WordSetUserViewState, ViewEvent>(R.layout.fragment_word_user_set) {
 

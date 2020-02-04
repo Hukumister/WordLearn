@@ -6,7 +6,7 @@ import ru.coderedwolf.wordlearn.database.converter.WordExampleConverter
 import ru.coderedwolf.wordlearn.word.model.WordExample
 
 /**
- * @author HaronCode. Date 05.06.2019.
+ * @author HaronCode.
  */
 @Entity(
     foreignKeys = [

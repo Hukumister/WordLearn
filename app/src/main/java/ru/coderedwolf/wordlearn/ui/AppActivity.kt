@@ -16,7 +16,7 @@ import ru.terrakok.cicerone.commands.Command
 import javax.inject.Inject
 
 /**
- * @author HaronCode. Date 21.04.2019.
+ * @author HaronCode.
  */
 class AppActivity : AppCompatActivity() {
 

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import org.threeten.bp.Instant
 
 /**
- * @author HaronCode. Date 02.05.2019.
+ * @author HaronCode.
  */
 @Entity
 data class WordCategoryEntity(

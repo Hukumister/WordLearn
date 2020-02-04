@@ -40,9 +40,6 @@ dependencies {
     implementation uiDeps.coreKtx
     implementation uiDeps.material
 
-    implementation uiDeps.groupie
-    implementation uiDeps.groupieExt
-
     implementation commonDeps.autoDispose
 
     implementation presentationDeps.lifecycleViewModel

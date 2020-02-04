@@ -7,7 +7,7 @@ import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.coderedwolf.wordlearn.mainflow.R
 
 /**
- * @author HaronCode. Date 01.05.2019.
+ * @author HaronCode.
  */
 class WordSetFragment : BaseFragment(R.layout.fragment_word_set) {
 

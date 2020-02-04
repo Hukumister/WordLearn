@@ -33,5 +33,4 @@ interface CreateWordComponent : Injector<CreateWordFragment>
 interface CreateWordDependencies : ScreenDependencies, ViewModelDependencies {
     fun categoryId(): Long
     fun wordRepository(): WordRepository
-    fun errorHandler(): ErrorHandler
 }
