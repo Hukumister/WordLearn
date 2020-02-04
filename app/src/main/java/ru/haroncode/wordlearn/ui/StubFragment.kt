@@ -1,7 +1,7 @@
 package ru.haroncode.wordlearn.ui
 
 import javax.inject.Inject
-import ru.coderedwolf.wordlearn.R
+import ru.haroncode.wordlearn.R
 import ru.haroncode.wordlearn.common.ui.BaseFragment
 import ru.terrakok.cicerone.Router
 
