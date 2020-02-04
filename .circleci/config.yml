@@ -52,5 +52,5 @@ jobs:
           path: app/build/test-results
 
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/output
+          path: app/build/outputs/apk/debug
           destination: build
