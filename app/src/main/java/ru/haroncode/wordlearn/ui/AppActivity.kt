@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import javax.inject.Inject
-import ru.haroncode.wordlearn.R
+import ru.coderedwolf.wordlearn.R
 import ru.haroncode.wordlearn.common.di.ComponentManager.clearInjector
 import ru.haroncode.wordlearn.common.di.ComponentManager.inject
 import ru.haroncode.wordlearn.common.extension.setLaunchScreen
