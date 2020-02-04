@@ -9,7 +9,6 @@ import ru.coderedwolf.wordlearn.common.di.ComponentDependencies
 import ru.coderedwolf.wordlearn.common.di.Injector
 import ru.coderedwolf.wordlearn.common.di.InjectorBuilder
 import ru.coderedwolf.wordlearn.common.di.findComponentDependencies
-import ru.coderedwolf.wordlearn.domain.interactors.PrePopulateDataBaseInteractor
 import ru.coderedwolf.wordlearn.ui.AppActivity
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -37,7 +36,6 @@ object AppActivityComponentBuilderModule {
 interface AppActivityComponent : Injector<AppActivity>
 
 interface AppActivityDependencies : ComponentDependencies {
-    fun prePopulateDataBaseInteractor(): PrePopulateDataBaseInteractor
     fun navigatorHolder(): NavigatorHolder
     fun router(): Router
 }

@@ -2,8 +2,6 @@ package ru.coderedwolf.wordlearn.wordflow.ui
 
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatCheckBox
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_word_list.*
 import ru.coderedwolf.wordlearn.common.ui.BaseFragment
 import ru.coderedwolf.wordlearn.wordflow.R
@@ -13,7 +11,6 @@ import ru.coderedwolf.wordlearn.wordflow.R
  */
 class WordListFragment : BaseFragment(R.layout.fragment_word_list) {
 
-    private val wordPreviewAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -30,7 +27,6 @@ class WordListFragment : BaseFragment(R.layout.fragment_word_list) {
             }
         }
         wordPreviewList.apply {
-            adapter = wordPreviewAdapter
             setHasFixedSize(true)
         }
     }
