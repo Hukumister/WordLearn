@@ -7,7 +7,7 @@ import ru.coderedwolf.wordlearn.word.model.WordPreview
 import ru.coderedwolf.wordlearn.wordflow.R
 
 /**
- * @author CodeRedWolf. Date 06.06.2019.
+ * @author HaronCode. Date 06.06.2019.
  */
 class WordPreviewItem(val wordPreview: WordPreview) : Item() {
 

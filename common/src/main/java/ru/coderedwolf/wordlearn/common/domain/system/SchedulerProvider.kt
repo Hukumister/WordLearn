@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.common.domain.system
 import io.reactivex.Scheduler
 
 /**
- * @author CodeRedWolf. Date 21.08.2019.
+ * @author HaronCode. Date 21.08.2019.
  */
 interface SchedulerProvider {
 

@@ -22,7 +22,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 22.06.2019.
+ * @author HaronCode. Date 22.06.2019.
  */
 class LearnWordsFlowFragment : BaseFragment(R.layout.fragment_learn_words),
     LearnWordsView,

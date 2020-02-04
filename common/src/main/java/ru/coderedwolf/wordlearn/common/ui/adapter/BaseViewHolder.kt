@@ -7,7 +7,7 @@ import kotlinx.android.extensions.LayoutContainer
 import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
 /**
- * @author CodeRedWolf. Date 10.10.2019.
+ * @author HaronCode. Date 10.10.2019.
  */
 
 open class BaseViewHolder(

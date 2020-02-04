@@ -7,7 +7,7 @@ import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.entity.PhraseEntity
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 @Dao
 interface PhraseDao {

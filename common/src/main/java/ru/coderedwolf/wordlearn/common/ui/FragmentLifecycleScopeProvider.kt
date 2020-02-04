@@ -6,9 +6,9 @@ import io.reactivex.CompletableSource
 import io.reactivex.subjects.BehaviorSubject
 
 /**
- * @author CodeRedWolf. Date 21.09.2019.
+ * @author HaronCode. Date 21.09.2019.
  */
-class FeatureLifecycleScopeProvider : ScopeProvider {
+class FragmentLifecycleScopeProvider : ScopeProvider {
 
     private val lifecycleSubject = BehaviorSubject.create<Unit>()
 

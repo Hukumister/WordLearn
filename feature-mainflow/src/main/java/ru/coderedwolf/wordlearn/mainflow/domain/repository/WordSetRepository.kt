@@ -11,7 +11,7 @@ import ru.coderedwolf.wordlearn.database.mapper.WordSetMapper
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 04.11.2019.
+ * @author HaronCode. Date 04.11.2019.
  */
 class WordSetRepositoryImpl @Inject constructor(
     private val schedulerProvider: SchedulerProvider,

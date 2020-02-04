@@ -1,9 +1,11 @@
 package ru.coderedwolf.wordlearn.common.domain.validator
 
 import androidx.annotation.StringRes
+import ru.coderedwolf.wordlearn.common.domain.resource.FormattedText
+import ru.coderedwolf.wordlearn.common.domain.resource.toStringRes
 
 /**
- * @author CodeRedWolf. Date 23.08.2019.
+ * @author HaronCode.
  */
 sealed class Verifiable {
 
@@ -14,17 +16,22 @@ sealed class Verifiable {
 object Validated : Verifiable() {
 
     override val isValid: Boolean = true
-
 }
 
 object NotValid : Verifiable() {
 
     override val isValid: Boolean = false
-
 }
 
 data class ResourceViolation(
-        override val isValid: Boolean,
-        @StringRes val res: Int
-) : Verifiable()
+    override val isValid: Boolean,
+    val formattedText: FormattedText
+) : Verifiable() {
+
+    constructor(
+        isValid: Boolean,
+        @StringRes stringRes: Int,
+        vararg args: Any?
+    ) : this(isValid, stringRes.toStringRes(args))
+}
 

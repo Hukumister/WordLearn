@@ -9,7 +9,7 @@ import ru.coderedwolf.wordlearn.common.di.ViewModelKey
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewModel
 
 /**
- * @author CodeRedWolf. Date 10.11.2019.
+ * @author HaronCode. Date 10.11.2019.
  */
 @Module
 interface ViewModelModule : ViewModelFactoryModule {

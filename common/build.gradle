@@ -23,7 +23,6 @@ android {
 
 dependencies {
     implementation commonDeps.kotlin
-    implementation commonDeps.kotlinCoroutines
 
     implementation uiDeps.adapterDelegate
 

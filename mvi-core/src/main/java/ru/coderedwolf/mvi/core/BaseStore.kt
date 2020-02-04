@@ -10,7 +10,7 @@ import io.reactivex.rxkotlin.withLatestFrom
 import ru.coderedwolf.mvi.core.elements.*
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
 open class BaseStore<Action, State, Event, Effect>(
     initialState: State,

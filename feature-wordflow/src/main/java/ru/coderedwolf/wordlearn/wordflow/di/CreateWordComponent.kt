@@ -6,7 +6,6 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
-import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository
 import ru.coderedwolf.wordlearn.wordflow.ui.CreateWordFragment
 

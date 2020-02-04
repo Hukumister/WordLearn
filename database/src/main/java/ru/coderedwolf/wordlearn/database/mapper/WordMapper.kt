@@ -5,7 +5,7 @@ import ru.coderedwolf.wordlearn.word.model.Word
 import ru.coderedwolf.wordlearn.word.model.WordPreview
 
 /**
- * @author CodeRedWolf. Date 09.06.2019.
+ * @author HaronCode. Date 09.06.2019.
  */
 
 class WordMapper {

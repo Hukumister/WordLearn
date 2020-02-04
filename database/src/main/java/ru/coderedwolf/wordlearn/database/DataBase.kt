@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.database.dao.*
 import ru.coderedwolf.wordlearn.database.entity.*
 
 /**
- * @author CodeRedWolf. Date 04.05.2019.
+ * @author HaronCode. Date 04.05.2019.
  */
 @Database(
     entities = [

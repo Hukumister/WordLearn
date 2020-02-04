@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewState.I
 import ru.coderedwolf.wordlearn.mainflow.presentation.set.WordSetUserViewState.Item.WordSetItem
 
 /**
- * @author CodeRedWolf. Date 06.11.2019.
+ * @author HaronCode. Date 06.11.2019.
  */
 object WordSetUserFactory {
 

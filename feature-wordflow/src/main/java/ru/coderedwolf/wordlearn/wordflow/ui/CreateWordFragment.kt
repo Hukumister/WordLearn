@@ -12,7 +12,7 @@ import ru.coderedwolf.wordlearn.common.domain.validator.ResourceViolation
 import ru.coderedwolf.wordlearn.common.extension.onClick
 import ru.coderedwolf.wordlearn.common.presentation.FlowRouter
 import ru.coderedwolf.wordlearn.common.ui.MviFragment
-import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultClicker
+import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultItemClicker
 import ru.coderedwolf.wordlearn.common.ui.adapter.ItemAsyncAdapter
 import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
@@ -23,7 +23,7 @@ import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewState.Item
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 06.06.2019.
+ * @author HaronCode. Date 06.06.2019.
  */
 class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.layout.fragment_create_word),
     CreateWordExampleDialogFragment.OnCreateExampleListener {
@@ -44,8 +44,8 @@ class CreateWordFragment : MviFragment<Action, CreateWordViewState, Nothing>(R.l
         toolbar.setNavigationOnClickListener { router.exit() }
 
         wordExampleAdapter = ItemAsyncAdapter.Builder<Item>()
-            .add(WordExampleAdapterDelegates(), DefaultClicker { showDialogCreateExample() })
-            .add(CreateWordAdapterDelegate(), DefaultClicker(::onClickRemoveExample))
+            .add(WordExampleAdapterDelegates(), DefaultItemClicker { showDialogCreateExample() })
+            .add(CreateWordAdapterDelegate(), DefaultItemClicker(::onClickRemoveExample))
             .build()
 
         examplesList.apply {

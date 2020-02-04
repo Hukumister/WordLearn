@@ -6,7 +6,7 @@ import dagger.Module
 import ru.coderedwolf.wordlearn.common.presentation.ViewModelFactory
 
 /**
- * @author CodeRedWolf. Date 04.11.2019.
+ * @author HaronCode. Date 04.11.2019.
  */
 @Module
 interface ViewModelFactoryModule {

@@ -1,7 +1,7 @@
 package ru.coderedwolf.mvi.core
 
 /**
- * @author CodeRedWolf. Date 13.10.2019.
+ * @author HaronCode. Date 13.10.2019.
  */
 interface Store<Action, State, Event> {
 

@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.word.model
 import org.threeten.bp.Instant
 
 /**
- * @author CodeRedWolf. Date 05.06.2019.
+ * @author HaronCode. Date 05.06.2019.
  */
 data class Word(
     val wordId: Long? = null,

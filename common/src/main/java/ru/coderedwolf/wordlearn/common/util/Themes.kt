@@ -11,7 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 
 /**
- * @author CodeRedWolf. Date 29.08.2019.
+ * @author HaronCode.
  */
 object Themes {
 

@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.wordscategory.model.WordCategory
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 04.05.2019.
+ * @author HaronCode. Date 04.05.2019.
  */
 interface WordsCategoryRepository {
     fun findAll(): Single<List<WordCategory>>

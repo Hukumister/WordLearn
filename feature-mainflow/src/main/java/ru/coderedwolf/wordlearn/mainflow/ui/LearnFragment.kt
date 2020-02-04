@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.mainflow.presentation.LearnReachableFlows
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 class LearnFragment : BaseFragment(R.layout.fragment_learn) {
 

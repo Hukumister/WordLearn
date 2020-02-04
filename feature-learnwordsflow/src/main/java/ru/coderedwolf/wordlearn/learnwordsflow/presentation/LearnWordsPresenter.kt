@@ -9,7 +9,7 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 22.06.2019.
+ * @author HaronCode. Date 22.06.2019.
  */
 @PerFlow
 @InjectViewState

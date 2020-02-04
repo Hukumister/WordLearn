@@ -53,7 +53,6 @@ interface ContextExtensionsHolder {
     fun @receiver:ColorRes Int.colorStateListRes(): ColorStateList =
         AppCompatResources.getColorStateList(extensionContext, this)!!
 
-
     @CheckResult
     fun @receiver:AttrRes Int.dimensionPixelAttr(context: Context = extensionContext): Int =
         Themes.resolveDimensionAttr(context, this)

@@ -4,7 +4,7 @@ import io.reactivex.Flowable
 import ru.coderedwolf.mvi.core.elements.*
 
 /**
- * @author CodeRedWolf. Date 14.10.2019.
+ * @author HaronCode. Date 14.10.2019.
  */
 abstract class ReducerViewModelStore<Action, State, ViewEvent>(
     initialState: State,

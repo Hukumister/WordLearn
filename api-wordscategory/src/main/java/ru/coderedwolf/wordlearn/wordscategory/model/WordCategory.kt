@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.wordscategory.model
 
 /**
- * @author CodeRedWolf. Date 02.05.2019.
+ * @author HaronCode. Date 02.05.2019.
  */
 data class WordCategory(
     val id: Long? = null,

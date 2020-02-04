@@ -10,7 +10,7 @@ import io.reactivex.Single
 import ru.coderedwolf.wordlearn.database.entity.WordEntity
 
 /**
- * @author CodeRedWolf. Date 23.09.2019.
+ * @author HaronCode. Date 23.09.2019.
  */
 @Dao
 interface WordDao {

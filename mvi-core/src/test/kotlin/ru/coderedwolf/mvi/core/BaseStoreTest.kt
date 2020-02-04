@@ -10,7 +10,7 @@ import ru.coderedwolf.mvi.core.TestAction.*
 import java.util.concurrent.TimeUnit
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
 class BaseStoreTest {
 

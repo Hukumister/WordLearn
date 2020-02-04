@@ -9,7 +9,7 @@ import ru.coderedwolf.wordlearn.mainflow.ui.StubFragment
 import ru.coderedwolf.wordlearn.mainflow.ui.word.set.user.WordSetUserFragment
 
 /**
- * @author CodeRedWolf. Date 11.10.2019.
+ * @author HaronCode. Date 11.10.2019.
  */
 class WordSetPagerAdapter(
     private val context: Context,

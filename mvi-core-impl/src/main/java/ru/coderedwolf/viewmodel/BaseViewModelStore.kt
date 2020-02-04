@@ -11,7 +11,7 @@ import ru.coderedwolf.mvi.core.Store
 import ru.coderedwolf.mvi.core.elements.*
 
 /**
- * @author CodeRedWolf. Date 13.10.2019.
+ * @author HaronCode. Date 13.10.2019.
  */
 abstract class BaseViewModelStore<Action, State, ViewEvent, Effect>(
     initialState: State,

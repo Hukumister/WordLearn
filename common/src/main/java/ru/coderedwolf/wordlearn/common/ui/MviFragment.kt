@@ -7,10 +7,11 @@ import ru.coderedwolf.mvi.core.MviView
 import ru.coderedwolf.mvi.core.Store
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
-abstract class MviFragment<Action, State, ViewEvent>(@LayoutRes layoutRes: Int) : BaseFragment(layoutRes),
-    MviView<Action, State, ViewEvent> {
+abstract class MviFragment<Action, State, ViewEvent> @JvmOverloads constructor(
+    @LayoutRes layoutRes: Int = 0
+) : BaseFragment(layoutRes), MviView<Action, State, ViewEvent> {
 
     override val actions: Observable<Action>
         get() = source.hide()

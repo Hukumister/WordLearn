@@ -9,7 +9,7 @@ import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
 
 /**
- * @author CodeRedWolf. Date 15.10.2019.
+ * @author HaronCode.
  */
 
 class ItemAsyncAdapter<ItemModel : Any>(
@@ -103,5 +103,4 @@ class ItemAsyncAdapter<ItemModel : Any>(
             diffUtilCallback = diffCallback
         )
     }
-
 }

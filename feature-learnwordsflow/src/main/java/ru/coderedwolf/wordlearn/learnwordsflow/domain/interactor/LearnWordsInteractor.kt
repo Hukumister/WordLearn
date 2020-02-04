@@ -4,7 +4,7 @@ import ru.coderedwolf.wordlearn.learnwordsflow.model.LearnWord
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 22.06.2019.
+ * @author HaronCode. Date 22.06.2019.
  */
 interface LearnWordsInteractor {
     suspend fun findAllLearnWords(): List<LearnWord>

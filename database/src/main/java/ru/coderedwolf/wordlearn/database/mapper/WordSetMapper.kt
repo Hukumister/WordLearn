@@ -4,7 +4,7 @@ import ru.coderedwolf.api.wordset.model.WordSet
 import ru.coderedwolf.wordlearn.database.entity.WordSetEntity
 
 /**
- * @author CodeRedWolf. Date 04.11.2019.
+ * @author HaronCode. Date 04.11.2019.
  */
 class WordSetMapper {
 

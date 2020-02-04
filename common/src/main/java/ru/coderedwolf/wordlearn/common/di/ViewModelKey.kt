@@ -5,7 +5,7 @@ import dagger.MapKey
 import kotlin.reflect.KClass
 
 /**
- * @author CodeRedWolf. Date 29.10.2019.
+ * @author HaronCode. Date 29.10.2019.
  */
 @MustBeDocumented
 @Target(

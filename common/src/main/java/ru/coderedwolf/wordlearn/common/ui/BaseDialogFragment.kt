@@ -19,12 +19,14 @@ import ru.coderedwolf.wordlearn.common.di.generateComponentName
 import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
-
-private const val STATE_COMPONENT_NAME = "state_component_name"
-
 abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
+
+    companion object {
+
+        private const val STATE_COMPONENT_NAME = "state_component_name"
+    }
 
     private var fragmentComponentName: String = ""
     private var instanceStateSaved: Boolean = false
@@ -68,12 +70,12 @@ abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
         else -> isRealRemoving()
     }
 
-    private val featureLifecycleScopeProvider = FeatureLifecycleScopeProvider()
+    private val featureLifecycleScopeProvider = FragmentLifecycleScopeProvider()
 
     private val featureDisposeCompositeDisposable = CompositeDisposable()
 
     internal fun isRealRemoving(): Boolean =
-        (isRemoving && !instanceStateSaved) || (parentFragment as BaseDialogFragment).isRealRemoving()
+        (isRemoving && !instanceStateSaved) || (parentFragment as? BaseDialogFragment)?.isRealRemoving() ?: false
 
     @CallSuper
     open fun onRealRemoving() {

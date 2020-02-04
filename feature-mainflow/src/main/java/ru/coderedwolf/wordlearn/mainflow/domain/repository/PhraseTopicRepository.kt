@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 16.06.2019.
+ * @author HaronCode. Date 16.06.2019.
  */
 interface PhraseTopicRepository {
     fun updateStudy(topicId: Long, isStudy: Boolean): Completable

@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.database.entity.PhraseTopicEntity
 import ru.coderedwolf.wordlearn.database.entity.TopicAndPhrasesEntity
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 @Dao
 interface PhraseTopicDao {

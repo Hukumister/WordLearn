@@ -1,7 +1,7 @@
 package ru.coderedwolf.wordlearn.word.model
 
 /**
- * @author CodeRedWolf. Date 06.06.2019.
+ * @author HaronCode. Date 06.06.2019.
  */
 data class WordPreview(
     val wordId: Long,

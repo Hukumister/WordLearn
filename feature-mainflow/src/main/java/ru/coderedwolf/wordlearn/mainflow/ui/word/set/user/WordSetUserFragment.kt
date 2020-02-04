@@ -6,13 +6,11 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_word_user_set.*
 import ru.coderedwolf.mvi.core.Store
 import ru.coderedwolf.wordlearn.common.domain.result.Product
 import ru.coderedwolf.wordlearn.common.ui.MviFragment
-import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultClicker
+import ru.coderedwolf.wordlearn.common.ui.adapter.DefaultItemClicker
 import ru.coderedwolf.wordlearn.common.ui.adapter.ItemAsyncAdapter
 import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.ButtonAdapterDelegate
 import ru.coderedwolf.wordlearn.common.util.unsafeLazy
@@ -26,7 +24,7 @@ import ru.coderedwolf.wordlearn.mainflow.ui.word.set.list.WordSetDelegate
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 11.10.2019.
+ * @author HaronCode. Date 11.10.2019.
  */
 class WordSetUserFragment : MviFragment<Action, WordSetUserViewState, ViewEvent>(R.layout.fragment_word_user_set) {
 
@@ -46,7 +44,7 @@ class WordSetUserFragment : MviFragment<Action, WordSetUserViewState, ViewEvent>
     private val itemAdapter: ItemAsyncAdapter<Item> by unsafeLazy {
         ItemAsyncAdapter.Builder<Item>()
             .add(WordSetDelegate())
-            .add(ButtonAdapterDelegate(), DefaultClicker(::onClickAddSet))
+            .add(ButtonAdapterDelegate(), DefaultItemClicker(::onClickAddSet))
             .build()
     }
 

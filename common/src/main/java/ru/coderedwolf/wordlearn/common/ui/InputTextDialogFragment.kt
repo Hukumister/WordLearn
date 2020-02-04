@@ -13,7 +13,7 @@ import ru.coderedwolf.wordlearn.common.R
 import ru.coderedwolf.wordlearn.common.extension.args
 
 /**
- * @author CodeRedWolf. Date 12.06.2019.
+ * @author HaronCode. Date 12.06.2019.
  */
 class InputTextDialogFragment : DialogFragment() {
 

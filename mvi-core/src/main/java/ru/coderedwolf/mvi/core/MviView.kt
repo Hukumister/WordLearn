@@ -3,7 +3,7 @@ package ru.coderedwolf.mvi.core
 import io.reactivex.Observable
 
 /**
- * @author CodeRedWolf. Date 13.10.2019.
+ * @author HaronCode. Date 13.10.2019.
  */
 interface MviView<Action, State, Event> {
 

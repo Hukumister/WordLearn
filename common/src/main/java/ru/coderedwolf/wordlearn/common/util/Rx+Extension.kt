@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
- * @author CodeRedWolf. Date 06.11.2019.
+ * @author HaronCode.
  */
 inline fun <T> T.asObservable() = Observable.just(this)
 

@@ -8,7 +8,7 @@ import ru.coderedwolf.wordlearn.word.model.Word
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 21.08.2019.
+ * @author HaronCode. Date 21.08.2019.
  */
 class WordRepositoryImpl @Inject constructor(
         private val wordDao: WordDao,

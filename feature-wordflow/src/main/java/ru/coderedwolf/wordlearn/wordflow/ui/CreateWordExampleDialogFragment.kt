@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.word.model.WordExample
 import ru.coderedwolf.wordlearn.wordflow.R
 
 /**
- * @author CodeRedWolf. Date 12.06.2019.
+ * @author HaronCode. Date 12.06.2019.
  */
 class CreateWordExampleDialogFragment : DialogFragment() {
 

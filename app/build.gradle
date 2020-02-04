@@ -41,7 +41,6 @@ dependencies {
      * Kotlin
      */
     implementation commonDeps.kotlin
-    implementation commonDeps.kotlinCoroutines
 
 
     implementation commonDeps.dagger

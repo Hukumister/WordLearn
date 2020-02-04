@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.common.ui.adapter
 import android.view.View
 
 /**
- * @author CodeRedWolf. Date 26.10.2019.
+ * @author HaronCode.
  */
 interface ItemClicker<ItemModel, VH : BaseViewHolder> {
 

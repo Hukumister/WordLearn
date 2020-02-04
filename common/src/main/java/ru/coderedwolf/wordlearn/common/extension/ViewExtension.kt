@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 /**
- * @author CodeRedWolf. Date 21.08.2019.
+ * @author HaronCode. Date 21.08.2019.
  */
 
 inline fun View.onClick(

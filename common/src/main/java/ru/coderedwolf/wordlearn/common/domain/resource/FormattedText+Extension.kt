@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.common.domain.resource.CharSequenceFormatted.Com
 import ru.coderedwolf.wordlearn.common.domain.resource.StringResFormatted.Companion.write
 
 /**
- * @author CodeRedWolf. Date 10.11.2019.
+ * @author HaronCode.
  */
 sealed class FormattedText : Parcelable {
 

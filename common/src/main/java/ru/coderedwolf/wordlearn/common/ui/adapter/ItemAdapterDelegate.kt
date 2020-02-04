@@ -5,7 +5,7 @@ import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import ru.coderedwolf.wordlearn.common.util.inflate
 
 /**
- * @author CodeRedWolf. Date 24.10.2019.
+ * @author HaronCode. Date 24.10.2019.
  */
 
 abstract class ItemAdapterDelegate<ItemModel, RenderContract> :

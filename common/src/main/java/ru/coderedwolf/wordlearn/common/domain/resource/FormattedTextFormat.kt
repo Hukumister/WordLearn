@@ -7,7 +7,7 @@ import androidx.core.text.toSpanned
 import kotlin.reflect.KClass
 
 /**
- * @author CodeRedWolf. Date 10.11.2019.
+ * @author HaronCode.
  */
 
 typealias ArgFormatter<T> = (Context, T) -> CharSequence
@@ -15,11 +15,15 @@ typealias ArgFormatter<T> = (Context, T) -> CharSequence
 object FormattedTextFormat {
 
     data class Config(
-        val parseHtml: Boolean = true,
-        val formatter: Map<KClass<*>, ArgFormatter<*>> = mapOf()
+        val parseHtml: Boolean = true
     )
 
+    private val formatters: MutableMap<KClass<*>, ArgFormatter<*>> = mutableMapOf()
     private val defaultConfig = Config()
+
+    fun <T : Any> registerFormatter(kClass: KClass<T>, formatter: ArgFormatter<T>) {
+        formatters[kClass] = formatter
+    }
 
     fun format(
         context: Context,
@@ -53,24 +57,20 @@ object FormattedTextFormat {
         context: Context,
         argument: T,
         config: Config
-    ) = (argument as? Any)?.let { notNullArgument ->
-        formatArgument(context, notNullArgument, config)
-    } ?: ""
+    ) = if (argument is Any) formatArgument(context, argument, config) else ""
 
+    @Suppress("UNCHECKED_CAST")
     private fun <T : Any> formatArgument(
         context: Context,
         argument: T,
         config: Config
-    ): CharSequence? = if (config.formatter.containsKey(argument::class)) {
-        val function = config.formatter[argument::class]
-        (function as ArgFormatter<T>)
-        function.invoke(context, argument)
+    ) = if (formatters.containsKey(argument::class)) {
+        val function = formatters[argument::class]
+        (function as ArgFormatter<T>).invoke(context, argument)
     } else {
         defaultFormatArgument(argument)
     }
 
-    private fun <T : Any> defaultFormatArgument(
-        argument: T
-    ): CharSequence? = argument.toString()
+    private fun <T : Any> defaultFormatArgument(argument: T) = argument.toString()
 
 }

@@ -14,7 +14,7 @@ import ru.coderedwolf.mvi.core.elements.Reducer
 import java.util.concurrent.TimeUnit
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
 
 const val INITIAL_COUNTER = 10

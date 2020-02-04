@@ -10,7 +10,7 @@ import io.reactivex.annotations.CheckReturnValue
 import io.reactivex.annotations.SchedulerSupport
 
 /**
- * @author CodeRedWolf. Date 24.08.2019.
+ * @author HaronCode. Date 24.08.2019.
  */
 sealed class Determinate {
 
@@ -38,13 +38,11 @@ sealed class Determinate {
     object Loading : Determinate() {
 
         override val state: Int = STATE_LOADING
-
     }
 
     object Completed : Determinate() {
 
         override val state: Int = STATE_COMPLETED
-
     }
 
     data class Error(
@@ -53,7 +51,6 @@ sealed class Determinate {
     ) : Determinate() {
 
         override val state: Int = STATE_ERROR
-
     }
 
 }

@@ -49,7 +49,6 @@ ext {
     commonDeps = [
             kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             kotlinReflect   : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
-            kotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version",
 
             dagger          : "com.google.dagger:dagger:$dagger_version",
             daggerCompiler  : "com.google.dagger:dagger-compiler:$dagger_version",

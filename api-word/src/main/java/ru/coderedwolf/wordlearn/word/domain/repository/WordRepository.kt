@@ -7,7 +7,7 @@ import ru.coderedwolf.wordlearn.word.model.Word
 import ru.coderedwolf.wordlearn.word.model.WordPreview
 
 /**
- * @author CodeRedWolf. Date 29.08.2019.
+ * @author HaronCode. Date 29.08.2019.
  */
 interface WordRepository {
     fun findAllPreviewByCategoryId(categoryId: Long): Single<List<WordPreview>>

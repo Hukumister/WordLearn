@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
 /**
- * @author CodeRedWolf. Date 26.10.2019.
+ * @author HaronCode.
  */
-
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int) = LayoutInflater.from(context).inflate(layoutRes, this, false)

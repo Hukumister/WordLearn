@@ -3,7 +3,7 @@ package ru.coderedwolf.viewmodel
 import ru.coderedwolf.mvi.core.elements.*
 
 /**
- * @author CodeRedWolf. Date 08.11.2019.
+ * @author HaronCode. Date 08.11.2019.
  */
 abstract class OnlyActionViewModelStore<Action, State, ViewEvent>(
     initialState: State,

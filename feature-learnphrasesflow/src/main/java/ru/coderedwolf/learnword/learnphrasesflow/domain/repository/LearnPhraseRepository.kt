@@ -5,7 +5,7 @@ import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 14.06.2019.
+ * @author HaronCode. Date 14.06.2019.
  */
 interface LearnPhraseRepository {
     suspend fun findLearnPhraseGroupByTopic(

@@ -9,19 +9,24 @@ import com.uber.autodispose.ObservableSubscribeProxy
 import com.uber.autodispose.autoDispose
 import io.reactivex.Observable
 import io.reactivex.annotations.CheckReturnValue
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.clearInjector
 import ru.coderedwolf.wordlearn.common.di.ComponentManager.inject
 import ru.coderedwolf.wordlearn.common.di.generateComponentName
 import ru.coderedwolf.wordlearn.common.util.ContextExtensionsHolder
 
-private const val STATE_COMPONENT_NAME = "state_component_name"
+abstract class BaseFragment @JvmOverloads constructor(
+    @LayoutRes layoutRes: Int = 0
+) : Fragment(layoutRes), ContextExtensionsHolder {
 
-abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes), ContextExtensionsHolder {
+    companion object {
+
+        private const val STATE_COMPONENT_NAME = "state_component_name"
+    }
 
     private var fragmentComponentName: String = ""
     private var instanceStateSaved: Boolean = false
+
+    private val fragmentScopeProvider = FragmentLifecycleScopeProvider()
 
     override val extensionContext: Context
         get() = requireContext()
@@ -51,30 +56,25 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes), Co
         }
     }
 
+    open fun onBackPressed() = Unit
+
+    open fun onRealRemoving() {
+        fragmentScopeProvider.onDestroy()
+        clearInjector(fragmentComponentName)
+    }
+
     private fun needToCallOnRealRemoving(): Boolean = when {
         activity?.isChangingConfigurations == true -> false
         activity?.isFinishing == true -> true
         else -> isRealRemoving()
     }
 
-    private val featureLifecycleScopeProvider = FeatureLifecycleScopeProvider()
-
-    private val featureDisposeCompositeDisposable = CompositeDisposable()
-
     private fun isRealRemoving(): Boolean =
         (isRemoving && !instanceStateSaved) || (parentFragment as? BaseFragment)?.isRealRemoving() ?: false
 
     @CallSuper
-    open fun onRealRemoving() {
-        featureLifecycleScopeProvider.onDestroy()
-        featureDisposeCompositeDisposable.dispose()
-        clearInjector(fragmentComponentName)
-    }
 
-    open fun onBackPressed() = Unit
 
     @CheckReturnValue
-    fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(featureLifecycleScopeProvider)
-
-    fun Disposable.autoDispose() = featureDisposeCompositeDisposable.add(this)
+    fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(fragmentScopeProvider)
 }

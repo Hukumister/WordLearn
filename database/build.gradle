@@ -28,7 +28,7 @@ kapt {
 
 dependencies {
     implementation commonDeps.kotlin
-    implementation commonDeps.kotlinCoroutines
+
     implementation commonDeps.threetenabp
     implementation commonDeps.rxJava
 

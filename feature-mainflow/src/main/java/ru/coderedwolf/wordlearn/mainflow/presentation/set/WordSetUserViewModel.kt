@@ -18,7 +18,7 @@ import ru.coderedwolf.wordlearn.mainflow.ui.MainFlowScreens
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 11.10.2019.
+ * @author HaronCode. Date 11.10.2019.
  */
 class WordSetUserViewModel @Inject constructor(
     wordSetRepository: WordSetRepository,

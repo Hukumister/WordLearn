@@ -13,7 +13,7 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 21.04.2019.
+ * @author HaronCode. Date 21.04.2019.
  */
 class MainFlowFragment : BaseFragment(R.layout.fragment_main_flow), HasChildDependencies {
 

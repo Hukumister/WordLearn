@@ -6,7 +6,7 @@ import ru.coderedwolf.wordlearn.common.domain.validator.VerifiableValue
 import ru.coderedwolf.wordlearn.word.model.WordExample
 
 /**
- * @author CodeRedWolf.
+ * @author HaronCode.
  */
 data class CreateWordViewState(
     val categoryId: Long,

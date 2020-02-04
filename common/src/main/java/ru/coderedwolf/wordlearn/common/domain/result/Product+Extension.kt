@@ -8,7 +8,7 @@ import io.reactivex.annotations.SchedulerSupport
 import ru.coderedwolf.wordlearn.common.util.asSingle
 
 /**
- * @author CodeRedWolf. Date 24.08.2019.
+ * @author HaronCode. Date 24.08.2019.
  */
 sealed class Product<out T> {
 

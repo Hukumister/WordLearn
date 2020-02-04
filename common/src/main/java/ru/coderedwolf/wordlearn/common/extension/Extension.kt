@@ -8,7 +8,7 @@ import ru.terrakok.cicerone.commands.BackTo
 import ru.terrakok.cicerone.commands.Replace
 
 /**
- * @author CodeRedWolf. Date 21.04.2019.
+ * @author HaronCode. Date 21.04.2019.
  */
 
 fun Navigator.setLaunchScreen(screen: SupportAppScreen) {

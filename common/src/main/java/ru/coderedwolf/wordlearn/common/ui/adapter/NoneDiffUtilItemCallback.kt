@@ -3,7 +3,7 @@ package ru.coderedwolf.wordlearn.common.ui.adapter
 import androidx.recyclerview.widget.DiffUtil
 
 /**
- * @author CodeRedWolf. Date 26.10.2019.
+ * @author HaronCode. Date 26.10.2019.
  */
 
 class NoneDiffUtilItemCallback<Item : Any> : DiffUtil.ItemCallback<Item>() {

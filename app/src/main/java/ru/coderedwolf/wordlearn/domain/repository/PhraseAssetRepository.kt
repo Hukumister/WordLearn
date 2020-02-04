@@ -4,14 +4,13 @@ import android.content.res.AssetManager
 import de.siegmar.fastcsv.reader.CsvReader
 import de.siegmar.fastcsv.reader.CsvRow
 import kotlinx.coroutines.withContext
-import ru.coderedwolf.wordlearn.common.domain.system.DispatchersProvider
 import ru.coderedwolf.wordlearn.phrase.model.Phrase
 import ru.coderedwolf.wordlearn.phrase.model.PhraseTopic
 import java.io.InputStreamReader
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 16.06.2019.
+ * @author HaronCode. Date 16.06.2019.
  */
 interface PhraseAssetRepository {
     suspend fun findAllGroupByTopic(): Map<PhraseTopic, List<Phrase>>

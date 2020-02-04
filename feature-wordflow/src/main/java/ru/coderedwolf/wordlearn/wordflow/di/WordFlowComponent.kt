@@ -4,8 +4,6 @@ import dagger.*
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.coderedwolf.wordlearn.common.di.*
-import ru.coderedwolf.wordlearn.common.domain.system.ResourceProvider
-import ru.coderedwolf.wordlearn.common.presentation.ErrorHandler
 import ru.coderedwolf.wordlearn.database.dao.WordDao
 import ru.coderedwolf.wordlearn.database.mapper.WordMapper
 import ru.coderedwolf.wordlearn.word.domain.repository.WordRepository

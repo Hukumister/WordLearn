@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.wordflow.R
 import ru.coderedwolf.wordlearn.wordflow.presentation.CreateWordViewState.Item
 
 /**
- * @author CodeRedWolf. Date 27.10.2019.
+ * @author HaronCode. Date 27.10.2019.
  */
 class WordExampleAdapterDelegates : ItemAdapterDelegate<Item, Item.WordExampleItem>(), ClickableAdapter {
 

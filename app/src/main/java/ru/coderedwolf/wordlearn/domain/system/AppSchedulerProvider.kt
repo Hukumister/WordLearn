@@ -4,7 +4,7 @@ import ru.coderedwolf.wordlearn.common.domain.system.SchedulerProvider
 import javax.inject.Inject
 
 /**
- * @author CodeRedWolf. Date 21.08.2019.
+ * @author HaronCode. Date 21.08.2019.
  */
 private typealias RxScheduler = io.reactivex.schedulers.Schedulers
 

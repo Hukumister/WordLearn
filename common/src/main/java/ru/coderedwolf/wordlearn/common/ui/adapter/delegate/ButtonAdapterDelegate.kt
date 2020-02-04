@@ -10,7 +10,7 @@ import ru.coderedwolf.wordlearn.common.ui.adapter.OnViewHolderClickListener
 import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.ButtonAdapterDelegate.RenderContract
 
 /**
- * @author CodeRedWolf. Date 29.10.2019.
+ * @author HaronCode. Date 29.10.2019.
  */
 
 data class Button(override val buttonText: FormattedText?) : RenderContract

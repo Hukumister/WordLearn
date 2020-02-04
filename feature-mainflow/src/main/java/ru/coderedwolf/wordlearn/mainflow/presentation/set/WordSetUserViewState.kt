@@ -6,7 +6,7 @@ import ru.coderedwolf.wordlearn.common.ui.adapter.delegate.ButtonAdapterDelegate
 import ru.coderedwolf.wordlearn.mainflow.ui.word.set.list.WordSetDelegate
 
 /**
- * @author CodeRedWolf. Date 29.10.2019.
+ * @author HaronCode. Date 29.10.2019.
  */
 
 data class WordSetUserViewState(

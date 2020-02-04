@@ -9,7 +9,7 @@ import ru.coderedwolf.wordlearn.mainflow.R
 import ru.coderedwolf.wordlearn.mainflow.ui.word.set.list.WordSetDelegate.RenderContact
 
 /**
- * @author CodeRedWolf. Date 04.11.2019.
+ * @author HaronCode. Date 04.11.2019.
  */
 class WordSetDelegate<ItemModel> : ItemAdapterDelegate<ItemModel, RenderContact>(), ClickableAdapter {
 
