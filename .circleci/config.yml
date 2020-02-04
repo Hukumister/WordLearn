@@ -15,6 +15,10 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - run:
+          name: Check #if permission for Gradlew Dependencies fail, use this.
+          command: sudo ls -la
+
+      - run:
           name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
           command: sudo chmod +x ./gradlew
 
