@@ -19,7 +19,7 @@ allprojects {
         target_sdk_version = 29
 
         applicationVersionCode = 1
-        applicationId = "ru.coderedwolf.worldlearn"
+        applicationId = "ru.haroncode.worldlearn"
         applicationVersionName = "1.0"
 
     }

@@ -4,7 +4,7 @@
     package="ru.coderedwolf.wordlearn">
 
     <application
-        android:name=".App"
+        android:name="ru.haroncode.wordlearn.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".ui.AppActivity"
+            android:name="ru.haroncode.wordlearn.ui.AppActivity"
             android:theme="@style/AppTheme.Splash"
             android:windowSoftInputMode="adjustPan">
 
