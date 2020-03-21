@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-
-/**
- * @author HaronCode.
- */
+import kotlin.reflect.KClass
 
 class ItemAsyncAdapter<ItemModel : Any>(
     private val itemClickers: SparseArrayCompat<ItemClicker<*, out BaseViewHolder>>,
@@ -74,24 +71,70 @@ class ItemAsyncAdapter<ItemModel : Any>(
         return delegatesManager.getDelegateForViewType(itemViewType) as ItemAdapterDelegate<ItemModel, *>
     }
 
-    class Builder<ItemModel : Any> {
+    class Builder<ItemModel : ComparableItem> {
 
-        private val adapterDelegatesManager: AdapterDelegatesManager<List<ItemModel>> = AdapterDelegatesManager()
+        fun singleViewType(
+            delegate: ItemAdapterDelegate<ItemModel, *>
+        ): SingleViewTypeBuilder<ItemModel> = singleViewType(delegate, ItemClicker.NoneClicker())
+
+        fun singleViewType(
+            delegate: ItemAdapterDelegate<ItemModel, *>,
+            itemClicker: ItemClicker<out ItemModel, BaseViewHolder>
+        ): SingleViewTypeBuilder<ItemModel> = SingleViewTypeBuilder(delegate, itemClicker)
+
+        fun withViewTypeSelector(
+            viewTypeSelector: (KClass<out ItemModel>) -> Int
+        ) = SealedViewTypeBuilder(viewTypeSelector)
+    }
+
+    class SingleViewTypeBuilder<ItemModel : ComparableItem>(
+        private val viewHolderRenderer: ItemAdapterDelegate<ItemModel, *>,
+        private val itemClicker: ItemClicker<*, out BaseViewHolder>
+    ) {
+
+        companion object {
+            private const val DEFAULT_VIEW_TYPE = 0
+        }
+
+        private var diffCallback: DiffUtil.ItemCallback<ItemModel> = ComparableDiffUtilItemCallback()
+
+        fun with(diffCallback: DiffUtil.ItemCallback<ItemModel>): SingleViewTypeBuilder<ItemModel> {
+            this.diffCallback = diffCallback
+            return this
+        }
+
+        fun build(): ItemAsyncAdapter<ItemModel> {
+            val adapterDelegatesManager = ItemAdapterDelegatesManager<ItemModel> { DEFAULT_VIEW_TYPE }
+            adapterDelegatesManager.addDelegate(DEFAULT_VIEW_TYPE, viewHolderRenderer)
+
+            val itemClickers = SparseArrayCompat<ItemClicker<*, out BaseViewHolder>>()
+            itemClickers.put(DEFAULT_VIEW_TYPE, itemClicker)
+
+            return ItemAsyncAdapter(
+                diffUtilCallback = diffCallback,
+                adapterDelegatesManager = adapterDelegatesManager,
+                itemClickers = itemClickers
+            )
+        }
+    }
+
+    class SealedViewTypeBuilder<ItemModel : ComparableItem>(sealedClassViewTypeSelector: (KClass<out ItemModel>) -> Int) {
+
+        private val adapterDelegatesManager = ItemAdapterDelegatesManager(sealedClassViewTypeSelector)
         private val clickers: SparseArrayCompat<ItemClicker<*, out BaseViewHolder>> = SparseArrayCompat()
-        private var diffCallback: DiffUtil.ItemCallback<ItemModel> = NoneDiffUtilItemCallback()
+        private var diffCallback: DiffUtil.ItemCallback<ItemModel> = ComparableDiffUtilItemCallback()
 
-        fun with(diffCallback: DiffUtil.ItemCallback<ItemModel>): Builder<ItemModel> {
+        fun with(diffCallback: DiffUtil.ItemCallback<ItemModel>): SealedViewTypeBuilder<ItemModel> {
             this.diffCallback = diffCallback
             return this
         }
 
         fun add(
+            kClass: KClass<out ItemModel>,
             delegate: ItemAdapterDelegate<ItemModel, *>,
             clicker: ItemClicker<out ItemModel, BaseViewHolder> = ItemClicker.NoneClicker()
-        ): Builder<ItemModel> {
-            adapterDelegatesManager.addDelegate(delegate)
-            val viewType = adapterDelegatesManager.getViewType(delegate)
-            check(viewType != -1) { "Fail determinate view type of adapter delegate" }
+        ): SealedViewTypeBuilder<ItemModel> {
+            val viewType = adapterDelegatesManager.addDelegateByClass(kClass, delegate)
             clickers.put(viewType, clicker)
             return this
         }

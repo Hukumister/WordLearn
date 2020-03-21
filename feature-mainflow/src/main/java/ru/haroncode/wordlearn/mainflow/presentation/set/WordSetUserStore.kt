@@ -1,33 +1,34 @@
 package ru.haroncode.wordlearn.mainflow.presentation.set
 
+import com.haroncode.gemini.core.elements.Bootstrapper
+import com.haroncode.gemini.core.elements.EventProducer
+import com.haroncode.gemini.core.elements.Middleware
+import com.haroncode.gemini.core.elements.Reducer
+import com.haroncode.gemini.store.OnlyActionStore
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import javax.inject.Inject
 import ru.haroncode.api.wordset.domain.repository.WordSetRepository
 import ru.haroncode.api.wordset.model.WordSet
-import ru.haroncode.mvi.core.elements.*
-import ru.haroncode.viewmodel.OnlyActionViewModelStore
+import ru.haroncode.wordlearn.common.di.PerFragment
 import ru.haroncode.wordlearn.common.domain.result.Product
 import ru.haroncode.wordlearn.common.domain.result.asProduct
 import ru.haroncode.wordlearn.common.domain.result.map
 import ru.haroncode.wordlearn.common.presentation.FlowRouter
 import ru.haroncode.wordlearn.common.util.asFlowable
-import ru.haroncode.wordlearn.common.util.asObservable
-import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewModel.Action
-import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserViewModel.ViewEvent
-import ru.haroncode.wordlearn.mainflow.ui.MainFlowScreens
+import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserStore.Action
+import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserStore.ViewEvent
 
 /**
- * @author HaronCode. Date 11.10.2019.
+ * @author HaronCode.
  */
-class WordSetUserViewModel @Inject constructor(
+@PerFragment
+class WordSetUserStore @Inject constructor(
     wordSetRepository: WordSetRepository,
     router: FlowRouter
-) : OnlyActionViewModelStore<Action, WordSetUserViewState, ViewEvent>(
+) : OnlyActionStore<Action, WordSetUserViewState, ViewEvent>(
     initialState = WordSetUserViewState(),
     bootstrapper = BootstrapperImpl(),
     reducer = ReducerImpl(),
-    navigator = NavigatorImpl(router),
     eventProducer = ViewEventProducerImpl(),
     middleware = MiddleWareImpl(wordSetRepository)
 ) {
@@ -56,15 +57,15 @@ class WordSetUserViewModel @Inject constructor(
             else -> state
         }
     }
-
-    private class NavigatorImpl(private val router: FlowRouter) : Navigator<WordSetUserViewState, Action> {
-
-        override fun invoke(state: WordSetUserViewState, action: Action) = when (action) {
-            is Action.WordSetClick -> router.navigateTo(MainFlowScreens.WordSet)
-            is Action.Back -> router.exit()
-            else -> Unit
-        }
-    }
+//
+//    private class NavigatorImpl(private val router: FlowRouter) : Navigator<WordSetUserViewState, Action> {
+//
+//        override fun invoke(state: WordSetUserViewState, action: Action) = when (action) {
+//            is Action.WordSetClick -> router.navigateTo(MainFlowScreens.WordSet)
+//            is Action.Back -> router.exit()
+//            else -> Unit
+//        }
+//    }
 
     private class ViewEventProducerImpl : EventProducer<WordSetUserViewState, Action, ViewEvent> {
 
@@ -75,7 +76,7 @@ class WordSetUserViewModel @Inject constructor(
     }
 
     private class BootstrapperImpl : Bootstrapper<Action> {
-        override fun invoke(): Observable<Action> = Action.LoadList.asObservable()
+        override fun invoke(): Flowable<Action> = Action.LoadList.asFlowable()
     }
 
     //region MiddleWare

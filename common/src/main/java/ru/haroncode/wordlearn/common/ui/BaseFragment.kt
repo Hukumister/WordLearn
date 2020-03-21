@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.uber.autodispose.FlowableSubscribeProxy
 import com.uber.autodispose.ObservableSubscribeProxy
 import com.uber.autodispose.autoDispose
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.annotations.CheckReturnValue
 import ru.haroncode.wordlearn.common.di.ComponentManager.clearInjector
@@ -58,6 +60,7 @@ abstract class BaseFragment @JvmOverloads constructor(
 
     open fun onBackPressed() = Unit
 
+    @CallSuper
     open fun onRealRemoving() {
         fragmentScopeProvider.onDestroy()
         clearInjector(fragmentComponentName)
@@ -72,8 +75,9 @@ abstract class BaseFragment @JvmOverloads constructor(
     private fun isRealRemoving(): Boolean =
         (isRemoving && !instanceStateSaved) || (parentFragment as? BaseFragment)?.isRealRemoving() ?: false
 
-    @CallSuper
-
     @CheckReturnValue
     fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(fragmentScopeProvider)
+
+    @CheckReturnValue
+    fun <T> Flowable<T>.autoDisposable(): FlowableSubscribeProxy<T> = autoDispose(fragmentScopeProvider)
 }

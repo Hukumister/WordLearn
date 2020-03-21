@@ -18,7 +18,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     androidExtensions {
@@ -29,11 +29,17 @@ android {
 dependencies {
     implementation commonDeps.kotlin
 
+    /**
+     * Dagger
+     */
     implementation commonDeps.dagger
     kapt commonDeps.daggerCompiler
 
     implementation commonDeps.threetenabp
 
+    /**
+     * Rx java
+     */
     implementation commonDeps.rxJava
     implementation commonDeps.rxKotlin
     implementation commonDeps.rxAndroid
@@ -50,6 +56,13 @@ dependencies {
 
     implementation commonDeps.autoDispose
 
+    /**
+     * Gemini
+     */
+    implementation presentationDeps.geminiCore
+    implementation presentationDeps.geminiAndroid
+    implementation presentationDeps.geminiDsl
+
     implementation project(':common')
 
     implementation project(':database')
@@ -59,8 +72,4 @@ dependencies {
     implementation project(':api-word')
 
     implementation project(':api-wordset')
-
-    implementation project(':mvi-core')
-    implementation project(':mvi-core-impl')
-
 }

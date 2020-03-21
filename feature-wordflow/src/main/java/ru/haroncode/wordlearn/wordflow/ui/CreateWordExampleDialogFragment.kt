@@ -10,7 +10,7 @@ import ru.haroncode.wordlearn.word.model.WordExample
 import ru.haroncode.wordlearn.wordflow.R
 
 /**
- * @author HaronCode. Date 12.06.2019.
+ * @author HaronCode.
  */
 class CreateWordExampleDialogFragment : DialogFragment() {
 
@@ -39,7 +39,7 @@ class CreateWordExampleDialogFragment : DialogFragment() {
 
                 if (exampleText.isNotEmpty() && translation.isNotEmpty()) {
                     listener.onCreateWordExample(
-                            WordExample(example = exampleText, translation = translation)
+                        WordExample(example = exampleText, translation = translation)
                     )
                 }
                 dismissAllowingStateLoss()
@@ -61,6 +61,6 @@ class CreateWordExampleDialogFragment : DialogFragment() {
 
     interface OnCreateExampleListener {
 
-        fun onCreateWordExample(wordExample: WordExample) {}
+        fun onCreateWordExample(wordExample: WordExample) = Unit
     }
 }

@@ -1,29 +1,27 @@
 package ru.haroncode.wordlearn.wordflow.presentation
 
+import com.haroncode.gemini.core.elements.Middleware
+import com.haroncode.gemini.core.elements.Reducer
+import com.haroncode.gemini.store.OnlyActionStore
 import io.reactivex.Flowable
 import javax.inject.Inject
-import ru.haroncode.mvi.core.elements.Middleware
-import ru.haroncode.mvi.core.elements.Navigator
-import ru.haroncode.mvi.core.elements.Reducer
-import ru.haroncode.viewmodel.OnlyActionViewModelStore
+import ru.haroncode.wordlearn.common.di.PerFragment
 import ru.haroncode.wordlearn.common.domain.result.Determinate
 import ru.haroncode.wordlearn.common.domain.result.asDeterminate
 import ru.haroncode.wordlearn.common.domain.validator.VerifiableValue
-import ru.haroncode.wordlearn.common.presentation.FlowRouter
 import ru.haroncode.wordlearn.common.util.SimpleValidator
 import ru.haroncode.wordlearn.word.domain.repository.WordRepository
 import ru.haroncode.wordlearn.word.model.Word
 import ru.haroncode.wordlearn.word.model.WordExample
-import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewModelStore.Action
+import ru.haroncode.wordlearn.wordflow.presentation.CreateWordStore.Action
 import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewState.Item
 
-class CreateWordViewModelStore @Inject constructor(
+@PerFragment
+class CreateWordStore @Inject constructor(
     categoryId: Long,
-    router: FlowRouter,
     wordRepository: WordRepository
-) : OnlyActionViewModelStore<Action, CreateWordViewState, Nothing>(
+) : OnlyActionStore<Action, CreateWordViewState, Nothing>(
     initialState = CreateWordViewState(categoryId),
-    navigator = NavigatorImpl(router),
     middleware = MiddleWareImpl(wordRepository),
     reducer = ReducerImpl()
 ) {
@@ -96,15 +94,15 @@ class CreateWordViewModelStore @Inject constructor(
         private fun WordExample.toItem(): Item.WordExampleItem = Item.WordExampleItem(this)
     }
 
-    class NavigatorImpl(private val flowRouter: FlowRouter) :
-        Navigator<CreateWordViewState, Action> {
+    /* class NavigatorImpl(private val flowRouter: FlowRouter) :
+         Navigator<CreateWordViewState, Action> {
 
-        override fun invoke(state: CreateWordViewState, action: Action) = when (action) {
-            is Action.SaveWordResult -> when (action.determinate) {
-                is Determinate.Completed -> flowRouter.exit()
-                else -> Unit
-            }
-            else -> Unit
-        }
-    }
+         override fun invoke(state: CreateWordViewState, action: Action) = when (action) {
+             is Action.SaveWordResult -> when (action.determinate) {
+                 is Determinate.Completed -> flowRouter.exit()
+                 else -> Unit
+             }
+             else -> Unit
+         }
+     }*/
 }
