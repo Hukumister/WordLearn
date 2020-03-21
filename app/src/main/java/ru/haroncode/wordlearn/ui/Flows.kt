@@ -3,7 +3,7 @@ package ru.haroncode.wordlearn.ui
 import ru.haroncode.wordlearn.mainflow.ui.MainFlowFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
-class Flows private constructor() {
+object Flows {
 
     object Main : SupportAppScreen() {
         override fun getFragment() = MainFlowFragment()

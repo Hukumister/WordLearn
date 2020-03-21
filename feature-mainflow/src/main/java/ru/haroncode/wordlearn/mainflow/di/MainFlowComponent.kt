@@ -36,7 +36,6 @@ object MainFlowComponentBuilderModule {
 @PerFlow
 @Component(
     modules = [
-        ViewModelModule::class,
         FlowNavigationModule::class,
         ChildDependenciesModule::class
     ],

@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.DialogFragment
+import com.uber.autodispose.FlowableSubscribeProxy
 import com.uber.autodispose.ObservableSubscribeProxy
 import com.uber.autodispose.autoDispose
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.annotations.CheckReturnValue
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import ru.haroncode.wordlearn.common.di.ComponentManager
 import ru.haroncode.wordlearn.common.di.ComponentManager.inject
 import ru.haroncode.wordlearn.common.di.generateComponentName
@@ -30,6 +30,8 @@ abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
 
     private var fragmentComponentName: String = ""
     private var instanceStateSaved: Boolean = false
+
+    private val fragmentScopeProvider = FragmentLifecycleScopeProvider()
 
     override val extensionContext: Context
         get() = requireContext()
@@ -70,22 +72,18 @@ abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
         else -> isRealRemoving()
     }
 
-    private val featureLifecycleScopeProvider = FragmentLifecycleScopeProvider()
-
-    private val featureDisposeCompositeDisposable = CompositeDisposable()
-
     internal fun isRealRemoving(): Boolean =
         (isRemoving && !instanceStateSaved) || (parentFragment as? BaseDialogFragment)?.isRealRemoving() ?: false
 
     @CallSuper
     open fun onRealRemoving() {
-        featureLifecycleScopeProvider.onDestroy()
-        featureDisposeCompositeDisposable.dispose()
+        fragmentScopeProvider.onDestroy()
         ComponentManager.clearInjector(fragmentComponentName)
     }
 
     @CheckReturnValue
-    fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(featureLifecycleScopeProvider)
+    fun <T> Observable<T>.autoDisposable(): ObservableSubscribeProxy<T> = autoDispose(fragmentScopeProvider)
 
-    fun Disposable.autoDispose() = featureDisposeCompositeDisposable.add(this)
+    @CheckReturnValue
+    fun <T> Flowable<T>.autoDisposable(): FlowableSubscribeProxy<T> = autoDispose(fragmentScopeProvider)
 }

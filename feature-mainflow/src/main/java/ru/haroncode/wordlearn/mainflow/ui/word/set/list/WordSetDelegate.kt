@@ -20,8 +20,6 @@ class WordSetDelegate<ItemModel> : ItemAdapterDelegate<ItemModel, RenderContact>
 
     override val layoutRes: Int = R.layout.item_word_set
 
-    override fun isForViewType(item: ItemModel): Boolean = item is RenderContact
-
     override fun getItem(item: ItemModel): RenderContact = item as RenderContact
 
     override fun onBindView(item: RenderContact, holder: BaseViewHolder) = with(holder) {

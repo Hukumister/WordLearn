@@ -3,6 +3,7 @@ package ru.haroncode.wordlearn.wordflow.presentation
 import ru.haroncode.wordlearn.common.domain.result.Determinate
 import ru.haroncode.wordlearn.common.domain.validator.NotValid
 import ru.haroncode.wordlearn.common.domain.validator.VerifiableValue
+import ru.haroncode.wordlearn.common.ui.adapter.SimpleComparableItem
 import ru.haroncode.wordlearn.word.model.WordExample
 
 /**
@@ -18,7 +19,7 @@ data class CreateWordViewState(
     val exampleListItem: List<Item> = listOf(Item.AddButtonItem)
 ) {
 
-    sealed class Item {
+    sealed class Item : SimpleComparableItem() {
 
         data class WordExampleItem(val wordExample: WordExample) : Item()
         object AddButtonItem : Item()

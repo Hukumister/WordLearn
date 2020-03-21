@@ -11,20 +11,20 @@ ext {
     auto_dispose_version = "1.4.0"
 
     commonDeps = [
-            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
-            kotlinReflect   : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            kotlinReflect : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
 
-            dagger          : "com.google.dagger:dagger:$dagger_version",
-            daggerCompiler  : "com.google.dagger:dagger-compiler:$dagger_version",
+            dagger        : "com.google.dagger:dagger:$dagger_version",
+            daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version",
 
-            threetenabp     : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version",
+            threetenabp   : "com.jakewharton.threetenabp:threetenabp:$threetenabp_version",
 
-            rxJava          : "io.reactivex.rxjava2:rxjava:$rx_java_version",
-            rxKotlin        : "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version",
-            rxAndroid       : "io.reactivex.rxjava2:rxandroid:$rx_java_android_version",
-            rxBind          : "com.jakewharton.rxbinding2:rxbinding:$rx_binding_version",
+            rxJava        : "io.reactivex.rxjava2:rxjava:$rx_java_version",
+            rxKotlin      : "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version",
+            rxAndroid     : "io.reactivex.rxjava2:rxandroid:$rx_java_android_version",
+            rxBind        : "com.jakewharton.rxbinding2:rxbinding:$rx_binding_version",
 
-            autoDispose     : "com.uber.autodispose:autodispose:$auto_dispose_version"
+            autoDispose   : "com.uber.autodispose:autodispose:$auto_dispose_version"
     ]
 
     / data /
@@ -54,11 +54,17 @@ ext {
     cicerone_version = '5.0.0'
     lifecycle_version = '2.1.0'
 
+    gemini_version = '1.0.0'
+
     presentationDeps = [
             cicerone          : "ru.terrakok.cicerone:cicerone:$cicerone_version",
 
             lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
-            lifecycleCommon   : "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+            lifecycleCommon   : "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version",
+
+            geminiCore        : "com.haroncode.gemini:gemini-core:$gemini_version",
+            geminiAndroid     : "com.haroncode.gemini:gemini-android:$gemini_version",
+            geminiDsl         : "com.haroncode.gemini:gemini-dsl:$gemini_version"
     ]
 
     / ui /
@@ -100,7 +106,7 @@ ext {
     dexmakerVersion = '1.0'
     espresso_version = '3.1.0-alpha4'
     testingSupportLibVersion = '0.1'
-    
+
     testDeps = [
             junit        : "junit:junit:${jUnit_version}",
             assertj      : "org.assertj:assertj-core:${assertJ_version}",

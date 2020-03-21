@@ -5,7 +5,6 @@ import android.view.View
 /**
  * @author HaronCode. Date 26.10.2019.
  */
-
 class DefaultItemClicker<ItemModel, VH : BaseViewHolder>(
     private val consumer: (ItemModel) -> Unit
 ) : ItemClicker<ItemModel, VH> {

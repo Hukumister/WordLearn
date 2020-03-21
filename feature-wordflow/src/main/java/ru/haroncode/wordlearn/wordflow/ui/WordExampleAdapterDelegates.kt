@@ -14,10 +14,7 @@ import ru.haroncode.wordlearn.wordflow.presentation.CreateWordViewState.Item
  */
 class WordExampleAdapterDelegates : ItemAdapterDelegate<Item, Item.WordExampleItem>(), ClickableAdapter {
 
-    override val layoutRes: Int
-        get() = R.layout.item_word_example
-
-    override fun isForViewType(item: Item): Boolean = item is Item.WordExampleItem
+    override val layoutRes = R.layout.item_word_example
 
     override fun getItem(item: Item): Item.WordExampleItem = item as Item.WordExampleItem
 
@@ -37,10 +34,7 @@ class WordExampleAdapterDelegates : ItemAdapterDelegate<Item, Item.WordExampleIt
 
 class CreateWordAdapterDelegate : ItemAdapterDelegate<Item, Item.AddButtonItem>(), ClickableAdapter {
 
-    override val layoutRes: Int
-        get() = R.layout.item_add_example
-
-    override fun isForViewType(item: Item): Boolean = item is Item.AddButtonItem
+    override val layoutRes = R.layout.item_add_example
 
     override fun onBindView(item: Item.AddButtonItem, holder: BaseViewHolder) = Unit
 

@@ -32,7 +32,7 @@ object WordsCategoryComponentBuilderModule {
 )
 interface WordSetUserComponent : Injector<WordSetUserFragment>
 
-interface WordSetUserDependencies : ScreenDependencies, ViewModelDependencies
+interface WordSetUserDependencies : ScreenDependencies
 
 @Module
 interface WordSetModule {

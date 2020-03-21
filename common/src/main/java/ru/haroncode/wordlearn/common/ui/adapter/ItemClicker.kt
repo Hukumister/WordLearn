@@ -2,9 +2,6 @@ package ru.haroncode.wordlearn.common.ui.adapter
 
 import android.view.View
 
-/**
- * @author HaronCode.
- */
 interface ItemClicker<ItemModel, VH : BaseViewHolder> {
 
     fun onBindClicker(holder: VH)

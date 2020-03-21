@@ -2,7 +2,6 @@ package ru.haroncode.wordlearn.common.di
 
 import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import dagger.MapKey
 import kotlin.reflect.KClass
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
@@ -67,8 +66,4 @@ interface FlowDependencies : CommonDependencies {
 
 interface ScreenDependencies : CommonDependencies {
     fun flowRouter(): FlowRouter
-}
-
-interface ViewModelDependencies {
-    fun viewModelFactory(): ViewModelProvider.Factory
 }

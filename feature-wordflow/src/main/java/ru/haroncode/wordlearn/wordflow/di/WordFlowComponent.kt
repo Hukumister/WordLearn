@@ -33,7 +33,6 @@ object WordFlowComponentBuilderModule {
 @PerFlow
 @Component(
     modules = [
-        ViewModelModule::class,
         CreateWordModule::class,
         FlowNavigationModule::class,
         ChildDependenciesModule::class
