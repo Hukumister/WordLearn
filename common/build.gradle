@@ -36,16 +36,22 @@ dependencies {
     implementation loggingDeps.timber
 
     implementation presentationDeps.cicerone
-
+    /**
+     * UiKit
+     */
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
     implementation uiDeps.material
-
+    implementation uiDeps.fragmentKtx
+    /**
+     * AutoDispose
+     */
     implementation commonDeps.autoDispose
-
+    implementation commonDeps.autoDisposeAndroid
+    /**
+     * Gemini
+     */
     implementation presentationDeps.geminiCore
-    implementation presentationDeps.geminiAndroid
-    implementation presentationDeps.geminiDsl
 
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
 }
