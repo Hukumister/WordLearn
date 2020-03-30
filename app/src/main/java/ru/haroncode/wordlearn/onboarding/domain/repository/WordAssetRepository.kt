@@ -1,4 +1,4 @@
-package ru.haroncode.wordlearn.domain.repository
+package ru.haroncode.wordlearn.onboarding.domain.repository
 
 import android.content.res.AssetManager
 import de.siegmar.fastcsv.reader.CsvReader
