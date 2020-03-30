@@ -42,7 +42,7 @@ class AppActivity : AppCompatActivity() {
     lateinit var navigatorHolder: NavigatorHolder
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.AppTheme_Light)
         inject(componentName)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_container)

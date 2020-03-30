@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.haroncode.wordlearn.common">
 
-    <application android:theme="@style/AppTheme" />
+    <application android:theme="@style/AppTheme.Light" />
 </manifest>
