@@ -1,4 +1,4 @@
-package ru.haroncode.wordlearn.onboarding.domain.system
+package ru.haroncode.wordlearn.domain.system
 
 import javax.inject.Inject
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
