@@ -24,6 +24,7 @@
 
         <item name="listPreferredItemPaddingTop">@dimen/spacing_small</item>
         <item name="listPreferredItemPaddingBottom">@dimen/spacing_small</item>
+        <item name="listPreferredItemPaddingBottomLarge">@dimen/spacing_large</item>
         <item name="listPreferredItemPaddingStart">@dimen/spacing_normal</item>
         <item name="listPreferredItemPaddingEnd">@dimen/spacing_normal</item>
 

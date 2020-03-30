@@ -3,6 +3,7 @@
 
     <attr name="listPreferredItemPaddingTop" format="dimension|reference" />
     <attr name="listPreferredItemPaddingBottom" format="dimension|reference" />
+    <attr name="listPreferredItemPaddingBottomLarge" format="dimension|reference" />
 
     <attr name="textInputLayoutStyle" format="reference" />
 </resources>

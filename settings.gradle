@@ -7,4 +7,5 @@ include ':common',
         ':database',
         ':feature-mainflow',
         ':feature-wordflow',
+        ':feature-onboarding-flow',
         ':app'
