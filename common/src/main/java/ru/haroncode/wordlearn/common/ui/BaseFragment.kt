@@ -58,11 +58,30 @@ abstract class BaseFragment @JvmOverloads constructor(
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        fragmentScopeProvider.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fragmentScopeProvider.onStop()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentScopeProvider.onAttach()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        fragmentScopeProvider.onDetach()
+    }
+
     open fun onBackPressed() = Unit
 
     @CallSuper
     open fun onRealRemoving() {
-        fragmentScopeProvider.onDestroy()
         clearInjector(fragmentComponentName)
     }
 
