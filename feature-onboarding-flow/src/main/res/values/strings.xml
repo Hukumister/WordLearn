@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="fragment_count_picker_title">Слов в день я хочу учить</string>
+</resources>

@@ -18,40 +18,55 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        experimental = true
     }
 }
 
 dependencies {
     implementation commonDeps.kotlin
-
-    implementation uiDeps.adapterDelegate
-
+    /**
+     * RxJava
+     */
+    implementation commonDeps.rxJava
+    implementation commonDeps.rxKotlin
+    /**
+     * Dagger
+     */
     implementation commonDeps.dagger
     kapt commonDeps.daggerCompiler
-
+    /**
+     * Threeten
+     */
     implementation commonDeps.threetenabp
-    implementation commonDeps.rxJava
-
-    implementation loggingDeps.timber
-
+    /**
+     * Cicerone
+     */
     implementation presentationDeps.cicerone
     /**
-     * UiKit
+     * Ui kit
      */
     implementation uiDeps.appcompat
     implementation uiDeps.coreKtx
-    implementation uiDeps.material
     implementation uiDeps.fragmentKtx
-    /**
-     * AutoDispose
-     */
-    implementation commonDeps.autoDispose
-    implementation commonDeps.autoDisposeAndroid
+    implementation uiDeps.material
+    implementation uiDeps.constraintLayout
     /**
      * Gemini
      */
     implementation presentationDeps.geminiCore
+    implementation presentationDeps.geminiAndroid
+    implementation presentationDeps.geminiDsl
+    /**
+     * Project libraries
+     */
+    implementation project(':api-wordscategory')
+    implementation project(':api-wordset')
+    implementation project(':api-phrase')
 
-    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
+    implementation project(':common')
+    implementation project(':database')
 }

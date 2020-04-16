@@ -16,14 +16,13 @@
     <string name="dialog.create.word.example.example.text">Текст примера</string>
     <string name="dialog.create.word.example.example.add">Добавить пример</string>
 
-
-
     <!--Word list-->
     <string name="place_holder_no_words">В данной категории нет слов</string>
 
     <!--Phrase topic-->
     <string name="phrase_topic_title">Темы</string>
 
+    <!-- {@deprecated Define string in feature module} -->
     <!--Learn main screen-->
     <string name="got_it">Помню</string>
     <string name="missed_it">Не помню</string>

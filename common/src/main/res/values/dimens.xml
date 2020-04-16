@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- {@deprecated Use spacing_x instead.} -->
     <dimen name="material_horizontal_margin">16dp</dimen>
+    <!-- {@deprecated Use spacing_x instead.} -->
     <dimen name="material_vertical_margin">16dp</dimen>
+    <!-- {@deprecated Use icon_x instead.} -->
     <dimen name="material_list_icon_size">40dp</dimen>
 
     <!-- All components align to an 8dp square baseline grid for mobile, tablet, and desktop. -->
