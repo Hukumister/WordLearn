@@ -1,4 +1,5 @@
 include ':common',
+        ':api-common',
         ':api-wordset',
         ':api-word',
         ':api-phrase',
@@ -6,4 +7,5 @@ include ':common',
         ':database',
         ':feature-mainflow',
         ':feature-wordflow',
+        ':feature-onboarding-flow',
         ':app'
