@@ -107,7 +107,12 @@ dependencies {
      */
     androidTestImplementation androidTestDeps.runner
     androidTestImplementation androidTestDeps.espresso
-
+    /**
+     * Gemini
+     */
+    implementation presentationDeps.geminiCore
+    implementation presentationDeps.geminiAndroid
+    implementation presentationDeps.geminiDsl
 
     implementation project(':common')
 
