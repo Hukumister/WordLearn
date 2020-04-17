@@ -103,6 +103,6 @@ class CharSequenceFormatted(
     }
 }
 
-fun @receiver:StringRes Int.toStringRes(args: Any? = null) = StringResFormatted(this, args)
+fun @receiver:StringRes Int.toFormatted(args: Any? = null) = StringResFormatted(this, args)
 
-fun CharSequence.toStringRes(args: Any? = null) = CharSequenceFormatted(this, args)
+fun CharSequence.toFormatted(args: Any? = null) = CharSequenceFormatted(this, args)

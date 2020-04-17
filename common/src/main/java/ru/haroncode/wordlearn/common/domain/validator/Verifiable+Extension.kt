@@ -2,7 +2,7 @@ package ru.haroncode.wordlearn.common.domain.validator
 
 import androidx.annotation.StringRes
 import ru.haroncode.wordlearn.common.domain.resource.FormattedText
-import ru.haroncode.wordlearn.common.domain.resource.toStringRes
+import ru.haroncode.wordlearn.common.domain.resource.toFormatted
 
 /**
  * @author HaronCode.
@@ -31,5 +31,5 @@ data class ResourceViolation(
         isValid: Boolean,
         @StringRes stringRes: Int,
         vararg args: Any?
-    ) : this(isValid, stringRes.toStringRes(args))
+    ) : this(isValid, stringRes.toFormatted(args))
 }
