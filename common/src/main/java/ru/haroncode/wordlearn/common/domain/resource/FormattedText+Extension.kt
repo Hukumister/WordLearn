@@ -7,6 +7,7 @@ import androidx.annotation.StringRes
 import kotlinx.android.parcel.Parceler
 import kotlinx.android.parcel.Parcelize
 import ru.haroncode.wordlearn.common.domain.resource.CharSequenceFormatted.Companion.write
+import ru.haroncode.wordlearn.common.domain.resource.EmptyFormatted.Companion.write
 import ru.haroncode.wordlearn.common.domain.resource.StringResFormatted.Companion.write
 
 /**
@@ -15,6 +16,7 @@ import ru.haroncode.wordlearn.common.domain.resource.StringResFormatted.Companio
 sealed class FormattedText : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, flags: Int) = when (this) {
+        is EmptyFormatted -> write(parcel, flags)
         is CharSequenceFormatted -> write(parcel, flags)
         is StringResFormatted -> write(parcel, flags)
     }
@@ -58,6 +60,22 @@ class StringResFormatted(
         var result = stringRes
         result = 31 * result + args.contentHashCode()
         return result
+    }
+}
+
+@Parcelize
+object EmptyFormatted : FormattedText() {
+
+    object Companion : Parceler<EmptyFormatted> {
+
+        override fun create(parcel: Parcel): EmptyFormatted {
+            parcel.readString()
+            return EmptyFormatted
+        }
+
+        override fun EmptyFormatted.write(parcel: Parcel, flags: Int) {
+            parcel.writeString(this::class.java.name)
+        }
     }
 }
 
