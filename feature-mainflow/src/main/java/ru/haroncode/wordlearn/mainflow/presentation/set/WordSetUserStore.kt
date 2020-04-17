@@ -10,10 +10,9 @@ import javax.inject.Inject
 import ru.haroncode.api.wordset.domain.repository.WordSetRepository
 import ru.haroncode.api.wordset.model.WordSet
 import ru.haroncode.wordlearn.common.di.PerFragment
-import ru.haroncode.wordlearn.common.domain.result.Product
-import ru.haroncode.wordlearn.common.domain.result.asProduct
-import ru.haroncode.wordlearn.common.domain.result.map
-import ru.haroncode.wordlearn.common.presentation.FlowRouter
+import ru.haroncode.wordlearn.common.domain.model.Product
+import ru.haroncode.wordlearn.common.domain.model.asProduct
+import ru.haroncode.wordlearn.common.domain.model.map
 import ru.haroncode.wordlearn.common.util.asFlowable
 import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserStore.Action
 import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserStore.ViewEvent
@@ -23,10 +22,9 @@ import ru.haroncode.wordlearn.mainflow.presentation.set.WordSetUserStore.ViewEve
  */
 @PerFragment
 class WordSetUserStore @Inject constructor(
-    wordSetRepository: WordSetRepository,
-    router: FlowRouter
-) : OnlyActionStore<Action, WordSetUserViewState, ViewEvent>(
-    initialState = WordSetUserViewState(),
+    wordSetRepository: WordSetRepository
+) : OnlyActionStore<Action, WordSetViewState, ViewEvent>(
+    initialState = WordSetViewState(),
     bootstrapper = BootstrapperImpl(),
     reducer = ReducerImpl(),
     eventProducer = ViewEventProducerImpl(),
@@ -35,10 +33,8 @@ class WordSetUserStore @Inject constructor(
 
     sealed class Action {
 
-        object Back : Action()
         object CreateNew : Action()
         object LoadList : Action()
-        data class WordSetClick(val id: Long) : Action()
 
         data class LoadListResult(val list: Product<List<WordSet>>) : Action()
     }
@@ -47,29 +43,17 @@ class WordSetUserStore @Inject constructor(
         object CreateNewDialog : ViewEvent()
     }
 
-    private class ReducerImpl : Reducer<WordSetUserViewState, Action> {
+    private class ReducerImpl : Reducer<WordSetViewState, Action> {
 
-        override fun invoke(state: WordSetUserViewState, action: Action): WordSetUserViewState = when (action) {
-            is Action.LoadListResult -> {
-                val items = action.list.map(WordSetUserFactory::item)
-                state.copy(items = items)
-            }
+        override fun invoke(state: WordSetViewState, action: Action): WordSetViewState = when (action) {
+            is Action.LoadListResult -> state.copy(items = action.list.map(WordSetFactory::item))
             else -> state
         }
     }
-//
-//    private class NavigatorImpl(private val router: FlowRouter) : Navigator<WordSetUserViewState, Action> {
-//
-//        override fun invoke(state: WordSetUserViewState, action: Action) = when (action) {
-//            is Action.WordSetClick -> router.navigateTo(MainFlowScreens.WordSet)
-//            is Action.Back -> router.exit()
-//            else -> Unit
-//        }
-//    }
 
-    private class ViewEventProducerImpl : EventProducer<WordSetUserViewState, Action, ViewEvent> {
+    private class ViewEventProducerImpl : EventProducer<WordSetViewState, Action, ViewEvent> {
 
-        override fun invoke(state: WordSetUserViewState, action: Action): ViewEvent? = when (action) {
+        override fun invoke(state: WordSetViewState, action: Action): ViewEvent? = when (action) {
             is Action.CreateNew -> ViewEvent.CreateNewDialog
             else -> null
         }
@@ -82,9 +66,9 @@ class WordSetUserStore @Inject constructor(
     //region MiddleWare
     private class MiddleWareImpl(
         private val wordSetRepository: WordSetRepository
-    ) : Middleware<Action, WordSetUserViewState, Action> {
+    ) : Middleware<Action, WordSetViewState, Action> {
 
-        override fun invoke(action: Action, state: WordSetUserViewState): Flowable<Action> = when (action) {
+        override fun invoke(action: Action, state: WordSetViewState): Flowable<Action> = when (action) {
             is Action.LoadList -> wordSetRepository.observableAllUserSet()
                 .asProduct()
                 .map(Action::LoadListResult)

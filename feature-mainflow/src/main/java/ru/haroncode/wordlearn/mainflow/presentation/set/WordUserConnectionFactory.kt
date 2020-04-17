@@ -9,15 +9,15 @@ import com.haroncode.gemini.dsl.observeOn
 import javax.inject.Inject
 import ru.haroncode.wordlearn.common.di.PerFragment
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
-import ru.haroncode.wordlearn.mainflow.ui.word.set.user.WordSetUserFragment
+import ru.haroncode.wordlearn.mainflow.ui.word.set.WordSetFragment
 
 @PerFragment
-class WordSetUserConnectionFactory @Inject constructor(
+class WordUserConnectionFactory @Inject constructor(
     private val wordSetUserStore: WordSetUserStore,
     private val schedulerProvider: SchedulerProvider
-) : DelegateConnectionRuleFactory<WordSetUserFragment>() {
+) : DelegateConnectionRuleFactory<WordSetFragment>() {
 
-    override val connectionRuleFactory: ConnectionRule.Factory<WordSetUserFragment> = connectionFactory { view ->
+    override val connectionRuleFactory: ConnectionRule.Factory<WordSetFragment> = connectionFactory { view ->
         rule { view connectTo wordSetUserStore }
         rule { wordSetUserStore connectTo view observeOn schedulerProvider.mainThread }
         rule { wordSetUserStore eventsTo view }
