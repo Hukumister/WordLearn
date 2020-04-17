@@ -1,7 +1,7 @@
 package ru.haroncode.api.wordset.model
 
 /**
- * @author HaronCode. Date 04.11.2019.
+ * @author HaronCode.
  */
 data class WordSet(
     val id: Long,

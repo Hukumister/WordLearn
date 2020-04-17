@@ -6,7 +6,7 @@ import io.reactivex.Single
 import ru.haroncode.api.wordset.model.WordSet
 
 /**
- * @author HaronCode. Date 04.11.2019.
+ * @author HaronCode.
  */
 interface WordSetRepository {
 
