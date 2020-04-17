@@ -52,6 +52,26 @@ abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
         instanceStateSaved = false
     }
 
+    override fun onStart() {
+        super.onStart()
+        fragmentScopeProvider.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fragmentScopeProvider.onStop()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentScopeProvider.onAttach()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        fragmentScopeProvider.onDetach()
+    }
+
     @CallSuper
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -77,7 +97,6 @@ abstract class BaseDialogFragment : DialogFragment(), ContextExtensionsHolder {
 
     @CallSuper
     open fun onRealRemoving() {
-        fragmentScopeProvider.onDestroy()
         ComponentManager.clearInjector(fragmentComponentName)
     }
 
