@@ -6,7 +6,7 @@ import com.haroncode.gemini.android.StoreViewConnector
 import com.jakewharton.rxbinding2.widget.RxTextView
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_create_word.*
-import ru.haroncode.wordlearn.common.domain.result.Determinate
+import ru.haroncode.wordlearn.common.domain.model.Determinate
 import ru.haroncode.wordlearn.common.domain.system.SchedulerProvider
 import ru.haroncode.wordlearn.common.domain.validator.ResourceViolation
 import ru.haroncode.wordlearn.common.extension.onClick

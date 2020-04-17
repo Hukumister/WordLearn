@@ -1,4 +1,4 @@
-package ru.haroncode.wordlearn.common.domain.result
+package ru.haroncode.wordlearn.common.domain.model
 
 import androidx.annotation.IntDef
 import androidx.annotation.IntRange

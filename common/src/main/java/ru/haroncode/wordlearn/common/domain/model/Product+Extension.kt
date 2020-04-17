@@ -1,4 +1,4 @@
-package ru.haroncode.wordlearn.common.domain.result
+package ru.haroncode.wordlearn.common.domain.model
 
 import io.reactivex.Flowable
 import io.reactivex.Observable

@@ -1,6 +1,6 @@
 package ru.haroncode.wordlearn.wordflow.presentation
 
-import ru.haroncode.wordlearn.common.domain.result.Determinate
+import ru.haroncode.wordlearn.common.domain.model.Determinate
 import ru.haroncode.wordlearn.common.domain.validator.NotValid
 import ru.haroncode.wordlearn.common.domain.validator.VerifiableValue
 import ru.haroncode.wordlearn.common.ui.adapter.SimpleComparableItem

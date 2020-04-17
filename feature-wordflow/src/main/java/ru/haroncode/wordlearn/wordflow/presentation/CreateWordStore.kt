@@ -6,8 +6,8 @@ import com.haroncode.gemini.store.OnlyActionStore
 import io.reactivex.Flowable
 import javax.inject.Inject
 import ru.haroncode.wordlearn.common.di.PerFragment
-import ru.haroncode.wordlearn.common.domain.result.Determinate
-import ru.haroncode.wordlearn.common.domain.result.asDeterminate
+import ru.haroncode.wordlearn.common.domain.model.Determinate
+import ru.haroncode.wordlearn.common.domain.model.asDeterminate
 import ru.haroncode.wordlearn.common.domain.validator.VerifiableValue
 import ru.haroncode.wordlearn.common.util.SimpleValidator
 import ru.haroncode.wordlearn.word.domain.repository.WordRepository
