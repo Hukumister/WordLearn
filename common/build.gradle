@@ -43,6 +43,7 @@ dependencies {
     implementation uiDeps.coreKtx
     implementation uiDeps.material
     implementation uiDeps.fragmentKtx
+    implementation uiDeps.constraintLayout
     /**
      * AutoDispose
      */
