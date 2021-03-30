@@ -2,13 +2,13 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 apply from: "$project.rootDir/сodequality/ktlint.gradle"
 
+import com.haroncode.rewise.buildsrc.Libs
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    implementation commonDeps.kotlin
-
-    implementation commonDeps.kotlin
+    implementation Libs.Kotlin.stdlib
     implementation commonDeps.rxJava
 }
 

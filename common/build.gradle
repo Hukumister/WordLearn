@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: "$project.rootDir/сodequality/ktlint.gradle"
 
+import com.haroncode.rewise.buildsrc.Libs
+
 android {
     compileSdkVersion target_sdk_version
 
@@ -23,7 +25,7 @@ android {
 }
 
 dependencies {
-    implementation commonDeps.kotlin
+    implementation Libs.Kotlin.stdlib
 
     implementation uiDeps.adapterDelegate
 

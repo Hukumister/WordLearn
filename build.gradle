@@ -1,33 +1,61 @@
 apply from: 'dependencies.gradle'
 
-buildscript {
-    ext.kotlin_version = '1.3.70'
+import com.haroncode.rewise.buildsrc.Libs
+import com.haroncode.rewise.buildsrc.Urls
 
+buildscript {
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+    }
+}
+
+subprojects {
+
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/haroncode/maven' }
+
+        if (!Libs.AndroidX.Compose.snapshot.isEmpty()) {
+            maven { url Urls.composeSnapshotRepo }
+            maven { url Urls.accompanistSnapshotRepo }
+        }
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            // Treat all Kotlin warnings as errors
+
+            freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+
+            // Enable experimental coroutines APIs, including Flow
+            freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+            freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.FlowPreview'
+            freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+            freeCompilerArgs += '-Xallow-jvm-ir-dependencies'
+
+            // Set JVM target to 1.8
+            jvmTarget = JavaVersion.VERSION_1_8
+        }
     }
 }
 
 allprojects {
     ext {
-        min_sdk_version = 21
-        target_sdk_version = 29
+        min_sdk_version = 23
+        target_sdk_version = 30
 
         applicationVersionCode = 1
         applicationId = "ru.haroncode.worldlearn"
-        applicationVersionName = "1.0"
-
-    }
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://jitpack.io' }
-        maven { url 'https://dl.bintray.com/haroncode/maven' }
+        applicationVersionName = "1.0.0"
     }
 }
 
