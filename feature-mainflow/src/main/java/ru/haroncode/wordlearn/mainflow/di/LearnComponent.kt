@@ -7,7 +7,7 @@ import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.haroncode.wordlearn.common.di.*
 import ru.haroncode.wordlearn.mainflow.presentation.LearnReachableFlows
-import ru.haroncode.wordlearn.mainflow.ui.LearnFragment
+import ru.haroncode.wordlearn.mainflow.ui.learn.LearnFragment
 
 @Module
 object LearnComponentBuilderModule {

@@ -1,5 +1,6 @@
 package ru.haroncode.wordlearn.mainflow.ui
 
+import ru.haroncode.wordlearn.mainflow.ui.learn.LearnFragment
 import ru.haroncode.wordlearn.mainflow.ui.word.set.WordSetFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 

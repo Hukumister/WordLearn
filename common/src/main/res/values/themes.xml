@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/white</item>
 
+        <item name="android:windowBackground">@color/windows_bg</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.Headline3</item>
